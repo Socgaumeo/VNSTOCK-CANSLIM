@@ -35,19 +35,20 @@ class MarketTimingConfig:
     # ─────────────────────────────────────────────────────────────
     # VNSTOCK CONFIG
     # ─────────────────────────────────────────────────────────────
-    VNSTOCK_API_KEY: str = ""           # API key vnstock premium
+    VNSTOCK_API_KEY: str = "vnstock_0acf8671851dba60b26830c7816c756f"           # API key vnstock premium
     DATA_SOURCE: str = "VCI"            # VCI hoặc TCBS
     
     # Index cần theo dõi
     MAIN_INDEX: str = "VNINDEX"
-    COMPARISON_INDICES: List[str] = field(default_factory=lambda: ["VN30", "VNMID"])
+    COMPARISON_INDICES: List[str] = field(default_factory=lambda: ["VN30", "VN100"])
     SECTOR_INDICES: List[str] = field(default_factory=lambda: [
-        "VNFIN", "VNREAL", "VNMAT", "VNIT", "VNENERGY", 
-        "VNHEAL", "VNCOND", "VNIND", "VNUTI"
+        "VNFIN", "VNREAL", "VNMAT", "VNIT",
+        "VNHEAL", "VNCOND", "VNCONS"
     ])
     
     LOOKBACK_DAYS: int = 120
-    API_DELAY: float = 0.5
+    API_DELAY: float = 0.8              # Tăng delay để tránh rate limit
+    BREADTH_SAMPLE_SIZE: int = 30       # Số mã mẫu để tính breadth
     
     # ─────────────────────────────────────────────────────────────
     # AI CONFIG
@@ -158,7 +159,7 @@ class MarketReport:
     # Core data
     vnindex: TechnicalData = field(default_factory=TechnicalData)
     vn30: TechnicalData = field(default_factory=TechnicalData)
-    vnmid: TechnicalData = field(default_factory=TechnicalData)
+    vn100: TechnicalData = field(default_factory=TechnicalData)
     
     # Market internals
     breadth: MarketBreadth = field(default_factory=MarketBreadth)
@@ -189,14 +190,11 @@ class MarketDataCollector:
         'VNREAL': 'Bất động sản',
         'VNMAT': 'Nguyên vật liệu',
         'VNIT': 'Công nghệ',
-        'VNENERGY': 'Năng lượng',
         'VNHEAL': 'Y tế',
-        'VNCOND': 'Tiêu dùng',
-        'VNIND': 'Công nghiệp',
-        'VNUTI': 'Tiện ích',
+        'VNCOND': 'Tiêu dùng không thiết yếu',
+        'VNCONS': 'Tiêu dùng thiết yếu',
         'VN30': 'VN30 Large Cap',
-        'VNMID': 'Midcap',
-        'VNSML': 'Smallcap',
+        'VN100': 'VN100',
     }
     
     def __init__(self, config: MarketTimingConfig):
@@ -359,29 +357,98 @@ class MarketDataCollector:
         return {'adx': dx, 'plus_di': plus_di, 'minus_di': minus_di}
     
     # ─────────────────────────────────────────────────────────────
-    # MARKET BREADTH
+    # MARKET BREADTH & MONEY FLOW (sử dụng price_board)
     # ─────────────────────────────────────────────────────────────
     
+    def _get_price_board_data(self, symbols: List[str]) -> Optional[pd.DataFrame]:
+        """Lấy dữ liệu price_board cho danh sách symbols"""
+        try:
+            stock = self.Vnstock().stock(symbol=symbols[0], source=self.config.DATA_SOURCE)
+            df = stock.trading.price_board(symbols_list=symbols)
+            return df
+        except Exception as e:
+            print(f"   ⚠️ Lỗi price_board: {e}")
+            return None
+    
     def get_market_breadth(self) -> MarketBreadth:
-        """Lấy độ rộng thị trường"""
+        """Lấy độ rộng thị trường từ price_board"""
         result = MarketBreadth()
         
         try:
-            trading = self.Trading(source=self.config.DATA_SOURCE)
+            # Lấy danh sách cổ phiếu thực (chỉ mã 3 ký tự - loại bỏ warrant, ETF)
+            listing = self.Listing()
+            all_stocks = listing.all_symbols()
             
-            # Lấy một số mã để estimate breadth
-            # (Cần adjust theo API thực tế của vnstock premium)
+            # Lọc chỉ lấy mã 3 ký tự (cổ phiếu thực)
+            real_stocks = all_stocks[all_stocks['symbol'].str.len() == 3]['symbol'].tolist()
             
-            # Placeholder - cần điều chỉnh
-            print("   ⚠️ Breadth: Đang dùng estimate (cần cấu hình vnstock premium)")
+            # Lấy mẫu đại diện
+            sample_size = min(self.config.BREADTH_SAMPLE_SIZE, len(real_stocks))
+            import random
+            random.seed(42)
+            sample_stocks = random.sample(real_stocks, sample_size)
             
-            # Estimate dựa trên thống kê trung bình
-            result.advances = 250
-            result.declines = 220
-            result.unchanged = 80
+            print(f"   📊 Đang lấy price_board cho {sample_size} mã...")
+            
+            # Lấy price_board (một lần gọi API cho nhiều mã)
+            df = self._get_price_board_data(sample_stocks)
+            
+            if df is not None and len(df) > 0:
+                advances = 0
+                declines = 0
+                unchanged = 0
+                ceiling = 0
+                floor = 0
+                
+                # Duyệt qua từng dòng để tính breadth
+                for _, row in df.iterrows():
+                    try:
+                        # Lấy giá từ multi-level columns
+                        match_price = row[('match', 'match_price')]
+                        ref_price = row[('listing', 'ref_price')]
+                        ceiling_price = row[('listing', 'ceiling')]
+                        floor_price = row[('listing', 'floor')]
+                        
+                        if match_price > 0 and ref_price > 0:
+                            change_pct = (match_price - ref_price) / ref_price * 100
+                            
+                            if match_price >= ceiling_price:
+                                ceiling += 1
+                                advances += 1
+                            elif match_price <= floor_price:
+                                floor += 1
+                                declines += 1
+                            elif change_pct > 0.1:
+                                advances += 1
+                            elif change_pct < -0.1:
+                                declines += 1
+                            else:
+                                unchanged += 1
+                    except:
+                        pass
+                
+                # Scale lên theo tổng số mã active (~500 mã trên HOSE)
+                scale_factor = 500 / len(df) if len(df) > 0 else 1
+                result.advances = int(advances * scale_factor)
+                result.declines = int(declines * scale_factor)
+                result.unchanged = int(unchanged * scale_factor)
+                result.ceiling = int(ceiling * scale_factor)
+                result.floor = int(floor * scale_factor)
+                
+                print(f"   ✓ Breadth: Tăng={result.advances}, Giảm={result.declines}, "
+                      f"Trần={result.ceiling}, Sàn={result.floor}")
+            else:
+                # Fallback
+                result.advances = 250
+                result.declines = 220
+                result.unchanged = 80
+                print("   ⚠️ Không lấy được price_board, dùng estimate")
             
         except Exception as e:
             print(f"   ⚠️ Lỗi breadth: {e}")
+            result.advances = 250
+            result.declines = 220
+            result.unchanged = 80
         
         return result
     
@@ -390,25 +457,73 @@ class MarketDataCollector:
     # ─────────────────────────────────────────────────────────────
     
     def get_money_flow(self) -> MoneyFlow:
-        """Lấy dòng tiền"""
+        """Lấy dòng tiền từ price_board"""
         result = MoneyFlow()
         
         try:
-            # vnstock premium API cho dòng tiền
-            # Cần điều chỉnh theo endpoint thực tế
+            # Các mã bluechip để tính dòng tiền
+            bluechips = ['VHM', 'FPT', 'VCB', 'HPG', 'VNM', 'VIC', 'MSN', 'MWG',
+                        'SSI', 'VPB', 'TCB', 'MBB', 'ACB', 'STB', 'HDB']
             
-            print("   ⚠️ Money Flow: Đang dùng estimate (cần cấu hình vnstock premium)")
+            print(f"   📊 Đang lấy dữ liệu dòng tiền từ {len(bluechips)} bluechips...")
             
-            # Placeholder
-            result.foreign_net = -125.5
-            result.proprietary_net = 45.2
-            result.total_value = 18500
+            df = self._get_price_board_data(bluechips)
             
-            result.top_foreign_buy = [('VHM', 35.2), ('FPT', 28.5), ('VCB', 25.1)]
-            result.top_foreign_sell = [('HPG', -42.3), ('SSI', -28.5), ('MWG', -22.1)]
+            if df is not None and len(df) > 0:
+                total_foreign_buy = 0
+                total_foreign_sell = 0
+                total_value = 0
+                stock_flows = []
+                
+                for _, row in df.iterrows():
+                    try:
+                        symbol = row[('listing', 'symbol')]
+                        foreign_buy_val = row[('match', 'foreign_buy_value')] / 1e9  # Chuyển sang tỷ
+                        foreign_sell_val = row[('match', 'foreign_sell_value')] / 1e9
+                        accumulated_value = row[('match', 'accumulated_value')] / 1e9
+                        
+                        total_foreign_buy += foreign_buy_val
+                        total_foreign_sell += foreign_sell_val
+                        total_value += accumulated_value
+                        
+                        net_flow = foreign_buy_val - foreign_sell_val
+                        stock_flows.append((symbol, net_flow))
+                    except:
+                        pass
+                
+                result.foreign_buy = total_foreign_buy
+                result.foreign_sell = total_foreign_sell
+                result.foreign_net = total_foreign_buy - total_foreign_sell
+                result.total_value = total_value
+                
+                # Estimate tự doanh (thường ~30% của khối ngoại ngược chiều)
+                result.proprietary_net = -result.foreign_net * 0.3
+                
+                # Top buy/sell
+                sorted_flows = sorted(stock_flows, key=lambda x: x[1], reverse=True)
+                result.top_foreign_buy = [(s, v) for s, v in sorted_flows[:5] if v > 0]
+                result.top_foreign_sell = [(s, v) for s, v in sorted_flows[-5:] if v < 0]
+                
+                print(f"   ✓ Money Flow: KN={result.foreign_net:+.1f}tỷ (Mua={result.foreign_buy:.1f}, "
+                      f"Bán={result.foreign_sell:.1f})")
+                print(f"   ✓ Top mua: {', '.join([f'{s}({v:+.1f})' for s,v in result.top_foreign_buy[:3]])}")
+                print(f"   ✓ Top bán: {', '.join([f'{s}({v:+.1f})' for s,v in result.top_foreign_sell[:3]])}")
+            else:
+                # Fallback
+                result.foreign_net = -125.5
+                result.proprietary_net = 45.2
+                result.total_value = 18500
+                result.top_foreign_buy = [('VHM', 35.2), ('FPT', 28.5), ('VCB', 25.1)]
+                result.top_foreign_sell = [('HPG', -42.3), ('SSI', -28.5), ('MWG', -22.1)]
+                print("   ⚠️ Không lấy được price_board, dùng estimate")
             
         except Exception as e:
             print(f"   ⚠️ Lỗi money flow: {e}")
+            result.foreign_net = -125.5
+            result.proprietary_net = 45.2
+            result.total_value = 18500
+            result.top_foreign_buy = [('VHM', 35.2), ('FPT', 28.5), ('VCB', 25.1)]
+            result.top_foreign_sell = [('HPG', -42.3), ('SSI', -28.5), ('MWG', -22.1)]
         
         return result
     
@@ -476,9 +591,10 @@ class MarketAnalyzer:
         report.vn30 = self.collector.get_technical_data("VN30")
         print(f"   ✓ VN30: {report.vn30.close:,.0f} ({report.vn30.change_1d:+.2f}%)")
         
-        # 3. Midcap
-        print("\n[3/5] VNMID...")
-        report.vnmid = self.collector.get_technical_data("VNMID")
+        # 3. VN100
+        print("\n[3/5] VN100...")
+        report.vn100 = self.collector.get_technical_data("VN100")
+        print(f"   ✓ VN100: {report.vn100.close:,.0f} ({report.vn100.change_1d:+.2f}%)")
         
         # 4. Breadth
         print("\n[4/5] ĐỘ RỘNG THỊ TRƯỜNG...")
@@ -505,17 +621,33 @@ class MarketAnalyzer:
         score = 0
         
         # 1. Price vs MA (30 điểm)
-        if vni.close > vni.ma20 > vni.ma50:
+        # Tính vị trí giá so với MA
+        above_ma20 = vni.close > vni.ma20 if vni.ma20 > 0 else False
+        above_ma50 = vni.close > vni.ma50 if vni.ma50 > 0 else False
+        ma20_above_ma50 = vni.ma20 > vni.ma50 if (vni.ma20 > 0 and vni.ma50 > 0) else False
+        
+        if above_ma20 and above_ma50 and ma20_above_ma50:
             score += 30
-            signals.append("✅ Uptrend: Giá > MA20 > MA50")
-        elif vni.close > vni.ma50:
+            signals.append(f"✅ Uptrend mạnh: Giá({vni.close:,.0f}) > MA20({vni.ma20:,.0f}) > MA50({vni.ma50:,.0f})")
+        elif above_ma20 and above_ma50:
+            # Giá trên cả MA20 và MA50, nhưng MA20 chưa vượt MA50
+            score += 25
+            signals.append(f"✅ Bullish: Giá({vni.close:,.0f}) > MA20({vni.ma20:,.0f}) & MA50({vni.ma50:,.0f})")
+        elif above_ma50:
             score += 15
-            signals.append("✅ Giá trên MA50")
-        elif vni.close < vni.ma20 < vni.ma50:
-            score -= 30
-            signals.append("❌ Downtrend: Giá < MA20 < MA50")
+            signals.append(f"⚠️ Giá trên MA50({vni.ma50:,.0f}) nhưng dưới MA20({vni.ma20:,.0f})")
+        elif above_ma20:
+            score += 10
+            signals.append(f"⚠️ Giá trên MA20({vni.ma20:,.0f}) nhưng dưới MA50({vni.ma50:,.0f})")
+        elif vni.close < vni.ma20 and vni.close < vni.ma50:
+            if vni.ma20 < vni.ma50:
+                score -= 30
+                signals.append(f"❌ Downtrend: Giá({vni.close:,.0f}) < MA20({vni.ma20:,.0f}) < MA50({vni.ma50:,.0f})")
+            else:
+                score -= 20
+                signals.append(f"❌ Giá dưới cả MA20 và MA50")
         else:
-            signals.append("➖ MA chưa rõ xu hướng")
+            signals.append(f"➖ MA chưa rõ xu hướng (Giá={vni.close:,.0f}, MA20={vni.ma20:,.0f}, MA50={vni.ma50:,.0f})")
         
         # 2. RSI (15 điểm)
         if 40 <= vni.rsi_14 <= 60:
@@ -671,6 +803,7 @@ DỮ LIỆU THỊ TRƯỜNG NGÀY {report.timestamp.strftime('%d/%m/%Y %H:%M')}
    - Giá: {vni.close:,.0f} điểm | Thay đổi: {vni.change_1d:+.2f}%
    - OHLC: O={vni.open:,.0f} H={vni.high:,.0f} L={vni.low:,.0f} C={vni.close:,.0f}
    - MA20: {vni.ma20:,.0f} | MA50: {vni.ma50:,.0f} | MA200: {vni.ma200:,.0f}
+   - VỊ TRÍ GIÁ: {"Giá TRÊN MA20" if vni.close > vni.ma20 else "Giá DƯỚI MA20"}, {"Giá TRÊN MA50" if vni.close > vni.ma50 else "Giá DƯỚI MA50"}
    - RSI(14): {vni.rsi_14:.1f}
    - MACD: {vni.macd:.2f} | Signal: {vni.macd_signal:.2f} | Hist: {vni.macd_hist:+.2f}
    - ADX: {vni.adx:.1f} | +DI: {vni.plus_di:.1f} | -DI: {vni.minus_di:.1f}

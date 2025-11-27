@@ -55,13 +55,11 @@ class AIConfig:
     temperature: float = 0.7
     
     # System prompt mặc định
-    system_prompt: str = """Bạn là Giám đốc Phân tích Chiến lược tại một quỹ đầu tư quy mô 100 tỷ VNĐ.
-Phong cách: Thận trọng, dựa trên dữ liệu (Data-driven), tuân thủ VSA (Volume Spread Analysis) và quản trị rủi ro chặt chẽ.
-Luôn trả lời bằng tiếng Việt, chuyên nghiệp và có cấu trúc rõ ràng."""
+    system_prompt: str = "Bạn là chuyên gia phân tích chứng khoán Việt Nam theo trường phái VSA."
 
     # Default models per provider
     DEFAULT_MODELS: Dict[str, str] = field(default_factory=lambda: {
-        "gemini": "gemini-1.5-flash",
+        "gemini": "gemini-3-pro-preview",  # Model Pro 3.0 Preview - mới nhất
         "claude": "claude-3-5-sonnet-20241022",
         "deepseek": "deepseek-chat",
         "openai": "gpt-4o-mini",
@@ -120,8 +118,10 @@ class GeminiProvider(BaseAIProvider):
     def _init_client(self):
         try:
             import google.generativeai as genai
+            
             genai.configure(api_key=self.config.api_key)
             
+            # Khởi tạo model với system_instruction (không có generation_config để tránh block)
             self.model = genai.GenerativeModel(
                 model_name=self.config.get_model(),
                 system_instruction=self.config.system_prompt
@@ -135,7 +135,7 @@ class GeminiProvider(BaseAIProvider):
         try:
             import google.generativeai as genai
             
-            # Nếu có system prompt mới, tạo model mới
+            # Nếu có system_prompt mới, tạo model mới với system_prompt đó
             if system_prompt:
                 model = genai.GenerativeModel(
                     model_name=self.config.get_model(),
@@ -144,13 +144,16 @@ class GeminiProvider(BaseAIProvider):
             else:
                 model = self.model
             
-            response = model.generate_content(
-                prompt,
-                generation_config=genai.types.GenerationConfig(
-                    max_output_tokens=self.config.max_tokens,
-                    temperature=self.config.temperature,
-                )
-            )
+            response = model.generate_content(prompt)
+            
+            # Kiểm tra và xử lý response
+            if response.candidates and len(response.candidates) > 0:
+                candidate = response.candidates[0]
+                if candidate.content and candidate.content.parts:
+                    return candidate.content.parts[0].text
+                elif candidate.finish_reason:
+                    return f"⚠️ Response bị block: finish_reason={candidate.finish_reason}"
+            
             return response.text
             
         except Exception as e:
