@@ -452,7 +452,13 @@ class EnhancedDataCollector:
         return result
     
     def _calc_rsi(self, prices: np.ndarray, period: int = 14) -> float:
-        """Tính RSI"""
+        """
+        Tính RSI theo công thức Wilder (chuẩn)
+        
+        Sử dụng Wilder's Smoothed Moving Average (SMMA):
+        - Bước 1: Tính SMA cho period đầu tiên
+        - Bước 2: Sử dụng SMMA: Avg = (Prev_Avg * (period-1) + Current) / period
+        """
         if len(prices) < period + 1:
             return 50.0
         
@@ -460,8 +466,15 @@ class EnhancedDataCollector:
         gains = np.where(deltas > 0, deltas, 0)
         losses = np.where(deltas < 0, -deltas, 0)
         
-        avg_gain = np.mean(gains[-period:])
-        avg_loss = np.mean(losses[-period:])
+        # Wilder's SMMA implementation
+        # Bước 1: SMA cho period đầu tiên
+        avg_gain = np.mean(gains[:period])
+        avg_loss = np.mean(losses[:period])
+        
+        # Bước 2: Áp dụng SMMA cho các giá trị tiếp theo
+        for i in range(period, len(gains)):
+            avg_gain = (avg_gain * (period - 1) + gains[i]) / period
+            avg_loss = (avg_loss * (period - 1) + losses[i]) / period
         
         if avg_loss == 0:
             return 100.0

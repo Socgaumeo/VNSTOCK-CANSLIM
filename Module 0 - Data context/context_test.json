@@ -1,0 +1,94 @@
+{
+  "timestamp": "2025-11-28 03:49:30",
+  "symbol": "MOCK_VNINDEX",
+  "trend": {
+    "ma20": {
+      "value": 1687.69,
+      "slope": 0.287,
+      "status": "➡️ FLAT"
+    },
+    "ma50": {
+      "value": 1672.8,
+      "slope": 1.479,
+      "status": "📈 UP"
+    },
+    "ma200": {
+      "value": 1586.27,
+      "slope": 2.748,
+      "status": "📈 UP"
+    },
+    "alignment": "BULLISH",
+    "alignment_note": "MA20 > MA50 > MA200 ✓ Perfect alignment"
+  },
+  "price": {
+    "current": 1697.27,
+    "percentile_50d": 98.0,
+    "status": "VERY_EXPENSIVE",
+    "ma_position": "🚀 STRONG_BULLISH",
+    "vs_ma20": 0.57,
+    "vs_ma50": 1.46,
+    "vs_ma200": 7.0
+  },
+  "rsi": {
+    "current": 53.9,
+    "min_50d": 30.7,
+    "max_50d": 81.8,
+    "regime": "🟡 NEUTRAL",
+    "note": "RSI dao động bình thường (30.7 - 81.8)",
+    "overbought": false,
+    "oversold": false
+  },
+  "macd": {
+    "line": 5.5192,
+    "signal": 6.0136,
+    "histogram": -0.4944,
+    "histogram_positive": false,
+    "impulse_direction": "▲ INCREASING",
+    "impulse_bars": 2,
+    "impulse_signal": "⚠️ Histogram đang tăng → Không được Short",
+    "cross": "NONE"
+  },
+  "distribution": {
+    "count": 1,
+    "status": "🟢 SAFE",
+    "note": "Chỉ 1 ngày phân phối trong 25 phiên → Thị trường khỏe",
+    "dates": [
+      "2025-11-05 00:00:00"
+    ]
+  },
+  "ftd": {
+    "has_ftd": false,
+    "date": null,
+    "gain": 0.0,
+    "volume_ratio": 0.0,
+    "recent_low": {
+      "date": "2025-11-08 00:00:00",
+      "price": 1678.81,
+      "days_ago": 19
+    },
+    "note": "Không tìm thấy FTD trong window day 4-10 từ đáy"
+  },
+  "regime": {
+    "current": "🟢 MARKUP",
+    "confidence": 75.0,
+    "scores": {
+      "trend": 1,
+      "momentum": 0,
+      "volume": 1,
+      "structure": 2
+    },
+    "signals": [
+      "MA50 slope dốc lên",
+      "Distribution days ít (1)",
+      "Giá > MA20 > MA50"
+    ]
+  },
+  "summary": {
+    "overall_bias": "BULLISH",
+    "key_signals": [
+      "MA50 slope dốc lên",
+      "Distribution days ít (1)",
+      "Giá > MA20 > MA50"
+    ]
+  }
+}

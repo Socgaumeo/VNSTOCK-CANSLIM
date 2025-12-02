@@ -1,0 +1,119 @@
+{
+  "timestamp": "2025-11-28 11:29:45",
+  "vnindex": {
+    "price": 1693.08,
+    "change_1d": 0.5200911940723918,
+    "change_5d": 1.504814206405336,
+    "change_1m": 1.4081470079122083,
+    "ma20": 1644.944,
+    "ma50": 1668.9222,
+    "rsi_14": 59.04992707168217,
+    "adx": 63.96223395743298,
+    "volume_ratio": 0.3574636395636042,
+    "volume_profile": {
+      "poc": 1649.7412,
+      "vah": 1676.6327999999999,
+      "val": 1622.8496,
+      "price_vs_va": "ABOVE_VA"
+    }
+  },
+  "traffic_light": {
+    "color": "🟡 VÀNG - THẬN TRỌNG",
+    "score": 55,
+    "action": "HOLD",
+    "position_size": "40-60%",
+    "scores": {
+      "trend": 0,
+      "structure": 1,
+      "momentum": 1,
+      "distribution": -2,
+      "volume": 1
+    },
+    "conditions_met": [
+      "✅ Giá > MA50",
+      "✅ MACD Histogram tăng & dương",
+      "✅ Giá TRÊN Value Area (VAH=1,677)"
+    ],
+    "conditions_failed": [
+      "❌ Distribution Days = 6 (> 5)"
+    ]
+  },
+  "breadth": {
+    "advances": 80,
+    "declines": 170,
+    "ad_ratio": 0.47058823529411764
+  },
+  "money_flow": {
+    "foreign_net": -41.2,
+    "foreign_net_20d": 350,
+    "proprietary_net": 15.5
+  },
+  "sectors": [
+    {
+      "code": "VNREAL",
+      "name": "Bất động sản",
+      "change_1d": 2.1704830219700044,
+      "rs_vs_index": 9.346622402702653
+    },
+    {
+      "code": "VNMAT",
+      "name": "Nguyên vật liệu",
+      "change_1d": -0.15959764140566213,
+      "rs_vs_index": -1.690760667285196
+    },
+    {
+      "code": "VNHEAL",
+      "name": "Y tế",
+      "change_1d": -0.5321459600347467,
+      "rs_vs_index": -4.3441804965173025
+    },
+    {
+      "code": "VNIT",
+      "name": "Công nghệ",
+      "change_1d": -0.9546124582397231,
+      "rs_vs_index": -5.157229546111985
+    },
+    {
+      "code": "VNFIN",
+      "name": "Tài chính",
+      "change_1d": -0.2194995591830784,
+      "rs_vs_index": -5.702130810121308
+    }
+  ],
+  "context": {
+    "trend": {
+      "ma20_slope": 0.0,
+      "ma50_slope": 0.0,
+      "ma_alignment": "NEUTRAL"
+    },
+    "price": {
+      "ma_position": "📈 BULLISH",
+      "percentile_50d": 80.0,
+      "vs_ma20": 2.93,
+      "vs_ma50": 1.45
+    },
+    "rsi": {
+      "current": 59.1,
+      "regime": "🟡 NEUTRAL",
+      "overbought": "False"
+    },
+    "macd": {
+      "histogram": 7.53,
+      "impulse_direction": "▲ INCREASING",
+      "impulse_signal": "⚠️ Histogram đang tăng → Không được Short"
+    },
+    "distribution": {
+      "count": 6,
+      "status": "🔴 DANGER"
+    },
+    "ftd": {
+      "has_ftd": false,
+      "date": null,
+      "note": "Không tìm thấy FTD trong window day 4-10 từ đáy"
+    },
+    "regime": {
+      "current": "🟠 DISTRIBUTION",
+      "confidence": 43.75
+    }
+  }
+}
