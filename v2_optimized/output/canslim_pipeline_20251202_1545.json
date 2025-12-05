@@ -1,0 +1,146 @@
+{
+  "timestamp": "2025-12-02 15:45:15",
+  "market": {
+    "traffic_light": "🟡 VÀNG - THẬN TRỌNG (60/100)",
+    "traffic_light_action": "HOLD",
+    "distribution_days": 0,
+    "market_regime": "UNKNOWN",
+    "vnindex_price": 1717.06,
+    "vnindex_change": 0.9044056720750815
+  },
+  "sectors": {
+    "rotation_clock": "🍂 LATE CYCLE",
+    "confidence": 66.66666666666666,
+    "leading_sectors": [
+      "Bất động sản"
+    ],
+    "top_sectors": [
+      {
+        "code": "VNCONS",
+        "name": "Tiêu dùng thiết yếu",
+        "rs_rating": 82,
+        "phase": "📈 IMPROVING"
+      },
+      {
+        "code": "VNREAL",
+        "name": "Bất động sản",
+        "rs_rating": 99,
+        "phase": "🚀 LEADING"
+      },
+      {
+        "code": "VNHEAL",
+        "name": "Y tế",
+        "rs_rating": 50,
+        "phase": "⛔ LAGGING"
+      },
+      {
+        "code": "VNCOND",
+        "name": "Tiêu dùng không thiết yếu",
+        "rs_rating": 66,
+        "phase": "⛔ LAGGING"
+      },
+      {
+        "code": "VNMAT",
+        "name": "Nguyên vật liệu",
+        "rs_rating": 33,
+        "phase": "⛔ LAGGING"
+      }
+    ]
+  },
+  "stocks": {
+    "total_scanned": 36,
+    "passed": 11,
+    "top_picks": [
+      {
+        "rank": 1,
+        "symbol": "VRE",
+        "sector": "Bất động sản",
+        "score": 56.163636363636364,
+        "rs_rating": 93,
+        "pattern": "VCP (Volatility Contraction)",
+        "signal": "👀 WATCH"
+      },
+      {
+        "rank": 2,
+        "symbol": "VHM",
+        "sector": "Bất động sản",
+        "score": 52.61060606060606,
+        "rs_rating": 76,
+        "pattern": "VCP (Volatility Contraction)",
+        "signal": "👀 WATCH"
+      },
+      {
+        "rank": 3,
+        "symbol": "HAG",
+        "sector": "Tiêu dùng thiết yếu",
+        "score": 51.81515151515151,
+        "rs_rating": 85,
+        "pattern": "Cup & Handle",
+        "signal": "👀 WATCH"
+      },
+      {
+        "rank": 4,
+        "symbol": "CEO",
+        "sector": "Bất động sản",
+        "score": 47.67878787878788,
+        "rs_rating": 79,
+        "pattern": "VCP (Volatility Contraction)",
+        "signal": "➖ NEUTRAL"
+      },
+      {
+        "rank": 5,
+        "symbol": "VNM",
+        "sector": "Tiêu dùng thiết yếu",
+        "score": 45.345454545454544,
+        "rs_rating": 90,
+        "pattern": "No Pattern",
+        "signal": "➖ NEUTRAL"
+      },
+      {
+        "rank": 6,
+        "symbol": "ANV",
+        "sector": "Tiêu dùng thiết yếu",
+        "score": 45.196969696969695,
+        "rs_rating": 82,
+        "pattern": "VCP (Volatility Contraction)",
+        "signal": "➖ NEUTRAL"
+      },
+      {
+        "rank": 7,
+        "symbol": "MCH",
+        "sector": "Tiêu dùng thiết yếu",
+        "score": 43.53181818181818,
+        "rs_rating": 96,
+        "pattern": "No Pattern",
+        "signal": "➖ NEUTRAL"
+      },
+      {
+        "rank": 8,
+        "symbol": "SAB",
+        "sector": "Tiêu dùng thiết yếu",
+        "score": 41.527272727272724,
+        "rs_rating": 87,
+        "pattern": "No Pattern",
+        "signal": "➖ NEUTRAL"
+      },
+      {
+        "rank": 9,
+        "symbol": "VIC",
+        "sector": "Bất động sản",
+        "score": 41.05,
+        "rs_rating": 99,
+        "pattern": "No Pattern",
+        "signal": "➖ NEUTRAL"
+      },
+      {
+        "rank": 10,
+        "symbol": "VHC",
+        "sector": "Tiêu dùng thiết yếu",
+        "score": 37.23030303030303,
+        "rs_rating": 71,
+        "pattern": "Flat Base",
+        "signal": "➖ NEUTRAL"
+      }
+    ]
+  }
+}

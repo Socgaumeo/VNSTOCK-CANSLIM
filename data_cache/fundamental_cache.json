@@ -1,0 +1,282 @@
+{
+  "MWG_ratios": {
+    "data": {
+      "pe": 21.413459783,
+      "pb": 3.9866256156,
+      "roe": 19.682572370000003,
+      "roa": 7.6371287,
+      "book_value": 21246.03817026
+    },
+    "timestamp": "2025-12-04"
+  },
+  "MWG_flow": {
+    "data": {
+      "revenue_growth_qoq": 5.937991259865565,
+      "revenue_growth_yoy": 16.674948422294325,
+      "eps_growth_qoq": 7.4479234379524,
+      "eps_growth_yoy": 121.32087268897716,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "PNJ_ratios": {
+    "data": {
+      "pe": 13.2130245737,
+      "pb": 2.5861563951,
+      "roe": 19.948487710000002,
+      "roa": 13.605998690000002,
+      "book_value": 35342.0234648833
+    },
+    "timestamp": "2025-12-04"
+  },
+  "PNJ_flow": {
+    "data": {
+      "revenue_growth_qoq": 7.449204490075115,
+      "revenue_growth_yoy": 13.975176362782374,
+      "eps_growth_qoq": 13.434255761024849,
+      "eps_growth_yoy": 129.66810525983726,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "DGW_ratios": {
+    "data": {
+      "pe": 18.5371804943,
+      "pb": 3.0207587682,
+      "roe": 17.05696245,
+      "roa": 6.2355364,
+      "book_value": 14797.6066379556
+    },
+    "timestamp": "2025-12-04"
+  },
+  "DGW_flow": {
+    "data": {
+      "revenue_growth_qoq": 27.787921497596717,
+      "revenue_growth_yoy": 17.61736875369983,
+      "eps_growth_qoq": 43.7922279835022,
+      "eps_growth_yoy": 36.70724299689543,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "FRT_ratios": {
+    "data": {
+      "pe": 42.8481053074,
+      "pb": 8.5614327602,
+      "roe": 24.798776359999998,
+      "roa": 3.4977342100000004,
+      "book_value": 18116.1266278976
+    },
+    "timestamp": "2025-12-04"
+  },
+  "FRT_flow": {
+    "data": {
+      "revenue_growth_qoq": 15.066976519096379,
+      "revenue_growth_yoy": 0.0,
+      "eps_growth_qoq": 84.33994218680763,
+      "eps_growth_yoy": 0.0,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VNM_ratios": {
+    "data": {
+      "pe": 15.5301525152,
+      "pb": 3.9595062986,
+      "roe": 26.374189209999997,
+      "roa": 15.73315019,
+      "book_value": 16315.1653587256
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VNM_flow": {
+    "data": {
+      "revenue_growth_qoq": 1.334605147435239,
+      "revenue_growth_yoy": 9.128583364253567,
+      "eps_growth_qoq": 2.1086870973983363,
+      "eps_growth_yoy": 5.127791734900657,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "SAB_ratios": {
+    "data": {
+      "pe": 15.3850223381,
+      "pb": 2.9334295646,
+      "roe": 18.932067590000003,
+      "roa": 13.3547937,
+      "book_value": 17692.601392414
+    },
+    "timestamp": "2025-12-04"
+  },
+  "SAB_flow": {
+    "data": {
+      "revenue_growth_qoq": -5.215261985183691,
+      "revenue_growth_yoy": -15.8736330961131,
+      "eps_growth_qoq": 12.674526422681321,
+      "eps_growth_yoy": 21.574889033026583,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "MCH_ratios": {
+    "data": {
+      "pe": 28.5441355071,
+      "pb": 14.5895157095,
+      "roe": 46.80180405,
+      "roa": 22.68059902,
+      "book_value": 15124.2854385073
+    },
+    "timestamp": "2025-12-04"
+  },
+  "MCH_flow": {
+    "data": {
+      "revenue_growth_qoq": 19.220207006431806,
+      "revenue_growth_yoy": -5.902570991127789,
+      "eps_growth_qoq": 26.412260483156174,
+      "eps_growth_yoy": -19.119410141002255,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "HAG_ratios": {
+    "data": {
+      "pe": 12.9448206579,
+      "pb": 1.7767351539,
+      "roe": 14.424242970000002,
+      "roa": 5.84420803,
+      "book_value": 9990.2340318745
+    },
+    "timestamp": "2025-12-04"
+  },
+  "HAG_flow": {
+    "data": {
+      "revenue_growth_qoq": -18.311015736006613,
+      "revenue_growth_yoy": 30.170080310738605,
+      "eps_growth_qoq": -15.609408513073234,
+      "eps_growth_yoy": 25.44195622481374,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "ANV_ratios": {
+    "data": {
+      "pe": 10.180144114,
+      "pb": 2.1651982468,
+      "roe": 24.049117640000002,
+      "roa": 14.786535579999999,
+      "book_value": 13301.3224273579
+    },
+    "timestamp": "2025-12-04"
+  },
+  "ANV_flow": {
+    "data": {
+      "revenue_growth_qoq": 15.077931563817677,
+      "revenue_growth_yoy": 49.284347804986346,
+      "eps_growth_qoq": -14.943855669721993,
+      "eps_growth_yoy": 915.4821877983068,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VHM_ratios": {
+    "data": {
+      "pe": 17.413313897,
+      "pb": 2.0187454329,
+      "roe": 12.662946159999999,
+      "roa": 4.16681821,
+      "book_value": 52904.1444560184
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VHM_flow": {
+    "data": {
+      "revenue_growth_qoq": -13.465055343196752,
+      "revenue_growth_yoy": -50.72501866720731,
+      "eps_growth_qoq": -44.27400340808078,
+      "eps_growth_yoy": -46.81046138004024,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VIC_ratios": {
+    "data": {
+      "pe": 117.8005484384,
+      "pb": 7.1237535488,
+      "roe": 6.20434279,
+      "roa": 0.95742235,
+      "book_value": 37817.1420660504
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VIC_flow": {
+    "data": {
+      "revenue_growth_qoq": -15.704508155486597,
+      "revenue_growth_yoy": -37.73221473352003,
+      "eps_growth_qoq": 168.03888580085854,
+      "eps_growth_yoy": -87.90947479311785,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "CEO_ratios": {
+    "data": {
+      "pe": 71.9868589786,
+      "pb": 2.3811709084,
+      "roe": 3.3300955200000004,
+      "roa": 2.33087188,
+      "book_value": 10877.001692148
+    },
+    "timestamp": "2025-12-04"
+  },
+  "CEO_flow": {
+    "data": {
+      "revenue_growth_qoq": -42.568563155060275,
+      "revenue_growth_yoy": -1.4468272335467316,
+      "eps_growth_qoq": -8.768672450625248,
+      "eps_growth_yoy": 6.823605340202612,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VRE_ratios": {
+    "data": {
+      "pe": 16.0895376014,
+      "pb": 1.7150748743,
+      "roe": 11.13287207,
+      "roa": 8.44881794,
+      "book_value": 20115.7398535534
+    },
+    "timestamp": "2025-12-04"
+  },
+  "VRE_flow": {
+    "data": {
+      "revenue_growth_qoq": 5.057802793762805,
+      "revenue_growth_yoy": 8.340067487535597,
+      "eps_growth_qoq": 11.609068647324976,
+      "eps_growth_yoy": 51.85679611650485,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  },
+  "NAF_ratios": {
+    "data": {
+      "pe": 16.4377965344,
+      "pb": 1.9923372914,
+      "roe": 13.92181183,
+      "roa": 5.89678318,
+      "book_value": 16287.4028109121
+    },
+    "timestamp": "2025-12-04"
+  },
+  "NAF_flow": {
+    "data": {
+      "revenue_growth_qoq": -7.342881519733595,
+      "revenue_growth_yoy": 81.57752733597412,
+      "eps_growth_qoq": -38.846467587132935,
+      "eps_growth_yoy": 55.81321557068909,
+      "gross_margin": 0.0
+    },
+    "timestamp": "2025-12-04"
+  }
+}
