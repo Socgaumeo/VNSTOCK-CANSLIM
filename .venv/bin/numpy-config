@@ -1,4 +1,4 @@
-#!/Users/bear1108/Documents/GitHub/VNSTOCK-CANSLIM/.venv/bin/python
+#!/Users/bear1108/Documents/GitHub/VNSTOCK-CANSLIM/.venv/bin/python3.12
 # -*- coding: utf-8 -*-
 import re
 import sys

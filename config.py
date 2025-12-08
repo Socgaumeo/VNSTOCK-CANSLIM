@@ -46,7 +46,7 @@ class APIKeys:
     
     # Anthropic Claude - Chất lượng cao nhất
     # Đăng ký: https://console.anthropic.com/
-    CLAUDE = ""
+    CLAUDE = "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"
     
     # OpenAI - Phổ biến
     # Đăng ký: https://platform.openai.com/

@@ -87,10 +87,11 @@ class DataSourceManager:
     def _init_vnstock(self, api_key: str = None):
         """Khởi tạo vnstock"""
         try:
-            from vnstock import Vnstock, Listing
-            
+            # Set API key BEFORE importing vnstock
             if api_key:
                 os.environ['VNSTOCK_API_KEY'] = api_key
+            
+            from vnstock import Vnstock, Listing
             
             self.Vnstock = Vnstock
             self.Listing = Listing
@@ -558,6 +559,24 @@ class EnhancedDataCollector:
         """Lấy dữ liệu index"""
         return self.get_stock_data(symbol, lookback_days=days, include_vp=True)
     
+    def _retry_request(self, func, *args, **kwargs):
+        """Helper to retry requests on failure"""
+        max_retries = 3
+        base_delay = 5
+        
+        for i in range(max_retries):
+            try:
+                return func(*args, **kwargs)
+            except Exception as e:
+                error_msg = str(e).lower()
+                if "429" in error_msg or "502" in error_msg or "rate limit" in error_msg:
+                    wait_time = base_delay * (2 ** i)
+                    print(f"   ⚠️ Rate limit/Error. Waiting {wait_time}s... ({i+1}/{max_retries})")
+                    time.sleep(wait_time)
+                else:
+                    raise e
+        return None
+
     def get_financial_ratios(self, symbol: str) -> Dict[str, float]:
         """
         Lấy các chỉ số tài chính cơ bản (PE, PB, ROE, ROA)
@@ -579,9 +598,13 @@ class EnhancedDataCollector:
         try:
             stock = self.data_manager._get_stock(symbol)
             if stock:
-                # Lấy ratio mới nhất
-                df = stock.finance.ratio(period='quarter', lang='vi')
-                if not df.empty:
+                # Retry wrapper for ratio
+                def fetch_ratio():
+                    return stock.finance.ratio(period='quarter', lang='vi')
+                
+                df = self._retry_request(fetch_ratio)
+                
+                if df is not None and not df.empty:
                     # Lấy dòng mới nhất (index 0)
                     latest = df.iloc[0]
                     
@@ -607,6 +630,72 @@ class EnhancedDataCollector:
             print(f"   ⚠️ Lỗi lấy ratio {symbol}: {e}")
             
         return result
+
+    def get_historical_ratios(self, symbol: str, periods: int = 12) -> pd.DataFrame:
+        """
+        Lấy lịch sử chỉ số tài chính (PE, PB)
+        Args:
+            symbol: Mã cổ phiếu
+            periods: Số kỳ (quý) cần lấy
+        Returns:
+            DataFrame với index là thời gian, columns là PE, PB
+        """
+        # Check cache
+        cache_key = f"{symbol}_hist_ratios_{periods}"
+        if cache_key in self.cache_data:
+            cached = self.cache_data[cache_key]
+            # Check expiry (7 days)
+            cached_time = datetime.strptime(cached['timestamp'], "%Y-%m-%d")
+            if (datetime.now() - cached_time).days < 7:
+                try:
+                    df = pd.DataFrame(cached['data'])
+                    return df
+                except:
+                    pass
+
+        try:
+            stock = self.data_manager._get_stock(symbol)
+            if stock:
+                # Retry wrapper
+                def fetch_ratio():
+                    return stock.finance.ratio(period='quarter', lang='vi')
+                
+                df = self._retry_request(fetch_ratio)
+                
+                if df is not None and not df.empty:
+                    # Lấy n dòng đầu tiên (mới nhất)
+                    df_subset = df.head(periods).copy()
+                    
+                    result_data = []
+                    for idx, row in df_subset.iterrows():
+                        try:
+                            # Extract PE, PB
+                            pe = float(row.get(('Chỉ tiêu định giá', 'P/E'), 0))
+                            pb = float(row.get(('Chỉ tiêu định giá', 'P/B'), 0))
+                            
+                            result_data.append({
+                                'period': idx, 
+                                'pe': pe,
+                                'pb': pb
+                            })
+                        except:
+                            pass
+                    
+                    result_df = pd.DataFrame(result_data)
+                    
+                    # Save to cache
+                    self.cache_data[cache_key] = {
+                        'data': result_df.to_dict(orient='records'),
+                        'timestamp': datetime.now().strftime("%Y-%m-%d")
+                    }
+                    self._save_cache()
+                    
+                    return result_df
+                        
+        except Exception as e:
+            print(f"   ⚠️ Lỗi lấy historical ratio {symbol}: {e}")
+            
+        return pd.DataFrame()
 
     def get_financial_flow(self, symbol: str) -> Dict[str, float]:
         """

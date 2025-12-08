@@ -34,7 +34,7 @@ class APIKeys:
     
     # DeepSeek - Rẻ nhất ($0.14/1M tokens)
     # Đăng ký: https://platform.deepseek.com/
-    DEEPSEEK = ""
+    DEEPSEEK = "sk-2ccd0aea542e4da8b7af147b435be35d"
     
     # Google Gemini - Free tier rộng rãi (60 req/phút)
     # Đăng ký: https://makersuite.google.com/app/apikey
@@ -46,7 +46,7 @@ class APIKeys:
     
     # Anthropic Claude - Chất lượng cao nhất
     # Đăng ký: https://console.anthropic.com/
-    CLAUDE = ""
+    CLAUDE = "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"
     
     # OpenAI - Phổ biến
     # Đăng ký: https://platform.openai.com/
@@ -95,10 +95,10 @@ class AIProviderConfig:
     
     # Thứ tự ưu tiên (Rẻ → Free → Nhanh → Chất lượng)
     PRIORITY: List[str] = field(default_factory=lambda: [
-        "deepseek",  # Rẻ nhất
+        "claude",    # Chất lượng cao - dùng Opus 4.5 - RUNNING CLAUDE
         "gemini",    # Free tier
+        "deepseek",  # Rẻ nhất
         "groq",      # Nhanh nhất
-        "claude",    # Chất lượng cao
         "openai"     # Phổ biến
     ])
     
@@ -107,7 +107,7 @@ class AIProviderConfig:
         "deepseek": "deepseek-chat",
         "gemini": "gemini-3-pro-preview",  # Gemini 3.0 Pro Preview - mới nhất
         "groq": "llama-3.1-70b-versatile",
-        "claude": "claude-3-5-sonnet-20241022",
+        "claude": "claude-opus-4-5-20251101",  # Claude Opus 4.5 - mới nhất (Nov 2025)
         "openai": "gpt-4o-mini"
     })
     
@@ -126,7 +126,7 @@ class AIProviderConfig:
             "openai": APIKeys.OPENAI,
         }
         
-        priority = ["deepseek", "gemini", "groq", "claude", "openai"]
+        priority = ["claude", "gemini", "deepseek", "groq", "openai"]  # Claude first
         
         for provider in priority:
             key = providers_keys.get(provider, "")

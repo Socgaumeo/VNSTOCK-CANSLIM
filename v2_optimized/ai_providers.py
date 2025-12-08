@@ -60,7 +60,7 @@ class AIConfig:
     # Default models per provider
     DEFAULT_MODELS: Dict[str, str] = field(default_factory=lambda: {
         "gemini": "gemini-3-pro-preview",  # Model Pro 3.0 Preview - mới nhất
-        "claude": "claude-3-5-sonnet-20241022",
+        "claude": "claude-opus-4-5-20251101",  # Claude Opus 4.5 - mới nhất (Nov 2025)
         "deepseek": "deepseek-chat",
         "openai": "gpt-4o-mini",
         "groq": "llama-3.1-70b-versatile"
@@ -248,13 +248,21 @@ class ClaudeProvider(BaseAIProvider):
 
 class DeepSeekProvider(BaseAIProvider):
     """
-    DeepSeek AI
+    DeepSeek AI - V3.2 (Latest)
     
     API Key: https://platform.deepseek.com/
     Pricing: ~$0.14/1M input tokens (RẺ NHẤT)
     
     Ưu điểm: Giá rẻ, hỗ trợ tiếng Việt tốt, API tương thích OpenAI
+    
+    Endpoints:
+    - Standard: https://api.deepseek.com (DeepSeek-V3.2-Exp)
+    - Speciale: https://api.deepseek.com/v3.2_speciale_expires_on_20251215 (until Dec 15, 2025)
     """
+    
+    # Use V3.2 Speciale endpoint (available until Dec 15, 2025)
+    BASE_URL = "https://api.deepseek.com"  # Standard endpoint uses V3.2-Exp
+    # BASE_URL = "https://api.deepseek.com/v3.2_speciale_expires_on_20251215"  # Speciale with thinking mode
     
     def __init__(self, config: AIConfig):
         super().__init__(config)
@@ -266,9 +274,9 @@ class DeepSeekProvider(BaseAIProvider):
             
             self.client = OpenAI(
                 api_key=self.config.api_key,
-                base_url="https://api.deepseek.com"
+                base_url=self.BASE_URL
             )
-            print(f"✓ DeepSeek initialized: {self.config.get_model()}")
+            print(f"✓ DeepSeek initialized: {self.config.get_model()} (V3.2)")
             
         except ImportError:
             raise ImportError("Chạy: pip install openai")

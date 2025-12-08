@@ -58,6 +58,23 @@ except ImportError:
     HAS_NEWS = False
     NewsAnalyzer = None
 
+# Import V3 Enhanced Modules
+try:
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    from v3_enhanced.fundamental_enhanced_v3 import FundamentalAggregator, EnhancedCANSLIMScorer
+    from v3_enhanced.vwap_indicator import VWAPIndicator, calculate_vwap
+    from v3_enhanced.news_analyzer import NewsAnalyzer as V3NewsAnalyzer, analyze_news
+    HAS_V3_ENHANCED = True
+    print("✓ V3 Enhanced modules loaded")
+except ImportError as e:
+    HAS_V3_ENHANCED = False
+    FundamentalAggregator = None
+    VWAPIndicator = None
+    V3NewsAnalyzer = None
+    print(f"⚠️ V3 Enhanced not available: {e}")
+
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # ENUMS & CONSTANTS
@@ -228,6 +245,15 @@ class FundamentalData:
     # Institutional
     foreign_ownership: float = 0.0
     foreign_net_buy_20d: float = 0.0
+    
+    # V3 Enhanced fields
+    eps_growth_3y_cagr: float = 0.0   # 3-year CAGR
+    eps_growth_5y_cagr: float = 0.0   # 5-year CAGR
+    eps_acceleration: float = 0.0     # EPS acceleration
+    consecutive_eps_growth: int = 0    # Consecutive quarters
+    earnings_stability: float = 0.0    # Stability score
+    confidence_score: float = 50.0     # Data confidence
+
 
 
 @dataclass
@@ -270,6 +296,13 @@ class TechnicalData:
     vah: float = 0.0
     val: float = 0.0
     price_vs_va: str = ""
+    
+    # VWAP (V3 Enhanced)
+    vwap: float = 0.0
+    vwap_score: float = 50.0
+    price_vs_vwap: str = ""  # "ABOVE", "BELOW", "AT"
+    vwap_buy_signal: bool = False
+
 
 
 @dataclass
@@ -380,18 +413,65 @@ class FundamentalAnalyzer:
     L - Leader (RS Rating)
     I - Institutional sponsorship
     M - Market direction
+    
+    V3 Enhanced: Uses FundamentalAggregator for multi-source data
     """
     
     def __init__(self, config: ScreenerConfig):
         self.config = config
         self.collector = get_data_collector()
+        
+        # V3 Enhanced: Initialize FundamentalAggregator
+        self.v3_aggregator = None
+        self.v3_scorer = None
+        if HAS_V3_ENHANCED and FundamentalAggregator:
+            try:
+                self.v3_aggregator = FundamentalAggregator(
+                    vnstock_api_key=config.VNSTOCK_API_KEY,
+                    cache_dir="./cache"
+                )
+                self.v3_scorer = EnhancedCANSLIMScorer()
+                print("   ✓ V3 FundamentalAggregator initialized")
+            except Exception as e:
+                print(f"   ⚠️ V3 Aggregator init failed: {e}")
     
     def analyze(self, symbol: str) -> FundamentalData:
         """Phân tích fundamental cho một mã"""
         data = FundamentalData()
         
         try:
-            # Lấy thông tin tài chính từ vnstock
+            # V3 Enhanced: Use FundamentalAggregator if available
+            if self.v3_aggregator:
+                v3_data = self.v3_aggregator.get_fundamental_data(symbol)
+                
+                # Map V3 data to local FundamentalData
+                data.roe = v3_data.roe
+                data.roa = v3_data.roa
+                data.eps_growth_qoq = v3_data.eps_growth_qoq
+                data.eps_growth_yoy = v3_data.eps_growth_yoy
+                data.eps_growth_3y = v3_data.eps_growth_3y_cagr
+                data.eps_growth_3y_cagr = v3_data.eps_growth_3y_cagr
+                data.eps_growth_5y_cagr = v3_data.eps_growth_5y_cagr
+                data.revenue_growth_qoq = v3_data.revenue_growth_qoq
+                data.revenue_growth_yoy = v3_data.revenue_growth_yoy
+                data.eps_acceleration = v3_data.eps_acceleration
+                data.consecutive_eps_growth = v3_data.consecutive_eps_growth
+                data.earnings_stability = v3_data.earnings_stability
+                data.confidence_score = v3_data.confidence_score
+                
+                # Use V3 scorer
+                if self.v3_scorer:
+                    score, breakdown = self.v3_scorer.score_fundamental(v3_data)
+                    data.c_score = breakdown['c_score']
+                    data.a_score = breakdown['a_score']
+                else:
+                    data.c_score = self._calc_c_score(data)
+                    data.a_score = self._calc_a_score(data)
+                
+                print(f"   📊 Funda V3: ROE={data.roe:.1f}% EPS_3Y={data.eps_growth_3y_cagr:.1f}% Conf={data.confidence_score:.0f}%")
+                return data
+            
+            # Fallback to original logic
             stock = self.collector.get_stock_data(symbol, lookback_days=30, include_vp=False)
             
             # Lấy Real Financial Data
@@ -399,7 +479,7 @@ class FundamentalAnalyzer:
             flow = self.collector.get_financial_flow(symbol)
             
             # Map data
-            data.market_cap = getattr(stock, 'market_cap', 0) # vnstock data might have this
+            data.market_cap = getattr(stock, 'market_cap', 0)
             
             # Ratios
             data.pe_ratio = ratios.get('pe', 0)
@@ -413,7 +493,7 @@ class FundamentalAnalyzer:
             data.revenue_growth_qoq = flow.get('revenue_growth_qoq', 0)
             data.revenue_growth_yoy = flow.get('revenue_growth_yoy', 0)
             
-            # Placeholder for 3y growth (requires more history)
+            # Placeholder for 3y growth
             data.eps_growth_3y = data.eps_growth_yoy 
             
             # Tính C score (Current EPS)
@@ -428,6 +508,7 @@ class FundamentalAnalyzer:
             print(f"   ⚠️ Fundamental error {symbol}: {e}")
         
         return data
+
     
     def _calc_c_score(self, data: FundamentalData) -> float:
         """Tính C score (0-100)"""
@@ -538,11 +619,21 @@ class TechnicalAnalyzer:
     - Price vs MA alignment
     - Volume characteristics
     - Distance from 52-week high
+    - VWAP (V3 Enhanced)
     """
     
     def __init__(self, config: ScreenerConfig):
         self.config = config
         self.collector = get_data_collector(enable_volume_profile=True)
+        
+        # V3 Enhanced: Initialize VWAP Indicator
+        self.vwap_indicator = None
+        if HAS_V3_ENHANCED and VWAPIndicator:
+            try:
+                self.vwap_indicator = VWAPIndicator(lookback_days=20)
+                print("   ✓ V3 VWAPIndicator initialized")
+            except Exception as e:
+                print(f"   ⚠️ VWAP Indicator init failed: {e}")
     
     def analyze(self, symbol: str, sector_rs: int = 50) -> TechnicalData:
         """Phân tích technical cho một mã"""
@@ -591,12 +682,26 @@ class TechnicalAnalyzer:
             data.val = stock.val
             data.price_vs_va = stock.price_vs_va
             
+            # V3 Enhanced: VWAP (using pre-fetched data from stock.df)
+            if self.vwap_indicator and hasattr(stock, 'df') and stock.df is not None:
+                try:
+                    # Use calculate_from_df to avoid extra API call
+                    vwap_result = self.vwap_indicator.calculate_from_df(symbol, stock.df)
+                    data.vwap = vwap_result.vwap
+                    data.vwap_score = vwap_result.vwap_score
+                    data.price_vs_vwap = vwap_result.price_vs_vwap
+                    data.vwap_buy_signal = vwap_result.buy_signal
+                except Exception as e:
+                    pass  # Silent fail, VWAP is optional
+
+            
             # RS Rating - cần tính từ performance
             data.rs_raw = self._calc_rs_raw(stock)
             # RS Rating sẽ được tính sau khi có đủ data các mã
             
         except Exception as e:
             pass
+
         
         return data
     

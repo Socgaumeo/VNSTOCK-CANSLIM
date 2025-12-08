@@ -64,8 +64,8 @@ class FullPipelineRunner:
         print("="*80)
         
         history_manager = HistoryManager(self.output_dir)
-        history_context = history_manager.get_ai_context()
-        print("✓ History context loaded.")
+        history_context = history_manager.get_ai_context_v2()  # V2 with What-If, RS trends
+        print("✓ History context loaded (V2 Enhanced).")
 
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 1: MARKET TIMING
@@ -94,14 +94,47 @@ class FullPipelineRunner:
         self.sector_report = m2_module.run()
         
         # Xác định target sectors từ Module 2
+        # LOGIC MỚI: Scan TẤT CẢ các ngành mạnh hoặc đang improving
         if not target_sectors and self.sector_report:
-            # Lấy top 2-3 ngành có RS cao nhất
-            top_sectors = []
+            target_sectors = []
+            
+            print("\n📊 PHÂN TÍCH NGÀNH ĐỂ SCAN:")
             if hasattr(self.sector_report, 'sectors') and self.sector_report.sectors:
-                for sector in self.sector_report.sectors[:3]:
+                for sector in self.sector_report.sectors:
                     if hasattr(sector, 'code'):
-                        top_sectors.append(sector.code)
-            target_sectors = top_sectors if top_sectors else ['VNREAL', 'VNCOND']
+                        sector_code = sector.code
+                        rs_rating = getattr(sector, 'rs_rating', 0)
+                        phase = getattr(sector, 'phase', None)
+                        rs_trend = getattr(sector, 'rs_trend', '')
+                        
+                        # Lấy phase name (xử lý cả Enum lẫn string)
+                        if hasattr(phase, 'name'):
+                            phase_name = phase.name  # Enum -> 'LEADING', 'IMPROVING', etc
+                        else:
+                            phase_name = str(phase) if phase else ''
+                        
+                        # Scan ngành nếu:
+                        # 1. Đang LEADING hoặc IMPROVING
+                        # 2. Hoặc có RS >= 50 (top half)
+                        # 3. Hoặc RS trend đang IMPROVING (có thể sắp bứt phá)
+                        should_scan = (
+                            phase_name in ['LEADING', 'IMPROVING'] or
+                            rs_rating >= 50 or
+                            'IMPROVING' in rs_trend.upper()
+                        )
+                        
+                        if should_scan:
+                            target_sectors.append(sector_code)
+                            print(f"   ✓ {sector_code}: RS={rs_rating}, Phase={phase_name}, Trend={rs_trend}")
+                        else:
+                            print(f"   ✗ {sector_code}: RS={rs_rating}, Phase={phase_name} - SKIP (yếu)")
+            
+            # Fallback nếu không có ngành nào
+            if not target_sectors:
+                target_sectors = ['VNFIN', 'VNREAL', 'VNCOND', 'VNCONS', 'VNMAT', 'VNIT', 'VNHEAL']
+                print("   ⚠️ Fallback: Scan tất cả ngành")
+            
+            print(f"\n📋 TARGET SECTORS ({len(target_sectors)}): {', '.join(target_sectors)}")
         
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 3: STOCK SCREENER
@@ -278,13 +311,22 @@ class FullPipelineRunner:
 
 **Scores:** Fundamental {c.score_fundamental:.0f} | Technical {c.score_technical:.0f} | Pattern {c.score_pattern:.0f} | News {c.score_news:.0f} | **Total: {c.score_total:.0f}**
 
-**Technical:**
+**📊 Fundamental (V3 Enhanced):**
+- ROE: {c.fundamental.roe:.1f}% | ROA: {c.fundamental.roa:.1f}%
+- EPS Q/Q: {c.fundamental.eps_growth_qoq:+.1f}% | EPS Y/Y: {c.fundamental.eps_growth_yoy:+.1f}%
+- EPS 3Y CAGR: {getattr(c.fundamental, 'eps_growth_3y_cagr', c.fundamental.eps_growth_3y):+.1f}%
+- C Score: {c.fundamental.c_score:.0f} | A Score: {c.fundamental.a_score:.0f}
+- Confidence: {getattr(c.fundamental, 'confidence_score', 50):.0f}%
+
+**📈 Technical:**
 - Giá: {price:,.0f} | RS: {c.technical.rs_rating} | RSI: {c.technical.rsi_14:.0f}
 - MA: {'✅ TRÊN' if c.technical.above_ma50 else '❌ DƯỚI'} MA50 | Volume Ratio: {c.technical.volume_ratio:.2f}x
+- VWAP: {getattr(c.technical, 'vwap', 0):,.0f} | Vị thế: {getattr(c.technical, 'price_vs_vwap', 'N/A')} | VWAP Score: {getattr(c.technical, 'vwap_score', 50):.0f}/100
 
 **Pattern:** {c.pattern.pattern_type.value} (Quality: {c.pattern.pattern_quality:.0f})
 
 """
+
                 # News section
                 if c.news and c.news.articles:
                     content += f"**📰 News ({len(c.news.articles)} bài):**\n"

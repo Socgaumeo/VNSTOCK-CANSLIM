@@ -235,14 +235,11 @@ class MarketTimingAnalyzer:
         if report.vn100 and report.vn100.price > 0:
             print(f"   ✓ VN100: {report.vn100.price:,.0f} ({report.vn100.change_1d:+.2f}%)")
         
-        # 4. Breadth - lấy từ price_board
-        print("\n[4/5] ĐỘ RỘNG THỊ TRƯỜNG...")
-        report.breadth = self._get_market_breadth()
-        print(f"   ✓ Breadth: Tăng={report.breadth.advances}, Giảm={report.breadth.declines}")
+        # 4. Market Internals (Breadth + Money Flow)
+        print("\n[4/5] MARKET INTERNALS (Breadth & Money Flow)...")
+        report.breadth, report.money_flow = self._get_market_internals()
         
-        # 5. Money Flow
-        print("\n[5/5] DÒNG TIỀN...")
-        report.money_flow = self._get_money_flow()
+        print(f"   ✓ Breadth: Tăng={report.breadth.advances}, Giảm={report.breadth.declines}")
         print(f"   ✓ Money Flow: KN={report.money_flow.foreign_net:+.1f}tỷ")
         
         # 6. Top 3 sectors (chỉ lấy để hiển thị, chi tiết ở Module 2)
@@ -266,109 +263,161 @@ class MarketTimingAnalyzer:
         
         return report
     
-    def _get_market_breadth(self) -> MarketBreadth:
-        """Lấy độ rộng thị trường từ price_board"""
-        result = MarketBreadth()
+    def _get_market_internals(self) -> Tuple[MarketBreadth, MoneyFlow]:
+        """
+        Lấy độ rộng thị trường và dòng tiền từ TOÀN BỘ thị trường (HOSE)
+        Sử dụng API trading.foreign_trade() cho dữ liệu khối ngoại chính xác
+        """
+        breadth = MarketBreadth()
+        money_flow = MoneyFlow()
         
         try:
             from vnstock import Vnstock, Listing
+            from datetime import datetime, timedelta
             
-            # Lấy danh sách cổ phiếu
+            # ═══════════════════════════════════════════════════════════════════════
+            # 1. LẤY DANH SÁCH CỔ PHIẾU HOSE
+            # ═══════════════════════════════════════════════════════════════════════
             listing = Listing()
-            all_stocks = listing.all_symbols()
+            try:
+                df_sym = listing.symbols_by_exchange()
+                hose_stocks = df_sym[
+                    (df_sym['exchange'] == 'HSX') & 
+                    (df_sym['type'] == 'STOCK')
+                ]['symbol'].tolist()
+                print(f"   📊 Scanning {len(hose_stocks)} HOSE stocks (Filtered by HSX/STOCK)...")
+            except Exception as e:
+                print(f"   ⚠️ symbols_by_exchange failed ({e}), trying fallback...")
+                all_stocks = listing.all_symbols()
+                hose_stocks = all_stocks[all_stocks['symbol'].str.len() == 3]['symbol'].tolist()
             
-            # Lọc mã HOSE 3 ký tự
-            hose_stocks = all_stocks[
-                (all_stocks['symbol'].str.len() == 3) & 
-                (all_stocks['exchange'] == 'HOSE')
-            ]['symbol'].tolist()
+            # ═══════════════════════════════════════════════════════════════════════
+            # 2. LẤY KHỐI NGOẠI TỪ VNINDEX - trading.foreign_trade() (CHÍNH XÁC)
+            # ═══════════════════════════════════════════════════════════════════════
+            try:
+                today = datetime.now().strftime('%Y-%m-%d')
+                # Lấy 3 ngày gần nhất để đảm bảo có dữ liệu (cuối tuần không có giao dịch)
+                start_date = (datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')
+                
+                # Sử dụng VNINDEX để lấy tổng dòng tiền cả thị trường
+                stock = Vnstock().stock(symbol='VNINDEX', source=self.config.DATA_SOURCE)
+                foreign_df = stock.trading.foreign_trade(start=start_date, end=today)
+                
+                if foreign_df is not None and not foreign_df.empty:
+                    # Lấy dữ liệu ngày gần nhất (cuối cùng)
+                    latest = foreign_df.iloc[-1]
+                    
+                    # fr_buy_value, fr_sell_value đã tính bằng VND
+                    money_flow.foreign_buy = latest.get('fr_buy_value', 0) / 1e9  # Convert to tỷ
+                    money_flow.foreign_sell = latest.get('fr_sell_value', 0) / 1e9
+                    money_flow.foreign_net = latest.get('fr_net_value', 0) / 1e9
+                    
+                    print(f"   ✓ Foreign Trade API: Buy={money_flow.foreign_buy:.1f}tỷ, Sell={money_flow.foreign_sell:.1f}tỷ, Net={money_flow.foreign_net:+.1f}tỷ")
+                else:
+                    print(f"   ⚠️ foreign_trade() returned empty, fallback to price_board calculation")
+                    raise Exception("Empty foreign_trade data")
+                    
+            except Exception as e:
+                print(f"   ⚠️ foreign_trade API failed: {e}, calculating from price_board...")
+                # Fallback: Tính từ price_board (code cũ)
+                money_flow = self._calculate_foreign_from_price_board(hose_stocks)
             
-            # Lấy mẫu lớn hơn (100 mã) để đại diện tốt hơn
-            import random
-            random.seed(42)
-            sample_size = min(100, len(hose_stocks))
-            sample = random.sample(hose_stocks, sample_size)
+            # ═══════════════════════════════════════════════════════════════════════
+            # 3. TÍNH BREADTH TỪ PRICE_BOARD
+            # ═══════════════════════════════════════════════════════════════════════
+            chunk_size = 100
+            all_dfs = []
+            stock = Vnstock().stock(symbol='VCB', source=self.config.DATA_SOURCE)
             
-            # Lấy price_board
-            stock = Vnstock().stock(symbol=sample[0], source=self.config.DATA_SOURCE)
-            df = stock.trading.price_board(symbols_list=sample)
+            for i in range(0, len(hose_stocks), chunk_size):
+                chunk = hose_stocks[i:i+chunk_size]
+                try:
+                    df = stock.trading.price_board(symbols_list=chunk)
+                    if df is not None and not df.empty:
+                        all_dfs.append(df)
+                except Exception:
+                    pass
             
-            if df is not None and len(df) > 0:
-                for _, row in df.iterrows():
+            if all_dfs:
+                full_df = pd.concat(all_dfs, ignore_index=True)
+                
+                for _, row in full_df.iterrows():
                     try:
-                        match_price = row[('match', 'match_price')]
-                        ref_price = row[('listing', 'ref_price')]
+                        match_price = row.get(('match', 'match_price'), 0)
+                        ref_price = row.get(('listing', 'ref_price'), 0)
+                        ceil_price = row.get(('listing', 'ceil_price'), 0)
+                        floor_price = row.get(('listing', 'floor_price'), 0)
+                        
+                        if match_price == 0: match_price = ref_price
                         
                         if match_price > 0 and ref_price > 0:
-                            change = (match_price - ref_price) / ref_price * 100
-                            if change > 0.1:
-                                result.advances += 1
-                            elif change < -0.1:
-                                result.declines += 1
-                            else:
-                                result.unchanged += 1
-                    except:
-                        pass
-                
-                # Scale lên toàn bộ HOSE (khoảng 400-500 mã)
-                total_hose = len(hose_stocks)
-                scale = total_hose / len(df) if len(df) > 0 else 1
-                
-                result.advances = int(result.advances * scale)
-                result.declines = int(result.declines * scale)
-                result.unchanged = int(result.unchanged * scale)
-                
+                            change = match_price - ref_price
+                            
+                            if match_price == ceil_price: breadth.ceiling += 1
+                            if match_price == floor_price: breadth.floor += 1
+                            
+                            if change > 0: breadth.advances += 1
+                            elif change < 0: breadth.declines += 1
+                            else: breadth.unchanged += 1
+                    except Exception:
+                        continue
+            
+            print(f"   ✓ Breadth: Tăng={breadth.advances}, Giảm={breadth.declines}")
+            print(f"   ✓ Money Flow: KN={money_flow.foreign_net:+.1f}tỷ")
+            
         except Exception as e:
-            print(f"   ⚠️ Lỗi breadth: {e}")
-            result.advances = 250
-            result.declines = 200
-            result.unchanged = 50
+            print(f"   ⚠️ Lỗi market internals: {e}")
+            breadth.advances = 100
+            breadth.declines = 100
         
-        return result
+        return breadth, money_flow
     
-    def _get_money_flow(self) -> MoneyFlow:
-        """Lấy dòng tiền từ price_board"""
-        result = MoneyFlow()
+    def _calculate_foreign_from_price_board(self, hose_stocks: List[str]) -> MoneyFlow:
+        """
+        Fallback: Tính dòng tiền khối ngoại từ price_board (kém chính xác hơn)
+        """
+        money_flow = MoneyFlow()
         
         try:
             from vnstock import Vnstock
             
-            bluechips = ['VHM', 'FPT', 'VCB', 'HPG', 'VNM', 'VIC', 'MSN', 'MWG',
-                        'SSI', 'VPB', 'TCB', 'MBB', 'ACB', 'STB', 'HDB']
+            chunk_size = 100
+            all_dfs = []
+            stock = Vnstock().stock(symbol='VCB', source=self.config.DATA_SOURCE)
             
-            stock = Vnstock().stock(symbol=bluechips[0], source=self.config.DATA_SOURCE)
-            df = stock.trading.price_board(symbols_list=bluechips)
+            for i in range(0, len(hose_stocks), chunk_size):
+                chunk = hose_stocks[i:i+chunk_size]
+                try:
+                    df = stock.trading.price_board(symbols_list=chunk)
+                    if df is not None and not df.empty:
+                        all_dfs.append(df)
+                except Exception:
+                    pass
             
-            if df is not None and len(df) > 0:
-                stock_flows = []
+            if all_dfs:
+                full_df = pd.concat(all_dfs, ignore_index=True)
                 
-                for _, row in df.iterrows():
+                for _, row in full_df.iterrows():
                     try:
-                        symbol = row[('listing', 'symbol')]
-                        foreign_buy = row[('match', 'foreign_buy_value')] / 1e9
-                        foreign_sell = row[('match', 'foreign_sell_value')] / 1e9
+                        f_buy = row.get(('match', 'foreign_buy_value'), 0)
+                        f_sell = row.get(('match', 'foreign_sell_value'), 0)
                         
-                        result.foreign_buy += foreign_buy
-                        result.foreign_sell += foreign_sell
+                        if pd.isna(f_buy): f_buy = 0
+                        if pd.isna(f_sell): f_sell = 0
                         
-                        net = foreign_buy - foreign_sell
-                        stock_flows.append((symbol, net))
-                    except:
-                        pass
+                        money_flow.foreign_buy += f_buy
+                        money_flow.foreign_sell += f_sell
+                    except Exception:
+                        continue
                 
-                result.foreign_net = result.foreign_buy - result.foreign_sell
-                result.proprietary_net = -result.foreign_net * 0.3
-                
-                sorted_flows = sorted(stock_flows, key=lambda x: x[1], reverse=True)
-                result.top_foreign_buy = [(s, v) for s, v in sorted_flows[:3] if v > 0]
-                result.top_foreign_sell = [(s, v) for s, v in sorted_flows[-3:] if v < 0]
+                money_flow.foreign_buy /= 1e9
+                money_flow.foreign_sell /= 1e9
+                money_flow.foreign_net = money_flow.foreign_buy - money_flow.foreign_sell
                 
         except Exception as e:
-            print(f"   ⚠️ Lỗi money flow: {e}")
-            result.foreign_net = -100
-            result.proprietary_net = 30
+            print(f"   ⚠️ Fallback failed: {e}")
         
-        return result
+        return money_flow
     
     def analyze(self, report: MarketReport) -> MarketReport:
         """Phân tích và tính điểm"""
