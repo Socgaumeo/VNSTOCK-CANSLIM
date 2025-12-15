@@ -302,10 +302,6 @@ class TechnicalData:
     vwap_score: float = 50.0
     price_vs_vwap: str = ""  # "ABOVE", "BELOW", "AT"
     vwap_buy_signal: bool = False
-    
-    # ATR for Dynamic SL/TP
-    atr_14: float = 0.0       # Average True Range 14 ngày
-    atr_pct: float = 0.0      # ATR as % of price
 
 
 
@@ -326,13 +322,6 @@ class PatternData:
     
     # Description
     description: str = ""
-    
-    # Volume Confirmation (NEW)
-    volume_confirmed: bool = False     # True nếu đủ điều kiện volume
-    volume_score: float = 0.0          # 0-80 điểm volume
-    has_shakeout: bool = False         # Có phiên rũ bỏ volume lớn
-    has_dryup: bool = False            # Volume cạn kiệt gần pivot
-    breakout_ready: bool = False       # Sẵn sàng breakout (shakeout + dryup)
 
 
 @dataclass
@@ -704,19 +693,6 @@ class TechnicalAnalyzer:
                     data.vwap_buy_signal = vwap_result.buy_signal
                 except Exception as e:
                     pass  # Silent fail, VWAP is optional
-            
-            # V3 Enhanced: ATR for Dynamic SL/TP
-            if hasattr(stock, 'df') and stock.df is not None and len(stock.df) >= 14:
-                try:
-                    import pandas_ta as ta
-                    df = stock.df.copy()
-                    atr = ta.atr(df['high'], df['low'], df['close'], length=14)
-                    if atr is not None and len(atr) > 0:
-                        data.atr_14 = float(atr.iloc[-1]) if not pd.isna(atr.iloc[-1]) else data.price * 0.03
-                        data.atr_pct = (data.atr_14 / data.price) * 100 if data.price > 0 else 3.0
-                except Exception as e:
-                    data.atr_14 = data.price * 0.03  # Default 3%
-                    data.atr_pct = 3.0
 
             
             # RS Rating - cần tính từ performance
@@ -860,121 +836,11 @@ class PatternDetector:
                 
                 # Current vs Buy Point
                 data.current_vs_buy_point = (stock.price - data.buy_point) / data.buy_point * 100
-                
-                # NEW: Volume Confirmation Analysis
-                vol_analysis = self._analyze_volume_profile(df)
-                data.volume_confirmed = vol_analysis['breakout_ready']
-                data.volume_score = vol_analysis['volume_score']
-                data.has_shakeout = vol_analysis['has_shakeout']
-                data.has_dryup = vol_analysis['has_dryup']
-                data.breakout_ready = vol_analysis['breakout_ready']
-                
-                # Add volume bonus to quality
-                data.pattern_quality = min(100, data.pattern_quality + vol_analysis['volume_score'] * 0.3)
-                
-                # Update description với volume info
-                vol_desc = []
-                if data.has_shakeout:
-                    vol_desc.append("✓ Shakeout")
-                if data.has_dryup:
-                    vol_desc.append("✓ Dry-up")
-                if vol_desc:
-                    data.description += f" | {' | '.join(vol_desc)}"
             
         except Exception as e:
             pass
         
         return data
-    
-    def _analyze_volume_profile(self, df: pd.DataFrame) -> Dict:
-        """
-        Phân tích volume profile cho pattern theo IBD/Minervini
-        
-        Rules:
-        1. SHAKEOUT: Volume > 1.5x avg khi rũ bỏ (giá giảm mạnh)
-        2. DRY-UP: Volume < 0.6x avg gần pivot (nguồn cung cạn kiệt)
-        3. VOLUME DECLINING: Volume giảm dần trong base
-        4. BREAKOUT READY: Có cả Shakeout + Dry-up = sẵn sàng breakout
-        
-        Returns:
-            Dict với các flags và volume_score
-        """
-        result = {
-            'has_shakeout': False,
-            'has_dryup': False,
-            'breakout_ready': False,
-            'volume_declining': False,
-            'volume_score': 0
-        }
-        
-        try:
-            volumes = df['volume'].values
-            closes = df['close'].values
-            lows = df['low'].values
-            
-            n = len(volumes)
-            if n < 30:
-                return result
-            
-            avg_vol_20 = np.mean(volumes[-20:])
-            avg_vol_50 = np.mean(volumes[-50:]) if n >= 50 else avg_vol_20
-            
-            # ═══════════════════════════════════════════════════════════════════
-            # 1. CHECK SHAKEOUT (phiên rũ bỏ volume lớn trong base)
-            # ═══════════════════════════════════════════════════════════════════
-            # Tìm phiên có volume spike + giá giảm trong 20 ngày gần nhất
-            for i in range(-20, -3):
-                if volumes[i] > avg_vol_50 * 1.5:  # Volume > 150% avg
-                    # Kiểm tra giá giảm mạnh trong ngày đó
-                    if closes[i] < closes[i-1] * 0.98:  # Giảm > 2%
-                        result['has_shakeout'] = True
-                        result['volume_score'] += 20
-                        break
-                    # Hoặc có long tail (nến hammer)
-                    elif lows[i] < closes[i] * 0.97:  # Tail > 3%
-                        result['has_shakeout'] = True
-                        result['volume_score'] += 15
-                        break
-            
-            # ═══════════════════════════════════════════════════════════════════
-            # 2. CHECK DRY-UP (volume cạn kiệt gần pivot)
-            # ═══════════════════════════════════════════════════════════════════
-            # Volume 5 ngày gần nhất phải thấp
-            recent_vol_5 = np.mean(volumes[-5:])
-            if recent_vol_5 < avg_vol_20 * 0.6:  # Volume < 60% avg
-                result['has_dryup'] = True
-                result['volume_score'] += 25
-            elif recent_vol_5 < avg_vol_20 * 0.75:
-                result['has_dryup'] = True
-                result['volume_score'] += 15
-            
-            # ═══════════════════════════════════════════════════════════════════
-            # 3. CHECK VOLUME DECLINING trong base
-            # ═══════════════════════════════════════════════════════════════════
-            vol_first_half = np.mean(volumes[-20:-10])
-            vol_second_half = np.mean(volumes[-10:])
-            
-            if vol_second_half < vol_first_half * 0.8:  # Giảm 20%+
-                result['volume_declining'] = True
-                result['volume_score'] += 15
-            elif vol_second_half < vol_first_half * 0.9:  # Giảm 10%
-                result['volume_score'] += 8
-            
-            # ═══════════════════════════════════════════════════════════════════
-            # 4. BREAKOUT READY = Shakeout + Dry-up
-            # ═══════════════════════════════════════════════════════════════════
-            if result['has_shakeout'] and result['has_dryup']:
-                result['breakout_ready'] = True
-                result['volume_score'] += 20  # Bonus
-            
-            # Cap score at 80
-            result['volume_score'] = min(80, result['volume_score'])
-            
-        except Exception as e:
-            pass
-        
-        return result
-
     
     def _detect_vcp(self, df: pd.DataFrame) -> Dict:
         """

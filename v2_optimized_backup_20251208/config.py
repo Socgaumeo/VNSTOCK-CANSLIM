@@ -145,7 +145,7 @@ class RateLimitConfig:
     """Cấu hình rate limiting"""
     
     # Delay giữa các request (giây)
-    API_DELAY: float = 1.5  # Tăng từ 0.3 để tránh TCBS rate limit
+    API_DELAY: float = 0.3
     
     # Số request trước khi nghỉ dài
     BATCH_SIZE: int = 20

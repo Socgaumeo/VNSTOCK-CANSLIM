@@ -29,81 +29,6 @@ from email_notifier import EmailNotifier
 from history_manager import HistoryManager
 
 
-def calculate_dynamic_sl_tp(candidate, market_score: int) -> dict:
-    """
-    Tính SL/TP động dựa trên điều kiện thị trường và cổ phiếu
-    
-    Args:
-        candidate: Stock candidate với technical, pattern data
-        market_score: 0-100 market score
-        
-    Returns:
-        Dict với stop_loss, target_1, target_2, risk_reward
-    """
-    price = candidate.technical.price
-    buy_point = candidate.pattern.buy_point if candidate.pattern.buy_point > 0 else price * 1.02
-    
-    # ATR-based calculation (default 3% nếu chưa có)
-    atr_pct = getattr(candidate.technical, 'atr_pct', 3.0) / 100  # Convert to decimal
-    if atr_pct <= 0:
-        atr_pct = 0.03  # Default 3%
-    
-    # === MARKET SCORE ADJUSTMENT ===
-    if market_score >= 60:     # XANH - Tấn công
-        sl_mult = 2.0          # SL = 2x ATR (rộng hơn)
-        tp_mult = 3.5          # TP = 3.5x ATR
-        mode = "Xanh-Tấn công"
-    elif market_score >= 40:   # VÀNG - Phòng thủ
-        sl_mult = 1.5          # SL = 1.5x ATR
-        tp_mult = 2.5          # TP = 2.5x ATR
-        mode = "Vàng-Phòng thủ"
-    else:                       # ĐỎ - Thận trọng
-        sl_mult = 1.0          # SL = 1x ATR (chặt)
-        tp_mult = 2.0          # TP = 2x ATR
-        mode = "Đỏ-Thận trọng"
-    
-    # === PATTERN QUALITY BONUS ===
-    pattern_quality = candidate.pattern.pattern_quality
-    if pattern_quality >= 80:
-        tp_mult += 0.5    # Pattern đẹp → TP xa hơn
-    
-    # === VOLUME CONFIRMATION BONUS ===
-    if getattr(candidate.pattern, 'breakout_ready', False):
-        tp_mult += 0.5    # Breakout Ready → TP xa hơn
-        sl_mult += 0.3    # Cho room chạy
-    elif getattr(candidate.pattern, 'has_shakeout', False) or getattr(candidate.pattern, 'has_dryup', False):
-        tp_mult += 0.25
-    
-    # === CALCULATE FINAL VALUES ===
-    sl_pct = atr_pct * sl_mult
-    tp_pct = atr_pct * tp_mult
-    
-    # Clamp values
-    sl_pct = max(0.03, min(0.10, sl_pct))   # 3% - 10%
-    tp_pct = max(0.10, min(0.35, tp_pct))   # 10% - 35%
-    
-    stop_loss = buy_point * (1 - sl_pct)
-    target_1 = buy_point * (1 + tp_pct)
-    target_2 = buy_point * (1 + tp_pct * 1.3)  # +30% thêm
-    
-    risk_reward = tp_pct / sl_pct if sl_pct > 0 else 2.0
-    
-    return {
-        'stop_loss': stop_loss,
-        'stop_loss_pct': sl_pct * 100,
-        'target_1': target_1,
-        'target_1_pct': tp_pct * 100,
-        'target_2': target_2,
-        'target_2_pct': tp_pct * 1.3 * 100,
-        'risk_reward': risk_reward,
-        'atr_pct': atr_pct * 100,
-        'sl_mult': sl_mult,
-        'tp_mult': tp_mult,
-        'mode': mode,
-        'rationale': f"ATR={atr_pct*100:.1f}% | {mode} | SL {sl_mult}x | TP {tp_mult}x"
-    }
-
-
 class FullPipelineRunner:
     """Chạy toàn bộ pipeline và gộp output"""
     
@@ -364,13 +289,11 @@ class FullPipelineRunner:
 
 ## 🏆 Top Picks
 
-| Rank | Symbol | Sector | Score | RS | Pattern | Vol✓ | Signal |
-|------|--------|--------|-------|----| --------|------|--------|
+| Rank | Symbol | Sector | Score | RS | Pattern | Signal |
+|------|--------|--------|-------|----| --------|--------|
 """
             for c in self.screener_report.top_picks[:10]:
-                vol_status = "🚀" if getattr(c.pattern, 'breakout_ready', False) else ("✓" if getattr(c.pattern, 'has_shakeout', False) or getattr(c.pattern, 'has_dryup', False) else "⭕")
-                content += f"| {c.rank} | {c.symbol} | {c.sector_name} | {c.score_total:.0f} | {c.technical.rs_rating} | {c.pattern.pattern_type.value} | {vol_status} | {c.signal.value} |\n"
-
+                content += f"| {c.rank} | {c.symbol} | {c.sector_name} | {c.score_total:.0f} | {c.technical.rs_rating} | {c.pattern.pattern_type.value} | {c.signal.value} |\n"
             
             # Top 5 detail với Trading Plan
             content += "\n## 📝 Chi tiết Top 5 Candidates\n"
@@ -379,15 +302,9 @@ class FullPipelineRunner:
                 price = c.technical.price
                 buy_point = c.pattern.buy_point if c.pattern.buy_point > 0 else price * 1.02
                 buy_zone_max = buy_point * 1.05
-                
-                # Dynamic SL/TP based on market conditions
-                market_score = self.market_report.market_score if self.market_report else 50
-                sl_tp = calculate_dynamic_sl_tp(c, market_score)
-                
-                # Calculate price vs MA percentages
-                pct_vs_ma20 = ((price - c.technical.ma20) / c.technical.ma20 * 100) if c.technical.ma20 > 0 else 0
-                pct_vs_ma50 = ((price - c.technical.ma50) / c.technical.ma50 * 100) if c.technical.ma50 > 0 else 0
-                pct_vs_ma200 = ((price - c.technical.ma200) / c.technical.ma200 * 100) if c.technical.ma200 > 0 else 0
+                stop_loss = buy_point * 0.93
+                target_20 = buy_point * 1.20
+                target_25 = buy_point * 1.25
                 
                 content += f"""
 ### {c.rank}. {c.symbol} - {c.sector_name}
@@ -403,30 +320,13 @@ class FullPipelineRunner:
 
 **📈 Technical:**
 - Giá: {price:,.0f} | RS: {c.technical.rs_rating} | RSI: {c.technical.rsi_14:.0f}
-- Volume Ratio: {c.technical.volume_ratio:.2f}x | ATR(14): {getattr(c.technical, 'atr_pct', 0):.1f}%
-
-**📍 Cấu trúc giá (MA Positions):**
-| MA | Giá | Vị thế | % vs Giá |
-|----|-----|--------|----------|
-| MA20 | {c.technical.ma20:,.0f} | {'✅ TRÊN' if c.technical.above_ma20 else '❌ DƯỚI'} | {pct_vs_ma20:+.1f}% |
-| MA50 | {c.technical.ma50:,.0f} | {'✅ TRÊN' if c.technical.above_ma50 else '❌ DƯỚI'} | {pct_vs_ma50:+.1f}% |
-| MA200 | {c.technical.ma200:,.0f} | {'✅ TRÊN' if c.technical.above_ma200 else '❌ DƯỚI'} | {pct_vs_ma200:+.1f}% |
-
-**📊 Volume Profile:**
-| Level | Giá | Ý nghĩa |
-|-------|-----|---------|
-| POC | {c.technical.poc:,.0f} | Vùng giao dịch nhiều nhất |
-| VAH | {c.technical.vah:,.0f} | Kháng cự Volume |
-| VAL | {c.technical.val:,.0f} | Hỗ trợ Volume |
-| **Vị thế** | **{c.technical.price_vs_va}** | {'📈 Bullish' if c.technical.price_vs_va == 'ABOVE_VA' else '📊 Neutral' if c.technical.price_vs_va == 'IN_VA' else '📉 Caution' if c.technical.price_vs_va else 'N/A'} |
+- MA: {'✅ TRÊN' if c.technical.above_ma50 else '❌ DƯỚI'} MA50 | Volume Ratio: {c.technical.volume_ratio:.2f}x
+- VWAP: {getattr(c.technical, 'vwap', 0):,.0f} | Vị thế: {getattr(c.technical, 'price_vs_vwap', 'N/A')} | VWAP Score: {getattr(c.technical, 'vwap_score', 50):.0f}/100
 
 **Pattern:** {c.pattern.pattern_type.value} (Quality: {c.pattern.pattern_quality:.0f})
-- 📊 Volume Score: {getattr(c.pattern, 'volume_score', 0):.0f}/80
-- {'✅ Shakeout detected' if getattr(c.pattern, 'has_shakeout', False) else '⭕ No shakeout'}
-- {'✅ Dry-up confirmed' if getattr(c.pattern, 'has_dryup', False) else '⭕ No dry-up'}
-- {'🚀 **BREAKOUT READY**' if getattr(c.pattern, 'breakout_ready', False) else '⏳ Waiting for confirmation'}
 
 """
+
                 # News section
                 if c.news and c.news.articles:
                     content += f"**📰 News ({len(c.news.articles)} bài):**\n"
@@ -443,16 +343,14 @@ class FullPipelineRunner:
                     content += "**📰 News:** Không có tin tức đáng chú ý\n"
                 
                 content += f"""
-**📈 TRADING PLAN (Dynamic):**
-| Level | Giá | % | Lý do |
-|-------|-----|---|-------|
-| 🎯 **Buy Point** | {buy_point:,.0f} | - | Breakout từ pattern |
-| 🛒 **Buy Zone** | {buy_point:,.0f} - {buy_zone_max:,.0f} | +5% | Mua trong vùng này |
-| 🛑 **Stop Loss** | {sl_tp['stop_loss']:,.0f} | -{sl_tp['stop_loss_pct']:.1f}% | {sl_tp['rationale']} |
-| 💰 **Target 1** | {sl_tp['target_1']:,.0f} | +{sl_tp['target_1_pct']:.0f}% | R:R = 1:{sl_tp['risk_reward']:.1f} |
-| 💰 **Target 2** | {sl_tp['target_2']:,.0f} | +{sl_tp['target_2_pct']:.0f}% | Trailing stop sau T1 |
-
-> 📊 **SL/TP Logic:** Market {sl_tp['mode']} | ATR={sl_tp['atr_pct']:.1f}% | Pattern={c.pattern.pattern_quality:.0f} | Vol={'🚀' if getattr(c.pattern, 'breakout_ready', False) else '✓' if getattr(c.pattern, 'has_shakeout', False) else '⭕'}
+**📈 TRADING PLAN:**
+| Level | Giá | Ghi chú |
+|-------|-----|---------|
+| 🎯 **Buy Point** | {buy_point:,.0f} | Breakout từ pattern |
+| 🛒 **Buy Zone** | {buy_point:,.0f} - {buy_zone_max:,.0f} | Mua trong vùng này |
+| 🛑 **Stop Loss** | {stop_loss:,.0f} | Cắt lỗ -7% |
+| 💰 **Target 1** | {target_20:,.0f} | +20% |
+| 💰 **Target 2** | {target_25:,.0f} | +25% |
 
 **Signal:** {c.signal.value}
 
