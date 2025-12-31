@@ -77,6 +77,9 @@ class MarketTimingConfig:
     ENABLE_VOLUME_PROFILE: bool = True
     VP_LOOKBACK_DAYS: int = 20
     
+    # Mid-Session flag
+    IS_MID_SESSION: bool = False
+    
     # Output
     OUTPUT_DIR: str = "./output"
     SAVE_REPORT: bool = True
@@ -419,10 +422,13 @@ class MarketTimingAnalyzer:
         
         return money_flow
     
-    def analyze(self, report: MarketReport) -> MarketReport:
-        """Phân tích và tính điểm"""
+    def collect_technical_signals(self, report: MarketReport) -> MarketReport:
+        """
+        Thu thập tín hiệu kỹ thuật (KHÔNG chấm điểm - để AI chấm)
+        Trả về report với key_signals được điền
+        """
         print("\n" + "="*60)
-        print("🔍 PHÂN TÍCH THỊ TRƯỜNG")
+        print("🔍 THU THẬP TÍN HIỆU KỸ THUẬT")
         print("="*60)
         
         vni = report.vnindex
@@ -430,110 +436,76 @@ class MarketTimingAnalyzer:
             return report
         
         signals = []
-        score = 0
         
-        # 1. Price vs MA (30 điểm) - Logic đã sửa
+        # 1. Price vs MA - Thu thập trạng thái
         above_ma20 = vni.price > vni.ma20 if vni.ma20 > 0 else False
         above_ma50 = vni.price > vni.ma50 if vni.ma50 > 0 else False
         ma20_above_ma50 = vni.ma20 > vni.ma50 if (vni.ma20 > 0 and vni.ma50 > 0) else False
         
         if above_ma20 and above_ma50 and ma20_above_ma50:
-            score += 30
-            signals.append(f"✅ Uptrend mạnh: Giá({vni.price:,.0f}) > MA20({vni.ma20:,.0f}) > MA50({vni.ma50:,.0f})")
+            signals.append(f"📊 MA Structure: Giá({vni.price:,.0f}) > MA20({vni.ma20:,.0f}) > MA50({vni.ma50:,.0f}) → Uptrend mạnh")
         elif above_ma20 and above_ma50:
-            score += 25
-            signals.append(f"✅ Bullish: Giá({vni.price:,.0f}) > MA20({vni.ma20:,.0f}) & MA50({vni.ma50:,.0f})")
+            signals.append(f"📊 MA Structure: Giá > MA20 & MA50, nhưng MA20 < MA50 → Bullish có điều kiện")
         elif above_ma50:
-            score += 15
-            signals.append(f"⚠️ Giá trên MA50({vni.ma50:,.0f}) nhưng dưới MA20")
+            signals.append(f"📊 MA Structure: Giá > MA50 nhưng < MA20 → Pullback trong uptrend")
         elif above_ma20:
-            score += 10
-            signals.append(f"⚠️ Giá trên MA20 nhưng dưới MA50")
+            signals.append(f"📊 MA Structure: Giá > MA20 nhưng < MA50 → Recovery yếu")
         elif vni.price < vni.ma20 and vni.price < vni.ma50:
-            score -= 30
-            signals.append(f"❌ Downtrend: Giá < MA20 & MA50")
+            signals.append(f"📊 MA Structure: Giá < MA20 & MA50 → Downtrend rõ ràng")
         else:
-            signals.append(f"➖ MA chưa rõ xu hướng")
+            signals.append(f"📊 MA Structure: Chưa rõ xu hướng")
         
-        # 2. RSI (15 điểm)
+        # 2. RSI - Thu thập trạng thái
         if vni.rsi_14 > 70:
-            score -= 10
-            signals.append(f"⚠️ RSI quá mua: {vni.rsi_14:.0f}")
+            signals.append(f"📈 RSI(14): {vni.rsi_14:.0f} → Quá mua, cần cẩn thận")
         elif vni.rsi_14 < 30:
-            score += 10
-            signals.append(f"📈 RSI quá bán: {vni.rsi_14:.0f}")
+            signals.append(f"📉 RSI(14): {vni.rsi_14:.0f} → Quá bán, cơ hội phục hồi")
         elif vni.rsi_14 > 50:
-            score += 10
-            signals.append(f"✅ RSI tích cực: {vni.rsi_14:.0f}")
+            signals.append(f"📊 RSI(14): {vni.rsi_14:.0f} → Tích cực (>50)")
         else:
-            score -= 5
-            signals.append(f"❌ RSI yếu: {vni.rsi_14:.0f}")
+            signals.append(f"📊 RSI(14): {vni.rsi_14:.0f} → Yếu (<50)")
         
-        # 3. MACD (15 điểm)
+        # 3. MACD - Thu thập trạng thái
         if vni.macd_hist > 0:
-            score += 15
-            signals.append("✅ MACD Histogram dương")
+            signals.append(f"📈 MACD Histogram: {vni.macd_hist:+.2f} → Dương (momentum tăng)")
         else:
-            score -= 15
-            signals.append("❌ MACD Histogram âm")
+            signals.append(f"📉 MACD Histogram: {vni.macd_hist:+.2f} → Âm (momentum giảm)")
         
-        # 4. ADX (10 điểm)
+        # 4. ADX - Thu thập trạng thái
         if vni.adx > 25:
-            score += 10
-            signals.append(f"✅ Trend mạnh (ADX={vni.adx:.0f})")
+            signals.append(f"💪 ADX: {vni.adx:.0f} → Trend mạnh (>25)")
         else:
-            signals.append(f"➖ Trend yếu (ADX={vni.adx:.0f})")
+            signals.append(f"➖ ADX: {vni.adx:.0f} → Trend yếu, sideway")
         
-        # 5. Breadth (15 điểm)
+        # 5. Breadth - Thu thập trạng thái
         ad = report.breadth.ad_ratio
         if ad >= 1.5:
-            score += 15
-            signals.append(f"✅ Breadth rất tốt (A/D={ad:.2f})")
+            signals.append(f"🟢 Breadth: A/D={ad:.2f} → Độ rộng rất tốt (>1.5)")
         elif ad >= 1:
-            score += 5
-            signals.append(f"✅ Breadth tích cực (A/D={ad:.2f})")
+            signals.append(f"🟡 Breadth: A/D={ad:.2f} → Độ rộng tích cực (>1)")
         else:
-            score -= 10
-            signals.append(f"❌ Breadth yếu (A/D={ad:.2f})")
+            signals.append(f"🔴 Breadth: A/D={ad:.2f} → Độ rộng yếu (<1)")
         
-        # 6. Money Flow (15 điểm)
+        # 6. Money Flow - Thu thập trạng thái
         mf = report.money_flow
         if mf.foreign_net > 0:
-            score += 10
-            signals.append(f"✅ Khối ngoại mua ròng ({mf.foreign_net:+.0f} tỷ)")
+            signals.append(f"💰 Khối ngoại: Mua ròng {mf.foreign_net:+.0f} tỷ")
         else:
-            score -= 10
-            signals.append(f"❌ Khối ngoại bán ({mf.foreign_net:+.0f} tỷ)")
+            signals.append(f"💸 Khối ngoại: Bán ròng {mf.foreign_net:+.0f} tỷ")
         
-        # 7. Volume Profile signals (bonus)
+        # 7. Volume Profile signals
         if vni.poc > 0:
             if vni.price_vs_va == "ABOVE_VA":
-                score += 5
-                signals.append(f"📈 Giá TRÊN Value Area (VAH={vni.vah:,.0f})")
+                signals.append(f"📊 Volume Profile: Giá TRÊN Value Area (VAH={vni.vah:,.0f}) → Bullish")
             elif vni.price_vs_va == "BELOW_VA":
-                score -= 5
-                signals.append(f"📉 Giá DƯỚI Value Area (VAL={vni.val:,.0f})")
+                signals.append(f"📊 Volume Profile: Giá DƯỚI Value Area (VAL={vni.val:,.0f}) → Bearish")
             else:
-                signals.append(f"📊 Giá TRONG Value Area ({vni.val:,.0f}-{vni.vah:,.0f})")
-        
-        # Market Color
-        report.market_score = max(-100, min(100, score))
-        
-        if score >= 40:
-            report.market_color = "🟢 XANH - TẤN CÔNG"
-            report.trend_status = "UPTREND"
-        elif score >= 0:
-            report.market_color = "🟡 VÀNG - PHÒNG THỦ"
-            report.trend_status = "SIDEWAY"
-        else:
-            report.market_color = "🔴 ĐỎ - RÚT LUI"
-            report.trend_status = "DOWNTREND"
+                signals.append(f"📊 Volume Profile: Giá TRONG Value Area ({vni.val:,.0f}-{vni.vah:,.0f}) → Neutral")
         
         report.key_signals = signals
         
-        # Print
-        print(f"\n📊 ĐIỂM THỊ TRƯỜNG: {report.market_score}/100")
-        print(f"🎯 {report.market_color}")
+        # Print signals
+        print("\n📋 CÁC TÍN HIỆU ĐÃ THU THẬP:")
         for sig in signals:
             print(f"   {sig}")
         
@@ -545,9 +517,12 @@ class MarketTimingAnalyzer:
 # ══════════════════════════════════════════════════════════════════════════════
 
 class MarketTimingAIGenerator:
-    """Tạo báo cáo AI với Gemini 3.0 Pro"""
+    """Tạo báo cáo AI với Gemini 3.0 Pro - Bao gồm AI Scoring"""
     
-    SYSTEM_PROMPT = "Bạn là chuyên gia phân tích chứng khoán Việt Nam theo trường phái VSA."
+    SYSTEM_PROMPT = """Bạn là chuyên gia phân tích chứng khoán Việt Nam theo trường phái VSA (Volume Spread Analysis).
+Phong cách phân tích: Chuyên nghiệp, khách quan, đào sâu vào bản chất dòng tiền và cấu trúc giá.
+Khi được yêu cầu chấm điểm market timing, hãy phân tích đa chiều trước khi đưa ra con số.
+Luôn trả lời bằng tiếng Việt."""
     
     def __init__(self, config: MarketTimingConfig):
         self.config = config
@@ -571,8 +546,8 @@ class MarketTimingAIGenerator:
             print(f"⚠️ Lỗi AI: {e}")
             return None
     
-    def generate_prompt(self, report: MarketReport, history_context: str = "") -> str:
-        """Tạo prompt với Volume Profile và History"""
+    def _build_market_data_context(self, report: MarketReport) -> str:
+        """Tạo context dữ liệu thị trường cho AI"""
         vni = report.vnindex
         vn30 = report.vn30
         
@@ -589,17 +564,14 @@ class MarketTimingAIGenerator:
    - VP Resistance: {', '.join([f'{p:,.0f}' for p in vni.vp_resistance[:3]]) if vni.vp_resistance else 'N/A'}
 """
         
+        # Signals section
+        signals_str = "\n".join([f"   - {s}" for s in report.key_signals])
+        
         # Top sectors
         top_str = "\n".join([f"   - {s.name}: {s.change_1d:+.2f}%" for s in report.top_sectors])
         weak_str = "\n".join([f"   - {s.name}: {s.change_1d:+.2f}%" for s in report.weak_sectors])
         
-        prompt = f"""
-═══════════════════════════════════════════════════════════════
-DỮ LIỆU THỊ TRƯỜNG - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
-═══════════════════════════════════════════════════════════════
-
-{history_context}
-
+        context = f"""
 📈 VN-INDEX:
    - Giá: {vni.price:,.0f} | Thay đổi: {vni.change_1d:+.2f}%
    - OHLC: O={vni.open:,.0f} H={vni.high:,.0f} L={vni.low:,.0f} C={vni.price:,.0f}
@@ -616,8 +588,6 @@ DỮ LIỆU THỊ TRƯỜNG - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
 
 💰 DÒNG TIỀN:
    - Khối ngoại: {report.money_flow.foreign_net:+.1f} tỷ
-   - Top mua: {', '.join([f'{s}({v:+.0f})' for s,v in report.money_flow.top_foreign_buy])}
-   - Top bán: {', '.join([f'{s}({v:+.0f})' for s,v in report.money_flow.top_foreign_sell])}
 
 🏭 TOP 3 NGÀNH MẠNH:
 {top_str}
@@ -625,16 +595,212 @@ DỮ LIỆU THỊ TRƯỜNG - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
 📉 TOP 3 NGÀNH YẾU:
 {weak_str}
 
-🎯 ĐÁNH GIÁ: {report.market_color} | Score: {report.market_score}/100
+📋 TÍN HIỆU KỸ THUẬT:
+{signals_str}
+"""
+        return context
+
+    def score_market(self, report: MarketReport, history_context: str = "") -> dict:
+        """
+        Yêu cầu AI chấm điểm thị trường
+        
+        Returns:
+            dict với: score (0-100), color, trend, reasoning
+        """
+        if not self.ai:
+            print("⚠️ AI không khả dụng, sử dụng fallback scoring")
+            return self._fallback_scoring(report)
+        
+        print("\n" + "="*60)
+        print(f"🤖 AI ĐANG CHẤM ĐIỂM THỊ TRƯỜNG ({self.config.AI_PROVIDER.upper()})...")
+        print("="*60)
+        
+        market_data = self._build_market_data_context(report)
+        mid_session_ctx = ""
+        if self.config.IS_MID_SESSION:
+            mid_session_ctx = """
+⚠️ CHÚ Ý: ĐÂY LÀ DỮ LIỆU ĐANG TRONG PHIÊN (MID-SESSION). 
+- Volume hiện tại chưa đầy đủ và CHƯA THỂ so sánh trực tiếp với trung bình 20 phiên.
+- Hãy tập trung vào Cấu trúc giá, RSI, MACD và Độ rộng thị trường.
+- Đánh giá Volume dựa trên tương quan với thời gian đã trôi qua của phiên giao dịch.
+"""
+
+        prompt = f"""
+{mid_session_ctx}
+
+═══════════════════════════════════════════════════════════════
+DỮ LIỆU THỊ TRƯỜNG - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
+═══════════════════════════════════════════════════════════════
+
+{history_context}
+
+{market_data}
+
+═══════════════════════════════════════════════════════════════
+
+YÊU CẦU: Phân tích dữ liệu trên và CHẤM ĐIỂM THỊ TRƯỜNG.
+
+TRẢ LỜI THEO ĐÚNG FORMAT JSON DƯỚI ĐÂY (VÀ CHỈ CÓ JSON):
+```json
+{{
+    "score": <số từ 0-100>,
+    "color": "<XANH hoặc VÀNG hoặc ĐỎ>",
+    "trend": "<UPTREND hoặc SIDEWAY hoặc DOWNTREND>",
+    "reasoning": "<giải thích ngắn gọn 1-2 câu quan trọng nhất>"
+}}
+```
+
+HƯỚNG DẪN CHẤM ĐIỂM:
+- 70-100: Thị trường mạnh, có thể tấn công mạnh → XANH
+- 40-69: Thị trường trung bình, thận trọng → VÀNG  
+- 0-39: Thị trường yếu, nên rút lui → ĐỎ
+
+CÁC YẾU TỐ CẦN CÂN NHẮC:
+1. Vị trí giá so với MA20/MA50 (quan trọng nhất)
+2. RSI, MACD, ADX
+3. Độ rộng thị trường (A/D ratio)
+4. Dòng tiền khối ngoại
+5. Volume Profile
+6. So sánh với Historical Context (nếu có)
+
+CHỈ TRẢ LỜI JSON, KHÔNG CÓ TEXT KHÁC.
+"""
+        
+        try:
+            import json
+            import re
+            
+            response = self.ai.chat(prompt)
+            
+            # Parse JSON from response
+            json_match = re.search(r'\{[^}]+\}', response, re.DOTALL)
+            if json_match:
+                result = json.loads(json_match.group())
+                
+                # Validate and normalize
+                score = int(result.get('score', 50))
+                score = max(0, min(100, score))  # Clamp to 0-100
+                
+                color = result.get('color', 'VÀNG').upper()
+                if 'XANH' in color:
+                    color_full = "🟢 XANH - TẤN CÔNG"
+                elif 'ĐỎ' in color:
+                    color_full = "🔴 ĐỎ - RÚT LUI"
+                else:
+                    color_full = "🟡 VÀNG - PHÒNG THỦ"
+                
+                trend = result.get('trend', 'SIDEWAY').upper()
+                if trend not in ['UPTREND', 'SIDEWAY', 'DOWNTREND']:
+                    trend = 'SIDEWAY'
+                
+                reasoning = result.get('reasoning', '')
+                
+                print(f"✓ AI Score: {score}/100 | {color_full}")
+                print(f"  Reasoning: {reasoning}")
+                
+                return {
+                    'score': score,
+                    'color': color_full,
+                    'trend': trend,
+                    'reasoning': reasoning
+                }
+            else:
+                print("⚠️ Không parse được JSON, sử dụng fallback")
+                return self._fallback_scoring(report)
+                
+        except Exception as e:
+            print(f"⚠️ Lỗi AI scoring: {e}, sử dụng fallback")
+            return self._fallback_scoring(report)
+    
+    def _fallback_scoring(self, report: MarketReport) -> dict:
+        """
+        Fallback scoring khi AI không khả dụng
+        Sử dụng logic đơn giản hóa
+        """
+        vni = report.vnindex
+        score = 50  # Base score
+        
+        # MA position (+/- 20)
+        if vni.price > vni.ma20 and vni.price > vni.ma50:
+            score += 20
+        elif vni.price < vni.ma20 and vni.price < vni.ma50:
+            score -= 20
+        
+        # RSI (+/- 10)
+        if 50 < vni.rsi_14 < 70:
+            score += 10
+        elif vni.rsi_14 > 70:
+            score -= 5
+        elif vni.rsi_14 < 30:
+            score += 5
+        else:
+            score -= 10
+        
+        # MACD (+/- 10)
+        if vni.macd_hist > 0:
+            score += 10
+        else:
+            score -= 10
+        
+        # Breadth (+/- 10)
+        if report.breadth.ad_ratio >= 1:
+            score += 10
+        else:
+            score -= 10
+        
+        score = max(0, min(100, score))
+        
+        if score >= 60:
+            color = "🟢 XANH - TẤN CÔNG"
+            trend = "UPTREND"
+        elif score >= 40:
+            color = "🟡 VÀNG - PHÒNG THỦ"
+            trend = "SIDEWAY"
+        else:
+            color = "🔴 ĐỎ - RÚT LUI"
+            trend = "DOWNTREND"
+        
+        print(f"⚠️ Fallback Score: {score}/100 | {color}")
+        
+        return {
+            'score': score,
+            'color': color,
+            'trend': trend,
+            'reasoning': "Fallback scoring (AI không khả dụng)"
+        }
+    
+    def generate_prompt(self, report: MarketReport, history_context: str = "") -> str:
+        """Tạo prompt cho báo cáo chi tiết (sau khi đã có score)"""
+        market_data = self._build_market_data_context(report)
+        mid_session_ctx = ""
+        if self.config.IS_MID_SESSION:
+            mid_session_ctx = """
+⚠️ CHÚ Ý: ĐÂY LÀ BÁO CÁO GIỮA PHIÊN (MID-SESSION).
+- Phân tích VSA cần lưu ý volume hiện tại chỉ mới phản ánh một phần phiên giao dịch.
+- Ưu tiên kịch bản dựa trên biến động giá và sức mạnh nội tại (Relative Strength).
+"""
+
+        prompt = f"""
+{mid_session_ctx}
+
+═══════════════════════════════════════════════════════════════
+DỮ LIỆU THỊ TRƯỜNG - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
+═══════════════════════════════════════════════════════════════
+
+{history_context}
+
+{market_data}
+
+🎯 ĐÁNH GIÁ (AI Scoring): {report.market_color} | Score: {report.market_score}/100
 
 ═══════════════════════════════════════════════════════════════
 
 YÊU CẦU: Viết BÁO CÁO CHIẾN LƯỢC NGÀY với cấu trúc:
 
 1. TỔNG QUAN THỊ TRƯỜNG
-   - Xu hướng chính, phân tích VSA
-   - Đánh giá sự thay đổi so với các phiên trước (dựa trên Historical Context)
-   
+   - Xu hướng chính, phân tích VSA.
+   - **SO SÁNH CHI TIẾT** với phiên GẦN NHẤT (Latest Session) trong Historical Context: Những gì đã thay đổi? (Điểm số, Price Action, Volume).
+   - Đánh giá tính liên tục của xu hướng.
 2. PHÂN TÍCH CẤU TRÚC
    - So sánh VN30 vs VNIndex
    
@@ -655,7 +821,7 @@ YÊU CẦU: Viết BÁO CÁO CHIẾN LƯỢC NGÀY với cấu trúc:
         return prompt
     
     def generate(self, report: MarketReport, history_context: str = "") -> str:
-        """Tạo báo cáo AI"""
+        """Tạo báo cáo AI chi tiết"""
         if not self.ai:
             return "⚠️ AI chưa được cấu hình. Điền API key vào config.py"
         
@@ -687,26 +853,32 @@ class MarketTimingModule:
         self.report: MarketReport = None
     
     def run(self, history_context: str = "") -> MarketReport:
-        """Chạy module"""
+        """Chạy module với AI-based scoring"""
         print("""
 ╔══════════════════════════════════════════════════════════════╗
-║     MODULE 1: MARKET TIMING + VOLUME PROFILE                 ║
+║     MODULE 1: MARKET TIMING + AI SCORING                     ║
 ╚══════════════════════════════════════════════════════════════╝
         """)
         
-        # 1. Thu thập
+        # 1. Thu thập dữ liệu
         self.report = self.analyzer.collect_data()
         
-        # 2. Phân tích
-        self.report = self.analyzer.analyze(self.report)
+        # 2. Thu thập tín hiệu kỹ thuật (không chấm điểm)
+        self.report = self.analyzer.collect_technical_signals(self.report)
         
-        # 3. AI
+        # 3. AI Scoring - để AI chấm điểm thị trường
+        ai_score_result = self.ai_generator.score_market(self.report, history_context)
+        self.report.market_score = ai_score_result['score']
+        self.report.market_color = ai_score_result['color']
+        self.report.trend_status = ai_score_result['trend']
+        
+        # 4. AI Generate detailed report
         self.report.ai_analysis = self.ai_generator.generate(self.report, history_context)
         
-        # 4. Print
+        # 5. Print
         self._print_report()
         
-        # 5. Save
+        # 6. Save
         if self.config.SAVE_REPORT:
             self._save_report()
         

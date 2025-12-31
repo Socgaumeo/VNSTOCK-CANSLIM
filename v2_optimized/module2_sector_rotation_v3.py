@@ -136,6 +136,9 @@ class SectorRotationConfig:
     # Volume Profile
     ENABLE_VOLUME_PROFILE: bool = True
     
+    # Mid-Session flag
+    IS_MID_SESSION: bool = False
+    
     # Output
     OUTPUT_DIR: str = "./output"
     SAVE_REPORT: bool = True
@@ -723,8 +726,16 @@ Luôn trả lời bằng tiếng Việt, chuyên nghiệp."""
         except:
             return None
     
-    def generate_prompt(self, report: SectorRotationReport) -> str:
-        """Tạo prompt với full data"""
+    def generate_prompt(self, report: SectorRotationReport, history_context: str = "") -> str:
+        """Tạo prompt với full data và context lịch sử"""
+        mid_session_ctx = ""
+        if self.config.IS_MID_SESSION:
+            mid_session_ctx = """
+⚠️ CHÚ Ý: ĐÂY LÀ DỮ LIỆU GIỮA PHIÊN (MID-SESSION).
+- Khối lượng giao dịch của các ngành và cổ phiếu dẫn dắt hiện tại chưa phản ánh đầy đủ cả ngày.
+- Hãy đánh giá Relative Strength (RS) dựa trên biến động giá là chính.
+- Với VSA, so sánh volume hiện tại dựa trên tỷ lệ thời gian đã trôi qua của phiên.
+"""
         
         # Sector table
         sector_table = ""
@@ -758,6 +769,8 @@ Luôn trả lời bằng tiếng Việt, chuyên nghiệp."""
 """
         
         prompt = f"""
+{mid_session_ctx}
+
 ═══════════════════════════════════════════════════════════════
 BÁO CÁO SECTOR ROTATION v3 - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
 ═══════════════════════════════════════════════════════════════
@@ -781,12 +794,14 @@ BÁO CÁO SECTOR ROTATION v3 - {report.timestamp.strftime('%d/%m/%Y %H:%M')}
 {rotation_section}
 ═══════════════════════════════════════════════════════════════
 
+{history_context}
+
+═══════════════════════════════════════════════════════════════
 YÊU CẦU PHÂN TÍCH:
 
 1. ĐÁNH GIÁ ROTATION CLOCK
-   - Xác nhận/điều chỉnh vị trí trong chu kỳ
-   - So sánh leading sectors hiện tại vs expected
-   - Dấu hiệu rotation tiếp theo
+   - Xác nhận/điều chỉnh vị trí trong chu kỳ.
+   - **SO SÁNH RS TREND** với phiên gần nhất (Latest Session): Ngành nào đang bứt phá? Ngành nào đang yếu đi?
 
 2. TOP 3 NGÀNH NÊN TĂNG TỶ TRỌNG
    - Ngành nào? Tại sao? 
@@ -808,17 +823,18 @@ YÊU CẦU PHÂN TÍCH:
 """
         return prompt
     
-    def generate(self, report: SectorRotationReport) -> str:
-        """Tạo báo cáo AI"""
+    def generate(self, report: SectorRotationReport, history_context: str = "") -> str:
+        """Tạo báo cáo AI với context lịch sử"""
         if not self.ai:
             return "⚠️ AI chưa cấu hình. Điền API key vào config.py"
         
         print("\n" + "="*60)
         print(f"🤖 AI ANALYSIS ({self.config.AI_PROVIDER.upper()})...")
-        print("="*60)
+        
+        prompt = self.generate_prompt(report, history_context)
         
         try:
-            response = self.ai.chat(self.generate_prompt(report))
+            response = self.ai.chat(prompt)
             print("✓ Hoàn thành!")
             return response
         except Exception as e:
@@ -1017,17 +1033,13 @@ class SectorRotationModule:
         self.exporter = ReportExporter(self.config)
         self.report: SectorRotationReport = None
     
-    def run(self, market_context: Optional[Dict] = None) -> SectorRotationReport:
+    def run(self, market_context: Optional[Dict] = None, history_context: str = "") -> SectorRotationReport:
         """
         Chạy module
         
         Args:
             market_context: Optional dict từ Module 1
-                {
-                    'traffic_light': '🟡 VÀNG',
-                    'distribution_days': 6,
-                    'market_regime': 'DISTRIBUTION'
-                }
+            history_context: Context lịch sử từ HistoryManager
         """
         print("""
 ╔══════════════════════════════════════════════════════════════╗
@@ -1040,7 +1052,7 @@ class SectorRotationModule:
         self.report = self.analyzer.analyze(market_context)
         
         # 2. AI
-        self.report.ai_analysis = self.ai_generator.generate(self.report)
+        self.report.ai_analysis = self.ai_generator.generate(self.report, history_context)
         
         # 3. Print summary
         self._print_summary()

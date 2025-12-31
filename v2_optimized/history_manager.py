@@ -232,47 +232,34 @@ class HistoryManagerV2:
         return data
 
     def get_ai_context_v2(self, limit: int = 5) -> str:
-        """Tạo context chi tiết hơn cho AI"""
+        """Tạo context chi tiết hơn cho AI, ưu tiên phiên gần nhất"""
         history = self.scan_reports(limit)
         if not history:
             return "No historical data available."
             
-        context = "### 📊 HISTORICAL CONTEXT (Enhanced Analysis)\n\n"
+        context = "### 📊 HISTORICAL CONTEXT & PERFORMANCE TRACKING\n\n"
         
-        for i, item in enumerate(history):
-            context += f"---\n#### 📅 Report: {item.date}\n"
-            
-            # Market Overview
-            context += f"\n**🚦 Market:**\n"
-            context += f"- Color: {item.market_color}\n"
-            context += f"- Score: {item.market_score}/100\n"
-            context += f"- VN-Index: {item.vn_index:,.0f} ({item.vn_index_change:+.2f}%)\n"
-            context += f"- RSI: {item.rsi:.1f}\n"
-            
-            # Allocation
-            if item.allocation_stocks > 0:
-                context += f"- Tỷ trọng: {item.allocation_stocks}% CP / {item.allocation_cash}% Cash\n"
-            
-            # What-If Scenarios
-            if item.what_if_scenarios:
-                context += f"\n**🔮 What-If Scenarios:**\n"
-                for sc in item.what_if_scenarios[:3]:
-                    context += f"- {sc.name}: {sc.probability}%\n"
-                    
-            # Sector RS Rankings
-            if item.sectors:
-                context += f"\n**🏭 Sector RS Rankings:**\n"
-                for s in item.sectors[:5]:
-                    trend_icon = "📈" if s.rs_trend == "IMPROVING" else "📉" if s.rs_trend == "DECLINING" else "➡️"
-                    context += f"- {s.name}: RS={s.rs_score} | {s.change_1d:+.2f}% | {trend_icon} {s.rs_trend}\n"
-                    
-            # Top Recommendations
-            if item.recommendations:
-                context += f"\n**🏆 Top Recommendations:**\n"
-                for r in item.recommendations[:5]:
-                    signal_short = "BUY" if "BUY" in r.signal else "WATCH" if "WATCH" in r.signal else "NEUTRAL"
-                    context += f"- {r.symbol}: Score={r.score} | RS={r.rs} | {r.pattern} | {signal_short}\n"
-                    
+        # 1. Highlight the MOST RECENT session
+        latest = history[0]
+        context += f"#### 🔴 PHIÊN GẦN NHẤT (LATEST): {latest.date}\n"
+        context += f"- Market: {latest.market_color} (Score: {latest.market_score}/100)\n"
+        context += f"- VN-Index: {latest.vn_index:,.0f} ({latest.vn_index_change:+.2f}%)\n"
+        
+        if latest.recommendations:
+            context += f"- Top Picks: {', '.join([r.symbol for r in latest.recommendations[:5]])}\n"
+            context += "  Mã cụ thể:\n"
+            for r in latest.recommendations[:5]:
+                context += f"  * {r.symbol}: Score={r.score} | RS={r.rs} | {r.pattern} | {r.signal}\n"
+        context += "\n"
+        
+        # 2. Progress Summary
+        context += self.generate_progress_summary(limit)
+        
+        # 3. Older Sessions (Brief)
+        if len(history) > 1:
+            context += "#### 🕒 CÁC PHIÊN TRƯỚC ĐÓ (OLDER SESSIONS):\n"
+            for item in history[1:]:
+                context += f"- {item.date}: {item.market_color} | Score: {item.market_score} | VNIndex: {item.vn_index:,.0f}\n"
             context += "\n"
             
         return context
@@ -392,6 +379,75 @@ class HistoryManagerV2:
         if clocks:
             context += f"**🕐 Rotation Clock History:** {' → '.join([c[1] for c in clocks[:3]])}\n\n"
             
+        return context
+    
+    def get_mid_session_data(self, date: str = None) -> Optional[dict]:
+        """
+        Đọc dữ liệu giữa phiên từ JSON file
+        
+        Args:
+            date: Date string in YYYYMMDD format. If None, uses today.
+            
+        Returns:
+            dict with mid-session data or None if not found
+        """
+        import json
+        
+        if date is None:
+            date = datetime.now().strftime('%Y%m%d')
+        
+        json_file = self.output_dir / f"mid_session_data_{date}.json"
+        
+        if not json_file.exists():
+            return None
+        
+        try:
+            with open(json_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except Exception as e:
+            print(f"⚠️ Error reading mid-session data: {e}")
+            return None
+    
+    def get_mid_session_context(self, date: str = None) -> str:
+        """
+        Tạo context từ dữ liệu giữa phiên để so sánh với cuối ngày
+        
+        Returns:
+            str: Formatted context for AI comparison
+        """
+        data = self.get_mid_session_data(date)
+        
+        if not data:
+            return ""
+        
+        context = f"""
+### 📊 DỮ LIỆU GIỮA PHIÊN (Mid-Session Snapshot)
+**Thời gian:** {data.get('timestamp', 'N/A')}
+
+**🚦 Market Timing (Giữa phiên):**
+- Score: {data.get('market', {}).get('score', 'N/A')}/100
+- Color: {data.get('market', {}).get('color', 'N/A')}
+- Trend: {data.get('market', {}).get('trend', 'N/A')}
+"""
+        
+        vnindex = data.get('market', {}).get('vnindex', {})
+        if vnindex:
+            context += f"""
+**📈 VNIndex (Giữa phiên):**
+- Giá: {vnindex.get('price', 0):,.0f} ({vnindex.get('change_1d', 0):+.2f}%)
+- RSI: {vnindex.get('rsi_14', 0):.1f}
+- A/D Ratio: {data.get('market', {}).get('breadth', {}).get('ad_ratio', 0):.2f}
+- Khối ngoại: {data.get('market', {}).get('money_flow', {}).get('foreign_net', 0):+.1f} tỷ
+"""
+        
+        sectors = data.get('sectors', [])
+        if sectors:
+            context += "\n**🏭 Sector Rankings (Giữa phiên):**\n"
+            for s in sectors[:5]:
+                context += f"- {s.get('name', 'N/A')}: RS={s.get('rs_rating', 0)} | {s.get('change_1d', 0):+.2f}%\n"
+        
+        context += "\n---\n"
+        
         return context
 
 

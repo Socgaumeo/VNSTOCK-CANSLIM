@@ -75,6 +75,11 @@ class QuarterlyData:
     roa: float = 0.0
     gross_margin: float = 0.0
     net_margin: float = 0.0
+    operating_cash_flow: float = 0.0
+    investing_cash_flow: float = 0.0
+    financing_cash_flow: float = 0.0
+    pe: float = 0.0
+    pb: float = 0.0
 
 
 @dataclass
@@ -86,7 +91,7 @@ class FundamentalData:
     
     # Current metrics
     eps_ttm: float = 0.0
-    pe_ttm: float = 0.0
+    pe: float = 0.0
     pb: float = 0.0
     roe: float = 0.0
     roa: float = 0.0
@@ -110,6 +115,11 @@ class FundamentalData:
     consecutive_rev_growth: int = 0
     earnings_stability: float = 0.0   # Độ ổn định (0-100)
     
+    # Cash Flow Quality
+    ocf_to_profit_ratio: float = 0.0  # OCF / Profit (Average)
+    cash_flow_quality_score: float = 0.0
+    cash_flow_warning: str = ""
+    
     # Historical data
     quarterly_data: List[QuarterlyData] = field(default_factory=list)
     
@@ -123,7 +133,7 @@ class FundamentalData:
             'source': self.source,
             'updated_at': self.updated_at,
             'eps_ttm': self.eps_ttm,
-            'pe_ttm': self.pe_ttm,
+            'pe': self.pe,
             'pb': self.pb,
             'roe': self.roe,
             'roa': self.roa,
@@ -137,6 +147,9 @@ class FundamentalData:
             'eps_acceleration': self.eps_acceleration,
             'consecutive_eps_growth': self.consecutive_eps_growth,
             'earnings_stability': self.earnings_stability,
+            'ocf_to_profit_ratio': self.ocf_to_profit_ratio,
+            'cash_flow_quality_score': self.cash_flow_quality_score,
+            'cash_flow_warning': self.cash_flow_warning,
             'confidence_score': self.confidence_score,
             'sources_used': self.sources_used
         }
@@ -227,7 +240,7 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
     
     def fetch_quarterly_data(self, symbol: str, quarters: int = 20) -> List[QuarterlyData]:
         """Lấy dữ liệu từ vnstock"""
-        cache_key = self._get_cache_key(symbol, f"quarterly_{quarters}")
+        cache_key = self._get_cache_key(symbol, f"quarterly_{quarters}_cf")
         cached = self._load_cache(cache_key, max_age_hours=168)  # 7 days
         
         if cached:
@@ -241,11 +254,14 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
         try:
             stock = Vnstock().stock(symbol=symbol, source='VCI')
             
-            # Income statement
+            # 1. Income statement
             income_df = stock.finance.income_statement(period='quarter', lang='vi')
             
-            # Ratio
+            # 2. Ratio
             ratio_df = stock.finance.ratio(period='quarter', lang='vi')
+            
+            # 3. Cash flow statement (BAO CAO LUU CHUYEN TIEN TE)
+            cf_df = stock.finance.cash_flow(period='quarter', lang='vi')
             
             if income_df.empty:
                 return []
@@ -273,6 +289,8 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
                     # Get ratio data if available
                     roe = 0.0
                     roa = 0.0
+                    pe = 0.0
+                    pb = 0.0
                     
                     if not ratio_df.empty and i < len(ratio_df):
                         ratio_row = ratio_df.iloc[i]
@@ -282,13 +300,56 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
                                 roe = float(ratio_row[col]) * 100 if pd.notna(ratio_row[col]) else 0.0
                             elif 'roa' in col_str:
                                 roa = float(ratio_row[col]) * 100 if pd.notna(ratio_row[col]) else 0.0
+                            elif 'p/e' in col_str or 'pe' == col_str:
+                                pe = float(ratio_row[col]) if pd.notna(ratio_row[col]) else 0.0
+                            elif 'p/b' in col_str or 'pb' == col_str:
+                                pb = float(ratio_row[col]) if pd.notna(ratio_row[col]) else 0.0
+                    
+                    # Get cash flow data if available
+                    ocf = 0.0
+                    icf = 0.0
+                    fcf = 0.0
+                    
+                    if not cf_df.empty and i < len(cf_df):
+                        cf_row = cf_df.iloc[i]
+                        for col in cf_df.columns:
+                            # Handle MultiIndex columns (convert to string)
+                            col_str = str(col).lower()
+                            
+                            # Operating Cash Flow mappings
+                            if any(x in col_str for x in ['lưu chuyển tiền tệ ròng từ các hoạt động sxkd', 
+                                                         'lưu chuyển tiền thuần từ hoạt động kinh doanh',
+                                                         'lưu chuyển tiền thuần từ hđkd']):
+                                val = float(cf_row[col]) if pd.notna(cf_row[col]) else 0.0
+                                if val != 0: ocf = val
+                            # Investing Cash Flow mappings
+                            elif any(x in col_str for x in ['lưu chuyển từ hoạt động đầu tư', 
+                                                           'lưu chuyển tiền thuần từ hoạt động đầu tư',
+                                                           'lưu chuyển tiền tệ ròng từ hoạt động đầu tư']):
+                                val = float(cf_row[col]) if pd.notna(cf_row[col]) else 0.0
+                                if val != 0: icf = val
+                            # Financing Cash Flow mappings
+                            elif any(x in col_str for x in ['lưu chuyển tiền từ hoạt động tài chính', 
+                                                           'lưu chuyển tiền thuần từ hoạt động tài chính',
+                                                           'lưu chuyển tiền tệ ròng từ hoạt động tài chính']):
+                                val = float(cf_row[col]) if pd.notna(cf_row[col]) else 0.0
+                                if val != 0: fcf = val
+                    
+                    # Debug print for first row
+                    if i == 0:
+                        print(f"      - {symbol} Q1 CF: OCF={ocf/1e9:.1f}B, ICF={icf/1e9:.1f}B, FCF={fcf/1e9:.1f}B")
                     
                     qdata = QuarterlyData(
                         period=period,
                         revenue=revenue,
                         profit=profit,
                         roe=roe,
-                        roa=roa
+                        roa=roa,
+                        operating_cash_flow=ocf,
+                        investing_cash_flow=icf,
+                        financing_cash_flow=fcf,
+                        pe=pe,
+                        pb=pb
                     )
                     result.append(qdata)
                     
@@ -727,6 +788,12 @@ class FundamentalAggregator:
         # Store quarterly data
         result.quarterly_data = primary_data
         
+        if primary_data:
+            latest = primary_data[0]
+            result.pe = latest.pe
+            result.pb = latest.pb
+            result.roe = latest.roe
+            result.roa = latest.roa
         # Calculate growth metrics
         self._calculate_growth_metrics(result, primary_data)
         
@@ -830,6 +897,45 @@ class FundamentalAggregator:
             result.roe = quarterly[0].roe
         if quarterly[0].roa:
             result.roa = quarterly[0].roa
+
+        # === Cash Flow Quality ===
+        # Lấy trung bình 4 quý gần nhất
+        ocf_values = [q.operating_cash_flow for q in quarterly[:4]]
+        profit_values = [q.profit for q in quarterly[:4]]
+        
+        avg_ocf = mean(ocf_values) if ocf_values else 0
+        avg_profit = mean(profit_values) if profit_values else 0
+        
+        if avg_profit != 0:
+            result.ocf_to_profit_ratio = avg_ocf / abs(avg_profit)
+        else:
+            result.ocf_to_profit_ratio = 1.0 if avg_ocf > 0 else 0.0
+
+        # Cash flow warning logic
+        negative_ocf_count = sum(1 for v in ocf_values if v < 0)
+        if negative_ocf_count >= 3:
+            result.cash_flow_warning = "⚠️ Dòng tiền HĐKD âm liên tục (3/4 quý)"
+        elif result.ocf_to_profit_ratio < 0.5 and avg_profit > 0:
+            result.cash_flow_warning = "⚠️ Dòng tiền HĐKD thấp hơn nhiều so với lợi nhuận"
+        elif avg_ocf < 0 and avg_profit > 0:
+            result.cash_flow_warning = "⚠️ Lợi nhuận dương nhưng dòng tiền HĐKD âm"
+
+        # Quality Score based on Cash Flow (0-100)
+        # Ratio >= 1.0 is ideal (score 100)
+        # Ratio < 0 is bad (score 0-20)
+        cf_score = 50 # Default
+        if result.ocf_to_profit_ratio >= 1.0:
+            cf_score = 100
+        elif result.ocf_to_profit_ratio >= 0.8:
+            cf_score = 80
+        elif result.ocf_to_profit_ratio >= 0.5:
+            cf_score = 60
+        elif result.ocf_to_profit_ratio > 0:
+            cf_score = 40
+        else:
+            cf_score = 20 - (negative_ocf_count * 5) # Penalize for frequency
+            
+        result.cash_flow_quality_score = max(0, cf_score)
     
     def _calculate_quality_metrics(self, 
                                     result: FundamentalData, 
@@ -930,7 +1036,7 @@ class EnhancedCANSLIMScorer:
         self.A_THRESHOLD = 25.0    # 25% annual CAGR
         self.C_WEIGHT = 0.30       # 30% của fundamental score
         self.A_WEIGHT = 0.30
-        self.QUALITY_WEIGHT = 0.40  # ROE, stability, etc.
+        self.QUALITY_WEIGHT = 0.40  # ROE, stability, cash flow, etc.
     
     def score_fundamental(self, fund_data: FundamentalData) -> Tuple[float, Dict]:
         """
@@ -1057,10 +1163,15 @@ class EnhancedCANSLIMScorer:
         if fund_data.consecutive_eps_growth >= 3:
             quality_score += 15
         
+        # Cash Flow Quality (New)
+        quality_score += (fund_data.cash_flow_quality_score * 0.25) # 25% of quality comes from CF
+        
         quality_score = min(100, quality_score)
         breakdown['quality_score'] = quality_score
         breakdown['details']['roe'] = fund_data.roe
         breakdown['details']['stability'] = fund_data.earnings_stability
+        breakdown['details']['cf_quality'] = fund_data.cash_flow_quality_score
+        breakdown['details']['ocf_profit_ratio'] = fund_data.ocf_to_profit_ratio
         
         # === Total Score ===
         total = (

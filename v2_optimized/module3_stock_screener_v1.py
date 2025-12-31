@@ -48,7 +48,6 @@ except ImportError:
         HAS_AI = False
         print("⚠️ Could not import AIProvider")
         AIProvider = None
-    HAS_AI = False
 
 # Import News Analyzer
 try:
@@ -181,6 +180,7 @@ class ScreenerConfig:
     AI_PROVIDER: str = ""
     AI_API_KEY: str = ""
     AI_MAX_TOKENS: int = 4096
+    USE_AI_SELECTION: bool = True  # Full AI-based stock selection (instead of algorithm)
     
     # News
     ENABLE_NEWS: bool = True
@@ -222,37 +222,33 @@ def create_config_from_unified() -> ScreenerConfig:
 class FundamentalData:
     """Dữ liệu cơ bản"""
     eps_ttm: float = 0.0
-    eps_growth_qoq: float = 0.0      # Quarter over Quarter
-    eps_growth_yoy: float = 0.0      # Year over Year
-    eps_growth_3y: float = 0.0       # 3 năm CAGR
-    
+    eps_growth_qoq: float = 0.0
+    eps_growth_yoy: float = 0.0
+    eps_growth_3y: float = 0.0
     revenue_ttm: float = 0.0
     revenue_growth_qoq: float = 0.0
     revenue_growth_yoy: float = 0.0
-    
     roe: float = 0.0
     roa: float = 0.0
     profit_margin: float = 0.0
-    
+    pe: float = 0.0
+    pb: float = 0.0
+    dividend_yield: float = 0.0
     market_cap: float = 0.0
-    pe_ratio: float = 0.0
-    pb_ratio: float = 0.0
-    
-    # CANSLIM specific
-    c_score: float = 0.0  # Current EPS
-    a_score: float = 0.0  # Annual EPS
-    
-    # Institutional
-    foreign_ownership: float = 0.0
+    outstanding_shares: float = 0.0
     foreign_net_buy_20d: float = 0.0
-    
-    # V3 Enhanced fields
-    eps_growth_3y_cagr: float = 0.0   # 3-year CAGR
-    eps_growth_5y_cagr: float = 0.0   # 5-year CAGR
-    eps_acceleration: float = 0.0     # EPS acceleration
     consecutive_eps_growth: int = 0    # Consecutive quarters
     earnings_stability: float = 0.0    # Stability score
     confidence_score: float = 50.0     # Data confidence
+    
+    # Cash Flow Quality
+    ocf_to_profit_ratio: float = 0.0
+    cash_flow_quality_score: float = 0.0
+    cash_flow_warning: str = ""
+    
+    # Fundamental Scores
+    c_score: float = 0.0
+    a_score: float = 0.0
 
 
 
@@ -306,6 +302,11 @@ class TechnicalData:
     # ATR for Dynamic SL/TP
     atr_14: float = 0.0       # Average True Range 14 ngày
     atr_pct: float = 0.0      # ATR as % of price
+    
+    # Foreign Trade (Current Session)
+    foreign_buy_value: float = 0.0
+    foreign_sell_value: float = 0.0
+    foreign_net_value: float = 0.0
 
 
 
@@ -458,6 +459,9 @@ class FundamentalAnalyzer:
                 # Map V3 data to local FundamentalData
                 data.roe = v3_data.roe
                 data.roa = v3_data.roa
+                data.profit_margin = v3_data.net_profit_margin if hasattr(v3_data, 'net_profit_margin') else 0.0
+                data.pe = v3_data.pe
+                data.pb = v3_data.pb
                 data.eps_growth_qoq = v3_data.eps_growth_qoq
                 data.eps_growth_yoy = v3_data.eps_growth_yoy
                 data.eps_growth_3y = v3_data.eps_growth_3y_cagr
@@ -469,6 +473,11 @@ class FundamentalAnalyzer:
                 data.consecutive_eps_growth = v3_data.consecutive_eps_growth
                 data.earnings_stability = v3_data.earnings_stability
                 data.confidence_score = v3_data.confidence_score
+                
+                # Cash Flow Quality
+                data.ocf_to_profit_ratio = v3_data.ocf_to_profit_ratio
+                data.cash_flow_quality_score = v3_data.cash_flow_quality_score
+                data.cash_flow_warning = v3_data.cash_flow_warning
                 
                 # Use V3 scorer
                 if self.v3_scorer:
@@ -493,10 +502,11 @@ class FundamentalAnalyzer:
             data.market_cap = getattr(stock, 'market_cap', 0)
             
             # Ratios
-            data.pe_ratio = ratios.get('pe', 0)
-            data.pb_ratio = ratios.get('pb', 0)
+            data.pe = ratios.get('pe', 0)
+            data.pb = ratios.get('pb', 0)
             data.roe = ratios.get('roe', 0)
             data.roa = ratios.get('roa', 0)
+            data.profit_margin = ratios.get('net_margin', 0)
             
             # Growth
             data.eps_growth_qoq = flow.get('eps_growth_qoq', 0)
@@ -605,9 +615,9 @@ class FundamentalAnalyzer:
             bonus += 5
         
         # PE reasonable
-        if 5 <= data.pe_ratio <= 20:
+        if 5 <= data.pe <= 20:
             bonus += 5
-        elif data.pe_ratio > 40:
+        elif data.pe > 40:
             bonus -= 5
         
         # Foreign interest
@@ -717,6 +727,11 @@ class TechnicalAnalyzer:
                 except Exception as e:
                     data.atr_14 = data.price * 0.03  # Default 3%
                     data.atr_pct = 3.0
+
+            # Foreign Trade (Current Session)
+            data.foreign_buy_value = getattr(stock, 'foreign_buy_value', 0.0)
+            data.foreign_sell_value = getattr(stock, 'foreign_sell_value', 0.0)
+            data.foreign_net_value = getattr(stock, 'foreign_net_value', 0.0)
 
             
             # RS Rating - cần tính từ performance
@@ -1221,13 +1236,15 @@ class StockNewsCollector:
         """Fetch tin tức cho một mã cổ phiếu"""
         news = StockNews()
         
-        # Thử dùng vnstock_news trước
-        if self.crawler and not self.use_fallback:
+        # Cách 1: Thử dùng vnstock API (company.news) - LUÔN THỬ TRƯỚC
+        try:
             news = self._fetch_with_vnstock_news(symbol, max_articles)
             if news.articles:
                 return news
+        except Exception as e:
+            pass  # Silent fail, try fallback
         
-        # Fallback: dùng requests để fetch từ web
+        # Cách 2: Fallback - dùng requests để fetch từ web
         news = self._fetch_with_requests(symbol, max_articles)
         
         return news
@@ -1548,7 +1565,15 @@ Ngành: {candidate.sector_name}
 - Fundamental: {candidate.score_fundamental:.0f}/100
 - Technical: {candidate.score_technical:.0f}/100
 - Pattern: {candidate.score_pattern:.0f}/100
+- Cash Flow Quality: {candidate.fundamental.cash_flow_quality_score:.0f}/100
 - TOTAL: {candidate.score_total:.0f}/100
+
+💹 FUNDAMENTAL & QUALITY:
+- EPS Q/Q: {candidate.fundamental.eps_growth_qoq:+.1f}% | Y/Y: {candidate.fundamental.eps_growth_yoy:+.1f}%
+- Revenue Q/Q: {candidate.fundamental.revenue_growth_qoq:+.1f}%
+- ROE: {candidate.fundamental.roe:.1f}% | ROA: {candidate.fundamental.roa:.1f}%
+- OCF/Profit Ratio: {candidate.fundamental.ocf_to_profit_ratio:.2f}
+- Cash Flow Status: {candidate.fundamental.cash_flow_warning if candidate.fundamental.cash_flow_warning else "Healthy"}
 
 📈 TECHNICAL DATA:
 - Giá hiện tại: {price:,.0f}
@@ -1558,6 +1583,7 @@ Ngành: {candidate.sector_name}
 - Vị trí MA: {"Giá TRÊN MA20" if candidate.technical.above_ma20 else "Giá DƯỚI MA20"}, {"TRÊN MA50" if candidate.technical.above_ma50 else "DƯỚI MA50"}
 - Distance from 52w High: {candidate.technical.distance_from_high:.1f}%
 - Volume Ratio: {candidate.technical.volume_ratio:.2f}x
+- Foreign Trade (Session): Buy {candidate.technical.foreign_buy_value/1e6:.1f}M, Sell {candidate.technical.foreign_sell_value/1e6:.1f}M, Net {candidate.technical.foreign_net_value/1e6:+.1f}M VND
 
 📐 PATTERN DETECTED:
 - Type: {candidate.pattern.pattern_type.value}
@@ -1568,9 +1594,10 @@ Ngành: {candidate.sector_name}
 {self._format_news_for_prompt(candidate.news)}
 
 ═════════════════════════════════════════════════════════════
-YÊU CẦU PHÂN TÍCH (BẮT BUỘC đưa ra CON SỐ CỤ THỂ):
+### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)
+*Dựa trên sự tương quan giữa Lợi nhuận và Dòng tiền HĐKD (OCF/Profit Ratio). Phân tích xem lợi nhuận có thực chất không hay chỉ là hạch toán tài chính.*
 
-### 1. ĐIỂM MẠNH / YẾU
+### 1. ĐIỂM MẠNH / YẾU (Bao gồm đánh giá dòng tiền Khối ngoại)
 *Liệt kê 2-3 điểm mỗi loại*
 
 ### 2. HÀNH ĐỘNG: BUY / WATCH / AVOID
@@ -1615,6 +1642,7 @@ YÊU CẦU PHÂN TÍCH (BẮT BUỘC đưa ra CON SỐ CỤ THỂ):
 {c.rank}. **{c.symbol}** ({c.sector_name})
    - Score: {c.score_total:.0f} | RS: {c.technical.rs_rating} | Pattern: {c.pattern.pattern_type.value}
    - Giá: {price:,.0f} | Buy Point: {buy_point:,.0f} | Stop: {stop_loss:,.0f} | Target: {target:,.0f}
+   - Khối ngoại (Net): {c.technical.foreign_net_value/1e6:+.1f}M VND (Mua {c.technical.foreign_buy_value/1e6:.1f}M, Bán {c.technical.foreign_sell_value/1e6:.1f}M)
    - Signal: {c.signal.value}
 """
         
@@ -1640,13 +1668,17 @@ BÁO CÁO STOCK SCREENING - {report.timestamp.strftime('%d/%m/%Y')}
 ═══════════════════════════════════════════════════════════════
 YÊU CẦU PHÂN TÍCH TỔNG HỢP (BẮT BUỘC đưa ra CON SỐ CỤ THỂ):
 
-### 1. ĐÁNH GIÁ TỔNG QUAN
-*Chất lượng danh mục: Cao/Trung bình/Thấp? Lý do?*
+### 1. ĐÁNH GIÁ TỔNG QUAN & THEO DÕI DANH MỤC (PORTFOLIO TRACKING)
+- **SO SÁNH VỚI PHIÊN LATEST:** Thị trường và danh mục đã thay đổi thế nào từ phiên gần nhất?
+- **STATUS UPDATE:** Đối với các mã đã khuyến nghị ở phiên trước (trong Historical Context), hãy đưa ra trạng thái cụ thể: **[TIẾP TỤC NẮM GIỮ / CHỐT LỜI / CẮT LỖ / MUA THÊM]**. 
+- Nếu có mã mới lọt vào Top Picks, giải thích tại sao nó vượt trội hơn các mã cũ.
 
-### 2. TOP 3 MÃ NÊN ƯU TIÊN (Đưa ra Trading Plan CỤ THỂ)
+### 2. TOP 3 MÃ NÊN ƯU TIÊN (Phân tích chi tiết Dòng tiền & Trading Plan)
+
+**CẢNH BÁO QUAN TRỌNG:** Bạn CHỈ ĐƯỢC PHÉP chọn 3 mã từ danh sách **TOP PICKS** bên trên để phân tích chi tiết. Tuyệt đối KHÔNG chọn các mã từ Historical Context nếu chúng không nằm trong Top Picks của phiên này.
 
 Với MỖI mã trong TOP 3, đưa ra:
-*   **Lý do chọn:** [2-3 điểm]
+*   **Lý do chọn & Ảnh hưởng Khối ngoại:** [Phân tích 2-3 điểm, đặc biệt đánh giá việc Khối ngoại mua/bán ròng có ủng hộ xu hướng không]
 *   **Plan:**
     *   Buy Zone: [Giá cụ thể]
     *   Stop loss: [Giá cụ thể hoặc % từ giá mua]
@@ -1665,6 +1697,146 @@ Với MỖI mã trong TOP 3, đưa ra:
             return self.ai.chat(prompt)
         except Exception as e:
             return f"❌ Error: {e}"
+    
+    def ai_select_top_stocks(self, candidates: List[StockCandidate], 
+                             market_context: Dict = None,
+                             history_context: str = "",
+                             top_n: int = 10) -> List[Dict]:
+        """
+        Full AI Selection: AI phân tích tất cả candidates và tự chọn Top N, có tính đến lịch sử
+        """
+        # [BẮT BUỘC] Trả về duy nhất một mã JSON array.
+        # [BẮT BUỘC] PHẢI ƯU TIÊN tính liên tục: Nếu các mã trong Historical Context vẫn duy trì setup tốt, hãy giữ lại chúng. Chỉ thay thế bằng mã mới nếu mã mới vượt trội rõ rệt.
+        # Định dạng: [{"symbol": "AAA", "score": 95, "rank": 1, "reason": "Lý do ngắn gọn..."}, ...]
+        if not self.ai:
+            print("   ⚠️ AI not available for selection")
+            return []
+        
+        if not candidates:
+            return []
+        
+        print(f"\n🤖 AI SELECTION: Phân tích {len(candidates)} candidates...")
+        
+        # Build candidate data for AI
+        candidates_data = ""
+        for c in candidates:
+            price = c.technical.price
+            news_sentiment = c.news.sentiment if c.news else 'N/A'
+            news_score = c.news.sentiment_score if c.news and hasattr(c.news, 'sentiment_score') else 0.0
+            candidates_data += f"""
+---
+**{c.symbol}** ({c.sector_name})
+- Giá: {price:,.0f} | RS Rating: {c.technical.rs_rating}
+- RSI: {c.technical.rsi_14:.1f} | Volume Ratio: {c.technical.volume_ratio:.2f}x
+- MA Alignment: {'✅ Above MA20/50/200' if (c.technical.above_ma20 and c.technical.above_ma50 and c.technical.above_ma200) else '❌ Not aligned'}
+- Pattern: {c.pattern.pattern_type.value} (Quality: {c.pattern.pattern_quality:.0f})
+- Volume Confirmed: {'✅' if c.pattern.volume_confirmed else '⭕'}
+- Fundamental: ROE={c.fundamental.roe:.1f}%, EPS Q/Q={c.fundamental.eps_growth_qoq:+.1f}%, EPS Y/Y={c.fundamental.eps_growth_yoy:+.1f}%
+- EPS 3Y CAGR: {c.fundamental.eps_growth_3y:+.1f}%
+- Foreign Trade (Net): {c.technical.foreign_net_value/1e6:+.1f}M VND (B/S: {c.technical.foreign_buy_value/1e6:.1f}M/{c.technical.foreign_sell_value/1e6:.1f}M)
+- News Sentiment: {news_sentiment} ({news_score:+.2f})
+"""
+
+        market_info = ""
+        if market_context:
+            market_info = f"""
+📊 MARKET CONTEXT:
+- Market Color: {market_context.get('market_color', 'N/A')}
+- Market Score: {market_context.get('market_score', 'N/A')}/100
+- Distribution Days: {market_context.get('distribution_days', 'N/A')}
+- Leading Sectors: {market_context.get('leading_sectors', 'N/A')}
+"""
+        
+        prompt = f"""
+Bạn là chuyên gia phân tích cổ phiếu CANSLIM/IBD với kinh nghiệm 20+ năm.
+
+{market_info}
+
+{history_context}
+
+---
+DANH SÁCH ỨNG VIÊN (Candidates List):
+{candidates_data}
+
+═══════════════════════════════════════════════════════════════
+YÊU CẦU: Phân tích và CHỌN TOP {top_n} cổ phiếu TỐT NHẤT để đầu tư ngay.
+
+TIÊU CHÍ ƯU TIÊN (theo thứ tự):
+1. **RS Rating cao** (≥80 là tốt nhất) - Leader trong ngành
+2. **Pattern chất lượng** với Volume Confirmed - Sẵn sàng breakout
+3. **Fundamental growth** - EPS tăng trưởng tốt
+4. **MA Alignment** - Cấu trúc giá healthy
+5. **Market phù hợp** - Sector đang leading
+
+TRẢ VỀ DƯỚI DẠNG JSON (CHỈ JSON, KHÔNG GHI GÌ KHÁC):
+**CẢNH BÁO:** Bạn CHỈ ĐƯỢC CHỌN các mã nằm trong "DANH SÁCH ỨNG VIÊN" bên trên. Tuyệt đối KHÔNG chọn mã từ Historical Context nếu mã đó không xuất hiện trong danh sách ứng viên mới nhất.
+```json
+{{
+  "top_picks": [
+    {{"symbol": "XXX", "score": 85, "rank": 1, "reason": "2-3 lý do ngắn gọn"}},
+    {{"symbol": "YYY", "score": 80, "rank": 2, "reason": "2-3 lý do ngắn gọn"}},
+    ...
+  ],
+  "avoid_list": ["AAA", "BBB"],
+  "avoid_reason": "Lý do các mã nên tránh"
+}}
+```
+"""
+        
+        try:
+            response = self.ai.chat(prompt)
+            
+            # Parse JSON from response
+            import json
+            import re
+            
+            # Extract JSON from markdown code block if present
+            json_match = re.search(r'```json\s*(.*?)\s*```', response, re.DOTALL)
+            if json_match:
+                json_str = json_match.group(1)
+            else:
+                # Try to find raw JSON
+                json_match = re.search(r'\{.*\}', response, re.DOTALL)
+                if json_match:
+                    json_str = json_match.group(0)
+                else:
+                    print(f"   ⚠️ Could not parse AI response as JSON")
+                    return []
+            
+            result = json.loads(json_str)
+            picks = result.get('top_picks', [])
+            
+            # Validate and clean picks
+            valid_picks = []
+            candidate_symbols = {c.symbol for c in candidates}
+            
+            for p in picks:
+                symbol = p.get('symbol', '').upper().strip()
+                # Handle cases where AI might return "1. VCB" or similar
+                if ' ' in symbol:
+                    symbol = symbol.split()[-1]
+                if '.' in symbol:
+                    symbol = symbol.split('.')[-1]
+                symbol = re.sub(r'[^A-Z0-9]', '', symbol)
+                
+                if symbol in candidate_symbols:
+                    p['symbol'] = symbol
+                    valid_picks.append(p)
+                else:
+                    print(f"   ⚠️ AI selected {symbol} which is NOT in current candidate list. Skipping.")
+            
+            print(f"   ✅ AI selected {len(valid_picks)} valid stocks")
+            for p in valid_picks[:5]:
+                print(f"      {p.get('rank')}. {p.get('symbol')} (Score: {p.get('score')}) - {p.get('reason', '')[:50]}...")
+            
+            return valid_picks
+            
+        except json.JSONDecodeError as e:
+            print(f"   ⚠️ JSON parse error: {e}")
+            return []
+        except Exception as e:
+            print(f"   ❌ AI Selection Error: {e}")
+            return []
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1822,15 +1994,50 @@ class StockScreener:
             
             time.sleep(self.config.API_DELAY)
         
-        # Sort by total score
+        # Sort by total score (initial algorithm ranking)
         candidates.sort(key=lambda x: x.score_total, reverse=True)
         
-        # Assign ranks
+        # Assign initial ranks
         for i, c in enumerate(candidates, 1):
             c.rank = i
         
         report.candidates = candidates
-        report.top_picks = candidates[:self.config.TOP_PICKS_COUNT]
+        
+        # === AI SELECTION (Full AI Mode) ===
+        if self.config.USE_AI_SELECTION and self.ai_analyzer.ai:
+            print("\n[3.5/5] 🤖 FULL AI SELECTION...")
+            ai_picks = self.ai_analyzer.ai_select_top_stocks(
+                candidates, 
+                market_context=market_context,
+                history_context=history_context,
+                top_n=self.config.TOP_PICKS_COUNT
+            )
+            
+            if ai_picks:
+                # Reorder candidates based on AI selection
+                ai_ranked = []
+                symbol_to_candidate = {c.symbol: c for c in candidates}
+                
+                for i, pick in enumerate(ai_picks):
+                    symbol = pick.get('symbol')
+                    if symbol and symbol in symbol_to_candidate:
+                        c = symbol_to_candidate[symbol]
+                        c.rank = i + 1
+                        c.score_total = pick.get('score', c.score_total)  # Use AI score
+                        c.ai_analysis = pick.get('reason', '')
+                        # Recalculate signal based on new score
+                        c.signal = self._determine_signal(c)
+                        ai_ranked.append(c)
+                
+                report.top_picks = ai_ranked[:self.config.TOP_PICKS_COUNT]
+                print(f"   ✅ AI đã chọn {len(report.top_picks)} stocks")
+            else:
+                # Fallback to algorithm ranking
+                print("   ⚠️ AI selection failed, using algorithm ranking")
+                report.top_picks = candidates[:self.config.TOP_PICKS_COUNT]
+        else:
+            # Traditional algorithm ranking
+            report.top_picks = candidates[:self.config.TOP_PICKS_COUNT]
         
         # Step 4: AI Analysis for top picks
         print("\n[4/5] AI Analysis cho top picks...")

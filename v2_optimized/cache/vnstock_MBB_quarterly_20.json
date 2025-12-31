@@ -1,0 +1,205 @@
+{
+  "timestamp": "2025-12-24T10:21:19.383136",
+  "data": [
+    {
+      "period": "Q1",
+      "revenue": 0.0,
+      "profit": 5571024000000.0,
+      "eps": 0.0,
+      "roe": 19.377228329999998,
+      "roa": 1.9821292899999998,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q2",
+      "revenue": 0.0,
+      "profit": 5877605000000.0,
+      "eps": 0.0,
+      "roe": 20.49440193,
+      "roa": 2.13020737,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q3",
+      "revenue": 0.0,
+      "profit": 6567740000000.0,
+      "eps": 0.0,
+      "roe": 21.688130140000002,
+      "roa": 2.29309625,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q4",
+      "revenue": 0.0,
+      "profit": 6284154000000.0,
+      "eps": 0.0,
+      "roe": 21.175729660000002,
+      "roa": 2.18287698,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q5",
+      "revenue": 0.0,
+      "profit": 5790156000000.0,
+      "eps": 0.0,
+      "roe": 20.69997625,
+      "roa": 2.20924997,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q6",
+      "revenue": 0.0,
+      "profit": 6026749000000.0,
+      "eps": 0.0,
+      "roe": 21.64211217,
+      "roa": 2.33628213,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q7",
+      "revenue": 0.0,
+      "profit": 4532698000000.0,
+      "eps": 0.0,
+      "roe": 21.48086782,
+      "roa": 2.32842679,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q8",
+      "revenue": 0.0,
+      "profit": 4986366000000.0,
+      "eps": 0.0,
+      "roe": 23.45312456,
+      "roa": 2.47110377,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q9",
+      "revenue": 0.0,
+      "profit": 5773265000000.0,
+      "eps": 0.0,
+      "roe": 22.35398773,
+      "roa": 2.45863339,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q10",
+      "revenue": 0.0,
+      "profit": 4893495000000.0,
+      "eps": 0.0,
+      "roe": 22.34403437,
+      "roa": 2.46997409,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q11",
+      "revenue": 0.0,
+      "profit": 5023662000000.0,
+      "eps": 0.0,
+      "roe": 23.08526861,
+      "roa": 2.5617408,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q12",
+      "revenue": 0.0,
+      "profit": 3434131000000.0,
+      "eps": 0.0,
+      "roe": 24.60637334,
+      "roa": 2.61781704,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q13",
+      "revenue": 0.0,
+      "profit": 4879193000000.0,
+      "eps": 0.0,
+      "roe": 25.43677864,
+      "roa": 2.7340177100000003,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q14",
+      "revenue": 0.0,
+      "profit": 4623202000000.0,
+      "eps": 0.0,
+      "roe": 24.24592747,
+      "roa": 2.54531778,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q15",
+      "revenue": 0.0,
+      "profit": 4546209000000.0,
+      "eps": 0.0,
+      "roe": 22.4129297,
+      "roa": 2.34515352,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q16",
+      "revenue": 0.0,
+      "profit": 3526064000000.0,
+      "eps": 0.0,
+      "roe": 22.55543204,
+      "roa": 2.30411303,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q17",
+      "revenue": 0.0,
+      "profit": 3022176000000.0,
+      "eps": 0.0,
+      "roe": 20.3137064,
+      "roa": 2.12995961,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q18",
+      "revenue": 0.0,
+      "profit": 2596026000000.0,
+      "eps": 0.0,
+      "roe": 20.06933782,
+      "roa": 2.13379577,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q19",
+      "revenue": 0.0,
+      "profit": 3552809000000.0,
+      "eps": 0.0,
+      "roe": 20.42335505,
+      "roa": 2.17888413,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    },
+    {
+      "period": "Q20",
+      "revenue": 0.0,
+      "profit": 1930705000000.0,
+      "eps": 0.0,
+      "roe": 18.36446214,
+      "roa": 1.8230413399999998,
+      "gross_margin": 0.0,
+      "net_margin": 0.0
+    }
+  ]
+}

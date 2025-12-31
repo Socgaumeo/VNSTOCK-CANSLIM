@@ -116,6 +116,7 @@ class FullPipelineRunner:
         self.market_report = None
         self.sector_report = None
         self.screener_report = None
+        self.mid_session_data = None  # Mid-session data for comparison
     
     def run(self, target_sectors: List[str] = None) -> str:
         """
@@ -141,6 +142,18 @@ class FullPipelineRunner:
         history_manager = HistoryManager(self.output_dir)
         history_context = history_manager.get_ai_context_v2()  # V2 with What-If, RS trends
         print("✓ History context loaded (V2 Enhanced).")
+        
+        # Load mid-session data if available
+        self.mid_session_data = history_manager.get_mid_session_data()
+        mid_session_context = ""
+        if self.mid_session_data:
+            mid_session_context = history_manager.get_mid_session_context()
+            print(f"✓ Mid-session data found: {self.mid_session_data.get('timestamp', 'N/A')}")
+        else:
+            print("ℹ️ No mid-session data available for today.")
+        
+        # Combine contexts for AI
+        combined_context = f"{mid_session_context}\n{history_context}"
 
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 1: MARKET TIMING
@@ -153,7 +166,7 @@ class FullPipelineRunner:
         m1_config.SAVE_REPORT = False  # Không save riêng
         
         m1_module = MarketTimingModule(m1_config)
-        self.market_report = m1_module.run(history_context)
+        self.market_report = m1_module.run(combined_context)
         
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 2: SECTOR ROTATION
@@ -278,6 +291,86 @@ class FullPipelineRunner:
         
         return context
     
+    def _generate_mid_session_comparison(self) -> str:
+        """Tạo section so sánh giữa phiên và cuối ngày"""
+        if not self.mid_session_data or not self.market_report:
+            return ""
+        
+        mid = self.mid_session_data
+        mid_market = mid.get('market', {})
+        mid_vnindex = mid_market.get('vnindex', {})
+        
+        # Current end-of-day data
+        eod_score = self.market_report.market_score
+        eod_color = self.market_report.market_color
+        eod_price = self.market_report.vnindex.price
+        eod_change = self.market_report.vnindex.change_1d
+        
+        # Mid-session data
+        mid_score = mid_market.get('score', 0)
+        mid_color = mid_market.get('color', 'N/A')
+        mid_price = mid_vnindex.get('price', 0)
+        mid_change = mid_vnindex.get('change_1d', 0)
+        
+        # Calculate changes
+        score_change = eod_score - mid_score
+        price_change = eod_price - mid_price
+        
+        # Score change indicator
+        if score_change > 5:
+            score_indicator = "📈 Tăng"
+        elif score_change < -5:
+            score_indicator = "📉 Giảm"
+        else:
+            score_indicator = "➡️ Ổn định"
+        
+        content = f"""# 📊 SO SÁNH GIỮA PHIÊN VS CUỐI NGÀY
+
+**Thời điểm giữa phiên:** {mid.get('timestamp', 'N/A')}
+
+## Tổng quan thay đổi
+
+| Chỉ số | Giữa phiên | Cuối ngày | Thay đổi |
+|--------|------------|-----------|----------|
+| **Score** | {mid_score}/100 | {eod_score}/100 | {score_change:+d} ({score_indicator}) |
+| **Color** | {mid_color} | {eod_color} | - |
+| **VNIndex** | {mid_price:,.0f} ({mid_change:+.2f}%) | {eod_price:,.0f} ({eod_change:+.2f}%) | {price_change:+,.0f} |
+| **RSI** | {mid_vnindex.get('rsi_14', 0):.1f} | {self.market_report.vnindex.rsi_14:.1f} | - |
+| **A/D Ratio** | {mid_market.get('breadth', {}).get('ad_ratio', 0):.2f} | {self.market_report.breadth.ad_ratio:.2f} | - |
+
+"""
+        
+        # Sector comparison
+        mid_sectors = mid.get('sectors', [])
+        if mid_sectors and self.sector_report and hasattr(self.sector_report, 'sectors'):
+            content += """## Thay đổi xếp hạng ngành
+
+| Ngành | RS Giữa phiên | RS Cuối ngày | Trend |
+|-------|---------------|--------------|-------|
+"""
+            # Build lookup for mid-session sectors
+            mid_sector_map = {s.get('code', ''): s for s in mid_sectors}
+            
+            for sector in self.sector_report.sectors[:5]:
+                code = getattr(sector, 'code', '')
+                eod_rs = getattr(sector, 'rs_rating', 0)
+                mid_sector = mid_sector_map.get(code, {})
+                mid_rs = mid_sector.get('rs_rating', 0)
+                
+                rs_change = eod_rs - mid_rs
+                if rs_change > 2:
+                    trend = "📈"
+                elif rs_change < -2:
+                    trend = "📉"
+                else:
+                    trend = "➡️"
+                
+                content += f"| {getattr(sector, 'name', code)} | {mid_rs:.0f} | {eod_rs:.0f} | {trend} ({rs_change:+.0f}) |\n"
+        
+        content += "\n---\n\n"
+        
+        return content
+    
     def _generate_combined_report(self) -> str:
         """Tạo báo cáo gộp từ 3 modules"""
         
@@ -287,7 +380,13 @@ class FullPipelineRunner:
 
 ---
 
-# 🎯 PHẦN 1: MARKET TIMING (Module 1)
+"""
+        
+        # Mid-Session Comparison Section (if available)
+        if self.mid_session_data:
+            content += self._generate_mid_session_comparison()
+        
+        content += """# 🎯 PHẦN 1: MARKET TIMING (Module 1)
 
 """
         

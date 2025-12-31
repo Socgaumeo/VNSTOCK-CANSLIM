@@ -296,6 +296,11 @@ class EnhancedStockData:
     volume_ratio: float = 1.0
     avg_value_20d: float = 0.0  # Tỷ VND
     
+    # Foreign Trade (Current Session)
+    foreign_buy_value: float = 0.0  # VND
+    foreign_sell_value: float = 0.0 # VND
+    foreign_net_value: float = 0.0  # VND
+    
     # Volume Profile
     poc: float = 0.0            # Point of Control
     vah: float = 0.0            # Value Area High
@@ -476,6 +481,9 @@ class EnhancedDataCollector:
             result.vp_resistance = vp_result.vp_resistance
             result.vp_signals = vp_result.signals
         
+        # 4. Lấy dữ liệu khối ngoại trong phiên (Foreign Trade)
+        self._fetch_foreign_data_from_price_board(result)
+        
         return result
     
     def _calc_rsi(self, prices: np.ndarray, period: int = 14) -> float:
@@ -508,6 +516,28 @@ class EnhancedDataCollector:
         
         rs = avg_gain / avg_loss
         return 100 - (100 / (1 + rs))
+    
+    def _fetch_foreign_data_from_price_board(self, result: EnhancedStockData):
+        """Lấy dữ liệu khối ngoại từ price_board API (thời gian thực/trong phiên)"""
+        try:
+            stock = self.data_manager._get_stock(result.symbol)
+            if stock:
+                # price_board trả về DataFrame với MultiIndex. Cần truyền danh sách mã.
+                df_pb = stock.trading.price_board(symbols_list=[result.symbol])
+                if df_pb is not None and not df_pb.empty:
+                    # Lấy dòng đầu tiên (thường chỉ có 1 dòng cho 1 mã)
+                    row = df_pb.iloc[0]
+                    
+                    # Columns in vnstock can be complex, usually ('match', 'foreign_buy_value')
+                    f_buy = row.get(('match', 'foreign_buy_value'), 0)
+                    f_sell = row.get(('match', 'foreign_sell_value'), 0)
+                    
+                    if pd.notna(f_buy): result.foreign_buy_value = float(f_buy)
+                    if pd.notna(f_sell): result.foreign_sell_value = float(f_sell)
+                    result.foreign_net_value = result.foreign_buy_value - result.foreign_sell_value
+        except Exception as e:
+            # Silent fail for optional data
+            pass
     
     def _calc_macd(self, prices: np.ndarray) -> Dict:
         """Tính MACD"""

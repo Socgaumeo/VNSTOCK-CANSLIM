@@ -15,6 +15,7 @@ Cách sử dụng:
 """
 
 import os
+import json
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -71,6 +72,7 @@ class MidSessionPipelineRunner:
         
         m1_config = create_m1_config()
         m1_config.SAVE_REPORT = False  # Không save riêng
+        m1_config.IS_MID_SESSION = True
         
         m1_module = MarketTimingModule(m1_config)
         self.market_report = m1_module.run(history_context)
@@ -84,6 +86,7 @@ class MidSessionPipelineRunner:
         
         m2_config = create_m2_config()
         m2_config.SAVE_REPORT = False  # Không save riêng
+        m2_config.IS_MID_SESSION = True
         
         m2_module = SectorRotationModule(m2_config)
         self.sector_report = m2_module.run()
@@ -97,6 +100,10 @@ class MidSessionPipelineRunner:
         
         combined_report = self._generate_combined_report()
         output_file = self._save_report(combined_report)
+        
+        # Save mid-session data for EOD reference
+        json_file = self._save_mid_session_data()
+        print(f"📊 Mid-session data saved: {json_file}")
         
         print(f"\n✅ HOÀN THÀNH!")
         print(f"📄 Output file: {output_file}")
@@ -206,6 +213,84 @@ class MidSessionPipelineRunner:
         
         with open(filename, 'w', encoding='utf-8') as f:
             f.write(content)
+        
+        return filename
+    
+    def _save_mid_session_data(self) -> str:
+        """
+        Lưu dữ liệu giữa phiên vào JSON để cuối ngày tham chiếu
+        
+        Returns:
+            str: Path to saved JSON file
+        """
+        os.makedirs(self.output_dir, exist_ok=True)
+        
+        # Build data structure
+        data = {
+            "timestamp": self.timestamp.isoformat(),
+            "date": self.timestamp.strftime('%Y%m%d'),
+            "type": "mid_session",
+            "market": {},
+            "sectors": [],
+            "summary": ""
+        }
+        
+        # Market data
+        if self.market_report:
+            vni = self.market_report.vnindex
+            data["market"] = {
+                "score": self.market_report.market_score,
+                "color": self.market_report.market_color,
+                "trend": self.market_report.trend_status,
+                "vnindex": {
+                    "price": vni.price,
+                    "change_1d": vni.change_1d,
+                    "rsi_14": vni.rsi_14,
+                    "macd_hist": vni.macd_hist,
+                    "adx": vni.adx,
+                    "volume_ratio": vni.volume_ratio,
+                    "ma20": vni.ma20,
+                    "ma50": vni.ma50,
+                    "poc": vni.poc,
+                    "vah": vni.vah,
+                    "val": vni.val,
+                    "price_vs_va": vni.price_vs_va
+                },
+                "breadth": {
+                    "advances": self.market_report.breadth.advances,
+                    "declines": self.market_report.breadth.declines,
+                    "ad_ratio": self.market_report.breadth.ad_ratio
+                },
+                "money_flow": {
+                    "foreign_net": self.market_report.money_flow.foreign_net
+                },
+                "key_signals": self.market_report.key_signals
+            }
+            # AI summary (first 500 chars)
+            if self.market_report.ai_analysis:
+                data["summary"] = self.market_report.ai_analysis[:500]
+        
+        # Sector data
+        if self.sector_report and hasattr(self.sector_report, 'sectors'):
+            for sector in self.sector_report.sectors:
+                sector_data = {
+                    "code": getattr(sector, 'code', 'N/A'),
+                    "name": getattr(sector, 'name', 'N/A'),
+                    "change_1d": getattr(sector, 'change_1d', 0),
+                    "rs_rating": getattr(sector, 'rs_rating', 50),
+                    "phase": str(getattr(sector, 'phase', '')),
+                    "rs_trend": getattr(sector, 'rs_trend', '')
+                }
+                data["sectors"].append(sector_data)
+        
+        # Save to JSON
+        filename = os.path.join(
+            self.output_dir,
+            f"mid_session_data_{self.timestamp.strftime('%Y%m%d')}.json"
+        )
+        
+        with open(filename, 'w', encoding='utf-8') as f:
+            json.dump(data, f, ensure_ascii=False, indent=2)
         
         return filename
 
