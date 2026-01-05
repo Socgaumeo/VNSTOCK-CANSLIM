@@ -1697,6 +1697,121 @@ Với MỖI mã trong TOP 3, đưa ra:
             return self.ai.chat(prompt)
         except Exception as e:
             return f"❌ Error: {e}"
+
+    def critique_screener(self, report: ScreenerReport, peer_analysis: str) -> str:
+        """
+        [NEW] Claude critique Gemini's Stock Selection
+        """
+        if not self.ai:
+            return "⚠️ AI Reviewer not available."
+            
+        # Build prompt
+        candidates_str = ""
+        for c in report.top_picks[:10]:
+            price = c.technical.price
+            buy_point = c.pattern.buy_point if c.pattern.buy_point > 0 else price * 1.02
+            
+            candidates_str += f"""
+{c.rank}. **{c.symbol}** ({c.sector_name})
+   - Score: {c.score_total:.0f} | RS: {c.technical.rs_rating} | Pattern: {c.pattern.pattern_type.value}
+   - Giá: {price:,.0f} | Buy Point: {buy_point:,.0f}
+   - EPS Growth Y/Y: {c.fundamental.eps_growth_yoy:+.1f}% | ROE: {c.fundamental.roe:.1f}%
+   - Net Foreign: {c.technical.foreign_net_value/1e6:+.1f}M VND
+"""
+
+        debate_prompt = f"""
+Bạn là Senior Portfolio Manager. Dưới đây là danh sách Top Picks từ Analyst (Junior).
+
+DỮ LIỆU TOP PICKS (FACT):
+{candidates_str}
+
+PHÂN TÍCH CỦA ANALYST (OPINION):
+```
+{peer_analysis}
+```
+
+NHIỆM VỤ CỦA BẠN (SENIOR REVIEW):
+1. **Selection Review**: Analyst chọn mã có hợp lý không? Có mã nào rủi ro cao (RS yếu, Fundamental kém) mà Analyst bỏ qua?
+2. **Trading Plan Check**: Buy Point/Stop Loss của Analyst có sát thực tế không?
+3. **Consensus**: Bạn đồng ý 'All-in' mã nào? Hoặc từ chối mã nào?
+4. **Final Top 3**: Đưa ra Top 3 của RIÊNG BẠN (có thể trùng hoặc khác, giải thích ngắn gọn).
+
+VIẾT NGẮN GỌN, SÚC TÍCH.
+"""
+        return self.ai.chat(debate_prompt)
+    
+    def risk_review(self, report, gemini_analysis: str, claude_critique: str) -> str:
+        """
+        [NEW] DeepSeek Risk Manager - Challenge both stock pick analyses
+        Focus: Position sizing risk, stop loss validity, fundamental red flags
+        """
+        if not self.ai:
+            return "⚠️ AI Risk Manager not available."
+        
+        # Build top picks summary
+        top_picks_str = ""
+        if hasattr(report, 'top_picks') and report.top_picks:
+            for i, pick in enumerate(report.top_picks[:5], 1):
+                symbol = pick.get('symbol', pick) if isinstance(pick, dict) else str(pick)
+                top_picks_str += f"{i}. {symbol}\n"
+        else:
+            top_picks_str = "Không có Top Picks rõ ràng"
+        
+        prompt = f"""
+Bạn là CHIEF RISK OFFICER với 25 năm kinh nghiệm quản lý rủi ro trên thị trường chứng khoán Việt Nam.
+Bạn vừa nhận được 2 báo cáo lựa chọn cổ phiếu từ team:
+
+NHIỆM VỤ CỦA BẠN (Critical):
+⚠️ BẠN ĐƯỢC THƯỞNG KHI TÌM RA RỦI RO MÀ CẢ 2 ANALYST ĐÃ BỎ SÓT.
+⚠️ NẾU CẢ 2 ĐỒNG Ý VỚI NHAU → Tìm lý do họ có thể CÙNG SAI.
+
+═══════════════════════════════════════════════════════════════
+TOP PICKS HIỆN TẠI:
+{top_picks_str}
+═══════════════════════════════════════════════════════════════
+
+PHÂN TÍCH CỦA JUNIOR ANALYST (Gemini):
+```
+{gemini_analysis[:2500]}
+```
+
+PHẢN BIỆN CỦA SENIOR REVIEWER (Claude):
+```
+{claude_critique[:2500]}
+```
+═══════════════════════════════════════════════════════════════
+
+HÃY VIẾT BÁO CÁO RỦI RO CỔ PHIẾU (STOCK RISK REPORT):
+Format:
+### ⚠️ Stock Pick Risk Manager Review
+
+**1. MÃ CÓ RỦI RO CAO NHẤT:**
+| Mã | Rủi ro | Mức độ | Lý do cả 2 analyst bỏ qua |
+|----|--------|--------|---------------------------|
+| ...| ...    | 🔴/🟡  | ...                       |
+
+**2. POSITION SIZING CONCERNS:**
+- Mã nào không nên vượt quá 5% NAV?
+- Mã nào cần cắt giảm size so với recommendations?
+
+**3. STOP LOSS VALIDATION:**
+- Trading plan nào có SL quá chặt/lỏng?
+- Đề xuất điều chỉnh cụ thể
+
+**4. FUNDAMENTAL RED FLAGS:**
+- Mã nào có EPS âm nhưng vẫn được recommend?
+- Mã nào có Cash Flow Warning?
+
+**5. FINAL RISK-ADJUSTED PICKS:**
+| Rank | Mã | Max Size | Entry | Stop | Confidence |
+|------|----|----------|-------|------|------------|
+| 1    | ...| 15%      | ...   | ...  | HIGH/MED/LOW|
+
+**6. CONSENSUS RECOMMENDATION:**
+- Điều gì cả 3 đều đồng ý?
+- Điều gì cần cân nhắc thêm?
+"""
+        return self.ai.chat(prompt)
     
     def ai_select_top_stocks(self, candidates: List[StockCandidate], 
                              market_context: Dict = None,
@@ -2323,6 +2438,27 @@ class StockScreenerModule:
             self.exporter.save(self.report)
         
         return self.report
+
+    def run_critique(self, report: ScreenerReport, peer_analysis: str) -> str:
+        """
+        [NEW] Critique Mode
+        """
+        print(f"\n[{self.config.AI_PROVIDER.upper()}] Running Critique Mode...")
+        critique = self.screener.ai_analyzer.critique_screener(report, peer_analysis)
+        print(f"✓ Critique Complete ({len(critique)} chars)")
+        return critique
+
+    def run_risk_review(self, report: ScreenerReport, gemini_analysis: str, claude_critique: str) -> str:
+        """
+        [NEW] Chạy chế độ Risk Manager (DeepSeek)
+        """
+        print(f"\n[{self.config.AI_PROVIDER.upper()}] Running Risk Review Mode...")
+        
+        # Gọi AI để risk review
+        risk_review = self.screener.ai_analyzer.risk_review(report, gemini_analysis, claude_critique)
+        
+        print(f"✓ Risk Review Complete ({len(risk_review)} chars)")
+        return risk_review
     
     def _print_summary(self):
         """Print summary"""

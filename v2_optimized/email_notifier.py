@@ -87,7 +87,11 @@ class EmailNotifier:
             </html>
             """
             
-            msg.attach(MIMEText(html_body, 'html'))
+            if not html_content:
+                print("   ⚠️ HTML content is empty after conversion!")
+                html_content = f"<pre>{report_content}</pre>"
+
+            msg.attach(MIMEText(html_body, 'html', 'utf-8'))
             
             # 3. Add Attachment (Original File)
             if attachment_path and os.path.exists(attachment_path):

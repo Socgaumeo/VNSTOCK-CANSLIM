@@ -769,7 +769,113 @@ CHỈ TRẢ LỜI JSON, KHÔNG CÓ TEXT KHÁC.
             'reasoning': "Fallback scoring (AI không khả dụng)"
         }
     
+
+    def critique_market(self, report: MarketReport, peer_analysis: str) -> str:
+        """
+        [NEW] Claude critique Gemini's analysis
+        """
+        if not self.ai:
+            return "⚠️ AI Reviewer not available."
+            
+        market_data = self._build_market_data_context(report)
+        
+        prompt = f"""
+Bạn là Senior Portfolio Manager với 20 năm kinh nghiệm trên thị trường chứng khoán Việt Nam.
+Dưới đây là dữ liệu thị trường và phân tích từ một Analyst (Junior) trong team.
+
+NHIỆM VỤ CỦA BẠN:
+1. Đọc dữ liệu thị trường (Fact).
+2. Đọc phân tích của Analyst (Opinion).
+3. Đưa ra nhận định ĐỘC LẬP của bạn (Senior Verdict).
+4. Chỉ ra điểm bạn ĐỒNG Ý và KHÔNG ĐỒNG Ý với Analyst.
+5. Kết luận cuối cùng về hành động cần làm.
+
+═══════════════════════════════════════════════════════════════
+DỮ LIỆU THỊ TRƯỜNG (FACT):
+{market_data}
+═══════════════════════════════════════════════════════════════
+
+PHÂN TÍCH CỦA ANALYST (OPINION):
+```
+{peer_analysis}
+```
+═══════════════════════════════════════════════════════════════
+
+HÃY VIẾT BÁO CÁO PHẢN BIỆN (DEBATE REPORT):
+- Giọng văn: Chuyên gia, gãy gọn, tập trung vào rủi ro và cơ hội thực tế.
+- Format:
+  ### 🧐 Senior Review
+  **1. Đánh giá tình hình:** (Nhận định riêng của bạn)
+  **2. Critique Analyst:** (Đồng ý/Phản đối điểm nào? Analyst có lạc quan/bi quan quá không?)
+  **3. Action Plan:** (Hành động cụ thể cho NĐT cá nhân)
+  """
+        return self.ai.chat(prompt)
+
+    def risk_review(self, report: MarketReport, gemini_analysis: str, claude_critique: str) -> str:
+        """
+        [NEW] DeepSeek Risk Manager - Challenge both analyses
+        Focus: Worst-case scenarios, hidden risks, contrarian view
+        """
+        if not self.ai:
+            return "⚠️ AI Risk Manager not available."
+            
+        market_data = self._build_market_data_context(report)
+        
+        prompt = f"""
+Bạn là CHIEF RISK OFFICER với 25 năm kinh nghiệm quản lý rủi ro trên thị trường chứng khoán Việt Nam.
+Bạn vừa nhận được 2 báo cáo từ team phân tích:
+1. Junior Analyst (Gemini) - Phân tích ban đầu
+2. Senior Reviewer (Claude) - Phản biện
+
+NHIỆM VỤ CỦA BẠN (Critical):
+⚠️ BẠN ĐƯỢC THƯỞNG KHI TÌM RA RỦI RO MÀ CẢ 2 ANALYST ĐÃ BỎ SÓT.
+⚠️ NẾU CẢ 2 ĐỒNG Ý VỚI NHAU → Tìm lý do họ có thể CÙNG SAI.
+
+═══════════════════════════════════════════════════════════════
+DỮ LIỆU THỊ TRƯỜNG (FACT):
+{market_data}
+═══════════════════════════════════════════════════════════════
+
+PHÂN TÍCH CỦA JUNIOR ANALYST (Gemini):
+```
+{gemini_analysis[:3000]}
+```
+
+PHẢN BIỆN CỦA SENIOR REVIEWER (Claude):
+```
+{claude_critique[:3000]}
+```
+═══════════════════════════════════════════════════════════════
+
+HÃY VIẾT BÁO CÁO RỦI RO (RISK REPORT):
+Format:
+### ⚠️ Risk Manager Review
+
+**1. RỦI RO BỎ SÓT:**
+- Liệt kê các rủi ro mà cả 2 analyst chưa đề cập hoặc đánh giá thấp
+
+**2. WORST-CASE SCENARIO:**
+- Kịch bản xấu nhất có thể xảy ra trong 1-2 tuần tới
+- Trigger conditions (điều kiện kích hoạt)
+
+**3. PHẢN BIỆN CẢ HAI:**
+| Analyst | Điểm có thể sai | Lý do |
+|---------|-----------------|-------|
+| Gemini  | ...             | ...   |
+| Claude  | ...             | ...   |
+
+**4. VỊ THẾ PHÒNG THỦ TỐI ƯU:**
+- Tỷ trọng tiền mặt khuyến nghị
+- Cổ phiếu nên cắt giảm ngay
+- Trigger để cắt lỗ toàn bộ
+
+**5. CONSENSUS RECOMMENDATION:**
+- Kết luận cuối cùng sau khi cân nhắc cả 3 góc nhìn
+"""
+        return self.ai.chat(prompt)
+
     def generate_prompt(self, report: MarketReport, history_context: str = "") -> str:
+
         """Tạo prompt cho báo cáo chi tiết (sau khi đã có score)"""
         market_data = self._build_market_data_context(report)
         mid_session_ctx = ""
@@ -801,6 +907,7 @@ YÊU CẦU: Viết BÁO CÁO CHIẾN LƯỢC NGÀY với cấu trúc:
    - Xu hướng chính, phân tích VSA.
    - **SO SÁNH CHI TIẾT** với phiên GẦN NHẤT (Latest Session) trong Historical Context: Những gì đã thay đổi? (Điểm số, Price Action, Volume).
    - Đánh giá tính liên tục của xu hướng.
+
 2. PHÂN TÍCH CẤU TRÚC
    - So sánh VN30 vs VNIndex
    
@@ -818,8 +925,8 @@ YÊU CẦU: Viết BÁO CÁO CHIẾN LƯỢC NGÀY với cấu trúc:
 6. KHUYẾN NGHỊ
    - Tỷ trọng CP/Tiền mặt
 """
-        return prompt
-    
+        return self.ai.chat(prompt)
+
     def generate(self, report: MarketReport, history_context: str = "") -> str:
         """Tạo báo cáo AI chi tiết"""
         if not self.ai:
@@ -883,6 +990,30 @@ class MarketTimingModule:
             self._save_report()
         
         return self.report
+    
+    def run_critique(self, report: MarketReport, peer_analysis: str) -> str:
+        """
+        [NEW] Chạy chế độ phản biện (không thu thập lại dữ liệu)
+        """
+        print(f"\n[{self.config.AI_PROVIDER.upper()}] Running Critique Mode...")
+        
+        # Gọi AI để critique
+        critique = self.ai_generator.critique_market(report, peer_analysis)
+        
+        print(f"✓ Critique Complete ({len(critique)} chars)")
+        return critique
+    
+    def run_risk_review(self, report: MarketReport, gemini_analysis: str, claude_critique: str) -> str:
+        """
+        [NEW] Chạy chế độ Risk Manager (DeepSeek)
+        """
+        print(f"\n[{self.config.AI_PROVIDER.upper()}] Running Risk Review Mode...")
+        
+        # Gọi AI để risk review
+        risk_review = self.ai_generator.risk_review(report, gemini_analysis, claude_critique)
+        
+        print(f"✓ Risk Review Complete ({len(risk_review)} chars)")
+        return risk_review
     
     def _print_report(self):
         """In báo cáo"""

@@ -822,7 +822,99 @@ YÊU CẦU PHÂN TÍCH:
    - Điều chỉnh theo Market Context (Traffic Light)
 """
         return prompt
-    
+
+    def critique_sector(self, report: SectorRotationReport, peer_analysis: str) -> str:
+        """
+        [NEW] Claude critique Gemini's Sector Analysis
+        """
+        if not self.ai:
+            return "⚠️ AI Reviewer not available."
+            
+        prompt = self.generate_prompt(report)
+        debate_prompt = f"""
+{prompt}
+
+═══════════════════════════════════════════════════════════════
+PHÂN TÍCH TỪ ANALYST TRƯỚC (OPINION):
+```
+{peer_analysis}
+```
+═══════════════════════════════════════════════════════════════
+
+NHIỆM VỤ CỦA BẠN (SENIOR PORTFOLIO MANAGER):
+1. Đọc dữ liệu (Data) và phân tích của Analyst (Opinion).
+2. Viết SENIOR REVIEW (Debate Report):
+   - **Market Regime Check**: Đồng ý với Rotation Clock hiện tại không?
+   - **Sector Picks**: Analyst chọn ngành này có hợp lý với Vĩ mô/Dòng tiền không?
+   - **Counter-Argument**: Nếu Analyst quá lạc quan/bi quan, hãy chỉ rõ lý do.
+   - **Top Picks**: Đưa ra Top 3 ngành BẠN chọn (có thể khác Analyst).
+
+HÃY ĐẢM BẢO KHÁCH QUAN, DỰA TRÊN DỮ LIỆU.
+"""
+        return self.ai.chat(debate_prompt)
+
+    def risk_review(self, report: SectorRotationReport, gemini_analysis: str, claude_critique: str) -> str:
+        """
+        [NEW] DeepSeek Risk Manager - Challenge both sector analyses
+        Focus: Sector concentration risk, rotation timing risk, contrarian view
+        """
+        if not self.ai:
+            return "⚠️ AI Risk Manager not available."
+            
+        base_prompt = self.generate_prompt(report)
+        
+        prompt = f"""
+Bạn là CHIEF RISK OFFICER với 25 năm kinh nghiệm quản lý rủi ro trên thị trường chứng khoán Việt Nam.
+Bạn vừa nhận được 2 báo cáo phân tích ngành từ team:
+
+NHIỆM VỤ CỦA BẠN (Critical):
+⚠️ BẠN ĐƯỢC THƯỞNG KHI TÌM RA RỦI RO MÀ CẢ 2 ANALYST ĐÃ BỎ SÓT.
+⚠️ NẾU CẢ 2 ĐỒNG Ý VỚI NHAU → Tìm lý do họ có thể CÙNG SAI.
+
+═══════════════════════════════════════════════════════════════
+DỮ LIỆU NGÀNH (FACT):
+{base_prompt[:2000]}
+═══════════════════════════════════════════════════════════════
+
+PHÂN TÍCH CỦA JUNIOR ANALYST (Gemini):
+```
+{gemini_analysis[:2500]}
+```
+
+PHẢN BIỆN CỦA SENIOR REVIEWER (Claude):
+```
+{claude_critique[:2500]}
+```
+═══════════════════════════════════════════════════════════════
+
+HÃY VIẾT BÁO CÁO RỦI RO NGÀNH (SECTOR RISK REPORT):
+Format:
+### ⚠️ Sector Risk Manager Review
+
+**1. RỦI RO NGÀNH BỎ SÓT:**
+- Rủi ro tập trung ngành (concentration risk)
+- Rủi ro rotation timing (quá sớm/muộn)
+- Rủi ro vĩ mô ảnh hưởng đến sector thesis
+
+**2. NGÀNH CÓ THỂ "BẪY" NHÀ ĐẦU TƯ:**
+- Ngành nào đang được cả 2 analyst khuyến nghị nhưng có rủi ro ẩn?
+- Lý do và trigger cần theo dõi
+
+**3. SECTOR CONTRARIAN VIEW:**
+- Có ngành nào bị cả 2 bỏ qua nhưng đáng cân nhắc?
+- Ngành nào "quá đông người" (crowded trade)?
+
+**4. VỊ THẾ PHÒNG THỦ NGÀNH:**
+| Ngành | Gemini | Claude | Risk Manager | Lý do |
+|-------|--------|--------|--------------|-------|
+| ...   | ...    | ...    | ...          | ...   |
+
+**5. CONSENSUS SECTOR ALLOCATION:**
+- Phân bổ ngành tối ưu sau khi cân nhắc cả 3 góc nhìn
+"""
+        return self.ai.chat(prompt)
+
+
     def generate(self, report: SectorRotationReport, history_context: str = "") -> str:
         """Tạo báo cáo AI với context lịch sử"""
         if not self.ai:
@@ -1062,6 +1154,30 @@ class SectorRotationModule:
             self.exporter.save(self.report)
         
         return self.report
+    
+    def run_critique(self, report: SectorRotationReport, peer_analysis: str) -> str:
+        """
+        [NEW] Chạy chế độ phản biện (không thu thập lại dữ liệu)
+        """
+        print(f"\n[{self.config.AI_PROVIDER.upper()}] Running Critique Mode...")
+        
+        # Gọi AI để critique
+        critique = self.ai_generator.critique_sector(report, peer_analysis)
+        
+        print(f"✓ Critique Complete ({len(critique)} chars)")
+        return critique
+    
+    def run_risk_review(self, report: SectorRotationReport, gemini_analysis: str, claude_critique: str) -> str:
+        """
+        [NEW] Chạy chế độ Risk Manager (DeepSeek)
+        """
+        print(f"\n[{self.config.AI_PROVIDER.upper()}] Running Risk Review Mode...")
+        
+        # Gọi AI để risk review
+        risk_review = self.ai_generator.risk_review(report, gemini_analysis, claude_critique)
+        
+        print(f"✓ Risk Review Complete ({len(risk_review)} chars)")
+        return risk_review
     
     def _print_summary(self):
         """Print summary"""

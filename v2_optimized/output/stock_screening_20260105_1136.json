@@ -1,0 +1,413 @@
+{
+  "timestamp": "2026-01-05 11:36:27",
+  "context": {
+    "target_sectors": [
+      "VNREAL",
+      "VNHEAL",
+      "VNCOND"
+    ],
+    "market": {
+      "traffic_light": "🟡 VÀNG - PHÒNG THỦ",
+      "distribution_days": 0,
+      "market_regime": "UPTREND"
+    }
+  },
+  "stats": {
+    "total_scanned": 50,
+    "passed_technical": 15,
+    "final_candidates": 15
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "symbol": "FRT",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 75.0,
+        "technical": 79.27272727272728,
+        "pattern": 30,
+        "news": 50,
+        "total": 65.99545454545455
+      },
+      "signal": "⭐⭐ BUY",
+      "technical": {
+        "price": 154.1,
+        "rs_rating": 90,
+        "rsi": 62.8318389869626,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "Dựa trên dữ liệu cung cấp và phương pháp CANSLIM, đây là phân tích chi tiết cho FRT:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Đánh giá:** **RẤT TỐT (High Quality)**\n*   **Phân tích:** Tỷ lệ OCF/Profit đạt **2.33** là mức cực kỳ ấn tượng. Điều này cho thấy với mỗi 1 đồng lợi nhuận kế toán, công ty thu về 2.33 đồng tiền mặt từ hoạt động kinh doanh. Lợi nhuận của FRT đến từ cốt lõi kinh doanh (hiệu quả tồn kho, bán hàng) chứ không phải thủ thuật kế toán. Cash Flow Status: Heal"
+    },
+    {
+      "rank": 2,
+      "symbol": "VRE",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 40.0,
+        "technical": 76.84848484848484,
+        "pattern": 100,
+        "news": 50,
+        "total": 63.39696969696969
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 34.35,
+        "rs_rating": 82,
+        "rsi": 57.39442331488976,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909097
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 100,
+        "buy_point": 40.198
+      },
+      "ai_analysis": "Dưới đây là phân tích chi tiết cổ phiếu VRE theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Cảnh báo đỏ (Red Flag):** Tỷ lệ OCF/Profit đạt **0.01** là mức cực thấp và rủi ro. Điều này cho thấy với mỗi 100 đồng lợi nhuận kế toán báo cáo, doanh nghiệp chỉ thu về thực tế 1 đồng tiền mặt từ hoạt động kinh doanh.\n*   **Kết luận:** Lợi nhuận tăng trưởng mạnh (+51.9% Y/Y) chủ yếu đến từ bút toán ghi nhận doanh thu/lợi nhuận trên giấ"
+    },
+    {
+      "rank": 3,
+      "symbol": "MCH",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 41.0,
+        "technical": 81.0909090909091,
+        "pattern": 74.5,
+        "news": 50,
+        "total": 61.406818181818174
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 217.6,
+        "rs_rating": 96,
+        "rsi": 58.02010251907449,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 74.5,
+        "buy_point": 232.3
+      },
+      "ai_analysis": "Dưới đây là phân tích cổ phiếu MCH theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Đánh giá: Thấp / Cần lưu ý.**\n*   Tỷ lệ OCF/Profit đạt **0.52** là mức thấp (Lý tưởng > 1.0). Điều này cho thấy lợi nhuận kế toán (Book Profit) cao nhưng dòng tiền thực thu về từ hoạt động kinh doanh chưa tương xứng. Có thể doanh nghiệp đang bị chiếm dụng vốn hoặc tăng khoản phải thu. Cần thận trọng nếu dòng tiền tiếp tục suy yếu trong quý tới."
+    },
+    {
+      "rank": 4,
+      "symbol": "PNJ",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 38.0,
+        "technical": 71.66666666666666,
+        "pattern": 65.0,
+        "news": 50,
+        "total": 55.633333333333326
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 97.1,
+        "rs_rating": 88,
+        "rsi": 70.27997345086247,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 50.0,
+        "buy_point": 98.98
+      },
+      "ai_analysis": "Dưới đây là phân tích PNJ theo phương pháp CANSLIM:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Đánh giá:** ⚠️ **KÉM (LOW QUALITY)**\n*   **Phân tích:** Tỷ lệ **OCF/Profit = 0.06** là mức báo động đỏ. PNJ đang ghi nhận lợi nhuận kế toán tăng trưởng mạnh (EPS Y/Y +129.7%) nhưng **không thu được tiền mặt thực tế**.\n*   **Nguyên nhân khả dĩ:** Với đặc thù ngành bán lẻ trang sức, khả năng cao dòng tiền đang bị \"giam\" trong hàng tồn kho (giá vàng neo cao) hoặc mở rộng cửa hàng. Đây "
+    },
+    {
+      "rank": 5,
+      "symbol": "MWG",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 44.0,
+        "technical": 77.45454545454545,
+        "pattern": 30,
+        "news": 50,
+        "total": 54.5090909090909
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 86.8,
+        "rs_rating": 84,
+        "rsi": 57.757273921245364,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "Dưới đây là phân tích cổ phiếu MWG theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Đánh giá:** **TUYỆT VỜI (Excellent)**\n*   **Phân tích:** Chỉ số **OCF/Profit Ratio = 1.18** (> 1.0) và Cash Flow Quality đạt điểm tuyệt đối 100/100 cho thấy MWG có dòng tiền hoạt động kinh doanh rất mạnh, vượt trội so với lợi nhuận kế toán. Lợi nhuận ghi nhận là \"tiền tươi thóc thật\", không phải do thủ thuật kế toán hay đánh giá lại tài sản. Đâ"
+    },
+    {
+      "rank": 6,
+      "symbol": "VIC",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 40.0,
+        "technical": 75.0,
+        "pattern": 30,
+        "news": 50,
+        "total": 52.25
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 171.4,
+        "rs_rating": 99,
+        "rsi": 70.50808689241414,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 7,
+      "symbol": "QNS",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 5.0,
+        "technical": 78.03030303030303,
+        "pattern": 100,
+        "news": 50,
+        "total": 51.56060606060606
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 46.9,
+        "rs_rating": 76,
+        "rsi": 73.05669645222176,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 80.0,
+        "buy_point": 48.480000000000004
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 8,
+      "symbol": "VHM",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 0,
+        "technical": 79.87878787878788,
+        "pattern": 100,
+        "news": 50,
+        "total": 50.45757575757575
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 128.5,
+        "rs_rating": 92,
+        "rsi": 68.73833504843391,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "Cup & Handle",
+        "quality": 94.5,
+        "buy_point": 125.44200000000001
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 9,
+      "symbol": "VNM",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 17.0,
+        "technical": 45.81818181818182,
+        "pattern": 100,
+        "news": 50,
+        "total": 44.486363636363635
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 61.0,
+        "rs_rating": 72,
+        "rsi": 44.87931731964718,
+        "above_ma50": "False",
+        "distance_from_high": 9.090909090909102
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 100,
+        "buy_point": 66.55900000000001
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 10,
+      "symbol": "DCL",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 12.0,
+        "technical": 80.48484848484848,
+        "pattern": 30,
+        "news": 50,
+        "total": 44.36969696969697
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 42.7,
+        "rs_rating": 94,
+        "rsi": 60.01964989231511,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909097
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 11,
+      "symbol": "TRA",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 8.0,
+        "technical": 78.06060606060606,
+        "pattern": 30,
+        "news": 50,
+        "total": 42.121212121212125
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 73.5,
+        "rs_rating": 86,
+        "rsi": 63.99018915476247,
+        "above_ma50": "True",
+        "distance_from_high": 9.0909090909091
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 12,
+      "symbol": "HAG",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 8.0,
+        "technical": 47.63636363636364,
+        "pattern": 96.9,
+        "news": 50,
+        "total": 41.50772727272727
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 17.45,
+        "rs_rating": 78,
+        "rsi": 46.14485713916918,
+        "above_ma50": "False",
+        "distance_from_high": 9.090909090909095
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 86.9,
+        "buy_point": 19.4425
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 13,
+      "symbol": "SAB",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 16.0,
+        "technical": 60.24242424242424,
+        "pattern": 30,
+        "news": 50,
+        "total": 38.68484848484848
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 48.55,
+        "rs_rating": 80,
+        "rsi": 46.280299083363104,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 14,
+      "symbol": "VHC",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 13.0,
+        "technical": 53.21212121212121,
+        "pattern": 52.4,
+        "news": 50,
+        "total": 38.53424242424242
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 55.5,
+        "rs_rating": 70,
+        "rsi": 49.94076263886425,
+        "above_ma50": "False",
+        "distance_from_high": 9.090909090909097
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 52.4,
+        "buy_point": 59.59
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 15,
+      "symbol": "IMP",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 8.0,
+        "technical": 67.42424242424242,
+        "pattern": 30,
+        "news": 50,
+        "total": 38.39848484848485
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 52.3,
+        "rs_rating": 74,
+        "rsi": 70.18206656113368,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    }
+  ],
+  "ai_summary": "Dựa trên dữ liệu screening ngày 05/01/2026 và phương pháp CANSLIM, dưới đây là phân tích chi tiết:\n\n### 1. ĐÁNH GIÁ TỔNG QUAN & THEO DÕI DANH MỤC\n\n*   **Thị trường (Market Traffic Light):** 🟡 **VÀNG (Phòng thủ)**.\n    *   Thị trường đang trong giai đoạn nhạy cảm. Số lượng mã vượt qua bộ lọc cơ bản (Fundamental) là **0**, chỉ có các yếu tố kỹ thuật (Technical) đang dẫn dắt. Đây là dấu hiệu của dòng tiền đầu cơ hoặc đánh theo sóng ngành, thiếu nền tảng lợi nhuận vững chắc.\n*   **Dòng tiền thông minh:** Khối ngoại đang có sự phân hóa cực mạnh. Họ mua ròng mạnh vào nhóm bán lẻ/BĐS chọn lọc (VRE, FRT) nhưng xả hàng quyết liệt ở các trụ lớn (VIC, VHM, MWG), tạo áp lực vô hình lên chỉ số chung.\n*   **Chiến lược chung:** Không mua đuổi (FOMO). Chỉ giải ngân khi cổ phiếu \"Confirm\" điểm mua Pivot với khối lượng đạt yêu cầu.\n\n### 2. TOP 3 MÃ ƯU TIÊN (ACTIONABLE IDEAS)\n\nDựa trên sức mạnh giá (RS), mẫu hình và dòng tiền khối ngoại, đây là 3 mã trading tốt nhất từ danh sách Top Picks:\n\n#### **#1. FRT (FPT Retail) - MẠNH NHẤT**\n*   **Lý do chọn:**\n    *   **Leader:** Điểm số cao nhất (66), RS 90 thuộc top đầu thị trường.\n    *   **Dòng tiền:** Khối ngoại MUA RÒNG (+9.4 tỷ VND) trong bối cảnh thị trường bị bán ròng là tín hiệu bảo trợ giá rất tích cực.\n    *   **Vị thế:** Giá hiện tại (154) đang tích lũy ngay dưới điểm Pivot (157), tạo thế nén lò xo.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **157**\n    *   **Buy Zone (Vùng mua):** 157.0 - 164.8 (Mua trong biên độ +5% từ Pivot).\n    *   **Stop Loss:** **146** (Thủng mức này cắt ngay, -7% từ Pivot).\n    *   **Target:** **189** (+20% chốt lời từng phần).\n    *   **Trigger Condition:** Giá vượt 157 dứt khoát + Volume phiên breakout > 140% trung bình 50 phiên.\n\n#### **#2. PNJ (Vàng bạc Đá quý Phú Nhuận)**\n*   **Lý do chọn:**\n    *   **Mẫu hình:** Flat Base (Nền giá phẳng) - mẫu hình kiến tạo tin cậy trong thị trường biến động.\n    *   **RS 88:** Cho thấy cổ phiếu giữ giá tốt hơn 88% thị trường chung.\n    *   **Dòng tiền:** Khối ngoại bán ròng nhẹ (-2.3 tỷ), không đáng kể so với thanh khoản, áp lực cung không lớn. Giá (97) rất sát điểm kích hoạt (99).\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **99**\n    *   **Buy Zone (Vùng mua):** 99.0 - 104.0.\n    *   **Stop Loss:** **92** (-7%).\n    *   **Target:** **119** (+20%).\n    *   **Trigger Condition:** Cần một phiên bùng nổ vượt 99 để xác nhận thoát nền giá.\n\n#### **#3. QNS (Đường Quảng Ngãi)**\n*   **Lý do chọn:**\n    *   **Mẫu hình:** VCP (Thu hẹp độ biến động). Đây là mẫu hình kinh điển của CANSLIM trước khi breakout.\n    *   **Tính chất phòng thủ:** Ngành tiêu dùng thiết yếu (Đường/Sữa) thường hút tiền khi thị trường \"Đèn Vàng\".\n    *   **Setup:** Giá (47) chỉ cách điểm mua (48) 1 giá. Rủi ro thấp do biến động giá hẹp.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **48**\n    *   **Buy Zone (Vùng mua):** 48.0 - 50.4.\n    *   **Stop Loss:** **45** (-6.25%, gãy nền hỗ trợ gần nhất).\n    *   **Target:** **58** (+21%).\n    *   **Trigger Condition:** Breakout 48 + RSI vượt 60.\n\n---\n*Lưu ý về các mã khác:*\n*   **VHM, VIC, MWG:** Dù RS cao nhưng Khối ngoại bán ròng quá mạnh (hàng chục đến hàng trăm tỷ), rủi ro \"Bull trap\" cao -> **Chỉ quan sát**.\n*   **VRE:** Mẫu hình đẹp nhưng giá (34) còn cách quá xa điểm mua chuẩn (40) -> **Chưa hành động**.\n\n### 3. CẢNH BÁO RỦI RO (RISK WARNING)\n1.  **Fundamental Gap:** 0/50 mã qua được lọc cơ bản. Động lực tăng giá thuần túy là kỹ thuật, thiếu bệ đỡ lợi nhuận tăng trưởng, cổ phiếu dễ \"gãy\" nhanh nếu thị trường xấu.\n2.  **Khối ngoại xả trụ:** Việc VIC, VHM, MWG bị bán ròng mạnh có thể kéo VN-Index giảm điểm bất ngờ, gây hiệu ứng domino lên các cổ phiếu mid-cap (như FRT, PNJ).\n3.  **Volume:** Nếu Breakout mà không kèm Volume lớn (thanh khoản thấp), đó có thể là False Break (Break giả).\n\n### 4. KHUYẾN NGHỊ HÀNH ĐỘNG\n\n*   **Tỷ trọng NAV:** Duy trì **30% - 50%** cổ phiếu. Giữ 50% tiền mặt để phòng thủ.\n*   **Chiến thuật:**\n    *   Đặt lệnh **Stop Limit (Lệnh điều kiện)** tại các điểm Buy Point (157 cho FRT, 99 cho PNJ, 48 cho QNS).\n    *   **KHÔNG MUA SỚM** (Anticipate) khi giá chưa chạm Pivot vì thị trường đang \"Đèn Vàng\".\n    *   Nếu cổ phiếu đã mua vi phạm -7%: **BÁN DỨT KHOÁT**, không trung bình giá xuống.\n*   **Watchlist bổ sung:** **MCH** (Chờ chỉnh về gần nền hoặc Break 232)."
+}

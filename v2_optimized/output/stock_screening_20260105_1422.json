@@ -1,0 +1,413 @@
+{
+  "timestamp": "2026-01-05 14:22:02",
+  "context": {
+    "target_sectors": [
+      "VNREAL",
+      "VNCOND",
+      "VNHEAL"
+    ],
+    "market": {
+      "traffic_light": "🟡 VÀNG - PHÒNG THỦ",
+      "distribution_days": 0,
+      "market_regime": "UPTREND"
+    }
+  },
+  "stats": {
+    "total_scanned": 50,
+    "passed_technical": 15,
+    "final_candidates": 15
+  },
+  "candidates": [
+    {
+      "rank": 3,
+      "symbol": "FRT",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 75.0,
+        "technical": 89.27272727272728,
+        "pattern": 30,
+        "news": 50,
+        "total": 90
+      },
+      "signal": "⭐⭐⭐ STRONG BUY",
+      "technical": {
+        "price": 153.2,
+        "rs_rating": 90,
+        "rsi": 61.686000804668545,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "Chào bạn, dưới đây là phân tích cổ phiếu **FRT (FPT Retail)** theo phương pháp CANSLIM:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Đánh giá:** **XUẤT SẮC (Excellent)**\n*   **Phân tích:** Tỷ lệ **OCF/Profit = 2.33** là con số cực kỳ ấn tượng (tiêu chuẩn > 1.0). Cứ 1 đồng lợi nhuận kế toán tạo ra tới 2.33 đồng tiền mặt từ hoạt động kinh doanh.\n*   **Kết luận:** Lợi nhuận tăng trưởng (+55.2% Y/Y) là lợi nhuận thực chất, chất lượng cao, không phải \"xào nấu\" báo cáo tài chính. Dòn"
+    },
+    {
+      "rank": 2,
+      "symbol": "VRE",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 40.0,
+        "technical": 86.84848484848484,
+        "pattern": 100,
+        "news": 50,
+        "total": 92
+      },
+      "signal": "⭐⭐⭐ STRONG BUY",
+      "technical": {
+        "price": 34.7,
+        "rs_rating": 82,
+        "rsi": 58.540268641789986,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 100,
+        "buy_point": 40.198
+      },
+      "ai_analysis": "Dưới đây là phân tích cổ phiếu VRE theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp.\n\n═════════════════════════════════════════════════════════════\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Chất lượng kém (Poor Quality):** Tỷ lệ **OCF/Profit = 0.01** là mức báo động đỏ. Điều này cho thấy với mỗi 100 đồng lợi nhuận ghi nhận, doanh nghiệp chỉ thu về thực tế 1 đồng tiền mặt từ hoạt động kinh doanh chính.\n*   **Kết luận:** Lợi nhuận tăng trưởng mạnh (+51.9% Y/Y) chủ yếu đế"
+    },
+    {
+      "rank": 1,
+      "symbol": "MCH",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 41.0,
+        "technical": 91.0909090909091,
+        "pattern": 74.5,
+        "news": 50,
+        "total": 95
+      },
+      "signal": "⭐⭐⭐ STRONG BUY",
+      "technical": {
+        "price": 218.7,
+        "rs_rating": 96,
+        "rsi": 59.84110306618,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909092
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 74.5,
+        "buy_point": 232.3
+      },
+      "ai_analysis": "Dưới đây là phân tích cổ phiếu **MCH (CTCP Hàng tiêu dùng Masan)** theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **OCF/Profit Ratio: 0.52**. Đây là mức **THẤP** (< 1.0). Điều này cho thấy lợi nhuận ghi nhận trên sổ sách cao hơn dòng tiền thực tế thu về từ hoạt động kinh doanh (có thể do tăng khoản phải thu hoặc hàng tồn kho).\n*   Mặc dù trạng thái được đánh giá là \"Healthy\", nhưng tỷ lệ chuyển đổi lợi nhuận thành tiền mặt thấ"
+    },
+    {
+      "rank": 4,
+      "symbol": "OPC",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 44.0,
+        "technical": 75.63636363636364,
+        "pattern": 54.5,
+        "news": 50,
+        "total": 57.54772727272727
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 22.6,
+        "rs_rating": 78,
+        "rsi": 51.15190915724756,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909097
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 54.5,
+        "buy_point": 24.240000000000002
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 4,
+      "symbol": "PNJ",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 38.0,
+        "technical": 76.06060606060606,
+        "pattern": 65.0,
+        "news": 50,
+        "total": 88
+      },
+      "signal": "⭐⭐⭐ STRONG BUY",
+      "technical": {
+        "price": 97.4,
+        "rs_rating": 86,
+        "rsi": 71.07811365816477,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 50.0,
+        "buy_point": 99.283
+      },
+      "ai_analysis": "Dưới đây là phân tích chuyên sâu cổ phiếu PNJ theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **Đánh giá:** ⚠️ **CẢNH BÁO - CHẤT LƯỢNG THẤP**\n*   **Phân tích:** Tỷ lệ OCF/Profit chỉ đạt **0.06** (cực thấp). Điều này cho thấy lợi nhuận kế toán (Accounting Profit) tăng trưởng rất mạnh (+129.7% Y/Y) nhưng tiền mặt thực tế thu về từ hoạt động kinh doanh gần như không có.\n*   **Nguyên nhân:** Đối với ngành bán lẻ trang sức như PNJ, "
+    },
+    {
+      "rank": 6,
+      "symbol": "MWG",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 44.0,
+        "technical": 82.45454545454545,
+        "pattern": 30,
+        "news": 50,
+        "total": 82
+      },
+      "signal": "⭐⭐⭐ STRONG BUY",
+      "technical": {
+        "price": 86.9,
+        "rs_rating": 84,
+        "rsi": 58.09711878309802,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909102
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "Turnaround play (EPS Y/Y +121%). RS 84. Chưa có Pattern rõ ràng, mua khi test lại MA50. Buy Zone: 85-87. Stop: 80. Target: 105."
+    },
+    {
+      "rank": 7,
+      "symbol": "VIC",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 40.0,
+        "technical": 80.0,
+        "pattern": 30,
+        "news": 50,
+        "total": 78
+      },
+      "signal": "⭐⭐ BUY",
+      "technical": {
+        "price": 172.9,
+        "rs_rating": 99,
+        "rsi": 71.21644861854624,
+        "above_ma50": "True",
+        "distance_from_high": 9.0909090909091
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "RS Rating cao nhất (99) cho thấy sức mạnh giá, nhưng Fundamental yếu (EPS 3Y -12%). Chỉ trading ngắn hạn. Buy: >173. Stop: 160. Target: 205."
+    },
+    {
+      "rank": 5,
+      "symbol": "QNS",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 5.0,
+        "technical": 83.03030303030303,
+        "pattern": 100,
+        "news": 50,
+        "total": 85
+      },
+      "signal": "⭐⭐⭐ STRONG BUY",
+      "technical": {
+        "price": 46.8,
+        "rs_rating": 76,
+        "rsi": 71.12817990078922,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 80.0,
+        "buy_point": 48.480000000000004
+      },
+      "ai_analysis": "Dựa trên dữ liệu cung cấp và phương pháp CANSLIM, đây là bản phân tích chi tiết cho **QNS (Đường Quảng Ngãi)**:\n\n### 0. ĐÁNH GIÁ CHẤT LƯỢNG LỢI NHUẬN (Earnings Quality)\n*   **OCF/Profit Ratio = 0.81:** Mức chấp nhận được. Với mỗi 1 đồng lợi nhuận kế toán, doanh nghiệp thu về 0.81 đồng tiền mặt từ hoạt động kinh doanh.\n*   **Đánh giá:** Lợi nhuận có độ tin cậy trung bình khá (Healthy), không có dấu hiệu xào nấu báo cáo tài chính nghiêm trọng. Tuy nhiên, vấn đề chính nằm ở **tăng trưởng âm** (Grow"
+    },
+    {
+      "rank": 9,
+      "symbol": "DCL",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 12.0,
+        "technical": 90.48484848484848,
+        "pattern": 30,
+        "news": 50,
+        "total": 47.86969696969697
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 42.5,
+        "rs_rating": 94,
+        "rsi": 59.03153191045696,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 10,
+      "symbol": "IMP",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 8.0,
+        "technical": 84.42424242424242,
+        "pattern": 30,
+        "news": 50,
+        "total": 70
+      },
+      "signal": "⭐⭐ BUY",
+      "technical": {
+        "price": 52.1,
+        "rs_rating": 74,
+        "rsi": 67.88498891070945,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "MA Alignment tốt, RS 74 trung bình. EPS ổn định. Buy Zone: 52. Stop: 48. Target: 60."
+    },
+    {
+      "rank": 9,
+      "symbol": "VNM",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 17.0,
+        "technical": 45.21212121212121,
+        "pattern": 100,
+        "news": 50,
+        "total": 72
+      },
+      "signal": "⭐⭐ BUY",
+      "technical": {
+        "price": 60.4,
+        "rs_rating": 70,
+        "rsi": 42.43973088946797,
+        "above_ma50": "False",
+        "distance_from_high": 9.09090909090909
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 100,
+        "buy_point": 66.55900000000001
+      },
+      "ai_analysis": "Setup VCP hoàn hảo (100/100) nhưng Trend yếu (MA Not Aligned). Chỉ mua khi vượt hẳn MA200. Buy Point: >62. Stop: 58. Target: 72."
+    },
+    {
+      "rank": 8,
+      "symbol": "TRA",
+      "sector": "Y tế",
+      "scores": {
+        "fundamental": 8.0,
+        "technical": 76.66666666666666,
+        "pattern": 30,
+        "news": 50,
+        "total": 76
+      },
+      "signal": "⭐⭐ BUY",
+      "technical": {
+        "price": 75.0,
+        "rs_rating": 88,
+        "rsi": 71.25443121888718,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909092
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": "EPS Y/Y +78%, RS 88. Cổ phiếu phòng thủ tốt. Thanh khoản thấp là rủi ro. Buy Zone: 75. Stop: 70. Target: 90."
+    },
+    {
+      "rank": 13,
+      "symbol": "VHM",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 0,
+        "technical": 82.87878787878788,
+        "pattern": 30,
+        "news": 50,
+        "total": 41.00757575757575
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 132.6,
+        "rs_rating": 92,
+        "rsi": 70.8879800801446,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909104
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 14,
+      "symbol": "VHC",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 13.0,
+        "technical": 58.81818181818182,
+        "pattern": 52.4,
+        "news": 50,
+        "total": 40.49636363636364
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 55.4,
+        "rs_rating": 72,
+        "rsi": 49.413114511597506,
+        "above_ma50": "False",
+        "distance_from_high": 9.0909090909091
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 52.4,
+        "buy_point": 59.59
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 15,
+      "symbol": "SAB",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 16.0,
+        "technical": 53.24242424242424,
+        "pattern": 30,
+        "news": 50,
+        "total": 36.234848484848484
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 48.1,
+        "rs_rating": 80,
+        "rsi": 44.21634930047215,
+        "above_ma50": "False",
+        "distance_from_high": 9.090909090909093
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    }
+  ],
+  "ai_summary": "Dưới đây là phân tích chi tiết dựa trên dữ liệu lọc cổ phiếu ngày 05/01/2026 theo phương pháp CANSLIM.\n\n### 1. ĐÁNH GIÁ TỔNG QUAN & THEO DÕI DANH MỤC\n\n*   **Tình trạng thị trường (Market Condition):** Đèn Vàng (Phòng thủ). Số lượng cổ phiếu đạt chuẩn cơ bản (Fundamental) là **0** là một tín hiệu cảnh báo lớn. Dòng tiền hiện tại hoàn toàn là **đầu cơ theo kỹ thuật** hoặc kỳ vọng phục hồi, thiếu nền tảng tăng trưởng lợi nhuận vững chắc theo tiêu chuẩn CANSLIM (EPS, Sales growth).\n*   **Dòng tiền thông minh (Smart Money):** Có sự phân hóa cực mạnh. Khối ngoại bán ròng mạnh ở các trụ cũ (VIC, MWG, MCH) nhưng lại gom mạnh **VRE** (+75 tỷ) và mua nhẹ **FRT**.\n*   **Nhóm ngành dẫn dắt:** Tiêu dùng (Consumer) đang áp đảo danh sách Top Picks (MCH, FRT, PNJ, MWG). Bất động sản có sự trở lại của VRE với dòng tiền ngoại nâng đỡ.\n\n### 2. TOP 3 MÃ ƯU TIÊN (ACTIONABLE BUY LIST)\n\nDựa trên sức mạnh giá (RS), mẫu hình và dòng tiền khối ngoại, đây là 3 mã tiềm năng nhất:\n\n#### **#1. VRE (Vincom Retail) - Dòng tiền tổ chức bảo trợ**\n*   **Lý do chọn:**\n    *   **RS 82 & Score 92:** Sức mạnh giá cải thiện đáng kể trong nhóm BĐS.\n    *   **Mẫu hình:** VCP (Thu hẹp độ biến động) - mẫu hình kinh điển của CANSLIM trước khi bứt phá.\n    *   **Dòng tiền:** Điểm sáng nhất là **Khối ngoại mua ròng +75.3 tỷ VND**. Trong bối cảnh thị trường \"Đèn Vàng\", việc tổ chức gom hàng mạnh là bảo hiểm tốt nhất cho vị thế.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **40.000 VND**\n    *   **Buy Zone:** **40.000 - 42.000 VND** (Mua trong biên độ 5% từ điểm Pivot).\n    *   **Trigger Condition:** Giá vượt 40 với Volume > **1.5x** trung bình 50 phiên.\n    *   **Stop Loss:** **37.000 VND** (Cắt lỗ nếu thủng nền giá kiến tạo gần nhất).\n    *   **Target Price:** **48.000 - 50.000 VND** (+20% đến +25%).\n\n#### **#2. MCH (Masan Consumer) - Market Leader (Cổ phiếu dẫn dắt)**\n*   **Lý do chọn:**\n    *   **RS 96 & Score 95:** Chỉ số sức mạnh cao nhất trong danh sách, cho thấy cổ phiếu này đang khỏe hơn 96% thị trường chung.\n    *   **Mẫu hình:** Flat Base (Nền giá phẳng). Đây là mẫu hình kiến tạo cho phép cổ phiếu tiêu hóa đà tăng trước đó để đi lên tiếp.\n    *   **Lưu ý:** Khối ngoại bán ròng (-57 tỷ), nhưng lực cầu nội đang cân tốt. Cần tuân thủ chặt chẽ điểm mua để tránh Bull trap.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **232.000 VND**\n    *   **Buy Zone:** **232.000 - 243.600 VND**\n    *   **Trigger Condition:** Breakout 232 dứt khoát, RSI > 60 hướng lên.\n    *   **Stop Loss:** **216.000 VND** (Thủng đáy hộp Flat Base -7%).\n    *   **Target Price:** **279.000 VND** (+20%).\n\n#### **#3. FRT (FPT Retail) - Cấu trúc giá chặt chẽ & Gần điểm mua nhất**\n*   **Lý do chọn:**\n    *   **RS 90:** Top 3 về sức mạnh giá.\n    *   **Vị thế giá:** Giá hiện tại **153** rất sát Buy Point **156** (chỉ cách 2%). Đây là mã có khả năng kích hoạt điểm mua sớm nhất so với VRE hay MCH.\n    *   **Dòng tiền:** Khối ngoại mua ròng nhẹ (+7.1 tỷ), ủng hộ xu hướng tăng.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **156.000 VND**\n    *   **Buy Zone:** **156.000 - 163.800 VND**\n    *   **Trigger Condition:** Volume tại phiên break phải tăng đột biến (>40-50% so với hôm trước).\n    *   **Stop Loss:** **145.000 VND** (-7% từ điểm mua).\n    *   **Target Price:** **188.000 VND** (+20%).\n\n---\n\n### 3. RISK WARNING (CẢNH BÁO RỦI RO)\n1.  **Rủi ro cơ bản (Fundamental Risk):** 0/50 mã qua được bộ lọc cơ bản (EPS/Sales growth). Đà tăng hiện tại thuần túy dựa trên kỳ vọng và dòng tiền đầu cơ. Khi thị trường rung lắc, các cổ phiếu này sẽ giảm rất nhanh do thiếu bệ đỡ lợi nhuận thực tế.\n2.  **Áp lực bán ròng:** VIC và MWG bị bán ròng rất mạnh (tổng >230 tỷ). Nếu nhóm trụ này gãy trend, nó sẽ kéo VNI giảm điểm, làm thất bại các mẫu hình Breakout của VRE hay FRT.\n3.  **Thị trường Đèn Vàng:** Tỷ lệ Breakout thất bại (Squat) sẽ cao hơn bình thường. Tuyệt đối không mua đuổi (Chase) khi giá đã vượt Buy Zone >5%.\n\n### 4. KHUYẾN NGHỊ HÀNH ĐỘNG\n\n*   **Tỷ trọng giải ngân:** **30% - 50% NAV**. Giữ tiền mặt cao để phòng thủ.\n*   **Chiến thuật:** **Pyramiding (Kim tự tháp)**.\n    *   Mua thăm dò 30% vị thế khi giá tiệm cận Buy Point (ví dụ FRT giá 154-155).\n    *   Mua đủ vị thế khi giá Breakout qua Buy Point với Volume xác nhận.\n*   **Watchlist (Theo dõi chặt):**\n    *   **PNJ:** Giá 97, Buy Point 99. Rất gần điểm nổ, form Flat Base đẹp tương tự MCH nhưng giá vốn thấp hơn, dễ hút tiền nhỏ lẻ.\n    *   **QNS:** Mẫu hình VCP đang hoàn thiện ở phía phải nền giá. Chờ Vol cạn kiệt thêm trước khi Break 48."
+}

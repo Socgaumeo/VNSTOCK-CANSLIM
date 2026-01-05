@@ -1,0 +1,337 @@
+{
+  "timestamp": "2025-12-03 11:36:02",
+  "context": {
+    "target_sectors": [
+      "VNREAL",
+      "VNCOND"
+    ],
+    "market": {
+      "traffic_light": "🟡 VÀNG - THẬN TRỌNG (60/100)",
+      "traffic_light_action": "HOLD",
+      "distribution_days": 0,
+      "market_regime": "UNKNOWN",
+      "vnindex_price": 1725.38,
+      "vnindex_change": 0.48454917125786423
+    }
+  },
+  "stats": {
+    "total_scanned": 40,
+    "passed_technical": 12,
+    "final_candidates": 12
+  },
+  "candidates": [
+    {
+      "rank": 1,
+      "symbol": "MWG",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 91.54545454545455,
+        "pattern": 100,
+        "news": 50,
+        "total": 56.64090909090909
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 82.7,
+        "rs_rating": 81,
+        "rsi": 57.73772096567017,
+        "above_ma50": "True",
+        "distance_from_high": 9.0909090909091
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 115,
+        "buy_point": 88.77900000000001
+      },
+      "ai_analysis": "Dựa trên dữ liệu cung cấp và phương pháp CANSLIM, dưới đây là phân tích chi tiết cho MWG:\n\n### 1. ĐIỂM MẠNH / YẾU\n\n**✅ Điểm mạnh:**\n*   **Mẫu hình VCP hoàn hảo:** Pattern Score 100/100 với độ sâu nền giá cực chặt chẽ (5.9%). Đây là dấu hiệu của sự tiết cung mạnh mẽ từ \"Smart Money\".\n*   **Sức mạnh giá (Technical):** RS Rating 81 và giá đang nằm trên cả MA20 và MA50, xác nhận xu hướng tăng trung hạn được bảo toàn.\n*   **Volume tích cực:** Volume Ratio 1.57x cho thấy dòng tiền đang âm thầm gom hàn"
+    },
+    {
+      "rank": 2,
+      "symbol": "FRT",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 94.57575757575758,
+        "pattern": 65,
+        "news": 50,
+        "total": 52.45151515151515
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 149.2,
+        "rs_rating": 91,
+        "rsi": 60.33819926202627,
+        "above_ma50": "True",
+        "distance_from_high": 9.0909090909091
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 50,
+        "buy_point": 153.52
+      },
+      "ai_analysis": "Dưới đây là phân tích cổ phiếu **FRT** theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp:\n\n### 1. ĐIỂM MẠNH / YẾU\n\n**✅ Điểm mạnh:**\n*   **Sức mạnh giá (Leader):** RS Rating 91 (Top 9% cổ phiếu mạnh nhất thị trường) kết hợp Technical Score 95/100 cho thấy dòng tiền đầu cơ đang rất mạnh.\n*   **Cấu trúc nền giá:** Mô hình **Flat Base** với độ sâu 12.6% là độ sâu lý tưởng (tight action), cho thấy lực cung đã cạn kiệt và sự tích lũy chặt chẽ.\n*   **Dòng tiền:** Volume Ratio 2.39x cho thấy sự qua"
+    },
+    {
+      "rank": 3,
+      "symbol": "HAG",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 77.15151515151516,
+        "pattern": 100,
+        "news": 50,
+        "total": 51.6030303030303
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 17.7,
+        "rs_rating": 83,
+        "rsi": 53.817926239446656,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909106
+      },
+      "pattern": {
+        "type": "Cup & Handle",
+        "quality": 90,
+        "buy_point": 17.523500000000002
+      },
+      "ai_analysis": "Chào bạn, đây là phân tích cổ phiếu **HAG** theo phương pháp **CANSLIM** dựa trên dữ liệu bạn cung cấp.\n\n### 1. ĐIỂM MẠNH / YẾU\n\n**✅ Điểm mạnh:**\n1.  **Mẫu hình hoàn hảo (Score 100/100):** Mẫu hình **Cup & Handle** với độ sâu 12.4% là rất chặt chẽ (lý tưởng là 12-15%), cho thấy sự tích lũy tốt, không bị rũ bỏ quá mạnh.\n2.  **Sức mạnh giá (RS Rating 83):** HAG đang mạnh hơn 83% các cổ phiếu khác trên thị trường. Giá nằm trên cả MA20 và MA50 (hội tụ tại vùng 17) tạo nền đỡ cứng.\n3.  **Vị thế Break"
+    },
+    {
+      "rank": 4,
+      "symbol": "VHM",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 74.12121212121212,
+        "pattern": 100,
+        "news": 50,
+        "total": 50.54242424242424
+      },
+      "signal": "👀 WATCH",
+      "technical": {
+        "price": 106.3,
+        "rs_rating": 73,
+        "rsi": 60.167293242016044,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 95,
+        "buy_point": 132.815
+      },
+      "ai_analysis": "Chào bạn, đây là phân tích cổ phiếu **VHM** theo phương pháp **CANSLIM** dựa trên dữ liệu bạn cung cấp.\n\n### 1. ĐIỂM MẠNH / YẾU\n\n**✅ Điểm mạnh:**\n*   **Mẫu hình hoàn hảo (Pattern Score 100/100):** VHM đang hình thành mẫu hình **VCP (Thu hẹp độ biến động)** với chất lượng rất cao (95/100). Đây là tín hiệu kỹ thuật mạnh nhất.\n*   **Xu hướng kỹ thuật tích cực:** Giá hiện tại (106) nằm trên cả MA20 và MA50. Sự sắp xếp Price > MA50 > MA20 xác nhận xu hướng tăng ngắn hạn.\n*   **Cạn cung (Volume Ratio "
+    },
+    {
+      "rank": 5,
+      "symbol": "VRE",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 61.06060606060606,
+        "pattern": 100,
+        "news": 50,
+        "total": 45.97121212121212
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 34.3,
+        "rs_rating": 86,
+        "rsi": 52.7456581744428,
+        "above_ma50": "False",
+        "distance_from_high": 9.090909090909092
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 95,
+        "buy_point": 45.652
+      },
+      "ai_analysis": "Chào bạn, dưới đây là phân tích cổ phiếu **VRE** theo phương pháp CANSLIM dựa trên dữ liệu bạn cung cấp.\n\n### 1. ĐIỂM MẠNH / YẾU\n\n*   **Điểm mạnh:**\n    *   **Pattern Score 100/100:** Mẫu hình VCP (Thu hẹp độ biến động) được đánh giá hoàn hảo, cho thấy sự tích lũy chặt chẽ của dòng tiền lớn.\n    *   **RS Rating 86:** Sức mạnh giá tương đối nằm trong Top 14% thị trường, cho thấy cổ phiếu khỏe hơn index chung.\n*   **Điểm yếu:**\n    *   **Fundamental 6/100:** Điểm cơ bản cực thấp. Tăng trưởng EPS v"
+    },
+    {
+      "rank": 6,
+      "symbol": "PNJ",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 75.03030303030303,
+        "pattern": 50,
+        "news": 50,
+        "total": 43.36060606060606
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 90.6,
+        "rs_rating": 76,
+        "rsi": 54.28805473324483,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909093
+      },
+      "pattern": {
+        "type": "Flat Base",
+        "quality": 50,
+        "buy_point": 97.162
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 7,
+      "symbol": "VNM",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 78.66666666666666,
+        "pattern": 30,
+        "news": 50,
+        "total": 41.633333333333326
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 64.2,
+        "rs_rating": 88,
+        "rsi": 61.94829735672061,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909092
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 8,
+      "symbol": "ANV",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 47.63636363636364,
+        "pattern": 100,
+        "news": 50,
+        "total": 41.27272727272727
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 28.45,
+        "rs_rating": 78,
+        "rsi": 44.6491781308474,
+        "above_ma50": "False",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "VCP (Volatility Contraction)",
+        "quality": 110,
+        "buy_point": 33.734
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 9,
+      "symbol": "SAB",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 75.18181818181819,
+        "pattern": 30,
+        "news": 50,
+        "total": 40.413636363636364
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 53.0,
+        "rs_rating": 93,
+        "rsi": 85.35578327647328,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909099
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 10,
+      "symbol": "MCH",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 74.0909090909091,
+        "pattern": 30,
+        "news": 50,
+        "total": 40.03181818181818
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 220.5,
+        "rs_rating": 96,
+        "rsi": 79.27146902584815,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909095
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 11,
+      "symbol": "DGW",
+      "sector": "Tiêu dùng không thiết yếu",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 73.51515151515152,
+        "pattern": 30,
+        "news": 50,
+        "total": 39.83030303030303
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 44.0,
+        "rs_rating": 71,
+        "rsi": 58.665671092969994,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909102
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    },
+    {
+      "rank": 12,
+      "symbol": "VIC",
+      "sector": "Bất động sản",
+      "scores": {
+        "fundamental": 6.0,
+        "technical": 67.0,
+        "pattern": 30,
+        "news": 50,
+        "total": 37.55
+      },
+      "signal": "➖ NEUTRAL",
+      "technical": {
+        "price": 274.3,
+        "rs_rating": 99,
+        "rsi": 84.04128820034548,
+        "above_ma50": "True",
+        "distance_from_high": 9.090909090909092
+      },
+      "pattern": {
+        "type": "No Pattern",
+        "quality": 0.0,
+        "buy_point": 0.0
+      },
+      "ai_analysis": ""
+    }
+  ],
+  "ai_summary": "Chào bạn, đây là phân tích dựa trên phương pháp CANSLIM và dữ liệu bạn cung cấp ngày 03/12/2025.\n\n### 1. ĐÁNH GIÁ TỔNG QUAN\n*   **Chất lượng danh mục:** **TRUNG BÌNH THẤP (SPECULATIVE)**\n*   **Lý do:**\n    1.  **Fundamental Fail:** Điểm yếu chí mạng là **0 mã vượt qua lọc Cơ bản (Fundamental)**. CANSLIM yêu cầu tăng trưởng EPS (C & A) mạnh mẽ. Việc chỉ có tín hiệu Kỹ thuật mà thiếu Cơ bản biến các mã này thành các giao dịch đầu cơ (setup-based) hơn là đầu tư tăng trưởng chuẩn mực.\n    2.  **Market Timing:** Đèn Vàng (Yellow) yêu cầu sự thận trọng cao độ. Không được margin.\n    3.  **RS Tốt:** Điểm sáng duy nhất là chỉ số RS (Sức mạnh giá) của các mã Top đều cao (>80), cho thấy dòng tiền đang trú ẩn vào nhóm này bất chấp thị trường yếu.\n\n---\n\n### 2. TOP 3 MÃ NÊN ƯU TIÊN (TRADING PLAN)\n\nDựa trên mẫu hình giá và điểm số RS, đây là 3 setup khả thi nhất để theo dõi cho nhịp Breakout:\n\n#### **#1. FRT (FPT Retail) - The Leader**\n*   **Lý do chọn:**\n    *   **RS 91:** Mạnh nhất trong nhóm có mẫu hình, cho thấy sức mạnh dẫn dắt.\n    *   **Mẫu hình:** Flat Base (Nền giá phẳng) sau nhịp tăng giá là mẫu hình tiếp diễn tin cậy nhất.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **154**\n    *   **Buy Zone:** **154 - 161.7** (Không mua đuổi quá 161.7)\n    *   **Stop Loss:** **143** (-7.1% từ Pivot - Tuân thủ kỷ luật 7-8%)\n    *   **Target Price:** **184 - 192** (+20% đến +25%)\n    *   **Trigger Condition:** Giá vượt 154 dứt khoát + Volume phiên > 1.4x trung bình 50 phiên + Thị trường chung không sập gãy.\n\n#### **#2. HAG (Hagl) - Actionable Now**\n*   **Lý do chọn:**\n    *   **Price Action:** Giá hiện tại (18) đang nằm ngay tại Buy Point. Đây là mã \"nhạy\" nhất danh sách.\n    *   **Mẫu hình:** Cup & Handle (Cốc tay cầm) kinh điển.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **18.0**\n    *   **Buy Zone:** **18.0 - 18.9**\n    *   **Stop Loss:** **16.7** (Cắt lỗ dứt khoát nếu thủng vùng này, -7.2%)\n    *   **Target Price:** **21.6 - 22.5** (+20% đến +25%)\n    *   **Trigger Condition:** Cần xác nhận Volume đột biến ngay tại vùng giá 18 để tránh False Breakout (Bẫy tăng giá).\n\n#### **#3. MWG (Thế Giới Di Động) - Top Score**\n*   **Lý do chọn:**\n    *   **Score 57:** Điểm tổng hợp cao nhất danh sách.\n    *   **VCP:** Mẫu hình thu hẹp biên độ biến động cho thấy nguồn cung đang cạn kiệt, chuẩn bị cho cú bật.\n*   **Trading Plan:**\n    *   **Buy Point (Pivot):** **89** (Lưu ý: Giá hiện tại 83, cần chờ đợi).\n    *   **Buy Zone:** **89 - 93.4**\n    *   **Stop Loss:** **82.7** (-7% từ Pivot)\n    *   **Target Price:** **107 - 111**\n    *   **Trigger Condition:** Quan sát hành động giá tại vùng 87-88. Nếu volume cạn kiệt trước khi bùng nổ qua 89 là tín hiệu chuẩn.\n\n---\n\n### 3. RISK WARNING (CẢNH BÁO RỦI RO)\n1.  **Rủi ro \"Chân gỗ\" (Fundamentals):** Không có mã nào đạt chuẩn tăng trưởng lợi nhuận. Khi thị trường rung lắc, các mã thiếu nền tảng cơ bản sẽ giảm mạnh hơn và phục hồi chậm hơn.\n2.  **Rủi ro Thị trường chung:** Đèn Vàng (Yellow) tức là thị trường đang \"cầm chừng\". Tỷ lệ Breakout thất bại (Fail Break) sẽ cao hơn bình thường (khoảng 40-50%).\n3.  **Tín hiệu Phân phối:** HAG và FRT đều là những cổ phiếu có beta cao (biến động lớn). Nếu VNI thủng đáy ngắn hạn, cần bán ngay lập tức không chờ chạm Stoploss.\n\n---\n\n### 4. KHUYẾN NGHỊ HÀNH ĐỘNG\n*   **Tỷ trọng:** **Tối đa 30% - 50% NAV.** (Do thị trường Đèn Vàng). Mỗi vị thế chỉ nên đi lệnh **10-15% NAV**.\n*   **Chiến thuật:** **Pilot Buy (Mua thăm dò).**\n    *   Giải ngân 50% khối lượng dự kiến khi giá vào Buy Zone.\n    *   Giải ngân 50% còn lại khi giá giữ vững trên Buy Point T+2,5 hoặc có lãi đệm >2%.\n    *   **TUYỆT ĐỐI KHÔNG BẮT ĐÁY (Buy the Dip)** khi giá chưa chạm Pivot.\n*   **Watchlist bổ sung:**\n    *   **VHM:** Theo dõi thêm. Mẫu hình VCP tốt nhưng giá hiện tại (106) còn cách quá xa điểm mua (133), chưa cần hành động ngay."
+}
