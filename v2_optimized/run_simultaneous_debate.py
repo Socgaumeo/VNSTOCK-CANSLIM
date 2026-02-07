@@ -72,6 +72,9 @@ A. TỔNG QUAN THỊ TRƯỜNG (MARKET CONTEXT)
    - Khối ngoại: {market_report.money_flow.foreign_net:+.1f} tỷ
 
 🚦 MARKET STATUS: {market_report.market_color} | Score: {market_report.market_score}/100
+
+🧠 CLAUDE ANALYSIS:
+{market_report.ai_analysis}
 """
 
     # === SECTOR DATA ===
@@ -456,7 +459,7 @@ def run_simultaneous_debate():
     try:
         notifier = EmailNotifier()
         subject = f"🎭 [DEBATE] BULL vs BEAR - {timestamp.strftime('%Y-%m-%d')}"
-        notifier.send_report(subject, report_content)
+        notifier.send_report(report_content, report_path, subject=subject)
         print("✓ Email sent!")
     except Exception as e:
         print(f"⚠️ Email failed: {e}")

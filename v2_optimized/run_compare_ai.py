@@ -9,6 +9,18 @@ import sys
 import time
 from datetime import datetime
 
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIG - Tùy chỉnh phạm vi scan
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Scan tất cả 7 ngành thay vì chỉ top sectors theo RS Rating
+SCAN_ALL_SECTORS = True
+
+# Danh sách tất cả 7 ngành hợp lệ
+ALL_SECTORS = ['VNFIN', 'VNREAL', 'VNMAT', 'VNIT', 'VNHEAL', 'VNCOND', 'VNCONS']
+
+# ══════════════════════════════════════════════════════════════════════════════
+
 # Import modules
 from config import get_config, APIKeys
 from module1_market_timing_v2 import MarketTimingModule, create_config_from_unified as create_m1_config
@@ -91,12 +103,21 @@ def run_with_provider(provider: str, output_dir: str):
         
         # === MODULE 3: STOCK SCREENER ===
         print(f"[{provider}] Module 3: Stock Screener...")
-        target_sectors = []
-        if hasattr(results['sector_report'], 'sectors') and results['sector_report'].sectors:
-            for sector in results['sector_report'].sectors[:6]:
-                sector_code = getattr(sector, 'code', getattr(sector, 'symbol', None))
-                if sector_code:
-                    target_sectors.append(sector_code)
+
+        # Quyết định target_sectors dựa trên config
+        if SCAN_ALL_SECTORS:
+            # Scan tất cả 7 ngành
+            target_sectors = ALL_SECTORS.copy()
+            print(f"   📊 SCAN_ALL_SECTORS=True → Scanning all 7 sectors")
+        else:
+            # Chỉ scan top sectors theo RS Rating từ Module 2
+            target_sectors = []
+            if hasattr(results['sector_report'], 'sectors') and results['sector_report'].sectors:
+                for sector in results['sector_report'].sectors[:6]:
+                    sector_code = getattr(sector, 'code', getattr(sector, 'symbol', None))
+                    if sector_code:
+                        target_sectors.append(sector_code)
+            print(f"   📊 SCAN_ALL_SECTORS=False → Scanning top {len(target_sectors)} sectors by RS")
         
         m3_config = create_m3_config()
         m3_config.SAVE_REPORT = False

@@ -73,6 +73,16 @@ except ImportError as e:
     V3NewsAnalyzer = None
     print(f"⚠️ V3 Enhanced not available: {e}")
 
+# Import Stock Universe (dynamic stock list)
+try:
+    from stock_universe import StockUniverse, get_stock_universe
+    HAS_STOCK_UNIVERSE = True
+    print("✓ Stock Universe module loaded")
+except ImportError as e:
+    HAS_STOCK_UNIVERSE = False
+    StockUniverse = None
+    get_stock_universe = None
+    print(f"⚠️ Stock Universe not available: {e}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -137,6 +147,85 @@ SECTOR_NAMES = {
     'VNCOND': 'Tiêu dùng không thiết yếu',
     'VNCONS': 'Tiêu dùng thiết yếu',
 }
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# DYNAMIC STOCK LIST (từ Stock Universe)
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Flag để enable/disable dynamic stock list
+USE_DYNAMIC_STOCK_LIST = True  # Set False để dùng SECTOR_STOCKS hardcode
+
+def get_sector_stocks_dynamic(sector: str, min_volume: int = 100_000) -> List[str]:
+    """
+    Lấy danh sách cổ phiếu theo ngành từ Stock Universe API
+
+    Fallback về SECTOR_STOCKS nếu Stock Universe không khả dụng
+
+    Args:
+        sector: Mã ngành (VNFIN, VNREAL, etc.)
+        min_volume: Volume tối thiểu (mặc định 100k)
+
+    Returns:
+        List[str]: Danh sách mã cổ phiếu
+    """
+    # Nếu không dùng dynamic list hoặc không có StockUniverse
+    if not USE_DYNAMIC_STOCK_LIST or not HAS_STOCK_UNIVERSE:
+        return SECTOR_STOCKS.get(sector, [])
+
+    try:
+        universe = get_stock_universe()
+        sector_map = universe.get_stocks_by_sector(sector, min_volume=min_volume)
+        stocks = sector_map.get(sector, [])
+
+        if stocks:
+            return stocks
+        else:
+            # Fallback nếu không tìm thấy
+            return SECTOR_STOCKS.get(sector, [])
+
+    except Exception as e:
+        print(f"⚠️ Stock Universe error for {sector}: {e}")
+        return SECTOR_STOCKS.get(sector, [])
+
+
+def get_all_sector_stocks(sectors: List[str] = None,
+                         min_volume: int = 100_000) -> Dict[str, List[str]]:
+    """
+    Lấy danh sách cổ phiếu cho tất cả hoặc một số ngành
+
+    Args:
+        sectors: Danh sách ngành cần lấy. None = tất cả 7 ngành
+        min_volume: Volume tối thiểu
+
+    Returns:
+        Dict[sector, List[symbol]]
+    """
+    if sectors is None:
+        sectors = list(SECTOR_NAMES.keys())
+
+    # Nếu không dùng dynamic list
+    if not USE_DYNAMIC_STOCK_LIST or not HAS_STOCK_UNIVERSE:
+        return {s: SECTOR_STOCKS.get(s, []) for s in sectors}
+
+    try:
+        universe = get_stock_universe()
+        all_stocks = universe.get_stocks_by_sector(min_volume=min_volume)
+
+        # Filter chỉ các sector được yêu cầu
+        result = {}
+        for sector in sectors:
+            if sector in all_stocks:
+                result[sector] = all_stocks[sector]
+            else:
+                # Fallback
+                result[sector] = SECTOR_STOCKS.get(sector, [])
+
+        return result
+
+    except Exception as e:
+        print(f"⚠️ Stock Universe error: {e}")
+        return {s: SECTOR_STOCKS.get(s, []) for s in sectors}
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -2006,9 +2095,10 @@ class StockScreener:
         # Get stocks from target sectors (Deduplicate, prioritize stronger sector)
         stocks_to_scan = []
         seen_symbols = set()
-        
+
         for sector in target_sectors:
-            sector_stocks = SECTOR_STOCKS.get(sector, [])
+            # Dùng dynamic stock list từ Stock Universe (với fallback về SECTOR_STOCKS)
+            sector_stocks = get_sector_stocks_dynamic(sector, min_volume=self.config.MIN_VOLUME_AVG)
             for symbol in sector_stocks:
                 if symbol not in seen_symbols:
                     stocks_to_scan.append((symbol, sector))
