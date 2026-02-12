@@ -1,0 +1,66 @@
+{
+  "symbol": "DL1",
+  "last_updated": "2026-02-11T23:02:44.719122",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DL1",
+      "buy_value": 0.0,
+      "sell_value": 215730000.0,
+      "net_value": -215730000.0,
+      "buy_volume": 0,
+      "sell_volume": 42300,
+      "net_volume": -42300,
+      "price": 5.0,
+      "total_volume": 562000,
+      "foreign_pct": 7.526690391459074
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DL1",
+      "buy_value": 1000000.0,
+      "sell_value": 154500000.0,
+      "net_value": -153500000.0,
+      "buy_volume": 200,
+      "sell_volume": 30900,
+      "net_volume": -30700,
+      "price": 4.9,
+      "total_volume": 269800,
+      "foreign_pct": 11.527057079318013
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DL1",
+      "buy_value": 980000.0,
+      "sell_value": 16170000.0,
+      "net_value": -15190000.0,
+      "buy_volume": 200,
+      "sell_volume": 3300,
+      "net_volume": -3100,
+      "price": 4.8,
+      "total_volume": 481800,
+      "foreign_pct": 0.726442507264425
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DL1",
+      "buy_value": 980000.0,
+      "sell_value": 0.0,
+      "net_value": 980000.0,
+      "buy_volume": 200,
+      "sell_volume": 0,
+      "net_volume": 200,
+      "price": 5.0,
+      "total_volume": 378800,
+      "foreign_pct": 0.05279831045406547
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -383440000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

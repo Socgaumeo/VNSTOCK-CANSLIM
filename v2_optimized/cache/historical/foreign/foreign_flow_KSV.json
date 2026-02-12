@@ -1,0 +1,66 @@
+{
+  "symbol": "KSV",
+  "last_updated": "2026-02-11T23:14:48.933228",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "KSV",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 169.3,
+      "total_volume": 155500,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "KSV",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 174.1,
+      "total_volume": 39500,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "KSV",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 163.0,
+      "total_volume": 83200,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "KSV",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 169.3,
+      "total_volume": 41500,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 0.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 0.0,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

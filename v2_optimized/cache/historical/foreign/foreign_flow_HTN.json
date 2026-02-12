@@ -1,0 +1,66 @@
+{
+  "symbol": "HTN",
+  "last_updated": "2026-02-11T22:55:18.912094",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HTN",
+      "buy_value": 100980000.0,
+      "sell_value": 198946000.0,
+      "net_value": -97966000.0,
+      "buy_volume": 13500,
+      "sell_volume": 25900,
+      "net_volume": -12400,
+      "price": 7.67,
+      "total_volume": 222600,
+      "foreign_pct": 17.69991015274034
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HTN",
+      "buy_value": 100980000.0,
+      "sell_value": 198946000.0,
+      "net_value": -97966000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 7.56,
+      "total_volume": 73700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HTN",
+      "buy_value": 2268000.0,
+      "sell_value": 0.0,
+      "net_value": 2268000.0,
+      "buy_volume": 300,
+      "sell_volume": 0,
+      "net_volume": 300,
+      "price": 7.56,
+      "total_volume": 84300,
+      "foreign_pct": 0.3558718861209964
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HTN",
+      "buy_value": 2268000.0,
+      "sell_value": 0.0,
+      "net_value": 2268000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 7.73,
+      "total_volume": 245400,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -191396000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 63.335473239045115,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

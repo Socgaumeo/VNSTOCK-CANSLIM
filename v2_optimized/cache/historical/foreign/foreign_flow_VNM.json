@@ -1,0 +1,66 @@
+{
+  "symbol": "VNM",
+  "last_updated": "2026-02-11T23:18:16.557952",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VNM",
+      "buy_value": 142896698500.0,
+      "sell_value": 17959185000.0,
+      "net_value": 124937513500.0,
+      "buy_volume": 2067553,
+      "sell_volume": 257850,
+      "net_volume": 1809703,
+      "price": 69.1,
+      "total_volume": 6695900,
+      "foreign_pct": 34.72875939007452
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VNM",
+      "buy_value": 66320212800.0,
+      "sell_value": 9001180800.0,
+      "net_value": 57319032000.0,
+      "buy_volume": 949309,
+      "sell_volume": 128901,
+      "net_volume": 820408,
+      "price": 69.6,
+      "total_volume": 2573300,
+      "foreign_pct": 41.89989507636109
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VNM",
+      "buy_value": 80540022000.0,
+      "sell_value": 54927441100.0,
+      "net_value": 25612580900.0,
+      "buy_volume": 1166020,
+      "sell_volume": 792674,
+      "net_volume": 373346,
+      "price": 68.4,
+      "total_volume": 5090400,
+      "foreign_pct": 38.47819424799623
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VNM",
+      "buy_value": 66906536400.0,
+      "sell_value": 6893453900.0,
+      "net_value": 60013082500.0,
+      "buy_volume": 962912,
+      "sell_volume": 99425,
+      "net_volume": 863487,
+      "price": 69.1,
+      "total_volume": 2672900,
+      "foreign_pct": 39.74473418384526
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 267882208900.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 4,
+    "sell_days_count": 0
+  }
+}

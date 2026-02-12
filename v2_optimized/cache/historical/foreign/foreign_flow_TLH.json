@@ -1,0 +1,66 @@
+{
+  "symbol": "TLH",
+  "last_updated": "2026-02-11T22:58:18.699731",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TLH",
+      "buy_value": 111903000.0,
+      "sell_value": 0.0,
+      "net_value": 111903000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 5.06,
+      "total_volume": 210000,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TLH",
+      "buy_value": 0.0,
+      "sell_value": 110308000.0,
+      "net_value": -110308000.0,
+      "buy_volume": 0,
+      "sell_volume": 21800,
+      "net_volume": -21800,
+      "price": 5.06,
+      "total_volume": 131700,
+      "foreign_pct": 16.552771450265755
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TLH",
+      "buy_value": 0.0,
+      "sell_value": 110308000.0,
+      "net_value": -110308000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.92,
+      "total_volume": 231500,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TLH",
+      "buy_value": 0.0,
+      "sell_value": 110308000.0,
+      "net_value": -110308000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.94,
+      "total_volume": 152400,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -219021000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 98.9194425814144,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

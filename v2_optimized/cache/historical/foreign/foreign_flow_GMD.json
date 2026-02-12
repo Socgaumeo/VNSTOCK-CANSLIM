@@ -1,0 +1,66 @@
+{
+  "symbol": "GMD",
+  "last_updated": "2026-02-11T23:15:16.700152",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GMD",
+      "buy_value": 112345440000.0,
+      "sell_value": 42840790000.0,
+      "net_value": 69504650000.0,
+      "buy_volume": 1565000,
+      "sell_volume": 597800,
+      "net_volume": 967200,
+      "price": 71.5,
+      "total_volume": 2870600,
+      "foreign_pct": 75.3431338396154
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GMD",
+      "buy_value": 25267570000.0,
+      "sell_value": 26008920000.0,
+      "net_value": -741350000.0,
+      "buy_volume": 358400,
+      "sell_volume": 370100,
+      "net_volume": -11700,
+      "price": 71.3,
+      "total_volume": 1312200,
+      "foreign_pct": 55.51745160798659
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GMD",
+      "buy_value": 70335030000.0,
+      "sell_value": 21874300000.0,
+      "net_value": 48460730000.0,
+      "buy_volume": 1002900,
+      "sell_volume": 312900,
+      "net_volume": 690000,
+      "price": 71.0,
+      "total_volume": 2071700,
+      "foreign_pct": 63.51305690978424
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GMD",
+      "buy_value": 28732990000.0,
+      "sell_value": 43288049900.0,
+      "net_value": -14555059900.0,
+      "buy_volume": 406400,
+      "sell_volume": 612933,
+      "net_volume": -206533,
+      "price": 71.3,
+      "total_volume": 1317000,
+      "foreign_pct": 77.39810174639332
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 102668970100.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 55.39297758568765,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

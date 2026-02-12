@@ -1,0 +1,66 @@
+{
+  "symbol": "PVI",
+  "last_updated": "2026-02-11T23:08:41.945407",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PVI",
+      "buy_value": 304050000.0,
+      "sell_value": 271370000.0,
+      "net_value": 32680000.0,
+      "buy_volume": 3400,
+      "sell_volume": 3000,
+      "net_volume": 400,
+      "price": 87.0,
+      "total_volume": 84800,
+      "foreign_pct": 7.547169811320755
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PVI",
+      "buy_value": 149360000.0,
+      "sell_value": 871230000.0,
+      "net_value": -721870000.0,
+      "buy_volume": 1700,
+      "sell_volume": 9900,
+      "net_volume": -8200,
+      "price": 87.5,
+      "total_volume": 47300,
+      "foreign_pct": 24.52431289640592
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PVI",
+      "buy_value": 111702100.0,
+      "sell_value": 26440000.0,
+      "net_value": 85262100.0,
+      "buy_volume": 1282,
+      "sell_volume": 300,
+      "net_volume": 982,
+      "price": 86.0,
+      "total_volume": 43700,
+      "foreign_pct": 3.620137299771167
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PVI",
+      "buy_value": 17300000.0,
+      "sell_value": 3231190000.0,
+      "net_value": -3213890000.0,
+      "buy_volume": 200,
+      "sell_volume": 37100,
+      "net_volume": -36900,
+      "price": 86.9,
+      "total_volume": 83600,
+      "foreign_pct": 44.61722488038278
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -3817817900.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

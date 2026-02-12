@@ -1,0 +1,66 @@
+{
+  "symbol": "HDB",
+  "last_updated": "2026-02-11T23:09:10.228869",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HDB",
+      "buy_value": 43231506000.0,
+      "sell_value": 238404890750.0,
+      "net_value": -195173384750.0,
+      "buy_volume": 1623526,
+      "sell_volume": 8935417,
+      "net_volume": -7311891,
+      "price": 26.5,
+      "total_volume": 27190700,
+      "foreign_pct": 38.83292081483742
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HDB",
+      "buy_value": 97196495000.0,
+      "sell_value": 79555148000.0,
+      "net_value": 17641347000.0,
+      "buy_volume": 3644600,
+      "sell_volume": 2982480,
+      "net_volume": 662120,
+      "price": 26.8,
+      "total_volume": 13142300,
+      "foreign_pct": 50.42557238839473
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HDB",
+      "buy_value": 45106935000.0,
+      "sell_value": 82749335000.0,
+      "net_value": -37642400000.0,
+      "buy_volume": 1687800,
+      "sell_volume": 3087700,
+      "net_volume": -1399900,
+      "price": 26.8,
+      "total_volume": 12368700,
+      "foreign_pct": 38.609554763233
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HDB",
+      "buy_value": 152077620000.0,
+      "sell_value": 167545142200.0,
+      "net_value": -15467522200.0,
+      "buy_volume": 5522500,
+      "sell_volume": 6112591,
+      "net_volume": -590091,
+      "price": 27.8,
+      "total_volume": 29253800,
+      "foreign_pct": 39.77292180844882
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -230641959950.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 50.921811177772994,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

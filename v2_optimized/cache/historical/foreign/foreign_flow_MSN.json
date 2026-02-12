@@ -1,0 +1,66 @@
+{
+  "symbol": "MSN",
+  "last_updated": "2026-02-11T23:07:17.955183",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "MSN",
+      "buy_value": 162653939000.0,
+      "sell_value": 147892188200.0,
+      "net_value": 14761750800.0,
+      "buy_volume": 2069571,
+      "sell_volume": 1888211,
+      "net_volume": 181360,
+      "price": 78.2,
+      "total_volume": 9419400,
+      "foreign_pct": 42.01734717710258
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "MSN",
+      "buy_value": 20083470000.0,
+      "sell_value": 58016946000.0,
+      "net_value": -37933476000.0,
+      "buy_volume": 256200,
+      "sell_volume": 739920,
+      "net_volume": -483720,
+      "price": 78.2,
+      "total_volume": 3681100,
+      "foreign_pct": 27.060389557469232
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "MSN",
+      "buy_value": 17068553000.0,
+      "sell_value": 96509098400.0,
+      "net_value": -79440545400.0,
+      "buy_volume": 222410,
+      "sell_volume": 1244112,
+      "net_volume": -1021702,
+      "price": 76.8,
+      "total_volume": 6018600,
+      "foreign_pct": 24.366497192038015
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "MSN",
+      "buy_value": 137388410000.0,
+      "sell_value": 32090803300.0,
+      "net_value": 105297606700.0,
+      "buy_volume": 1757310,
+      "sell_volume": 412024,
+      "net_volume": 1345286,
+      "price": 78.0,
+      "total_volume": 5600000,
+      "foreign_pct": 38.73810714285714
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 2685336100.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 0.7995600642835446,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

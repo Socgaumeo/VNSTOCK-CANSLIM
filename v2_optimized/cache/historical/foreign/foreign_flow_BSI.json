@@ -1,0 +1,66 @@
+{
+  "symbol": "BSI",
+  "last_updated": "2026-02-11T22:51:36.044723",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BSI",
+      "buy_value": 1693515000.0,
+      "sell_value": 1960075000.0,
+      "net_value": -266560000.0,
+      "buy_volume": 45000,
+      "sell_volume": 51300,
+      "net_volume": -6300,
+      "price": 37.5,
+      "total_volume": 648300,
+      "foreign_pct": 14.854234150856085
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BSI",
+      "buy_value": 1778340000.0,
+      "sell_value": 1148690000.0,
+      "net_value": 629650000.0,
+      "buy_volume": 47900,
+      "sell_volume": 30600,
+      "net_volume": 17300,
+      "price": 37.55,
+      "total_volume": 255600,
+      "foreign_pct": 30.71205007824726
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BSI",
+      "buy_value": 319990000.0,
+      "sell_value": 41575000.0,
+      "net_value": 278415000.0,
+      "buy_volume": 8500,
+      "sell_volume": 1100,
+      "net_volume": 7400,
+      "price": 37.6,
+      "total_volume": 274100,
+      "foreign_pct": 3.502371397300255
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BSI",
+      "buy_value": 669860000.0,
+      "sell_value": 1421380000.0,
+      "net_value": -751520000.0,
+      "buy_volume": 17600,
+      "sell_volume": 37400,
+      "net_volume": -19800,
+      "price": 37.95,
+      "total_volume": 279600,
+      "foreign_pct": 19.670958512160226
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -110015000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 2.4357317407295684,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

@@ -84,6 +84,15 @@ except ImportError as e:
     get_stock_universe = None
     print(f"⚠️ Stock Universe not available: {e}")
 
+# Import Recommendation History Tracker
+try:
+    from history_manager import get_recommendation_tracker, RecommendationHistoryTracker
+    HAS_REC_TRACKER = True
+except ImportError:
+    HAS_REC_TRACKER = False
+    get_recommendation_tracker = None
+    RecommendationHistoryTracker = None
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # ENUMS & CONSTANTS
@@ -2487,12 +2496,15 @@ class ScreenerExporter:
 
 class StockScreenerModule:
     """Module 3: Stock Screener"""
-    
+
     def __init__(self, config: ScreenerConfig = None):
         self.config = config or create_config_from_unified()
         self.screener = StockScreener(self.config)
         self.exporter = ScreenerExporter(self.config)
         self.report: ScreenerReport = None
+
+        # Recommendation History Tracker
+        self.rec_tracker = get_recommendation_tracker() if HAS_REC_TRACKER else None
     
     def run(self,
             target_sectors: List[str] = None,
@@ -2522,12 +2534,73 @@ class StockScreenerModule:
         
         # Print summary
         self._print_summary()
-        
+
         # Save
         if self.config.SAVE_REPORT:
             self.exporter.save(self.report)
-        
+
+        # Track recommendations for backtesting
+        self._track_recommendations()
+
         return self.report
+
+    def _track_recommendations(self):
+        """Save recommendations to history tracker for performance tracking"""
+        if not self.rec_tracker or not self.report or not self.report.top_picks:
+            return
+
+        try:
+            today = datetime.now().strftime('%Y-%m-%d')
+
+            # Get current prices for all top picks
+            current_prices = {}
+            for c in self.report.top_picks:
+                if c.technical and c.technical.price > 0:
+                    current_prices[c.symbol] = c.technical.price
+
+            # Convert StockCandidate to simple objects with correct attributes for tracker
+            picks_for_tracking = []
+            for c in self.report.top_picks:
+                price = c.technical.price if c.technical else 0
+                buy_point = c.pattern.buy_point if c.pattern and c.pattern.buy_point > 0 else price * 1.02
+                stop_loss = c.stop_loss if c.stop_loss > 0 else buy_point * 0.93
+                target_price = buy_point * 1.20  # +20% target
+
+                # Create simple namespace object for tracker
+                class PickData:
+                    pass
+
+                pick = PickData()
+                pick.symbol = c.symbol
+                pick.sector = c.sector_name
+                pick.signal = c.signal.value if c.signal else "WATCH"
+                pick.pattern = c.pattern.pattern_type.value if c.pattern else "No Pattern"
+                pick.score = c.score_total
+                pick.rs_rating = c.technical.rs_rating if c.technical else 50
+                pick.price = price
+                pick.buy_point = buy_point
+                pick.stop_loss = stop_loss
+                pick.target_price = target_price
+
+                picks_for_tracking.append(pick)
+
+            # Save recommendations
+            saved = self.rec_tracker.save_daily_recommendations(
+                date=today,
+                picks=picks_for_tracking,
+                current_prices=current_prices
+            )
+
+            if saved > 0:
+                print(f"✓ Tracked {saved} new recommendations for backtesting")
+
+            # Update tracking with current prices
+            stats = self.rec_tracker.update_tracking(current_prices)
+            if stats.get('triggered', 0) > 0 or stats.get('stopped', 0) > 0 or stats.get('target_hit', 0) > 0:
+                print(f"   Tracking: {stats['triggered']} triggered, {stats['target_hit']} target hit, {stats['stopped']} stopped")
+
+        except Exception as e:
+            print(f"   ⚠️ Recommendation tracking error: {e}")
 
     def run_critique(self, report: ScreenerReport, peer_analysis: str) -> str:
         """

@@ -1,0 +1,66 @@
+{
+  "symbol": "SCR",
+  "last_updated": "2026-02-11T22:53:38.227509",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SCR",
+      "buy_value": 20640000.0,
+      "sell_value": 3741321000.0,
+      "net_value": -3720681000.0,
+      "buy_volume": 3000,
+      "sell_volume": 543100,
+      "net_volume": -540100,
+      "price": 6.9,
+      "total_volume": 2401100,
+      "foreign_pct": 22.743742451376452
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SCR",
+      "buy_value": 404381000.0,
+      "sell_value": 900103000.0,
+      "net_value": -495722000.0,
+      "buy_volume": 60200,
+      "sell_volume": 132700,
+      "net_volume": -72500,
+      "price": 6.75,
+      "total_volume": 2682900,
+      "foreign_pct": 7.189980990718999
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SCR",
+      "buy_value": 3343442000.0,
+      "sell_value": 181367000.0,
+      "net_value": 3162075000.0,
+      "buy_volume": 502000,
+      "sell_volume": 27000,
+      "net_volume": 475000,
+      "price": 6.7,
+      "total_volume": 3180100,
+      "foreign_pct": 16.634697022106224
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SCR",
+      "buy_value": 3798922000.0,
+      "sell_value": 0.0,
+      "net_value": 3798922000.0,
+      "buy_volume": 556900,
+      "sell_volume": 0,
+      "net_volume": 556900,
+      "price": 6.9,
+      "total_volume": 1823400,
+      "foreign_pct": 30.5418449051223
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 2744594000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 44.3027443677959,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

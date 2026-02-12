@@ -65,14 +65,20 @@ def load_subscribers() -> set:
 
 
 def run_pipeline() -> tuple[int, str]:
-    """Chạy run_compare_ai.py"""
-    log("Starting CANSLIM pipeline...")
+    """Chạy run_compare_ai_v2.py (optimized)"""
+    log("Starting CANSLIM pipeline (V2 optimized)...")
 
-    script_path = PROJECT_DIR / "run_compare_ai.py"
+    # Prefer V2 (data 1x, AI parallel) - faster
+    script_path = PROJECT_DIR / "run_compare_ai_v2.py"
+    if not script_path.exists():
+        script_path = PROJECT_DIR / "run_compare_ai.py"
+        log("V2 not found, falling back to V1")
 
     if not script_path.exists():
         log(f"ERROR: Script not found: {script_path}")
         return 1, "Script not found"
+
+    log(f"Running: {script_path.name}")
 
     try:
         result = subprocess.run(
@@ -80,7 +86,7 @@ def run_pipeline() -> tuple[int, str]:
             cwd=str(PROJECT_DIR),
             capture_output=True,
             text=True,
-            timeout=3600  # 1 hour timeout
+            timeout=7200  # 2 hour timeout (scan all 7 sectors with 2 AI)
         )
 
         if result.returncode == 0:
@@ -92,8 +98,8 @@ def run_pipeline() -> tuple[int, str]:
             return result.returncode, f"Failed with code {result.returncode}"
 
     except subprocess.TimeoutExpired:
-        log("ERROR: Pipeline timed out after 1 hour")
-        return 1, "Timeout after 1 hour"
+        log("ERROR: Pipeline timed out after 2 hours")
+        return 1, "Timeout after 2 hours"
     except Exception as e:
         log(f"ERROR: {e}")
         return 1, str(e)[:50]

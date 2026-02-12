@@ -1,0 +1,66 @@
+{
+  "symbol": "KDC",
+  "last_updated": "2026-02-11T23:07:33.226123",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "KDC",
+      "buy_value": 358890000.0,
+      "sell_value": 800740000.0,
+      "net_value": -441850000.0,
+      "buy_volume": 6900,
+      "sell_volume": 15400,
+      "net_volume": -8500,
+      "price": 52.1,
+      "total_volume": 256700,
+      "foreign_pct": 8.687183482664588
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "KDC",
+      "buy_value": 309510000.0,
+      "sell_value": 269590000.0,
+      "net_value": 39920000.0,
+      "buy_volume": 6000,
+      "sell_volume": 5200,
+      "net_volume": 800,
+      "price": 51.9,
+      "total_volume": 290500,
+      "foreign_pct": 3.8554216867469884
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "KDC",
+      "buy_value": 450820000.0,
+      "sell_value": 19054000.0,
+      "net_value": 431766000.0,
+      "buy_volume": 8700,
+      "sell_volume": 370,
+      "net_volume": 8330,
+      "price": 51.9,
+      "total_volume": 239700,
+      "foreign_pct": 3.7838965373383395
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "KDC",
+      "buy_value": 87600000.0,
+      "sell_value": 2308210000.0,
+      "net_value": -2220610000.0,
+      "buy_volume": 1700,
+      "sell_volume": 44800,
+      "net_volume": -43100,
+      "price": 51.9,
+      "total_volume": 400200,
+      "foreign_pct": 11.619190404797601
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2190774000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 95.15973150980777,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

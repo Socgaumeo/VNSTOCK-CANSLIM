@@ -1,0 +1,66 @@
+{
+  "symbol": "HQC",
+  "last_updated": "2026-02-11T22:55:24.121879",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HQC",
+      "buy_value": 99351000.0,
+      "sell_value": 1798533000.0,
+      "net_value": -1699182000.0,
+      "buy_volume": 34600,
+      "sell_volume": 630400,
+      "net_volume": -595800,
+      "price": 2.8,
+      "total_volume": 4287200,
+      "foreign_pct": 15.511289419667849
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HQC",
+      "buy_value": 13900000.0,
+      "sell_value": 1135567000.0,
+      "net_value": -1121667000.0,
+      "buy_volume": 5000,
+      "sell_volume": 405400,
+      "net_volume": -400400,
+      "price": 2.78,
+      "total_volume": 4125500,
+      "foreign_pct": 9.947885104835777
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HQC",
+      "buy_value": 6875000.0,
+      "sell_value": 1601183000.0,
+      "net_value": -1594308000.0,
+      "buy_volume": 2500,
+      "sell_volume": 578000,
+      "net_volume": -575500,
+      "price": 2.73,
+      "total_volume": 3058500,
+      "foreign_pct": 18.979892103972535
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HQC",
+      "buy_value": 282520000.0,
+      "sell_value": 205329000.0,
+      "net_value": 77191000.0,
+      "buy_volume": 101900,
+      "sell_volume": 74100,
+      "net_volume": 27800,
+      "price": 2.8,
+      "total_volume": 4330000,
+      "foreign_pct": 4.064665127020786
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -4337966000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

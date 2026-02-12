@@ -1,0 +1,66 @@
+{
+  "symbol": "PPC",
+  "last_updated": "2026-02-11T22:59:57.295044",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PPC",
+      "buy_value": 0.0,
+      "sell_value": 2020000.0,
+      "net_value": -2020000.0,
+      "buy_volume": 0,
+      "sell_volume": 200,
+      "net_volume": -200,
+      "price": 10.1,
+      "total_volume": 296400,
+      "foreign_pct": 0.06747638326585695
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PPC",
+      "buy_value": 40100000.0,
+      "sell_value": 194970000.0,
+      "net_value": -154870000.0,
+      "buy_volume": 4000,
+      "sell_volume": 19400,
+      "net_volume": -15400,
+      "price": 10.0,
+      "total_volume": 123200,
+      "foreign_pct": 18.993506493506494
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PPC",
+      "buy_value": 51949000.0,
+      "sell_value": 188155000.0,
+      "net_value": -136206000.0,
+      "buy_volume": 5200,
+      "sell_volume": 18801,
+      "net_volume": -13601,
+      "price": 9.99,
+      "total_volume": 198900,
+      "foreign_pct": 12.066867772750125
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PPC",
+      "buy_value": 999000.0,
+      "sell_value": 71000000.0,
+      "net_value": -70001000.0,
+      "buy_volume": 100,
+      "sell_volume": 7100,
+      "net_volume": -7000,
+      "price": 10.0,
+      "total_volume": 284600,
+      "foreign_pct": 2.52986647926915
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -363097000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

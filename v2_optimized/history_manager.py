@@ -15,10 +15,12 @@ Features:
 import os
 import re
 import glob
+import json
 from pathlib import Path
-from typing import List, Dict, Optional, Tuple
-from datetime import datetime
-from dataclasses import dataclass, field
+from typing import List, Dict, Optional, Tuple, Any
+from datetime import datetime, timedelta
+from dataclasses import dataclass, field, asdict
+from enum import Enum
 
 
 @dataclass
@@ -455,6 +457,518 @@ class HistoryManagerV2:
 class HistoryManager(HistoryManagerV2):
     """Alias for backward compatibility"""
     pass
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# RECOMMENDATION HISTORY TRACKER
+# ══════════════════════════════════════════════════════════════════════════════
+
+class TradeStatus(Enum):
+    """Trạng thái giao dịch"""
+    PENDING = "PENDING"           # Chờ trigger buy point
+    TRIGGERED = "TRIGGERED"       # Đã trigger, đang hold
+    STOPPED = "STOPPED"           # Hit stop loss
+    TARGET_HIT = "TARGET_HIT"     # Đạt target
+    EXPIRED = "EXPIRED"           # Quá thời gian theo dõi
+
+
+@dataclass
+class TrackedRecommendation:
+    """Khuyến nghị đang được theo dõi"""
+
+    # Basic info
+    date: str = ""                          # Ngày khuyến nghị (YYYY-MM-DD)
+    symbol: str = ""
+    sector: str = ""
+    signal: str = ""                        # STRONG BUY, BUY, WATCH
+    pattern: str = ""
+    score: int = 0
+    rs_rating: int = 0
+
+    # Price levels
+    price_at_recommendation: float = 0.0    # Giá lúc khuyến nghị
+    buy_point: float = 0.0                  # Điểm mua
+    stop_loss: float = 0.0                  # Cắt lỗ
+    target_price: float = 0.0               # Mục tiêu
+
+    # Tracking (updated daily)
+    status: str = "PENDING"                 # PENDING, TRIGGERED, STOPPED, TARGET_HIT, EXPIRED
+    buy_point_hit: bool = False
+    buy_point_hit_date: str = ""
+    triggered_price: float = 0.0            # Giá trigger thực tế
+    highest_price_after: float = 0.0        # Giá cao nhất sau trigger
+    lowest_price_after: float = 0.0         # Giá thấp nhất sau trigger
+    current_price: float = 0.0              # Giá hiện tại
+    last_updated: str = ""
+
+    # Performance
+    profit_loss_pct: float = 0.0            # % lời/lỗ
+    max_profit_pct: float = 0.0             # % lời cao nhất (MAE)
+    max_drawdown_pct: float = 0.0           # % drawdown max (MFE)
+    holding_days: int = 0                   # Số ngày hold
+
+    def to_dict(self) -> Dict:
+        return asdict(self)
+
+    @classmethod
+    def from_dict(cls, data: Dict) -> 'TrackedRecommendation':
+        # Handle missing fields with defaults
+        valid_fields = {k: v for k, v in data.items() if k in cls.__dataclass_fields__}
+        return cls(**valid_fields)
+
+
+class RecommendationHistoryTracker:
+    """
+    Theo dõi hiệu suất khuyến nghị qua thời gian
+
+    Usage:
+        tracker = RecommendationHistoryTracker()
+
+        # Save daily recommendations
+        tracker.save_daily_recommendations(date, picks)
+
+        # Update with current prices
+        tracker.update_tracking(current_prices)
+
+        # Get win rates
+        rates = tracker.calculate_win_rates()
+        print(f"Win Rate: {rates['overall_win_rate']*100:.0f}%")
+    """
+
+    def __init__(self, cache_dir: str = "./cache/historical/recommendations"):
+        self.cache_dir = Path(cache_dir)
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
+
+        self.master_file = self.cache_dir / "tracking_master.json"
+        self.max_tracking_days = 30         # Theo dõi tối đa 30 ngày
+        self.history_days = 90              # Giữ lịch sử 90 ngày
+
+    def _load_master(self) -> List[TrackedRecommendation]:
+        """Load master tracking file"""
+        if not self.master_file.exists():
+            return []
+
+        try:
+            with open(self.master_file, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                recs = data.get('recommendations', [])
+                return [TrackedRecommendation.from_dict(r) for r in recs]
+        except Exception as e:
+            print(f"   Warning: Could not load tracking master: {e}")
+            return []
+
+    def _save_master(self, recommendations: List[TrackedRecommendation]) -> bool:
+        """Save master tracking file"""
+        try:
+            data = {
+                'last_updated': datetime.now().isoformat(),
+                'total_count': len(recommendations),
+                'recommendations': [r.to_dict() for r in recommendations]
+            }
+
+            with open(self.master_file, 'w', encoding='utf-8') as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+
+            return True
+        except Exception as e:
+            print(f"   Error saving tracking master: {e}")
+            return False
+
+    def save_daily_recommendations(self, date: str,
+                                   picks: List[Any],
+                                   current_prices: Dict[str, float] = None) -> int:
+        """
+        Lưu khuyến nghị hàng ngày
+
+        Args:
+            date: Date string (YYYY-MM-DD)
+            picks: List of StockCandidate or similar objects
+            current_prices: Dict of symbol -> current price
+
+        Returns:
+            Number of recommendations saved
+        """
+        if not picks:
+            return 0
+
+        # Save daily file
+        daily_file = self.cache_dir / f"recommendations_{date.replace('-', '')}.json"
+
+        daily_data = {
+            'date': date,
+            'count': len(picks),
+            'picks': []
+        }
+
+        # Load existing master
+        master = self._load_master()
+        existing_keys = {f"{r.date}_{r.symbol}" for r in master}
+
+        new_recs = []
+        for pick in picks:
+            # Extract data from pick object
+            symbol = getattr(pick, 'symbol', '') or getattr(pick, 'code', '')
+            if not symbol:
+                continue
+
+            price = current_prices.get(symbol, 0) if current_prices else 0
+            if price == 0:
+                price = getattr(pick, 'price', 0) or getattr(pick, 'close', 0) or 0
+
+            rec = TrackedRecommendation(
+                date=date,
+                symbol=symbol,
+                sector=getattr(pick, 'sector', '') or getattr(pick, 'industry', ''),
+                signal=getattr(pick, 'signal', '') or getattr(pick, 'action', 'WATCH'),
+                pattern=getattr(pick, 'pattern', '') or getattr(pick, 'chart_pattern', ''),
+                score=int(getattr(pick, 'score', 0) or getattr(pick, 'canslim_score', 0) or 0),
+                rs_rating=int(getattr(pick, 'rs_rating', 0) or getattr(pick, 'rs', 0) or 0),
+                price_at_recommendation=price,
+                buy_point=float(getattr(pick, 'buy_point', 0) or price * 1.02),
+                stop_loss=float(getattr(pick, 'stop_loss', 0) or price * 0.92),
+                target_price=float(getattr(pick, 'target_price', 0) or getattr(pick, 'target', 0) or price * 1.15),
+                status=TradeStatus.PENDING.value,
+                current_price=price,
+                last_updated=datetime.now().isoformat()
+            )
+
+            # Add to daily file
+            daily_data['picks'].append(rec.to_dict())
+
+            # Add to master if new
+            key = f"{date}_{symbol}"
+            if key not in existing_keys:
+                new_recs.append(rec)
+
+        # Save daily file
+        try:
+            with open(daily_file, 'w', encoding='utf-8') as f:
+                json.dump(daily_data, f, ensure_ascii=False, indent=2)
+        except Exception as e:
+            print(f"   Error saving daily recommendations: {e}")
+
+        # Add new to master and save
+        if new_recs:
+            master.extend(new_recs)
+            self._save_master(master)
+
+        return len(new_recs)
+
+    def update_tracking(self, current_prices: Dict[str, float]) -> Dict[str, int]:
+        """
+        Cập nhật tracking với giá hiện tại
+
+        Args:
+            current_prices: Dict of symbol -> current price
+
+        Returns:
+            Dict with update statistics
+        """
+        master = self._load_master()
+        if not master:
+            return {'updated': 0, 'triggered': 0, 'stopped': 0, 'target_hit': 0}
+
+        stats = {'updated': 0, 'triggered': 0, 'stopped': 0, 'target_hit': 0}
+        today = datetime.now().strftime('%Y-%m-%d')
+        cutoff_date = (datetime.now() - timedelta(days=self.max_tracking_days)).strftime('%Y-%m-%d')
+
+        for rec in master:
+            # Skip if already closed or expired
+            if rec.status in [TradeStatus.STOPPED.value, TradeStatus.TARGET_HIT.value, TradeStatus.EXPIRED.value]:
+                continue
+
+            # Check expiration
+            if rec.date < cutoff_date:
+                rec.status = TradeStatus.EXPIRED.value
+                continue
+
+            symbol = rec.symbol
+            if symbol not in current_prices:
+                continue
+
+            price = current_prices[symbol]
+            rec.current_price = price
+            rec.last_updated = datetime.now().isoformat()
+            stats['updated'] += 1
+
+            # Check buy point trigger
+            if rec.status == TradeStatus.PENDING.value:
+                if price >= rec.buy_point:
+                    rec.buy_point_hit = True
+                    rec.buy_point_hit_date = today
+                    rec.triggered_price = price
+                    rec.status = TradeStatus.TRIGGERED.value
+                    rec.highest_price_after = price
+                    rec.lowest_price_after = price
+                    stats['triggered'] += 1
+
+            # If triggered, track performance
+            if rec.status == TradeStatus.TRIGGERED.value:
+                rec.highest_price_after = max(rec.highest_price_after, price)
+                rec.lowest_price_after = min(rec.lowest_price_after, price) if rec.lowest_price_after > 0 else price
+
+                # Calculate holding days
+                try:
+                    trigger_date = datetime.strptime(rec.buy_point_hit_date, '%Y-%m-%d')
+                    rec.holding_days = (datetime.now() - trigger_date).days
+                except:
+                    pass
+
+                # Calculate P/L
+                if rec.triggered_price > 0:
+                    rec.profit_loss_pct = ((price / rec.triggered_price) - 1) * 100
+                    rec.max_profit_pct = ((rec.highest_price_after / rec.triggered_price) - 1) * 100
+                    rec.max_drawdown_pct = ((rec.lowest_price_after / rec.triggered_price) - 1) * 100
+
+                # Check stop loss
+                if price <= rec.stop_loss:
+                    rec.status = TradeStatus.STOPPED.value
+                    stats['stopped'] += 1
+
+                # Check target
+                if price >= rec.target_price:
+                    rec.status = TradeStatus.TARGET_HIT.value
+                    stats['target_hit'] += 1
+
+        # Save updated master
+        self._save_master(master)
+
+        return stats
+
+    def calculate_win_rates(self, days: int = 90) -> Dict:
+        """
+        Tính win rates và metrics
+
+        Args:
+            days: Số ngày để tính (mặc định 90)
+
+        Returns:
+            Dict with win rate metrics
+        """
+        master = self._load_master()
+        cutoff = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+
+        # Filter by date
+        recs = [r for r in master if r.date >= cutoff]
+
+        if not recs:
+            return {
+                'total_recommendations': 0,
+                'overall_win_rate': 0,
+                'by_signal': {},
+                'by_pattern': {},
+            }
+
+        # Count by status
+        total = len(recs)
+        triggered = [r for r in recs if r.buy_point_hit]
+        stopped = [r for r in recs if r.status == TradeStatus.STOPPED.value]
+        target_hit = [r for r in recs if r.status == TradeStatus.TARGET_HIT.value]
+        pending = [r for r in recs if r.status == TradeStatus.PENDING.value]
+
+        # Win rate (target hit / (stopped + target hit))
+        closed_trades = len(stopped) + len(target_hit)
+        win_rate = len(target_hit) / closed_trades if closed_trades > 0 else 0
+
+        # Trigger rate
+        trigger_rate = len(triggered) / total if total > 0 else 0
+
+        # Average P/L for triggered trades
+        triggered_pnl = [r.profit_loss_pct for r in triggered if r.profit_loss_pct != 0]
+        avg_pnl = sum(triggered_pnl) / len(triggered_pnl) if triggered_pnl else 0
+
+        # Win rate by signal
+        by_signal = {}
+        for signal in ['STRONG BUY', 'BUY', 'WATCH']:
+            signal_recs = [r for r in recs if signal in r.signal]
+            signal_wins = [r for r in signal_recs if r.status == TradeStatus.TARGET_HIT.value]
+            signal_losses = [r for r in signal_recs if r.status == TradeStatus.STOPPED.value]
+            signal_closed = len(signal_wins) + len(signal_losses)
+
+            by_signal[signal] = {
+                'count': len(signal_recs),
+                'triggered': len([r for r in signal_recs if r.buy_point_hit]),
+                'wins': len(signal_wins),
+                'losses': len(signal_losses),
+                'win_rate': len(signal_wins) / signal_closed if signal_closed > 0 else 0,
+            }
+
+        # Win rate by pattern
+        by_pattern = {}
+        patterns = set(r.pattern for r in recs if r.pattern)
+        for pattern in patterns:
+            pat_recs = [r for r in recs if r.pattern == pattern]
+            pat_wins = [r for r in pat_recs if r.status == TradeStatus.TARGET_HIT.value]
+            pat_losses = [r for r in pat_recs if r.status == TradeStatus.STOPPED.value]
+            pat_closed = len(pat_wins) + len(pat_losses)
+
+            if len(pat_recs) >= 3:  # Only include patterns with enough data
+                by_pattern[pattern] = {
+                    'count': len(pat_recs),
+                    'wins': len(pat_wins),
+                    'losses': len(pat_losses),
+                    'win_rate': len(pat_wins) / pat_closed if pat_closed > 0 else 0,
+                }
+
+        return {
+            'period_days': days,
+            'total_recommendations': total,
+            'triggered_count': len(triggered),
+            'trigger_rate': trigger_rate,
+            'pending_count': len(pending),
+            'closed_trades': closed_trades,
+            'wins': len(target_hit),
+            'losses': len(stopped),
+            'overall_win_rate': win_rate,
+            'avg_pnl_pct': avg_pnl,
+            'by_signal': by_signal,
+            'by_pattern': by_pattern,
+        }
+
+    def get_active_trades(self) -> List[TrackedRecommendation]:
+        """Get all active (triggered but not closed) trades"""
+        master = self._load_master()
+        return [r for r in master if r.status == TradeStatus.TRIGGERED.value]
+
+    def get_pending_recommendations(self) -> List[TrackedRecommendation]:
+        """Get all pending (not yet triggered) recommendations"""
+        master = self._load_master()
+        cutoff = (datetime.now() - timedelta(days=self.max_tracking_days)).strftime('%Y-%m-%d')
+        return [r for r in master if r.status == TradeStatus.PENDING.value and r.date >= cutoff]
+
+    def get_recent_closed(self, days: int = 7) -> List[TrackedRecommendation]:
+        """Get recently closed trades"""
+        master = self._load_master()
+        cutoff = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+        closed_statuses = [TradeStatus.STOPPED.value, TradeStatus.TARGET_HIT.value]
+        return [r for r in master if r.status in closed_statuses and r.date >= cutoff]
+
+    def generate_backtest_report(self, days: int = 90) -> str:
+        """
+        Tạo báo cáo backtest
+
+        Returns:
+            Markdown formatted report
+        """
+        rates = self.calculate_win_rates(days)
+        active = self.get_active_trades()
+        pending = self.get_pending_recommendations()
+
+        report = f"""
+# 📊 RECOMMENDATION BACKTEST REPORT
+
+**Period:** Last {days} days
+**Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M')}
+
+---
+
+## 📈 Overall Performance
+
+| Metric | Value |
+|--------|-------|
+| Total Recommendations | {rates['total_recommendations']} |
+| Trigger Rate | {rates['trigger_rate']*100:.1f}% |
+| Closed Trades | {rates['closed_trades']} |
+| **Win Rate** | **{rates['overall_win_rate']*100:.1f}%** |
+| Avg P/L (Triggered) | {rates['avg_pnl_pct']:+.1f}% |
+
+---
+
+## 📊 By Signal Type
+
+| Signal | Count | Triggered | Wins | Losses | Win Rate |
+|--------|-------|-----------|------|--------|----------|
+"""
+        for signal, data in rates['by_signal'].items():
+            if data['count'] > 0:
+                report += f"| {signal} | {data['count']} | {data['triggered']} | {data['wins']} | {data['losses']} | {data['win_rate']*100:.0f}% |\n"
+
+        if rates['by_pattern']:
+            report += """
+---
+
+## 📐 By Pattern
+
+| Pattern | Count | Wins | Losses | Win Rate |
+|---------|-------|------|--------|----------|
+"""
+            for pattern, data in sorted(rates['by_pattern'].items(), key=lambda x: x[1]['win_rate'], reverse=True):
+                report += f"| {pattern} | {data['count']} | {data['wins']} | {data['losses']} | {data['win_rate']*100:.0f}% |\n"
+
+        if active:
+            report += f"""
+---
+
+## 🔥 Active Trades ({len(active)})
+
+| Symbol | Entry | Current | P/L | Days |
+|--------|-------|---------|-----|------|
+"""
+            for r in sorted(active, key=lambda x: x.profit_loss_pct, reverse=True)[:10]:
+                report += f"| {r.symbol} | {r.triggered_price:,.0f} | {r.current_price:,.0f} | {r.profit_loss_pct:+.1f}% | {r.holding_days} |\n"
+
+        if pending:
+            report += f"""
+---
+
+## ⏳ Pending ({len(pending)})
+
+| Symbol | Rec Price | Buy Point | Gap |
+|--------|-----------|-----------|-----|
+"""
+            for r in pending[:10]:
+                gap = ((r.buy_point / r.price_at_recommendation) - 1) * 100 if r.price_at_recommendation > 0 else 0
+                report += f"| {r.symbol} | {r.price_at_recommendation:,.0f} | {r.buy_point:,.0f} | {gap:+.1f}% |\n"
+
+        return report
+
+    def cleanup_old_data(self, older_than_days: int = 90):
+        """Clean up old recommendation files"""
+        cutoff = datetime.now() - timedelta(days=older_than_days)
+
+        # Clean daily files
+        for f in self.cache_dir.glob("recommendations_*.json"):
+            try:
+                date_str = f.stem.replace("recommendations_", "")
+                file_date = datetime.strptime(date_str, '%Y%m%d')
+                if file_date < cutoff:
+                    f.unlink()
+                    print(f"   Cleaned up: {f.name}")
+            except:
+                pass
+
+        # Clean master file - remove old entries
+        master = self._load_master()
+        cutoff_str = cutoff.strftime('%Y-%m-%d')
+        master = [r for r in master if r.date >= cutoff_str or
+                  r.status in [TradeStatus.TRIGGERED.value, TradeStatus.PENDING.value]]
+        self._save_master(master)
+
+    def get_summary(self) -> Dict:
+        """Get summary statistics"""
+        master = self._load_master()
+
+        status_counts = {}
+        for status in TradeStatus:
+            status_counts[status.value] = len([r for r in master if r.status == status.value])
+
+        return {
+            'total_tracked': len(master),
+            'by_status': status_counts,
+            'cache_dir': str(self.cache_dir),
+        }
+
+
+# Singleton
+_rec_tracker_instance: Optional[RecommendationHistoryTracker] = None
+
+
+def get_recommendation_tracker() -> RecommendationHistoryTracker:
+    """Get singleton instance"""
+    global _rec_tracker_instance
+    if _rec_tracker_instance is None:
+        _rec_tracker_instance = RecommendationHistoryTracker()
+    return _rec_tracker_instance
 
 
 if __name__ == "__main__":

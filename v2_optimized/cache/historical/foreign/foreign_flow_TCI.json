@@ -1,0 +1,66 @@
+{
+  "symbol": "TCI",
+  "last_updated": "2026-02-11T22:48:46.171643",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TCI",
+      "buy_value": 0.0,
+      "sell_value": 7256000.0,
+      "net_value": -7256000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.9,
+      "total_volume": 43200,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TCI",
+      "buy_value": 0.0,
+      "sell_value": 7256000.0,
+      "net_value": -7256000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.88,
+      "total_volume": 158100,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TCI",
+      "buy_value": 0.0,
+      "sell_value": 7256000.0,
+      "net_value": -7256000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.8,
+      "total_volume": 50300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TCI",
+      "buy_value": 0.0,
+      "sell_value": 7256000.0,
+      "net_value": -7256000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.81,
+      "total_volume": 41000,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -29024000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

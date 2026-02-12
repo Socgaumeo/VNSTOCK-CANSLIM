@@ -1,0 +1,66 @@
+{
+  "symbol": "TAL",
+  "last_updated": "2026-02-11T23:10:54.419071",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TAL",
+      "buy_value": 7785480000.0,
+      "sell_value": 2149380000.0,
+      "net_value": 5636100000.0,
+      "buy_volume": 168000,
+      "sell_volume": 47500,
+      "net_volume": 120500,
+      "price": 46.5,
+      "total_volume": 524200,
+      "foreign_pct": 41.11026325829836
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TAL",
+      "buy_value": 1537720000.0,
+      "sell_value": 1534470000.0,
+      "net_value": 3250000.0,
+      "buy_volume": 33200,
+      "sell_volume": 34000,
+      "net_volume": -800,
+      "price": 46.45,
+      "total_volume": 336600,
+      "foreign_pct": 19.964349376114082
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TAL",
+      "buy_value": 1946700000.0,
+      "sell_value": 206990000.0,
+      "net_value": 1739710000.0,
+      "buy_volume": 42400,
+      "sell_volume": 4500,
+      "net_volume": 37900,
+      "price": 46.35,
+      "total_volume": 239300,
+      "foreign_pct": 19.598829920601755
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TAL",
+      "buy_value": 4638410000.0,
+      "sell_value": 236620000.0,
+      "net_value": 4401790000.0,
+      "buy_volume": 99400,
+      "sell_volume": 5100,
+      "net_volume": 94300,
+      "price": 47.0,
+      "total_volume": 421600,
+      "foreign_pct": 24.786527514231498
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 11780850000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 0
+  }
+}

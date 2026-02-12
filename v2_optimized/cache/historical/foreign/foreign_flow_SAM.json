@@ -1,0 +1,66 @@
+{
+  "symbol": "SAM",
+  "last_updated": "2026-02-11T23:04:08.546275",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SAM",
+      "buy_value": 0.0,
+      "sell_value": 221850000.0,
+      "net_value": -221850000.0,
+      "buy_volume": 0,
+      "sell_volume": 31400,
+      "net_volume": -31400,
+      "price": 6.95,
+      "total_volume": 183200,
+      "foreign_pct": 17.139737991266376
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SAM",
+      "buy_value": 0.0,
+      "sell_value": 35250000.0,
+      "net_value": -35250000.0,
+      "buy_volume": 0,
+      "sell_volume": 5000,
+      "net_volume": -5000,
+      "price": 6.98,
+      "total_volume": 93500,
+      "foreign_pct": 5.347593582887701
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SAM",
+      "buy_value": 0.0,
+      "sell_value": 12582000.0,
+      "net_value": -12582000.0,
+      "buy_volume": 0,
+      "sell_volume": 1800,
+      "net_volume": -1800,
+      "price": 6.98,
+      "total_volume": 91600,
+      "foreign_pct": 1.9650655021834063
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SAM",
+      "buy_value": 700000.0,
+      "sell_value": 0.0,
+      "net_value": 700000.0,
+      "buy_volume": 100,
+      "sell_volume": 0,
+      "net_volume": 100,
+      "price": 7.01,
+      "total_volume": 186700,
+      "foreign_pct": 0.05356186395286556
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -268982000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

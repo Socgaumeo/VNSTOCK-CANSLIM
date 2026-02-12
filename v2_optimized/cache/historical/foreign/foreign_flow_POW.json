@@ -1,0 +1,66 @@
+{
+  "symbol": "POW",
+  "last_updated": "2026-02-11T23:13:59.145873",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "POW",
+      "buy_value": 7255938750.0,
+      "sell_value": 20261150000.0,
+      "net_value": -13005211250.0,
+      "buy_volume": 525305,
+      "sell_volume": 1458700,
+      "net_volume": -933395,
+      "price": 13.5,
+      "total_volume": 21388700,
+      "foreign_pct": 9.275949449943194
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "POW",
+      "buy_value": 1927870000.0,
+      "sell_value": 19843680000.0,
+      "net_value": -17915810000.0,
+      "buy_volume": 142900,
+      "sell_volume": 1462700,
+      "net_volume": -1319800,
+      "price": 13.45,
+      "total_volume": 8185700,
+      "foreign_pct": 19.614693917441393
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "POW",
+      "buy_value": 16403570000.0,
+      "sell_value": 6764059500.0,
+      "net_value": 9639510500.0,
+      "buy_volume": 1264000,
+      "sell_volume": 510570,
+      "net_volume": 753430,
+      "price": 12.95,
+      "total_volume": 18560100,
+      "foreign_pct": 9.561209260725965
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "POW",
+      "buy_value": 10298134000.0,
+      "sell_value": 9051235000.0,
+      "net_value": 1246899000.0,
+      "buy_volume": 783870,
+      "sell_volume": 686900,
+      "net_volume": 96970,
+      "price": 13.2,
+      "total_volume": 7311600,
+      "foreign_pct": 20.11556977952842
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -20034611750.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 43.64571141844561,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

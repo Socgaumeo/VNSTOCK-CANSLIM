@@ -1,0 +1,66 @@
+{
+  "symbol": "GEX",
+  "last_updated": "2026-02-11T23:02:06.572175",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GEX",
+      "buy_value": 21183969200.0,
+      "sell_value": 112980010700.0,
+      "net_value": -91796041500.0,
+      "buy_volume": 605586,
+      "sell_volume": 3225443,
+      "net_volume": -2619857,
+      "price": 34.25,
+      "total_volume": 10126300,
+      "foreign_pct": 37.8324659549885
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GEX",
+      "buy_value": 79526595000.0,
+      "sell_value": 86102675000.0,
+      "net_value": -6576080000.0,
+      "buy_volume": 2364440,
+      "sell_volume": 2550000,
+      "net_volume": -185560,
+      "price": 33.0,
+      "total_volume": 7929600,
+      "foreign_pct": 61.97588781275222
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GEX",
+      "buy_value": 72056691000.0,
+      "sell_value": 29474166550.0,
+      "net_value": 42582524450.0,
+      "buy_volume": 2151940,
+      "sell_volume": 882261,
+      "net_volume": 1269679,
+      "price": 33.55,
+      "total_volume": 6928100,
+      "foreign_pct": 43.79557165745298
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GEX",
+      "buy_value": 47701528000.0,
+      "sell_value": 29456475000.0,
+      "net_value": 18245053000.0,
+      "buy_volume": 1386020,
+      "sell_volume": 847240,
+      "net_volume": 538780,
+      "price": 35.85,
+      "total_volume": 9082200,
+      "foreign_pct": 24.589416661161394
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -37544544050.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 15.693186110841356,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

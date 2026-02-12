@@ -1,0 +1,66 @@
+{
+  "symbol": "HPG",
+  "last_updated": "2026-02-11T23:01:31.639882",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HPG",
+      "buy_value": 484196253000.0,
+      "sell_value": 284039551200.0,
+      "net_value": 200156701800.0,
+      "buy_volume": 17575140,
+      "sell_volume": 10386793,
+      "net_volume": 7188347,
+      "price": 26.8,
+      "total_volume": 67073000,
+      "foreign_pct": 41.68880622605221
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HPG",
+      "buy_value": 97439492750.0,
+      "sell_value": 212141773300.0,
+      "net_value": -114702280550.0,
+      "buy_volume": 3622831,
+      "sell_volume": 7895643,
+      "net_volume": -4272812,
+      "price": 26.75,
+      "total_volume": 24310400,
+      "foreign_pct": 47.38084934842701
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HPG",
+      "buy_value": 70991716650.0,
+      "sell_value": 178301969450.0,
+      "net_value": -107310252800.0,
+      "buy_volume": 2660375,
+      "sell_volume": 6680377,
+      "net_volume": -4020002,
+      "price": 26.55,
+      "total_volume": 32543400,
+      "foreign_pct": 28.70244657902985
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HPG",
+      "buy_value": 106149366900.0,
+      "sell_value": 201903430900.0,
+      "net_value": -95754064000.0,
+      "buy_volume": 3944712,
+      "sell_volume": 7527089,
+      "net_volume": -3582377,
+      "price": 26.85,
+      "total_volume": 26495200,
+      "foreign_pct": 43.297657688939886
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -117609895550.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 14.385092580067521,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

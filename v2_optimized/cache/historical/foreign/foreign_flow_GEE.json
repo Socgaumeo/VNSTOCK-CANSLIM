@@ -1,0 +1,66 @@
+{
+  "symbol": "GEE",
+  "last_updated": "2026-02-11T23:02:17.265957",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GEE",
+      "buy_value": 2322846500.0,
+      "sell_value": 15130242000.0,
+      "net_value": -12807395500.0,
+      "buy_volume": 14021,
+      "sell_volume": 89430,
+      "net_volume": -75409,
+      "price": 165.0,
+      "total_volume": 338800,
+      "foreign_pct": 30.534533648170008
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GEE",
+      "buy_value": 2687503400.0,
+      "sell_value": 2859580000.0,
+      "net_value": -172076600.0,
+      "buy_volume": 16928,
+      "sell_volume": 17600,
+      "net_volume": -672,
+      "price": 156.4,
+      "total_volume": 185500,
+      "foreign_pct": 18.613477088948787
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GEE",
+      "buy_value": 252530000.0,
+      "sell_value": 47550000.0,
+      "net_value": 204980000.0,
+      "buy_volume": 1600,
+      "sell_volume": 300,
+      "net_volume": 1300,
+      "price": 160.0,
+      "total_volume": 150400,
+      "foreign_pct": 1.2632978723404253
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GEE",
+      "buy_value": 10626240000.0,
+      "sell_value": 32160000.0,
+      "net_value": 10594080000.0,
+      "buy_volume": 64800,
+      "sell_volume": 200,
+      "net_volume": 64600,
+      "price": 167.0,
+      "total_volume": 244900,
+      "foreign_pct": 26.541445487954267
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2180412100.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 12.841570427594034,
+    "buy_days_count": 1,
+    "sell_days_count": 1
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "ACB",
+  "last_updated": "2026-02-11T22:52:16.814979",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ACB",
+      "buy_value": 9168385000.0,
+      "sell_value": 190087035000.0,
+      "net_value": -180918650000.0,
+      "buy_volume": 395700,
+      "sell_volume": 8221800,
+      "net_volume": -7826100,
+      "price": 23.0,
+      "total_volume": 18597300,
+      "foreign_pct": 46.33737155393525
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ACB",
+      "buy_value": 17467160000.0,
+      "sell_value": 82115280000.0,
+      "net_value": -64648120000.0,
+      "buy_volume": 755900,
+      "sell_volume": 3553300,
+      "net_volume": -2797400,
+      "price": 22.95,
+      "total_volume": 11128300,
+      "foreign_pct": 38.72289568038244
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ACB",
+      "buy_value": 53922460000.0,
+      "sell_value": 178628427400.0,
+      "net_value": -124705967400.0,
+      "buy_volume": 2344500,
+      "sell_volume": 7771738,
+      "net_volume": -5427238,
+      "price": 23.0,
+      "total_volume": 14120400,
+      "foreign_pct": 71.6427155038101
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ACB",
+      "buy_value": 153997428000.0,
+      "sell_value": 165484084000.0,
+      "net_value": -11486656000.0,
+      "buy_volume": 6655786,
+      "sell_volume": 7046970,
+      "net_volume": -391184,
+      "price": 23.65,
+      "total_volume": 17796900,
+      "foreign_pct": 76.99518455461345
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -381759393400.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 89.73386698677224,
+    "buy_days_count": 0,
+    "sell_days_count": 4
+  }
+}

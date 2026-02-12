@@ -1,0 +1,66 @@
+{
+  "symbol": "GIL",
+  "last_updated": "2026-02-11T23:06:08.841856",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GIL",
+      "buy_value": 27740000.0,
+      "sell_value": 198940000.0,
+      "net_value": -171200000.0,
+      "buy_volume": 1900,
+      "sell_volume": 13700,
+      "net_volume": -11800,
+      "price": 14.3,
+      "total_volume": 406900,
+      "foreign_pct": 3.8338658146964857
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GIL",
+      "buy_value": 0.0,
+      "sell_value": 216825350.0,
+      "net_value": -216825350.0,
+      "buy_volume": 0,
+      "sell_volume": 15272,
+      "net_volume": -15272,
+      "price": 14.1,
+      "total_volume": 165200,
+      "foreign_pct": 9.24455205811138
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GIL",
+      "buy_value": 67020000.0,
+      "sell_value": 0.0,
+      "net_value": 67020000.0,
+      "buy_volume": 4800,
+      "sell_volume": 0,
+      "net_volume": 4800,
+      "price": 13.8,
+      "total_volume": 209300,
+      "foreign_pct": 2.2933588150979456
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GIL",
+      "buy_value": 110940000.0,
+      "sell_value": 28020000.0,
+      "net_value": 82920000.0,
+      "buy_volume": 7900,
+      "sell_volume": 2000,
+      "net_volume": 5900,
+      "price": 13.95,
+      "total_volume": 215800,
+      "foreign_pct": 4.5875810936051895
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -238085350.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 73.31507939324574,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

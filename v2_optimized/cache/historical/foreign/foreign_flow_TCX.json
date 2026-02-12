@@ -1,0 +1,66 @@
+{
+  "symbol": "TCX",
+  "last_updated": "2026-02-11T23:08:21.631217",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TCX",
+      "buy_value": 82135680000.0,
+      "sell_value": 49220249000.0,
+      "net_value": 32915431000.0,
+      "buy_volume": 1509500,
+      "sell_volume": 904879,
+      "net_volume": 604621,
+      "price": 54.9,
+      "total_volume": 3298100,
+      "foreign_pct": 73.20514841878656
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TCX",
+      "buy_value": 29358561000.0,
+      "sell_value": 12130846000.0,
+      "net_value": 17227715000.0,
+      "buy_volume": 533600,
+      "sell_volume": 220501,
+      "net_volume": 313099,
+      "price": 55.2,
+      "total_volume": 493900,
+      "foreign_pct": 152.6829317675643
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TCX",
+      "buy_value": 10666490000.0,
+      "sell_value": 12719656000.0,
+      "net_value": -2053166000.0,
+      "buy_volume": 196505,
+      "sell_volume": 234204,
+      "net_volume": -37699,
+      "price": 54.5,
+      "total_volume": 850900,
+      "foreign_pct": 50.618051474908924
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TCX",
+      "buy_value": 35058040000.0,
+      "sell_value": 5488650000.0,
+      "net_value": 29569390000.0,
+      "buy_volume": 631300,
+      "sell_volume": 98400,
+      "net_volume": 532900,
+      "price": 55.8,
+      "total_volume": 1176000,
+      "foreign_pct": 62.04931972789116
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 77659370000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 65.59673076621269,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

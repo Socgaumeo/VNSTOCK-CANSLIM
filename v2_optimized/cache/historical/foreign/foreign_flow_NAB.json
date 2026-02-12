@@ -1,0 +1,66 @@
+{
+  "symbol": "NAB",
+  "last_updated": "2026-02-11T22:49:53.830582",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NAB",
+      "buy_value": 229030000.0,
+      "sell_value": 2450230000.0,
+      "net_value": -2221200000.0,
+      "buy_volume": 16400,
+      "sell_volume": 175200,
+      "net_volume": -158800,
+      "price": 14.0,
+      "total_volume": 1248900,
+      "foreign_pct": 15.341500520458004
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NAB",
+      "buy_value": 1030120000.0,
+      "sell_value": 4722530000.0,
+      "net_value": -3692410000.0,
+      "buy_volume": 73505,
+      "sell_volume": 339100,
+      "net_volume": -265595,
+      "price": 14.05,
+      "total_volume": 1451800,
+      "foreign_pct": 28.42023694723791
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NAB",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 14.05,
+      "total_volume": 1142300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NAB",
+      "buy_value": 1589900000.0,
+      "sell_value": 5344875000.0,
+      "net_value": -3754975000.0,
+      "buy_volume": 112600,
+      "sell_volume": 381600,
+      "net_volume": -269000,
+      "price": 14.15,
+      "total_volume": 1391200,
+      "foreign_pct": 35.5232892466935
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -9668585000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "LDG",
+  "last_updated": "2026-02-11T22:54:31.679255",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "LDG",
+      "buy_value": 50964000.0,
+      "sell_value": 520528000.0,
+      "net_value": -469564000.0,
+      "buy_volume": 13000,
+      "sell_volume": 131300,
+      "net_volume": -118300,
+      "price": 3.85,
+      "total_volume": 1640700,
+      "foreign_pct": 8.795026513073688
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "LDG",
+      "buy_value": 0.0,
+      "sell_value": 748939000.0,
+      "net_value": -748939000.0,
+      "buy_volume": 0,
+      "sell_volume": 193900,
+      "net_volume": -193900,
+      "price": 3.81,
+      "total_volume": 985500,
+      "foreign_pct": 19.67529173008625
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "LDG",
+      "buy_value": 125127000.0,
+      "sell_value": 98031000.0,
+      "net_value": 27096000.0,
+      "buy_volume": 32700,
+      "sell_volume": 25500,
+      "net_volume": 7200,
+      "price": 3.81,
+      "total_volume": 849300,
+      "foreign_pct": 6.852702225362063
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "LDG",
+      "buy_value": 172089000.0,
+      "sell_value": 61365000.0,
+      "net_value": 110724000.0,
+      "buy_volume": 44400,
+      "sell_volume": 15800,
+      "net_volume": 28600,
+      "price": 3.88,
+      "total_volume": 665500,
+      "foreign_pct": 9.045830202854996
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1080683000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

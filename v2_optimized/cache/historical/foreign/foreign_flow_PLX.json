@@ -1,0 +1,66 @@
+{
+  "symbol": "PLX",
+  "last_updated": "2026-02-11T23:14:09.237329",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PLX",
+      "buy_value": 119107263900.0,
+      "sell_value": 72192420000.0,
+      "net_value": 46914843900.0,
+      "buy_volume": 2106020,
+      "sell_volume": 1262500,
+      "net_volume": 843520,
+      "price": 57.0,
+      "total_volume": 10233300,
+      "foreign_pct": 32.917240772771244
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PLX",
+      "buy_value": 39920980000.0,
+      "sell_value": 16770950000.0,
+      "net_value": 23150030000.0,
+      "buy_volume": 694200,
+      "sell_volume": 292600,
+      "net_volume": 401600,
+      "price": 57.3,
+      "total_volume": 2437900,
+      "foreign_pct": 40.477460109110304
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PLX",
+      "buy_value": 49683260000.0,
+      "sell_value": 60482260000.0,
+      "net_value": -10799000000.0,
+      "buy_volume": 909800,
+      "sell_volume": 1111000,
+      "net_volume": -201200,
+      "price": 53.3,
+      "total_volume": 11387800,
+      "foreign_pct": 17.745306380512478
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PLX",
+      "buy_value": 88265560000.0,
+      "sell_value": 64668160000.0,
+      "net_value": 23597400000.0,
+      "buy_volume": 1702616,
+      "sell_volume": 1245450,
+      "net_volume": 457166,
+      "price": 51.7,
+      "total_volume": 7516800,
+      "foreign_pct": 39.21969455087272
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 82863273900.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 32.426044515448524,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

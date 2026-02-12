@@ -1,0 +1,66 @@
+{
+  "symbol": "TCH",
+  "last_updated": "2026-02-11T22:53:12.019403",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TCH",
+      "buy_value": 2634426250.0,
+      "sell_value": 11982270000.0,
+      "net_value": -9347843750.0,
+      "buy_volume": 178509,
+      "sell_volume": 802300,
+      "net_volume": -623791,
+      "price": 14.7,
+      "total_volume": 5329800,
+      "foreign_pct": 18.40236031370783
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TCH",
+      "buy_value": 13984245000.0,
+      "sell_value": 4434245450.0,
+      "net_value": 9549999550.0,
+      "buy_volume": 944200,
+      "sell_volume": 302157,
+      "net_volume": 642043,
+      "price": 15.0,
+      "total_volume": 3088500,
+      "foreign_pct": 40.354767686579244
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TCH",
+      "buy_value": 12211170000.0,
+      "sell_value": 1665540000.0,
+      "net_value": 10545630000.0,
+      "buy_volume": 809300,
+      "sell_volume": 110700,
+      "net_volume": 698600,
+      "price": 15.05,
+      "total_volume": 3630700,
+      "foreign_pct": 25.339466218635526
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TCH",
+      "buy_value": 29934360000.0,
+      "sell_value": 414985000.0,
+      "net_value": 29519375000.0,
+      "buy_volume": 1890100,
+      "sell_volume": 25900,
+      "net_volume": 1864200,
+      "price": 16.1,
+      "total_volume": 14272900,
+      "foreign_pct": 13.4240413651045
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 40267160800.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

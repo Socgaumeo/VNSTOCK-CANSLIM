@@ -1,0 +1,66 @@
+{
+  "symbol": "HII",
+  "last_updated": "2026-02-11T23:01:38.975735",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HII",
+      "buy_value": 54222000.0,
+      "sell_value": 156921000.0,
+      "net_value": -102699000.0,
+      "buy_volume": 10700,
+      "sell_volume": 30900,
+      "net_volume": -20200,
+      "price": 5.16,
+      "total_volume": 290500,
+      "foreign_pct": 14.320137693631668
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HII",
+      "buy_value": 7620000.0,
+      "sell_value": 47650000.0,
+      "net_value": -40030000.0,
+      "buy_volume": 1500,
+      "sell_volume": 9300,
+      "net_volume": -7800,
+      "price": 5.12,
+      "total_volume": 66500,
+      "foreign_pct": 16.2406015037594
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HII",
+      "buy_value": 18130000.0,
+      "sell_value": 61693000.0,
+      "net_value": -43563000.0,
+      "buy_volume": 3600,
+      "sell_volume": 12200,
+      "net_volume": -8600,
+      "price": 5.1,
+      "total_volume": 246800,
+      "foreign_pct": 6.40194489465154
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HII",
+      "buy_value": 32681000.0,
+      "sell_value": 37943000.0,
+      "net_value": -5262000.0,
+      "buy_volume": 6400,
+      "sell_volume": 7300,
+      "net_volume": -900,
+      "price": 5.25,
+      "total_volume": 114000,
+      "foreign_pct": 12.017543859649123
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -191554000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 91.9032768795279,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

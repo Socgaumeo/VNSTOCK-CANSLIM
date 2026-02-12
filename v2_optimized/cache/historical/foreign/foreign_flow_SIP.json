@@ -1,0 +1,66 @@
+{
+  "symbol": "SIP",
+  "last_updated": "2026-02-11T23:11:13.661875",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SIP",
+      "buy_value": 15394890000.0,
+      "sell_value": 4381320000.0,
+      "net_value": 11013570000.0,
+      "buy_volume": 252000,
+      "sell_volume": 71300,
+      "net_volume": 180700,
+      "price": 60.0,
+      "total_volume": 1009500,
+      "foreign_pct": 32.02575532441803
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SIP",
+      "buy_value": 1006120000.0,
+      "sell_value": 1981300000.0,
+      "net_value": -975180000.0,
+      "buy_volume": 16700,
+      "sell_volume": 32900,
+      "net_volume": -16200,
+      "price": 60.0,
+      "total_volume": 471400,
+      "foreign_pct": 10.521849809079338
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SIP",
+      "buy_value": 4183308600.0,
+      "sell_value": 4137850000.0,
+      "net_value": 45458600.0,
+      "buy_volume": 72418,
+      "sell_volume": 70300,
+      "net_volume": 2118,
+      "price": 57.5,
+      "total_volume": 697200,
+      "foreign_pct": 20.470166379804933
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SIP",
+      "buy_value": 1657070000.0,
+      "sell_value": 1920390000.0,
+      "net_value": -263320000.0,
+      "buy_volume": 28300,
+      "sell_volume": 32900,
+      "net_volume": -4600,
+      "price": 58.6,
+      "total_volume": 248700,
+      "foreign_pct": 24.60796139927624
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 9820528600.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 56.66411728407026,
+    "buy_days_count": 1,
+    "sell_days_count": 0
+  }
+}

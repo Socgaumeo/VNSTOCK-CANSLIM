@@ -1,0 +1,66 @@
+{
+  "symbol": "SGR",
+  "last_updated": "2026-02-11T22:53:32.989568",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SGR",
+      "buy_value": 6700000.0,
+      "sell_value": 69825000.0,
+      "net_value": -63125000.0,
+      "buy_volume": 400,
+      "sell_volume": 4200,
+      "net_volume": -3800,
+      "price": 16.5,
+      "total_volume": 118500,
+      "foreign_pct": 3.8818565400843887
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SGR",
+      "buy_value": 0.0,
+      "sell_value": 292735000.0,
+      "net_value": -292735000.0,
+      "buy_volume": 0,
+      "sell_volume": 17800,
+      "net_volume": -17800,
+      "price": 16.45,
+      "total_volume": 71900,
+      "foreign_pct": 24.756606397774686
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SGR",
+      "buy_value": 0.0,
+      "sell_value": 52740000.0,
+      "net_value": -52740000.0,
+      "buy_volume": 0,
+      "sell_volume": 3200,
+      "net_volume": -3200,
+      "price": 16.65,
+      "total_volume": 74100,
+      "foreign_pct": 4.318488529014845
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SGR",
+      "buy_value": 131850000.0,
+      "sell_value": 13340000.0,
+      "net_value": 118510000.0,
+      "buy_volume": 7900,
+      "sell_volume": 800,
+      "net_volume": 7100,
+      "price": 16.65,
+      "total_volume": 70000,
+      "foreign_pct": 12.428571428571429
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -290090000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

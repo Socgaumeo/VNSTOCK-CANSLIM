@@ -1,0 +1,79 @@
+{
+  "symbol": "MBB",
+  "last_updated": "2026-02-12T07:27:31.725335",
+  "count": 5,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "MBB",
+      "buy_value": 512927360000.0,
+      "sell_value": 71284425000.0,
+      "net_value": 441642935000.0,
+      "buy_volume": 18787600,
+      "sell_volume": 2642822,
+      "net_volume": 16144778,
+      "price": 27.35,
+      "total_volume": 49957800,
+      "foreign_pct": 42.897049109448375
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "MBB",
+      "buy_value": 260464820000.0,
+      "sell_value": 61776664800.0,
+      "net_value": 198688155200.0,
+      "buy_volume": 9373200,
+      "sell_volume": 2224742,
+      "net_volume": 7148458,
+      "price": 27.6,
+      "total_volume": 25413800,
+      "foreign_pct": 45.63639439989297
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "MBB",
+      "buy_value": 584484369250.0,
+      "sell_value": 12474840000.0,
+      "net_value": 572009529250.0,
+      "buy_volume": 20765082,
+      "sell_volume": 446600,
+      "net_volume": 20318482,
+      "price": 27.85,
+      "total_volume": 51318500,
+      "foreign_pct": 41.333402184397436
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "MBB",
+      "buy_value": 1427614706050.0,
+      "sell_value": 19098047500.0,
+      "net_value": 1408516658550.0,
+      "buy_volume": 49483993,
+      "sell_volume": 673091,
+      "net_volume": 48810902,
+      "price": 29.0,
+      "total_volume": 104577300,
+      "foreign_pct": 47.961731656870086
+    },
+    {
+      "date": "2026-02-12",
+      "symbol": "MBB",
+      "buy_value": 1427614706050.0,
+      "sell_value": 19098047500.0,
+      "net_value": 1408516658550.0,
+      "buy_volume": 49483993,
+      "sell_volume": 673091,
+      "net_volume": 48810902,
+      "price": 29.0,
+      "total_volume": 104577300,
+      "foreign_pct": 47.961731656870086
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 4029373936550.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 5,
+    "sell_days_count": 0
+  }
+}

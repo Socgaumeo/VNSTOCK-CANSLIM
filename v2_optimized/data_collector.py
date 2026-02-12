@@ -39,6 +39,16 @@ except ImportError:
     VolumeProfileCalculator = None
     VolumeProfileResult = None
 
+# Import Historical Trackers
+try:
+    from historical_price_tracker import get_price_tracker, HistoricalPriceTracker
+    from historical_foreign_tracker import get_foreign_tracker, HistoricalForeignTracker
+except ImportError:
+    get_price_tracker = None
+    get_foreign_tracker = None
+    HistoricalPriceTracker = None
+    HistoricalForeignTracker = None
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # DATA SOURCE MANAGER
@@ -47,42 +57,51 @@ except ImportError:
 class DataSourceManager:
     """
     Quản lý nhiều nguồn dữ liệu với auto-fallback
-    
+
     Usage:
         manager = DataSourceManager()
         df = manager.get_price_history("VCB", days=60)
     """
-    
+
     SOURCES = ["VCI", "TCBS", "SSI"]
-    
-    def __init__(self, 
+
+    def __init__(self,
                  primary_source: str = "VCI",
                  api_key: str = None,
-                 auto_fallback: bool = True):
+                 auto_fallback: bool = True,
+                 enable_ohlcv_cache: bool = True):
         """
         Args:
             primary_source: Nguồn dữ liệu chính
             api_key: API key cho vnstock premium
             auto_fallback: Tự động chuyển nguồn khi lỗi
+            enable_ohlcv_cache: Bật cache OHLCV (same-day TTL)
         """
         self.primary_source = primary_source
         self.current_source = primary_source
         self.auto_fallback = auto_fallback
         self.failed_sources: Dict[str, datetime] = {}
-        
-        # Load từ config nếu có
-        if get_config and not api_key:
-            api_key = APIKeys.VNSTOCK if APIKeys else None
-        
-        self._init_vnstock(api_key)
-        
+
+        # OHLCV Cache (same-day TTL - refresh mỗi ngày)
+        self.enable_ohlcv_cache = enable_ohlcv_cache
+        self.ohlcv_cache_dir = Path("cache/ohlcv")
+        if enable_ohlcv_cache:
+            self.ohlcv_cache_dir.mkdir(parents=True, exist_ok=True)
+
         # Statistics
         self.stats = {
             'requests': 0,
             'success': 0,
             'failures': 0,
-            'fallbacks': 0
+            'fallbacks': 0,
+            'cache_hits': 0
         }
+
+        # Load từ config nếu có
+        if get_config and not api_key:
+            api_key = APIKeys.VNSTOCK if APIKeys else None
+
+        self._init_vnstock(api_key)
     
     def _init_vnstock(self, api_key: str = None):
         """Khởi tạo vnstock"""
@@ -90,19 +109,124 @@ class DataSourceManager:
             # Set API key BEFORE importing vnstock
             if api_key:
                 os.environ['VNSTOCK_API_KEY'] = api_key
-            
+
             from vnstock import Vnstock, Listing
-            
+
             self.Vnstock = Vnstock
             self.Listing = Listing
             self._vnstock_available = True
-            
-            print(f"✓ Vnstock initialized | Primary: {self.primary_source}")
-            
+
+            cache_status = "ON" if self.enable_ohlcv_cache else "OFF"
+            print(f"✓ Vnstock initialized | Primary: {self.primary_source} | OHLCV Cache: {cache_status}")
+
         except ImportError:
             self._vnstock_available = False
             print("✗ vnstock not available: pip install -U vnstock")
-    
+
+    # ─────────────────────────────────────────────────────────────
+    # OHLCV CACHE METHODS
+    # ─────────────────────────────────────────────────────────────
+
+    def _get_ohlcv_cache_path(self, symbol: str, days: int) -> Path:
+        """Lấy path cache file cho OHLCV"""
+        return self.ohlcv_cache_dir / f"ohlcv_{symbol}_{days}d.json"
+
+    def _is_ohlcv_cache_valid(self, cache_path: Path) -> bool:
+        """
+        Kiểm tra cache còn valid không (same-day TTL)
+        Cache chỉ valid nếu được tạo trong cùng ngày giao dịch
+        """
+        if not cache_path.exists():
+            return False
+
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cached = json.load(f)
+
+            cached_date = cached.get('date', '')
+            today = datetime.now().strftime('%Y-%m-%d')
+
+            # Same day = valid
+            return cached_date == today
+        except:
+            return False
+
+    def _load_ohlcv_from_cache(self, symbol: str, days: int) -> Optional[pd.DataFrame]:
+        """Load OHLCV từ cache nếu còn valid"""
+        if not self.enable_ohlcv_cache:
+            return None
+
+        cache_path = self._get_ohlcv_cache_path(symbol, days)
+
+        if not self._is_ohlcv_cache_valid(cache_path):
+            return None
+
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cached = json.load(f)
+
+            df = pd.DataFrame(cached['data'])
+
+            # Convert time column if exists
+            if 'time' in df.columns:
+                df['time'] = pd.to_datetime(df['time'])
+
+            self.stats['cache_hits'] += 1
+            return df
+        except Exception as e:
+            return None
+
+    def _save_ohlcv_to_cache(self, symbol: str, days: int, df: pd.DataFrame):
+        """Lưu OHLCV vào cache"""
+        if not self.enable_ohlcv_cache or df.empty:
+            return
+
+        cache_path = self._get_ohlcv_cache_path(symbol, days)
+
+        try:
+            # Convert DataFrame to JSON-serializable format
+            data_dict = df.copy()
+
+            # Convert datetime columns to string
+            for col in data_dict.columns:
+                if pd.api.types.is_datetime64_any_dtype(data_dict[col]):
+                    data_dict[col] = data_dict[col].astype(str)
+
+            cached = {
+                'symbol': symbol,
+                'days': days,
+                'date': datetime.now().strftime('%Y-%m-%d'),
+                'timestamp': datetime.now().isoformat(),
+                'rows': len(df),
+                'data': data_dict.to_dict(orient='records')
+            }
+
+            with open(cache_path, 'w', encoding='utf-8') as f:
+                json.dump(cached, f, ensure_ascii=False)
+
+        except Exception as e:
+            # Silent fail - caching is optional
+            pass
+
+    def clear_ohlcv_cache(self, symbol: str = None):
+        """
+        Xóa cache OHLCV
+
+        Args:
+            symbol: Mã cụ thể (None = xóa tất cả)
+        """
+        if symbol:
+            pattern = f"ohlcv_{symbol}_*.json"
+        else:
+            pattern = "ohlcv_*.json"
+
+        count = 0
+        for cache_file in self.ohlcv_cache_dir.glob(pattern):
+            cache_file.unlink()
+            count += 1
+
+        print(f"✓ Cleared {count} OHLCV cache files")
+
     def _get_stock(self, symbol: str, source: str = None):
         """Tạo stock object với source cụ thể"""
         if not self._vnstock_available:
@@ -147,65 +271,77 @@ class DataSourceManager:
     # PUBLIC API
     # ─────────────────────────────────────────────────────────────
     
-    def get_price_history(self, 
-                          symbol: str, 
+    def get_price_history(self,
+                          symbol: str,
                           days: int = 120,
-                          source: str = None) -> pd.DataFrame:
+                          source: str = None,
+                          force_refresh: bool = False) -> pd.DataFrame:
         """
-        Lấy lịch sử giá với auto-fallback
-        
+        Lấy lịch sử giá với auto-fallback và OHLCV caching
+
         Args:
             symbol: Mã cổ phiếu
             days: Số ngày
             source: Nguồn cụ thể (None = auto)
-            
+            force_refresh: Bỏ qua cache, luôn fetch từ API
+
         Returns:
             DataFrame với OHLCV
         """
+        # 1. Kiểm tra cache trước (same-day TTL)
+        if not force_refresh:
+            cached_df = self._load_ohlcv_from_cache(symbol, days)
+            if cached_df is not None and not cached_df.empty:
+                return cached_df
+
+        # 2. Fetch từ API nếu cache miss
         sources_to_try = [source] if source else [self.current_source]
-        
+
         if self.auto_fallback and not source:
             # Thêm các nguồn backup
             for s in self.SOURCES:
                 if s not in sources_to_try and not self._should_skip_source(s):
                     sources_to_try.append(s)
-        
+
         last_error = None
-        
+
         for src in sources_to_try:
             try:
                 self.stats['requests'] += 1
-                
+
                 stock = self._get_stock(symbol, src)
                 if stock is None:
                     continue
-                
+
                 end_date = datetime.now().strftime('%Y-%m-%d')
                 start_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
-                
+
                 df = stock.quote.history(start=start_date, end=end_date)
-                
+
                 if not df.empty:
                     self.stats['success'] += 1
-                    
+
                     if src != self.current_source:
                         self.stats['fallbacks'] += 1
                         print(f"   ⚠️ Fallback: {self.current_source} → {src}")
                         self.current_source = src
-                    
+
+                    # 3. Lưu vào cache
+                    self._save_ohlcv_to_cache(symbol, days, df)
+
                     return df
-                
+
             except Exception as e:
                 last_error = e
                 self._mark_source_failed(src)
-                
+
                 if self.auto_fallback:
                     next_src = self._get_next_source(src)
                     if next_src:
                         continue
-                
+
                 break
-        
+
         # Tất cả nguồn đều thất bại
         print(f"   ✗ Không lấy được dữ liệu {symbol}: {last_error}")
         return pd.DataFrame()
@@ -248,7 +384,8 @@ class DataSourceManager:
         """In thống kê"""
         print(f"\n📊 Data Source Stats:")
         print(f"   Current: {self.current_source}")
-        print(f"   Requests: {self.stats['requests']}")
+        print(f"   Cache Hits: {self.stats['cache_hits']}")
+        print(f"   API Requests: {self.stats['requests']}")
         print(f"   Success: {self.stats['success']}")
         print(f"   Failures: {self.stats['failures']}")
         print(f"   Fallbacks: {self.stats['fallbacks']}")
@@ -263,44 +400,48 @@ class EnhancedStockData:
     """Dữ liệu cổ phiếu đầy đủ bao gồm Volume Profile"""
     symbol: str
     name: str = ""
-    
+
     # Price
     price: float = 0.0
     open: float = 0.0
     high: float = 0.0
     low: float = 0.0
-    
+
     # Changes
     change_1d: float = 0.0
     change_5d: float = 0.0
     change_1m: float = 0.0
     change_3m: float = 0.0
-    
+
     # Moving Averages
     ma20: float = 0.0
     ma50: float = 0.0
     ma200: float = 0.0
     above_ma20: bool = False
     above_ma50: bool = False
-    
+
     # Technical Indicators
     rsi_14: float = 50.0
     macd: float = 0.0
     macd_signal: float = 0.0
     macd_hist: float = 0.0
+    macd_histogram: float = 0.0  # Alias for macd_hist
     adx: float = 25.0
-    
+
     # Volume
     volume: float = 0.0
     volume_ma20: float = 0.0
     volume_ratio: float = 1.0
     avg_value_20d: float = 0.0  # Tỷ VND
-    
+
     # Foreign Trade (Current Session)
-    foreign_buy_value: float = 0.0  # VND
-    foreign_sell_value: float = 0.0 # VND
-    foreign_net_value: float = 0.0  # VND
-    
+    foreign_buy_value: float = 0.0   # VND
+    foreign_sell_value: float = 0.0  # VND
+    foreign_net_value: float = 0.0   # VND
+    foreign_buy_volume: int = 0      # Shares
+    foreign_sell_volume: int = 0     # Shares
+    foreign_net_buy_20d: float = 0.0 # Rolling 20-day net buy (VND) - from tracker
+
     # Volume Profile
     poc: float = 0.0            # Point of Control
     vah: float = 0.0            # Value Area High
@@ -310,7 +451,10 @@ class EnhancedStockData:
     vp_support: List[float] = field(default_factory=list)
     vp_resistance: List[float] = field(default_factory=list)
     vp_signals: List[str] = field(default_factory=list)
-    
+
+    # RS Rating (for historical tracking)
+    rs_rating: int = 50
+
     # Raw data
     df: pd.DataFrame = field(default_factory=pd.DataFrame)
 
@@ -360,7 +504,12 @@ class EnhancedDataCollector:
             )
         else:
             self.vp_calculator = None
-            
+
+        # Historical Trackers (optional)
+        self.price_tracker = get_price_tracker() if get_price_tracker else None
+        self.foreign_tracker = get_foreign_tracker() if get_foreign_tracker else None
+        self.enable_historical_tracking = True  # Set to False to disable
+
         # Caching
         self.cache_dir = Path("data_cache")
         self.cache_dir.mkdir(exist_ok=True)
@@ -483,8 +632,39 @@ class EnhancedDataCollector:
         
         # 4. Lấy dữ liệu khối ngoại trong phiên (Foreign Trade)
         self._fetch_foreign_data_from_price_board(result)
-        
+
+        # 5. Historical Tracking (save daily snapshots)
+        if self.enable_historical_tracking:
+            self._save_historical_data(result)
+
         return result
+
+    def _save_historical_data(self, result: EnhancedStockData):
+        """Save data to historical trackers for trend analysis"""
+        try:
+            # Save price snapshot
+            if self.price_tracker and result.price > 0:
+                self.price_tracker.save_daily_snapshot(result.symbol, result)
+
+            # Save foreign flow and get rolling 20d value
+            if self.foreign_tracker:
+                # Save today's flow
+                self.foreign_tracker.save_daily_flow(
+                    symbol=result.symbol,
+                    buy_value=result.foreign_buy_value,
+                    sell_value=result.foreign_sell_value,
+                    buy_volume=result.foreign_buy_volume,
+                    sell_volume=result.foreign_sell_volume,
+                    price=result.price,
+                    total_volume=int(result.volume)
+                )
+
+                # Get rolling 20-day net buy
+                result.foreign_net_buy_20d = self.foreign_tracker.get_foreign_net_buy_20d(result.symbol)
+
+        except Exception as e:
+            # Silent fail - historical tracking is optional
+            pass
     
     def _calc_rsi(self, prices: np.ndarray, period: int = 14) -> float:
         """
@@ -527,13 +707,18 @@ class EnhancedDataCollector:
                 if df_pb is not None and not df_pb.empty:
                     # Lấy dòng đầu tiên (thường chỉ có 1 dòng cho 1 mã)
                     row = df_pb.iloc[0]
-                    
+
                     # Columns in vnstock can be complex, usually ('match', 'foreign_buy_value')
-                    f_buy = row.get(('match', 'foreign_buy_value'), 0)
-                    f_sell = row.get(('match', 'foreign_sell_value'), 0)
-                    
-                    if pd.notna(f_buy): result.foreign_buy_value = float(f_buy)
-                    if pd.notna(f_sell): result.foreign_sell_value = float(f_sell)
+                    f_buy_val = row.get(('match', 'foreign_buy_value'), 0)
+                    f_sell_val = row.get(('match', 'foreign_sell_value'), 0)
+                    f_buy_vol = row.get(('match', 'foreign_buy_volume'), 0)
+                    f_sell_vol = row.get(('match', 'foreign_sell_volume'), 0)
+
+                    if pd.notna(f_buy_val): result.foreign_buy_value = float(f_buy_val)
+                    if pd.notna(f_sell_val): result.foreign_sell_value = float(f_sell_val)
+                    if pd.notna(f_buy_vol): result.foreign_buy_volume = int(f_buy_vol)
+                    if pd.notna(f_sell_vol): result.foreign_sell_volume = int(f_sell_vol)
+
                     result.foreign_net_value = result.foreign_buy_value - result.foreign_sell_value
         except Exception as e:
             # Silent fail for optional data

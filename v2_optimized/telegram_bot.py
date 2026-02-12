@@ -12,6 +12,13 @@ Commands:
 - /market - Tình hình thị trường
 - /sector - Xếp hạng ngành
 - /alert on/off - Bật/tắt alert 16h
+
+NEW - Historical Tracking:
+- /foreign <mã> - Xem khối ngoại 20 ngày rolling
+- /winrate - Xem win rate của recommendations
+- /trades - Xem active trades đang hold
+- /pending - Xem pending recommendations
+- /backtest - Báo cáo backtest đầy đủ
 """
 
 import os
@@ -37,7 +44,7 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 
 # Telegram imports
 try:
-    from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup
+    from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, ReplyKeyboardMarkup, KeyboardButton, BotCommand
     from telegram.ext import (
         Application, CommandHandler, ContextTypes,
         MessageHandler, filters, CallbackQueryHandler
@@ -50,6 +57,15 @@ except ImportError:
 
 # Project imports
 from config import get_config
+
+# Historical Tracking imports
+try:
+    from historical_foreign_tracker import HistoricalForeignTracker, get_foreign_tracker
+    from history_manager import RecommendationHistoryTracker, get_recommendation_tracker
+    HAS_TRACKING = True
+except ImportError as e:
+    HAS_TRACKING = False
+    print(f"⚠️ Historical Tracking modules not available: {e}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -119,7 +135,10 @@ def build_main_menu_keyboard():
             InlineKeyboardButton("🏭 Xếp hạng ngành", callback_data="action_sector"),
         ],
         [
-            InlineKeyboardButton("📢 Bật/Tắt Alert", callback_data="menu_alert"),
+            InlineKeyboardButton("📈 Tracking", callback_data="menu_tracking"),
+            InlineKeyboardButton("📢 Alert", callback_data="menu_alert"),
+        ],
+        [
             InlineKeyboardButton("❓ Trợ giúp", callback_data="action_help"),
         ],
     ]
@@ -183,6 +202,173 @@ def build_back_to_menu_keyboard():
     return InlineKeyboardMarkup([[InlineKeyboardButton("🔙 Menu chính", callback_data="menu_main")]])
 
 
+def build_persistent_menu_keyboard():
+    """Tạo menu cố định ở dưới (ReplyKeyboard)"""
+    keyboard = [
+        [KeyboardButton("📊 Menu"), KeyboardButton("🏆 Top Picks")],
+        [KeyboardButton("🏛️ Thị trường"), KeyboardButton("📈 Tracking")],
+    ]
+    return ReplyKeyboardMarkup(keyboard, resize_keyboard=True, is_persistent=True)
+
+
+def parse_top_picks_from_ai_report() -> tuple:
+    """Parse top picks từ file AI report (canslim_report_claude_*.md) mới nhất
+
+    Returns:
+        tuple: (list of picks, report_date, ai_source)
+    """
+    import re
+    try:
+        output_dir = Path(__file__).parent / "output"
+
+        # Tìm file canslim_report mới nhất (ưu tiên Claude)
+        claude_files = sorted(output_dir.glob("canslim_report_claude_*.md"), reverse=True)
+        gemini_files = sorted(output_dir.glob("canslim_report_gemini_*.md"), reverse=True)
+
+        latest_file = None
+        ai_source = "Claude"
+
+        if claude_files and gemini_files:
+            # So sánh timestamp, chọn file mới nhất
+            claude_time = claude_files[0].stat().st_mtime
+            gemini_time = gemini_files[0].stat().st_mtime
+            if claude_time >= gemini_time:
+                latest_file = claude_files[0]
+                ai_source = "Claude"
+            else:
+                latest_file = gemini_files[0]
+                ai_source = "Gemini"
+        elif claude_files:
+            latest_file = claude_files[0]
+            ai_source = "Claude"
+        elif gemini_files:
+            latest_file = gemini_files[0]
+            ai_source = "Gemini"
+
+        if not latest_file:
+            return [], None, None
+
+        # Parse filename để lấy ngày
+        # Format: canslim_report_claude_20260208_1132.md
+        filename = latest_file.name
+        date_match = re.search(r'_(\d{8})_(\d{4})\.md$', filename)
+        if date_match:
+            date_str = date_match.group(1)
+            time_str = date_match.group(2)
+            report_date = f"{date_str[:4]}-{date_str[4:6]}-{date_str[6:8]} {time_str[:2]}:{time_str[2:]}"
+        else:
+            report_date = "Unknown"
+
+        # Đọc file và parse bảng Top Picks
+        with open(latest_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Tìm bảng Top Picks
+        # Format: | Rank | Symbol | Sector | Score | RS | Pattern | Vol✓ | Signal |
+        picks = []
+
+        # Pattern để match mỗi row trong bảng
+        # | 1 | TCX | Tài chính | 98 | 91 | Cup & Handle | ✓ | ⭐⭐⭐ STRONG BUY |
+        row_pattern = re.compile(
+            r'\|\s*(\d+)\s*\|\s*([A-Z0-9]+)\s*\|\s*([^|]+)\s*\|\s*(\d+)\s*\|\s*(\d+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|\s*([^|]+)\s*\|'
+        )
+
+        for match in row_pattern.finditer(content):
+            rank = int(match.group(1))
+            if rank > 10:
+                break
+
+            picks.append({
+                'rank': rank,
+                'symbol': match.group(2).strip(),
+                'sector': match.group(3).strip(),
+                'score': int(match.group(4)),
+                'rs_rating': int(match.group(5)),
+                'pattern': match.group(6).strip(),
+                'volume_ok': '✓' in match.group(7),
+                'signal': match.group(8).strip(),
+            })
+
+        # Sort by rank
+        picks = sorted(picks, key=lambda x: x['rank'])[:10]
+
+        return picks, report_date, ai_source
+
+    except Exception as e:
+        logger.error(f"Error parsing AI report: {e}")
+        return [], None, None
+
+
+def parse_top_picks_from_json() -> list:
+    """Parse top picks - ưu tiên AI report mới nhất, fallback về JSON cũ"""
+    # Thử đọc từ AI report trước
+    picks, report_date, ai_source = parse_top_picks_from_ai_report()
+    if picks:
+        return picks
+
+    # Fallback: đọc từ stock_screening JSON
+    try:
+        output_dir = Path(__file__).parent / "output"
+        json_files = sorted(output_dir.glob("stock_screening_*.json"), reverse=True)
+
+        if not json_files:
+            return []
+
+        latest_file = json_files[0]
+        with open(latest_file, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        candidates = data.get('candidates', [])
+        # Sort by rank
+        candidates = sorted(candidates, key=lambda x: x.get('rank', 999))
+
+        picks = []
+        for c in candidates[:10]:  # Top 10
+            picks.append({
+                'rank': c.get('rank', 0),
+                'symbol': c.get('symbol', ''),
+                'sector': c.get('sector', ''),
+                'score': c.get('scores', {}).get('total', 0),
+                'signal': c.get('signal', ''),
+                'price': c.get('technical', {}).get('price', 0),
+                'rs_rating': c.get('technical', {}).get('rs_rating', 0),
+                'pattern': c.get('pattern', {}).get('type', 'N/A'),
+            })
+
+        return picks
+    except Exception as e:
+        logger.error(f"Error parsing top picks: {e}")
+        return []
+
+
+def build_tracking_menu_keyboard():
+    """Tạo menu tracking/backtest"""
+    keyboard = [
+        [
+            InlineKeyboardButton("📊 Win Rate", callback_data="tracking_winrate"),
+            InlineKeyboardButton("💹 Active Trades", callback_data="tracking_trades"),
+        ],
+        [
+            InlineKeyboardButton("⏳ Pending", callback_data="tracking_pending"),
+            InlineKeyboardButton("📋 Backtest", callback_data="tracking_backtest"),
+        ],
+        [
+            InlineKeyboardButton("🔙 Menu chính", callback_data="menu_main"),
+        ],
+    ]
+    return InlineKeyboardMarkup(keyboard)
+
+
+def build_foreign_stocks_keyboard():
+    """Tạo keyboard các mã để xem khối ngoại"""
+    # Top stocks to check foreign flow
+    foreign_stocks = ["VCB", "FPT", "HPG", "MWG", "VNM", "TCB", "VHM", "MSN"]
+    row1 = [InlineKeyboardButton(s, callback_data=f"foreign_{s}") for s in foreign_stocks[:4]]
+    row2 = [InlineKeyboardButton(s, callback_data=f"foreign_{s}") for s in foreign_stocks[4:]]
+    keyboard = [row1, row2, [InlineKeyboardButton("🔙 Tracking Menu", callback_data="menu_tracking")]]
+    return InlineKeyboardMarkup(keyboard)
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # COMMAND HANDLERS
 # ══════════════════════════════════════════════════════════════════════════════
@@ -195,13 +381,20 @@ async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 Tôi là *CANSLIM Stock Bot* - Trợ lý phân tích cổ phiếu Việt Nam với AI Claude Sonnet 4.
 
-🔹 Bấm nút bên dưới để sử dụng
+🔹 Bấm nút menu ở dưới để sử dụng
 🔹 Hoặc gõ `/vn <mã>` để phân tích nhanh
 
 💡 Ví dụ: `/vn FPT` hoặc `/compare VCB BID`
 """
+    # Gửi persistent menu keyboard
     await update.message.reply_text(
         welcome_text,
+        parse_mode='Markdown',
+        reply_markup=build_persistent_menu_keyboard()
+    )
+    # Gửi inline menu
+    await update.message.reply_text(
+        "🏠 *MENU CHÍNH*\n\nChọn chức năng:",
         parse_mode='Markdown',
         reply_markup=build_main_menu_keyboard()
     )
@@ -213,19 +406,25 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 📚 *Hướng dẫn sử dụng:*
 
 *Phân tích cổ phiếu:*
-• `/vn VCB` - Phân tích đầy đủ Vietcombank
-• `/tech HPG` - Chỉ kỹ thuật HPG
-• `/fund MWG` - Chỉ cơ bản MWG
+• `/vn VCB` - Phân tích đầy đủ
+• `/tech HPG` - Chỉ kỹ thuật
+• `/fund MWG` - Chỉ cơ bản
 
 *So sánh & Tổng hợp:*
 • `/compare FPT CMG` - So sánh 2 mã
-• `/top` - Top 10 cổ phiếu hôm nay
-• `/market` - Tình hình thị trường
-• `/sector` - Ngành mạnh nhất
+• `/top` - Top 10 picks
+• `/market` - Thị trường
+• `/sector` - Xếp hạng ngành
+
+*Tracking & Backtest:*
+• `/foreign VCB` - Khối ngoại 20d
+• `/winrate` - Win rate recommendations
+• `/trades` - Active trades
+• `/pending` - Pending picks
+• `/backtest` - Báo cáo backtest
 
 *Alert:*
-• `/alert on` - Nhận báo cáo lúc 16h
-• `/alert off` - Tắt báo cáo
+• `/alert on/off` - Bật/tắt alert
 
 ⚠️ Dữ liệu chỉ mang tính tham khảo!
 """
@@ -407,33 +606,67 @@ async def top_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("⏳ Đang tải top picks...")
 
     try:
-        # Tìm báo cáo mới nhất
-        output_dir = Path(__file__).parent / "output"
-        report_files = sorted(output_dir.glob("canslim_report_claude_*.md"), reverse=True)
+        # Lấy thông tin chi tiết từ AI report
+        picks, report_date, ai_source = parse_top_picks_from_ai_report()
 
-        if not report_files:
-            await update.message.reply_text("❌ Chưa có báo cáo hôm nay. Chạy `/market` để xem tình hình.")
+        if not picks:
+            # Fallback về JSON
+            picks = parse_top_picks_from_json()
+            report_date = None
+            ai_source = None
+
+        if not picks:
+            await update.message.reply_text("❌ Chưa có báo cáo hôm nay. Chạy `/market` để xem tình hình.", parse_mode='Markdown')
             return
 
-        latest_report = report_files[0]
+        # Header với nguồn AI
+        ai_icon = "🔵" if ai_source == "Claude" else "🟢" if ai_source == "Gemini" else "📊"
+        ai_label = f"{ai_icon} {ai_source}" if ai_source else "📊 CANSLIM"
 
-        # Parse top picks từ file (simplified)
-        with open(latest_report, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        # Extract top 10 section (simplified parsing)
         text = f"""
-🏆 *TOP PICKS HÔM NAY*
+🏆 *TOP PICKS* - {ai_label}
 ━━━━━━━━━━━━━━━━━━━━━━
 
-📄 Báo cáo: {latest_report.name}
-
-💡 Xem chi tiết từng mã:
-`/vn <mã>` để phân tích
-
-📧 Báo cáo đầy đủ đã gửi qua email lúc 16h
 """
-        await update.message.reply_text(text, parse_mode='Markdown')
+        for p in picks[:10]:
+            rank = p['rank']
+            symbol = p['symbol']
+            score = p['score']
+            rs = p.get('rs_rating', 0)
+            pattern = p.get('pattern', 'N/A')
+            signal = p.get('signal', '')
+            signal_short = "⭐" if "STRONG" in signal else "✅" if "BUY" in signal else "👀"
+
+            # Rút gọn pattern
+            pattern_short = pattern[:12] + ".." if len(pattern) > 14 else pattern
+
+            text += f"{rank}. *{symbol}* {signal_short} Sc:{score} RS:{rs}\n"
+            text += f"   └ {pattern_short}\n"
+
+        # Footer với thời gian report
+        if report_date:
+            text += f"""
+━━━━━━━━━━━━━━━━━━━━━━
+📅 Báo cáo: {report_date}
+💡 Gõ `/vn <mã>` để phân tích chi tiết
+"""
+        else:
+            text += f"""
+━━━━━━━━━━━━━━━━━━━━━━
+💡 Gõ `/vn <mã>` để phân tích chi tiết
+⏰ Cập nhật: {datetime.now().strftime('%H:%M %d/%m')}
+"""
+
+        # Build keyboard với các mã top picks để quick access
+        top_symbols = [p['symbol'] for p in picks[:8]]
+        row1 = [InlineKeyboardButton(s, callback_data=f"stock_{s}") for s in top_symbols[:4]]
+        row2 = [InlineKeyboardButton(s, callback_data=f"stock_{s}") for s in top_symbols[4:8]]
+        keyboard = [row1, row2, [InlineKeyboardButton("🔙 Menu chính", callback_data="menu_main")]]
+
+        await update.message.reply_text(
+            text, parse_mode='Markdown',
+            reply_markup=InlineKeyboardMarkup(keyboard)
+        )
 
     except Exception as e:
         logger.error(f"Error loading top picks: {e}")
@@ -553,6 +786,204 @@ async def alert_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❓ Dùng `/alert on` hoặc `/alert off`", parse_mode='Markdown')
 
 
+# ══════════════════════════════════════════════════════════════════════════════
+# HISTORICAL TRACKING COMMANDS
+# ══════════════════════════════════════════════════════════════════════════════
+
+async def foreign_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handler cho /foreign <symbol> - Xem khối ngoại 20 ngày"""
+    if not HAS_TRACKING:
+        await update.message.reply_text("❌ Tính năng tracking chưa được cài đặt.")
+        return
+
+    if not context.args:
+        await update.message.reply_text(
+            "❌ Vui lòng nhập mã cổ phiếu!\nVí dụ: `/foreign VCB`",
+            parse_mode='Markdown',
+            reply_markup=build_foreign_stocks_keyboard()
+        )
+        return
+
+    symbol = context.args[0].upper()
+    await update.message.reply_text(f"⏳ Đang tải dữ liệu khối ngoại {symbol}...")
+
+    try:
+        tracker = get_foreign_tracker()
+        analysis = tracker.calculate_rolling_metrics(symbol)
+
+        if analysis:
+            net_20d = analysis.net_value_20d / 1e9  # Convert to billions
+            avg_daily = analysis.avg_daily_net_20d / 1e9
+            coverage = analysis.data_coverage_pct
+
+            trend_emoji = "🟢" if analysis.trend == "ACCUMULATING" else "🔴" if analysis.trend == "DISTRIBUTING" else "⚪"
+
+            text = f"""
+🌐 *KHỐI NGOẠI: {symbol}*
+━━━━━━━━━━━━━━━━━━━━━━
+
+*20 Ngày Rolling:*
+• Net Value: {net_20d:+.1f} tỷ VND
+• Avg Daily: {avg_daily:+.2f} tỷ/ngày
+• Buy Days: {analysis.buy_days_count}
+• Sell Days: {analysis.sell_days_count}
+
+*Phân tích:*
+• Trend: {trend_emoji} {analysis.trend}
+• Intensity: {analysis.intensity_score:.0f}/100
+• Data Coverage: {coverage:.0f}%
+
+⏰ Cập nhật: {datetime.now().strftime('%H:%M %d/%m')}
+"""
+        else:
+            text = f"❌ Chưa có dữ liệu khối ngoại cho {symbol}. Cần chạy scan để thu thập."
+
+        await update.message.reply_text(text, parse_mode='Markdown')
+
+    except Exception as e:
+        logger.error(f"Error in foreign command {symbol}: {e}")
+        await update.message.reply_text(f"❌ Lỗi: {str(e)[:100]}")
+
+
+async def winrate_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handler cho /winrate - Xem win rate của recommendations"""
+    if not HAS_TRACKING:
+        await update.message.reply_text("❌ Tính năng tracking chưa được cài đặt.")
+        return
+
+    await update.message.reply_text("⏳ Đang tính toán win rate...")
+
+    try:
+        tracker = get_recommendation_tracker()
+        win_rates = tracker.calculate_win_rates()
+
+        overall = win_rates.get('overall_win_rate', 0) * 100
+        total = win_rates.get('total_completed', 0)
+        wins = win_rates.get('total_wins', 0)
+
+        text = f"""
+📊 *WIN RATE ANALYSIS*
+━━━━━━━━━━━━━━━━━━━━━━
+
+*Overall Performance:*
+• Win Rate: {overall:.1f}%
+• Completed Trades: {total}
+• Winning Trades: {wins}
+
+*By Signal Type:*
+"""
+        by_signal = win_rates.get('by_signal', {})
+        for signal, stats in by_signal.items():
+            wr = stats.get('win_rate', 0) * 100
+            cnt = stats.get('count', 0)
+            text += f"• {signal}: {wr:.0f}% ({cnt} trades)\n"
+
+        text += f"\n⏰ Cập nhật: {datetime.now().strftime('%H:%M %d/%m')}"
+
+        await update.message.reply_text(text, parse_mode='Markdown')
+
+    except Exception as e:
+        logger.error(f"Error in winrate command: {e}")
+        await update.message.reply_text(f"❌ Lỗi: {str(e)[:100]}")
+
+
+async def trades_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handler cho /trades - Xem active trades đang hold"""
+    if not HAS_TRACKING:
+        await update.message.reply_text("❌ Tính năng tracking chưa được cài đặt.")
+        return
+
+    await update.message.reply_text("⏳ Đang tải active trades...")
+
+    try:
+        tracker = get_recommendation_tracker()
+        master = tracker._load_tracking_master()
+
+        # Filter triggered trades
+        triggered = [t for t in master.get('trades', []) if t.get('status') == 'TRIGGERED']
+
+        if not triggered:
+            text = "📭 Không có trade nào đang active."
+        else:
+            text = f"""
+💹 *ACTIVE TRADES ({len(triggered)})*
+━━━━━━━━━━━━━━━━━━━━━━
+
+"""
+            for t in triggered[:10]:  # Top 10
+                symbol = t.get('symbol', 'N/A')
+                entry = t.get('price_at_recommendation', 0)
+                pnl = t.get('profit_loss_pct', 0)
+                pnl_emoji = "🟢" if pnl > 0 else "🔴" if pnl < 0 else "⚪"
+                text += f"{pnl_emoji} *{symbol}*: Entry {entry:,.0f} | P&L: {pnl:+.1f}%\n"
+
+        await update.message.reply_text(text, parse_mode='Markdown')
+
+    except Exception as e:
+        logger.error(f"Error in trades command: {e}")
+        await update.message.reply_text(f"❌ Lỗi: {str(e)[:100]}")
+
+
+async def pending_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handler cho /pending - Xem pending recommendations"""
+    if not HAS_TRACKING:
+        await update.message.reply_text("❌ Tính năng tracking chưa được cài đặt.")
+        return
+
+    await update.message.reply_text("⏳ Đang tải pending recommendations...")
+
+    try:
+        tracker = get_recommendation_tracker()
+        master = tracker._load_tracking_master()
+
+        # Filter pending trades
+        pending = [t for t in master.get('trades', []) if t.get('status') == 'PENDING']
+
+        if not pending:
+            text = "📭 Không có recommendation nào đang pending."
+        else:
+            text = f"""
+⏳ *PENDING RECOMMENDATIONS ({len(pending)})*
+━━━━━━━━━━━━━━━━━━━━━━
+
+"""
+            for t in pending[:10]:  # Top 10
+                symbol = t.get('symbol', 'N/A')
+                buy_point = t.get('buy_point', 0)
+                stop_loss = t.get('stop_loss', 0)
+                signal = t.get('signal', 'N/A')
+                text += f"• *{symbol}* ({signal})\n  Buy: {buy_point:,.0f} | Stop: {stop_loss:,.0f}\n"
+
+        await update.message.reply_text(text, parse_mode='Markdown')
+
+    except Exception as e:
+        logger.error(f"Error in pending command: {e}")
+        await update.message.reply_text(f"❌ Lỗi: {str(e)[:100]}")
+
+
+async def backtest_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handler cho /backtest - Báo cáo backtest đầy đủ"""
+    if not HAS_TRACKING:
+        await update.message.reply_text("❌ Tính năng tracking chưa được cài đặt.")
+        return
+
+    await update.message.reply_text("⏳ Đang tạo báo cáo backtest...")
+
+    try:
+        tracker = get_recommendation_tracker()
+        report = tracker.generate_backtest_report()
+
+        # Truncate if too long for Telegram
+        if len(report) > 4000:
+            report = report[:4000] + "\n\n... (truncated)"
+
+        await update.message.reply_text(report, parse_mode='Markdown')
+
+    except Exception as e:
+        logger.error(f"Error in backtest command: {e}")
+        await update.message.reply_text(f"❌ Lỗi: {str(e)[:100]}")
+
+
 async def scan_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler cho /scan - Chỉ admin mới được dùng"""
     user_id = update.effective_user.id
@@ -574,6 +1005,38 @@ async def scan_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def unknown_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Handler cho command không nhận diện"""
     await update.message.reply_text("❓ Không hiểu command. Gõ `/help` để xem hướng dẫn.", parse_mode='Markdown')
+
+
+async def handle_text_menu(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Handler cho persistent keyboard buttons"""
+    text = update.message.text
+
+    if text == "📊 Menu":
+        await update.message.reply_text(
+            "🏠 *MENU CHÍNH*\n\nChọn chức năng:",
+            parse_mode='Markdown',
+            reply_markup=build_main_menu_keyboard()
+        )
+    elif text == "🏆 Top Picks":
+        await top_command(update, context)
+    elif text == "🏛️ Thị trường":
+        await market_command(update, context)
+    elif text == "📈 Tracking":
+        if HAS_TRACKING:
+            await update.message.reply_text(
+                "📈 *TRACKING & BACKTEST*\n\nTheo dõi hiệu suất:",
+                parse_mode='Markdown',
+                reply_markup=build_tracking_menu_keyboard()
+            )
+        else:
+            await update.message.reply_text("❌ Tính năng tracking chưa được cài đặt.")
+    else:
+        # Có thể là mã cổ phiếu
+        symbol = text.upper().strip()
+        if len(symbol) == 3 and symbol.isalpha():
+            # Likely a stock symbol
+            context.args = [symbol]
+            await analyze_stock_command(update, context)
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -650,26 +1113,61 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif data == "action_top":
         await query.edit_message_text("⏳ Đang tải top picks...")
         try:
-            output_dir = Path(__file__).parent / "output"
-            report_files = sorted(output_dir.glob("canslim_report_claude_*.md"), reverse=True)
+            # Lấy thông tin chi tiết từ AI report
+            picks, report_date, ai_source = parse_top_picks_from_ai_report()
 
-            if report_files:
+            if not picks:
+                # Fallback về JSON
+                picks = parse_top_picks_from_json()
+                report_date = None
+                ai_source = None
+
+            if picks:
+                # Header với nguồn AI
+                ai_icon = "🔵" if ai_source == "Claude" else "🟢" if ai_source == "Gemini" else "📊"
+                ai_label = f"{ai_icon} {ai_source}" if ai_source else "📊 CANSLIM"
+
                 text = f"""
-🏆 *TOP PICKS HÔM NAY*
+🏆 *TOP PICKS* - {ai_label}
 ━━━━━━━━━━━━━━━━━━━━━━
 
-📄 Báo cáo: {report_files[0].name}
-
-💡 Bấm phân tích để xem chi tiết từng mã
-📧 Báo cáo đầy đủ đã gửi qua email
 """
-            else:
-                text = "❌ Chưa có báo cáo hôm nay."
+                for p in picks[:10]:
+                    rank = p['rank']
+                    symbol = p['symbol']
+                    score = p['score']
+                    rs = p.get('rs_rating', 0)
+                    pattern = p.get('pattern', 'N/A')
+                    signal = p.get('signal', '')
+                    signal_short = "⭐" if "STRONG" in signal else "✅" if "BUY" in signal else "👀"
 
-            await query.edit_message_text(
-                text, parse_mode='Markdown',
-                reply_markup=build_popular_stocks_keyboard()
-            )
+                    # Rút gọn pattern
+                    pattern_short = pattern[:12] + ".." if len(pattern) > 14 else pattern
+
+                    text += f"{rank}. *{symbol}* {signal_short} Sc:{score} RS:{rs}\n"
+                    text += f"   └ {pattern_short}\n"
+
+                # Footer với thời gian report
+                if report_date:
+                    text += f"\n📅 Báo cáo: {report_date}"
+                else:
+                    text += f"\n⏰ {datetime.now().strftime('%H:%M %d/%m')}"
+
+                # Keyboard với top symbols
+                top_symbols = [p['symbol'] for p in picks[:8]]
+                row1 = [InlineKeyboardButton(s, callback_data=f"stock_{s}") for s in top_symbols[:4]]
+                row2 = [InlineKeyboardButton(s, callback_data=f"stock_{s}") for s in top_symbols[4:8]]
+                keyboard = [row1, row2, [InlineKeyboardButton("🔙 Menu chính", callback_data="menu_main")]]
+
+                await query.edit_message_text(
+                    text, parse_mode='Markdown',
+                    reply_markup=InlineKeyboardMarkup(keyboard)
+                )
+            else:
+                await query.edit_message_text(
+                    "❌ Chưa có báo cáo hôm nay. Chạy scan để tạo báo cáo.",
+                    reply_markup=build_back_to_menu_keyboard()
+                )
         except Exception as e:
             await query.edit_message_text(
                 f"❌ Lỗi: {str(e)[:100]}",
@@ -770,19 +1268,19 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 ━━━━━━━━━━━━━━━━━━━━━━
 
 *Bấm nút:*
-• 📊 Phân tích mã → Chọn mã phổ biến
-• 🏆 Top Picks → Xem top cổ phiếu
+• 📊 Phân tích → Chọn mã
+• 🏆 Top Picks → Top picks
 • 🏛️ Thị trường → VN-Index
-• 🏭 Ngành → Xếp hạng ngành
+• 📈 Tracking → Win rate, trades
 
 *Gõ lệnh:*
 • `/vn <mã>` - Phân tích đầy đủ
-• `/tech <mã>` - Chỉ kỹ thuật
-• `/fund <mã>` - Chỉ cơ bản
-• `/compare <mã1> <mã2>` - So sánh
+• `/foreign <mã>` - Khối ngoại
+• `/winrate` - Win rate
+• `/backtest` - Báo cáo backtest
 
 *Ví dụ:*
-`/vn VCB` `/compare FPT CMG`
+`/vn VCB` `/foreign FPT`
 """
         await query.edit_message_text(
             help_text, parse_mode='Markdown',
@@ -926,6 +1424,218 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=build_back_to_menu_keyboard()
         )
 
+    # ─── TRACKING MENU ───
+    elif data == "menu_tracking":
+        await query.edit_message_text(
+            "📈 *TRACKING & BACKTEST*\n\n"
+            "Theo dõi hiệu suất recommendations và khối ngoại:",
+            parse_mode='Markdown',
+            reply_markup=build_tracking_menu_keyboard()
+        )
+
+    elif data == "tracking_winrate":
+        if not HAS_TRACKING:
+            await query.edit_message_text(
+                "❌ Tính năng tracking chưa được cài đặt.",
+                reply_markup=build_back_to_menu_keyboard()
+            )
+            return
+
+        await query.edit_message_text("⏳ Đang tính toán win rate...")
+        try:
+            tracker = get_recommendation_tracker()
+            win_rates = tracker.calculate_win_rates()
+
+            overall = win_rates.get('overall_win_rate', 0) * 100
+            total = win_rates.get('total_completed', 0)
+            wins = win_rates.get('total_wins', 0)
+
+            text = f"""
+📊 *WIN RATE ANALYSIS*
+━━━━━━━━━━━━━━━━━━━━━━
+
+*Overall Performance:*
+• Win Rate: {overall:.1f}%
+• Completed Trades: {total}
+• Winning Trades: {wins}
+
+*By Signal Type:*
+"""
+            by_signal = win_rates.get('by_signal', {})
+            for signal, stats in by_signal.items():
+                wr = stats.get('win_rate', 0) * 100
+                cnt = stats.get('count', 0)
+                text += f"• {signal}: {wr:.0f}% ({cnt} trades)\n"
+
+            text += f"\n⏰ {datetime.now().strftime('%H:%M %d/%m')}"
+
+            await query.edit_message_text(
+                text, parse_mode='Markdown',
+                reply_markup=build_tracking_menu_keyboard()
+            )
+        except Exception as e:
+            await query.edit_message_text(
+                f"❌ Lỗi: {str(e)[:100]}",
+                reply_markup=build_tracking_menu_keyboard()
+            )
+
+    elif data == "tracking_trades":
+        if not HAS_TRACKING:
+            await query.edit_message_text(
+                "❌ Tính năng tracking chưa được cài đặt.",
+                reply_markup=build_back_to_menu_keyboard()
+            )
+            return
+
+        await query.edit_message_text("⏳ Đang tải active trades...")
+        try:
+            tracker = get_recommendation_tracker()
+            master = tracker._load_tracking_master()
+
+            triggered = [t for t in master.get('trades', []) if t.get('status') == 'TRIGGERED']
+
+            if not triggered:
+                text = "📭 *ACTIVE TRADES*\n━━━━━━━━━━━━━━━━━━━━━━\n\nKhông có trade nào đang active."
+            else:
+                text = f"""
+💹 *ACTIVE TRADES ({len(triggered)})*
+━━━━━━━━━━━━━━━━━━━━━━
+
+"""
+                for t in triggered[:8]:
+                    symbol = t.get('symbol', 'N/A')
+                    entry = t.get('price_at_recommendation', 0)
+                    pnl = t.get('profit_loss_pct', 0)
+                    pnl_emoji = "🟢" if pnl > 0 else "🔴" if pnl < 0 else "⚪"
+                    text += f"{pnl_emoji} *{symbol}*: {entry:,.0f} | {pnl:+.1f}%\n"
+
+            await query.edit_message_text(
+                text, parse_mode='Markdown',
+                reply_markup=build_tracking_menu_keyboard()
+            )
+        except Exception as e:
+            await query.edit_message_text(
+                f"❌ Lỗi: {str(e)[:100]}",
+                reply_markup=build_tracking_menu_keyboard()
+            )
+
+    elif data == "tracking_pending":
+        if not HAS_TRACKING:
+            await query.edit_message_text(
+                "❌ Tính năng tracking chưa được cài đặt.",
+                reply_markup=build_back_to_menu_keyboard()
+            )
+            return
+
+        await query.edit_message_text("⏳ Đang tải pending recommendations...")
+        try:
+            tracker = get_recommendation_tracker()
+            master = tracker._load_tracking_master()
+
+            pending = [t for t in master.get('trades', []) if t.get('status') == 'PENDING']
+
+            if not pending:
+                text = "📭 *PENDING RECOMMENDATIONS*\n━━━━━━━━━━━━━━━━━━━━━━\n\nKhông có recommendation nào pending."
+            else:
+                text = f"""
+⏳ *PENDING ({len(pending)})*
+━━━━━━━━━━━━━━━━━━━━━━
+
+"""
+                for t in pending[:8]:
+                    symbol = t.get('symbol', 'N/A')
+                    buy_point = t.get('buy_point', 0)
+                    signal = t.get('signal', 'N/A')
+                    text += f"• *{symbol}* ({signal}): Buy {buy_point:,.0f}\n"
+
+            await query.edit_message_text(
+                text, parse_mode='Markdown',
+                reply_markup=build_tracking_menu_keyboard()
+            )
+        except Exception as e:
+            await query.edit_message_text(
+                f"❌ Lỗi: {str(e)[:100]}",
+                reply_markup=build_tracking_menu_keyboard()
+            )
+
+    elif data == "tracking_backtest":
+        if not HAS_TRACKING:
+            await query.edit_message_text(
+                "❌ Tính năng tracking chưa được cài đặt.",
+                reply_markup=build_back_to_menu_keyboard()
+            )
+            return
+
+        await query.edit_message_text("⏳ Đang tạo báo cáo backtest...")
+        try:
+            tracker = get_recommendation_tracker()
+            report = tracker.generate_backtest_report()
+
+            # Truncate for Telegram
+            if len(report) > 3500:
+                report = report[:3500] + "\n\n... (Gõ /backtest để xem đầy đủ)"
+
+            await query.edit_message_text(
+                report, parse_mode='Markdown',
+                reply_markup=build_tracking_menu_keyboard()
+            )
+        except Exception as e:
+            await query.edit_message_text(
+                f"❌ Lỗi: {str(e)[:100]}",
+                reply_markup=build_tracking_menu_keyboard()
+            )
+
+    # ─── FOREIGN FLOW ───
+    elif data.startswith("foreign_"):
+        symbol = data.replace("foreign_", "")
+
+        if not HAS_TRACKING:
+            await query.edit_message_text(
+                "❌ Tính năng tracking chưa được cài đặt.",
+                reply_markup=build_back_to_menu_keyboard()
+            )
+            return
+
+        await query.edit_message_text(f"⏳ Đang tải khối ngoại {symbol}...")
+        try:
+            tracker = get_foreign_tracker()
+            analysis = tracker.calculate_rolling_metrics(symbol)
+
+            if analysis:
+                net_20d = analysis.net_value_20d / 1e9
+                avg_daily = analysis.avg_daily_net_20d / 1e9
+                coverage = analysis.data_coverage_pct
+
+                trend_emoji = "🟢" if analysis.trend == "ACCUMULATING" else "🔴" if analysis.trend == "DISTRIBUTING" else "⚪"
+
+                text = f"""
+🌐 *KHỐI NGOẠI: {symbol}*
+━━━━━━━━━━━━━━━━━━━━━━
+
+*20 Ngày Rolling:*
+• Net: {net_20d:+.1f} tỷ VND
+• Avg: {avg_daily:+.2f} tỷ/ngày
+• Buy Days: {analysis.buy_days_count}
+• Sell Days: {analysis.sell_days_count}
+
+*Phân tích:*
+• Trend: {trend_emoji} {analysis.trend}
+• Intensity: {analysis.intensity_score:.0f}/100
+• Data: {coverage:.0f}%
+"""
+            else:
+                text = f"❌ Chưa có data khối ngoại cho {symbol}."
+
+            await query.edit_message_text(
+                text, parse_mode='Markdown',
+                reply_markup=build_foreign_stocks_keyboard()
+            )
+        except Exception as e:
+            await query.edit_message_text(
+                f"❌ Lỗi: {str(e)[:100]}",
+                reply_markup=build_tracking_menu_keyboard()
+            )
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SCHEDULED SCAN JOB
@@ -969,9 +1679,12 @@ async def scheduled_scan_job(context):
         except Exception as e:
             logger.error(f"Failed to notify {user_id}: {e}")
 
-    # Run the scan
+    # Run the scan (use optimized V2 if available)
     try:
-        script_path = Path(__file__).parent / "run_compare_ai.py"
+        # Prefer V2 (data 1x, AI parallel) - faster
+        script_path = Path(__file__).parent / "run_compare_ai_v2.py"
+        if not script_path.exists():
+            script_path = Path(__file__).parent / "run_compare_ai.py"
 
         if script_path.exists():
             logger.info(f"Running: {script_path}")
@@ -981,7 +1694,7 @@ async def scheduled_scan_job(context):
                 cwd=str(Path(__file__).parent),
                 capture_output=True,
                 text=True,
-                timeout=3600  # 1 hour timeout
+                timeout=7200  # 2 hour timeout (scan all 7 sectors with 2 AI)
             )
 
             if result.returncode == 0:
@@ -996,8 +1709,8 @@ async def scheduled_scan_job(context):
             status_msg = "❌ Không tìm thấy script scan"
 
     except subprocess.TimeoutExpired:
-        logger.error("Scan timed out after 1 hour")
-        status_msg = "⏰ Scan timeout sau 1 giờ"
+        logger.error("Scan timed out after 2 hours")
+        status_msg = "⏰ Scan timeout sau 2 giờ"
     except Exception as e:
         logger.error(f"Scan error: {e}")
         status_msg = f"❌ Lỗi: {str(e)[:50]}"
@@ -1067,13 +1780,24 @@ def main():
     app.add_handler(CommandHandler("alert", alert_command))
     app.add_handler(CommandHandler("scan", scan_command))  # Admin only
 
+    # Historical Tracking commands
+    app.add_handler(CommandHandler("foreign", foreign_command))
+    app.add_handler(CommandHandler("winrate", winrate_command))
+    app.add_handler(CommandHandler("trades", trades_command))
+    app.add_handler(CommandHandler("pending", pending_command))
+    app.add_handler(CommandHandler("backtest", backtest_command))
+
     # Add callback handler for inline buttons
     app.add_handler(CallbackQueryHandler(button_callback))
+
+    # Handle persistent keyboard text messages (Menu, Top Picks, etc.)
+    menu_filter = filters.TEXT & filters.Regex(r'^(📊 Menu|🏆 Top Picks|🏛️ Thị trường|📈 Tracking)$')
+    app.add_handler(MessageHandler(menu_filter, handle_text_menu))
 
     # Unknown command handler
     app.add_handler(MessageHandler(filters.COMMAND, unknown_command))
 
-    # ─── SETUP SCHEDULED JOB (16:00 daily) ───
+    # ─── SETUP SCHEDULED JOBS ───
     job_queue = app.job_queue
 
     # Schedule daily scan at 16:00 Vietnam time (Monday-Friday)
@@ -1085,9 +1809,50 @@ def main():
         name="daily_canslim_scan"
     )
 
+    # Schedule daily restart at 05:00 AM to prevent stale state
+    async def daily_restart_job(context: ContextTypes.DEFAULT_TYPE):
+        """Restart bot daily to prevent memory leaks and stale state"""
+        logger.info("🔄 Daily restart triggered at 05:00 AM")
+        try:
+            # Notify admin
+            await context.bot.send_message(
+                chat_id=ADMIN_USER_ID,
+                text="🔄 Bot đang restart theo lịch 05:00 hàng ngày..."
+            )
+        except:
+            pass
+
+        # Restart the process
+        import sys
+        os.execv(sys.executable, [sys.executable] + sys.argv)
+
+    restart_time = dt_time(hour=5, minute=0, second=0, tzinfo=VN_TZ)
+    job_queue.run_daily(
+        daily_restart_job,
+        time=restart_time,
+        days=(0, 1, 2, 3, 4, 5, 6),  # Every day
+        name="daily_restart"
+    )
+
+    # Set bot commands menu
+    async def post_init(application):
+        await application.bot.set_my_commands([
+            BotCommand("start", "🏠 Menu chính"),
+            BotCommand("vn", "📊 Phân tích mã (VD: /vn VCB)"),
+            BotCommand("top", "🏆 Top picks hôm nay"),
+            BotCommand("market", "🏛️ Tình hình thị trường"),
+            BotCommand("foreign", "🌐 Khối ngoại (VD: /foreign VCB)"),
+            BotCommand("winrate", "📈 Win rate tracking"),
+            BotCommand("backtest", "📋 Backtest report"),
+            BotCommand("help", "❓ Hướng dẫn"),
+        ])
+
+    app.post_init = post_init
+
     print("\n✅ Bot started! Press Ctrl+C to stop.")
     print("📱 Open Telegram and send /start to your bot")
-    print(f"⏰ Scheduled scan: 16:00 daily (Mon-Fri, Vietnam time)\n")
+    print(f"⏰ Scheduled scan: 16:00 daily (Mon-Fri, Vietnam time)")
+    print(f"🔄 Auto-restart: 05:00 daily (to prevent stale state)\n")
 
     # Run bot
     app.run_polling(allowed_updates=Update.ALL_TYPES)

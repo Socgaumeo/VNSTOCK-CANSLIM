@@ -1,0 +1,66 @@
+{
+  "symbol": "NRC",
+  "last_updated": "2026-02-11T22:54:04.230687",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NRC",
+      "buy_value": 0.0,
+      "sell_value": 29120000.0,
+      "net_value": -29120000.0,
+      "buy_volume": 0,
+      "sell_volume": 5200,
+      "net_volume": -5200,
+      "price": 5.7,
+      "total_volume": 468700,
+      "foreign_pct": 1.1094516748453167
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NRC",
+      "buy_value": 0.0,
+      "sell_value": 29120000.0,
+      "net_value": -29120000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 5.7,
+      "total_volume": 415200,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NRC",
+      "buy_value": 0.0,
+      "sell_value": 29120000.0,
+      "net_value": -29120000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 5.7,
+      "total_volume": 580700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NRC",
+      "buy_value": 0.0,
+      "sell_value": 29120000.0,
+      "net_value": -29120000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 5.7,
+      "total_volume": 460900,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -116480000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

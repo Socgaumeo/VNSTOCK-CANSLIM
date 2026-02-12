@@ -1,0 +1,66 @@
+{
+  "symbol": "KDH",
+  "last_updated": "2026-02-11T22:54:47.411760",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "KDH",
+      "buy_value": 11059422000.0,
+      "sell_value": 56359185000.0,
+      "net_value": -45299763000.0,
+      "buy_volume": 429960,
+      "sell_volume": 2184000,
+      "net_volume": -1754040,
+      "price": 25.4,
+      "total_volume": 7494700,
+      "foreign_pct": 34.87744672902184
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "KDH",
+      "buy_value": 82434745000.0,
+      "sell_value": 15470133300.0,
+      "net_value": 66964611700.0,
+      "buy_volume": 3127900,
+      "sell_volume": 587163,
+      "net_volume": 2540737,
+      "price": 26.55,
+      "total_volume": 6905800,
+      "foreign_pct": 53.79627269831156
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "KDH",
+      "buy_value": 89939305000.0,
+      "sell_value": 21913930000.0,
+      "net_value": 68025375000.0,
+      "buy_volume": 3304200,
+      "sell_volume": 803900,
+      "net_volume": 2500300,
+      "price": 27.6,
+      "total_volume": 8868300,
+      "foreign_pct": 46.3234216253397
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "KDH",
+      "buy_value": 51899455000.0,
+      "sell_value": 31656285000.0,
+      "net_value": 20243170000.0,
+      "buy_volume": 1836300,
+      "sell_volume": 1115600,
+      "net_volume": 720700,
+      "price": 28.55,
+      "total_volume": 9648800,
+      "foreign_pct": 30.59344167150319
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 109933393700.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 60.95009781408351,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "ELC",
+  "last_updated": "2026-02-11T23:16:40.596911",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ELC",
+      "buy_value": 2076635000.0,
+      "sell_value": 874560000.0,
+      "net_value": 1202075000.0,
+      "buy_volume": 91900,
+      "sell_volume": 38300,
+      "net_volume": 53600,
+      "price": 23.0,
+      "total_volume": 1574600,
+      "foreign_pct": 8.268766670900545
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ELC",
+      "buy_value": 23000000.0,
+      "sell_value": 1403720000.0,
+      "net_value": -1380720000.0,
+      "buy_volume": 1000,
+      "sell_volume": 61000,
+      "net_volume": -60000,
+      "price": 23.1,
+      "total_volume": 416500,
+      "foreign_pct": 14.8859543817527
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ELC",
+      "buy_value": 316525000.0,
+      "sell_value": 898293950.0,
+      "net_value": -581768950.0,
+      "buy_volume": 14100,
+      "sell_volume": 39529,
+      "net_volume": -25429,
+      "price": 22.7,
+      "total_volume": 560800,
+      "foreign_pct": 9.562945791726106
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ELC",
+      "buy_value": 688595000.0,
+      "sell_value": 1213615000.0,
+      "net_value": -525020000.0,
+      "buy_volume": 30700,
+      "sell_volume": 53202,
+      "net_volume": -22502,
+      "price": 22.9,
+      "total_volume": 1208500,
+      "foreign_pct": 6.942656185353744
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1285433950.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 34.30136258724123,
+    "buy_days_count": 1,
+    "sell_days_count": 1
+  }
+}

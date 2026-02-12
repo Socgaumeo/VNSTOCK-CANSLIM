@@ -1,0 +1,66 @@
+{
+  "symbol": "GAS",
+  "last_updated": "2026-02-11T23:15:26.114642",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GAS",
+      "buy_value": 117131119000.0,
+      "sell_value": 37763412300.0,
+      "net_value": 79367706700.0,
+      "buy_volume": 1032527,
+      "sell_volume": 328923,
+      "net_volume": 703604,
+      "price": 115.0,
+      "total_volume": 3964600,
+      "foreign_pct": 34.34016041971447
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GAS",
+      "buy_value": 30832577100.0,
+      "sell_value": 18981786000.0,
+      "net_value": 11850791100.0,
+      "buy_volume": 266247,
+      "sell_volume": 163951,
+      "net_volume": 102296,
+      "price": 115.7,
+      "total_volume": 901300,
+      "foreign_pct": 47.73083324087429
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GAS",
+      "buy_value": 91344000000.0,
+      "sell_value": 153376011900.0,
+      "net_value": -62032011900.0,
+      "buy_volume": 820480,
+      "sell_volume": 1383505,
+      "net_volume": -563025,
+      "price": 107.7,
+      "total_volume": 6158900,
+      "foreign_pct": 35.785367516926726
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GAS",
+      "buy_value": 44398999600.0,
+      "sell_value": 58237811500.0,
+      "net_value": -13838811900.0,
+      "buy_volume": 427686,
+      "sell_volume": 558315,
+      "net_volume": -130629,
+      "price": 102.0,
+      "total_volume": 3230600,
+      "foreign_pct": 30.520677273571472
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 15347674000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 5.560089502489364,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

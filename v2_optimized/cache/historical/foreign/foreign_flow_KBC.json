@@ -1,0 +1,66 @@
+{
+  "symbol": "KBC",
+  "last_updated": "2026-02-11T22:54:52.869753",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "KBC",
+      "buy_value": 31338318650.0,
+      "sell_value": 29236701000.0,
+      "net_value": 2101617650.0,
+      "buy_volume": 909905,
+      "sell_volume": 840980,
+      "net_volume": 68925,
+      "price": 34.2,
+      "total_volume": 7341600,
+      "foreign_pct": 23.84882042061676
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "KBC",
+      "buy_value": 1438347300.0,
+      "sell_value": 9016040000.0,
+      "net_value": -7577692700.0,
+      "buy_volume": 41706,
+      "sell_volume": 262200,
+      "net_volume": -220494,
+      "price": 34.5,
+      "total_volume": 1892400,
+      "foreign_pct": 16.059289790741914
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "KBC",
+      "buy_value": 2176725000.0,
+      "sell_value": 5555136050.0,
+      "net_value": -3378411050.0,
+      "buy_volume": 65200,
+      "sell_volume": 162899,
+      "net_volume": -97699,
+      "price": 34.0,
+      "total_volume": 3720400,
+      "foreign_pct": 6.1310342973873775
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "KBC",
+      "buy_value": 4368030000.0,
+      "sell_value": 18039315000.0,
+      "net_value": -13671285000.0,
+      "buy_volume": 127700,
+      "sell_volume": 527400,
+      "net_volume": -399700,
+      "price": 34.2,
+      "total_volume": 2313800,
+      "foreign_pct": 28.312732301841127
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -22525771100.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 44.53114544527757,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

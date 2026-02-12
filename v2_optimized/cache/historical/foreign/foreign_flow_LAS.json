@@ -1,0 +1,66 @@
+{
+  "symbol": "LAS",
+  "last_updated": "2026-02-11T23:01:04.262771",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "LAS",
+      "buy_value": 0.0,
+      "sell_value": 232760000.0,
+      "net_value": -232760000.0,
+      "buy_volume": 0,
+      "sell_volume": 13600,
+      "net_volume": -13600,
+      "price": 16.9,
+      "total_volume": 425600,
+      "foreign_pct": 3.195488721804511
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "LAS",
+      "buy_value": 0.0,
+      "sell_value": 101400000.0,
+      "net_value": -101400000.0,
+      "buy_volume": 0,
+      "sell_volume": 6000,
+      "net_volume": -6000,
+      "price": 16.8,
+      "total_volume": 235200,
+      "foreign_pct": 2.5510204081632653
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "LAS",
+      "buy_value": 0.0,
+      "sell_value": 436010000.0,
+      "net_value": -436010000.0,
+      "buy_volume": 0,
+      "sell_volume": 25900,
+      "net_volume": -25900,
+      "price": 16.5,
+      "total_volume": 347200,
+      "foreign_pct": 7.459677419354839
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "LAS",
+      "buy_value": 0.0,
+      "sell_value": 8350000.0,
+      "net_value": -8350000.0,
+      "buy_volume": 0,
+      "sell_volume": 500,
+      "net_volume": -500,
+      "price": 16.5,
+      "total_volume": 251700,
+      "foreign_pct": 0.1986491855383393
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -778520000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

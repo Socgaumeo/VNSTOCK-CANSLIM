@@ -1,0 +1,66 @@
+{
+  "symbol": "VTO",
+  "last_updated": "2026-02-11T22:57:11.823919",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VTO",
+      "buy_value": 23750000.0,
+      "sell_value": 355270000.0,
+      "net_value": -331520000.0,
+      "buy_volume": 2000,
+      "sell_volume": 29800,
+      "net_volume": -27800,
+      "price": 11.8,
+      "total_volume": 600600,
+      "foreign_pct": 5.294705294705294
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VTO",
+      "buy_value": 0.0,
+      "sell_value": 544560000.0,
+      "net_value": -544560000.0,
+      "buy_volume": 0,
+      "sell_volume": 45900,
+      "net_volume": -45900,
+      "price": 11.85,
+      "total_volume": 135900,
+      "foreign_pct": 33.77483443708609
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VTO",
+      "buy_value": 0.0,
+      "sell_value": 303025000.0,
+      "net_value": -303025000.0,
+      "buy_volume": 0,
+      "sell_volume": 25600,
+      "net_volume": -25600,
+      "price": 11.8,
+      "total_volume": 212300,
+      "foreign_pct": 12.058407913330193
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VTO",
+      "buy_value": 0.0,
+      "sell_value": 22470000.0,
+      "net_value": -22470000.0,
+      "buy_volume": 0,
+      "sell_volume": 1900,
+      "net_volume": -1900,
+      "price": 11.85,
+      "total_volume": 82600,
+      "foreign_pct": 2.3002421307506054
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1201575000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

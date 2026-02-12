@@ -1,0 +1,66 @@
+{
+  "symbol": "VCI",
+  "last_updated": "2026-02-11T22:48:16.014721",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VCI",
+      "buy_value": 10628688700.0,
+      "sell_value": 56914843500.0,
+      "net_value": -46286154800.0,
+      "buy_volume": 303250,
+      "sell_volume": 1618000,
+      "net_volume": -1314750,
+      "price": 34.25,
+      "total_volume": 14180300,
+      "foreign_pct": 13.548726049519402
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VCI",
+      "buy_value": 1783435000.0,
+      "sell_value": 14557102800.0,
+      "net_value": -12773667800.0,
+      "buy_volume": 51800,
+      "sell_volume": 422869,
+      "net_volume": -371069,
+      "price": 34.45,
+      "total_volume": 4853800,
+      "foreign_pct": 9.779327537187358
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VCI",
+      "buy_value": 7878735000.0,
+      "sell_value": 2465123000.0,
+      "net_value": 5413612000.0,
+      "buy_volume": 229000,
+      "sell_volume": 71110,
+      "net_volume": 157890,
+      "price": 34.75,
+      "total_volume": 4436000,
+      "foreign_pct": 6.765329125338143
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VCI",
+      "buy_value": 16561225000.0,
+      "sell_value": 3398966400.0,
+      "net_value": 13162258600.0,
+      "buy_volume": 466500,
+      "sell_volume": 96152,
+      "net_volume": 370348,
+      "price": 35.55,
+      "total_volume": 6361500,
+      "foreign_pct": 8.844643558909063
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -40483952000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 70.90746780439578,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

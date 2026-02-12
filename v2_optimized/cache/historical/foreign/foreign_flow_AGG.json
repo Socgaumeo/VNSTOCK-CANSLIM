@@ -1,0 +1,66 @@
+{
+  "symbol": "AGG",
+  "last_updated": "2026-02-11T22:56:50.705704",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "AGG",
+      "buy_value": 4290000.0,
+      "sell_value": 1417285000.0,
+      "net_value": -1412995000.0,
+      "buy_volume": 300,
+      "sell_volume": 98200,
+      "net_volume": -97900,
+      "price": 14.35,
+      "total_volume": 446400,
+      "foreign_pct": 22.06541218637993
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "AGG",
+      "buy_value": 4305000.0,
+      "sell_value": 805320000.0,
+      "net_value": -801015000.0,
+      "buy_volume": 300,
+      "sell_volume": 56000,
+      "net_volume": -55700,
+      "price": 14.45,
+      "total_volume": 233900,
+      "foreign_pct": 24.070115433946132
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "AGG",
+      "buy_value": 486260000.0,
+      "sell_value": 1450000.0,
+      "net_value": 484810000.0,
+      "buy_volume": 33500,
+      "sell_volume": 100,
+      "net_volume": 33400,
+      "price": 14.4,
+      "total_volume": 203500,
+      "foreign_pct": 16.51105651105651
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "AGG",
+      "buy_value": 1446505000.0,
+      "sell_value": 7240000.0,
+      "net_value": 1439265000.0,
+      "buy_volume": 98700,
+      "sell_volume": 500,
+      "net_volume": 98200,
+      "price": 14.85,
+      "total_volume": 355200,
+      "foreign_pct": 27.927927927927925
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -289935000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 13.896907364735403,
+    "buy_days_count": 1,
+    "sell_days_count": 1
+  }
+}

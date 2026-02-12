@@ -1,0 +1,66 @@
+{
+  "symbol": "FTS",
+  "last_updated": "2026-02-11T22:50:50.722810",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "FTS",
+      "buy_value": 1079645000.0,
+      "sell_value": 4950595000.0,
+      "net_value": -3870950000.0,
+      "buy_volume": 33500,
+      "sell_volume": 153700,
+      "net_volume": -120200,
+      "price": 31.85,
+      "total_volume": 1296300,
+      "foreign_pct": 14.44110159685258
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "FTS",
+      "buy_value": 127475000.0,
+      "sell_value": 738468750.0,
+      "net_value": -610993750.0,
+      "buy_volume": 4000,
+      "sell_volume": 23161,
+      "net_volume": -19161,
+      "price": 31.85,
+      "total_volume": 467700,
+      "foreign_pct": 5.807355142185162
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "FTS",
+      "buy_value": 0.0,
+      "sell_value": 251350000.0,
+      "net_value": -251350000.0,
+      "buy_volume": 0,
+      "sell_volume": 7900,
+      "net_volume": -7900,
+      "price": 31.9,
+      "total_volume": 723800,
+      "foreign_pct": 1.091461729759602
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "FTS",
+      "buy_value": 1002705000.0,
+      "sell_value": 1411940000.0,
+      "net_value": -409235000.0,
+      "buy_volume": 31200,
+      "sell_volume": 44100,
+      "net_volume": -12900,
+      "price": 32.6,
+      "total_volume": 624600,
+      "foreign_pct": 12.055715658021134
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -5142528750.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

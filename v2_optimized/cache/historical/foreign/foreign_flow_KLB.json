@@ -1,0 +1,66 @@
+{
+  "symbol": "KLB",
+  "last_updated": "2026-02-11T22:50:23.984197",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "KLB",
+      "buy_value": 806325000.0,
+      "sell_value": 14970000.0,
+      "net_value": 791355000.0,
+      "buy_volume": 54200,
+      "sell_volume": 1000,
+      "net_volume": 53200,
+      "price": 14.6,
+      "total_volume": 433600,
+      "foreign_pct": 12.730627306273062
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "KLB",
+      "buy_value": 1057200000.0,
+      "sell_value": 811805000.0,
+      "net_value": 245395000.0,
+      "buy_volume": 71700,
+      "sell_volume": 55000,
+      "net_volume": 16700,
+      "price": 14.7,
+      "total_volume": 165600,
+      "foreign_pct": 76.50966183574879
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "KLB",
+      "buy_value": 11705000.0,
+      "sell_value": 282215000.0,
+      "net_value": -270510000.0,
+      "buy_volume": 800,
+      "sell_volume": 19100,
+      "net_volume": -18300,
+      "price": 14.5,
+      "total_volume": 163000,
+      "foreign_pct": 12.208588957055214
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "KLB",
+      "buy_value": 999365000.0,
+      "sell_value": 99430000.0,
+      "net_value": 899935000.0,
+      "buy_volume": 68100,
+      "sell_volume": 6800,
+      "net_volume": 61300,
+      "price": 14.55,
+      "total_volume": 352300,
+      "foreign_pct": 21.260289525972183
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 1666175000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 81.61493406220647,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

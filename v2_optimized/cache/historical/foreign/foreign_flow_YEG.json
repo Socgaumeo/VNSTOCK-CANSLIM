@@ -1,0 +1,66 @@
+{
+  "symbol": "YEG",
+  "last_updated": "2026-02-11T23:05:23.217641",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "YEG",
+      "buy_value": 249090000.0,
+      "sell_value": 170825000.0,
+      "net_value": 78265000.0,
+      "buy_volume": 20400,
+      "sell_volume": 14000,
+      "net_volume": 6400,
+      "price": 12.1,
+      "total_volume": 1259400,
+      "foreign_pct": 2.7314594251230746
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "YEG",
+      "buy_value": 41310000.0,
+      "sell_value": 1797170000.0,
+      "net_value": -1755860000.0,
+      "buy_volume": 3400,
+      "sell_volume": 148000,
+      "net_volume": -144600,
+      "price": 12.15,
+      "total_volume": 723700,
+      "foreign_pct": 20.92027083045461
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "YEG",
+      "buy_value": 0.0,
+      "sell_value": 409545000.0,
+      "net_value": -409545000.0,
+      "buy_volume": 0,
+      "sell_volume": 33700,
+      "net_volume": -33700,
+      "price": 12.15,
+      "total_volume": 791700,
+      "foreign_pct": 4.256662877352532
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "YEG",
+      "buy_value": 198985000.0,
+      "sell_value": 252550000.0,
+      "net_value": -53565000.0,
+      "buy_volume": 16200,
+      "sell_volume": 20400,
+      "net_volume": -4200,
+      "price": 12.3,
+      "total_volume": 1317400,
+      "foreign_pct": 2.77819948383179
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2140705000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

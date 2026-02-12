@@ -1,0 +1,66 @@
+{
+  "symbol": "VDS",
+  "last_updated": "2026-02-11T22:48:05.805670",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VDS",
+      "buy_value": 9656040000.0,
+      "sell_value": 3849115000.0,
+      "net_value": 5806925000.0,
+      "buy_volume": 538700,
+      "sell_volume": 215000,
+      "net_volume": 323700,
+      "price": 17.45,
+      "total_volume": 1746500,
+      "foreign_pct": 43.15488119095334
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VDS",
+      "buy_value": 741300000.0,
+      "sell_value": 101125000.0,
+      "net_value": 640175000.0,
+      "buy_volume": 42000,
+      "sell_volume": 5800,
+      "net_volume": 36200,
+      "price": 17.65,
+      "total_volume": 474100,
+      "foreign_pct": 10.082261126344653
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VDS",
+      "buy_value": 199600000.0,
+      "sell_value": 1545410000.0,
+      "net_value": -1345810000.0,
+      "buy_volume": 11600,
+      "sell_volume": 88400,
+      "net_volume": -76800,
+      "price": 17.6,
+      "total_volume": 731400,
+      "foreign_pct": 13.672409078479628
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VDS",
+      "buy_value": 3611495000.0,
+      "sell_value": 1801775000.0,
+      "net_value": 1809720000.0,
+      "buy_volume": 200000,
+      "sell_volume": 100800,
+      "net_volume": 99200,
+      "price": 18.2,
+      "total_volume": 1437600,
+      "foreign_pct": 20.92376182526433
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 6911010000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 64.27094754638968,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

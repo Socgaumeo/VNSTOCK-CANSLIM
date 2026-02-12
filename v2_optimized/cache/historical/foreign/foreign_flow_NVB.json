@@ -1,0 +1,66 @@
+{
+  "symbol": "NVB",
+  "last_updated": "2026-02-11T22:49:48.702189",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NVB",
+      "buy_value": 1250000.0,
+      "sell_value": 0.0,
+      "net_value": 1250000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 11.9,
+      "total_volume": 236700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NVB",
+      "buy_value": 1170000.0,
+      "sell_value": 0.0,
+      "net_value": 1170000.0,
+      "buy_volume": 100,
+      "sell_volume": 0,
+      "net_volume": 100,
+      "price": 11.7,
+      "total_volume": 110300,
+      "foreign_pct": 0.09066183136899365
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NVB",
+      "buy_value": 8310000.0,
+      "sell_value": 0.0,
+      "net_value": 8310000.0,
+      "buy_volume": 700,
+      "sell_volume": 0,
+      "net_volume": 700,
+      "price": 11.9,
+      "total_volume": 109200,
+      "foreign_pct": 0.641025641025641
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NVB",
+      "buy_value": 4820000.0,
+      "sell_value": 0.0,
+      "net_value": 4820000.0,
+      "buy_volume": 400,
+      "sell_volume": 0,
+      "net_volume": 400,
+      "price": 12.1,
+      "total_volume": 96700,
+      "foreign_pct": 0.4136504653567736
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 15550000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

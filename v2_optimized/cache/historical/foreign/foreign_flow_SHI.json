@@ -1,0 +1,66 @@
+{
+  "symbol": "SHI",
+  "last_updated": "2026-02-11T22:58:45.436532",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SHI",
+      "buy_value": 12780000.0,
+      "sell_value": 129220000.0,
+      "net_value": -116440000.0,
+      "buy_volume": 900,
+      "sell_volume": 9100,
+      "net_volume": -8200,
+      "price": 14.1,
+      "total_volume": 443900,
+      "foreign_pct": 2.2527596305474207
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SHI",
+      "buy_value": 170965000.0,
+      "sell_value": 28000000.0,
+      "net_value": 142965000.0,
+      "buy_volume": 12200,
+      "sell_volume": 2000,
+      "net_volume": 10200,
+      "price": 14.05,
+      "total_volume": 799800,
+      "foreign_pct": 1.7754438609652412
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SHI",
+      "buy_value": 239310000.0,
+      "sell_value": 206720000.0,
+      "net_value": 32590000.0,
+      "buy_volume": 17000,
+      "sell_volume": 14700,
+      "net_volume": 2300,
+      "price": 14.3,
+      "total_volume": 875700,
+      "foreign_pct": 3.6199611739180084
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SHI",
+      "buy_value": 237505000.0,
+      "sell_value": 65450000.0,
+      "net_value": 172055000.0,
+      "buy_volume": 16700,
+      "sell_volume": 4600,
+      "net_volume": 12100,
+      "price": 14.3,
+      "total_volume": 370000,
+      "foreign_pct": 5.756756756756757
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 231170000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 42.41845956236524,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

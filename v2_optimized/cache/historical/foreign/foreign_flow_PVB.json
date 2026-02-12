@@ -1,0 +1,66 @@
+{
+  "symbol": "PVB",
+  "last_updated": "2026-02-11T22:59:38.913219",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PVB",
+      "buy_value": 2491250000.0,
+      "sell_value": 21900000.0,
+      "net_value": 2469350000.0,
+      "buy_volume": 75000,
+      "sell_volume": 600,
+      "net_volume": 74400,
+      "price": 34.3,
+      "total_volume": 911000,
+      "foreign_pct": 8.298572996706916
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PVB",
+      "buy_value": 55490000.0,
+      "sell_value": 737170000.0,
+      "net_value": -681680000.0,
+      "buy_volume": 1600,
+      "sell_volume": 21200,
+      "net_volume": -19600,
+      "price": 35.9,
+      "total_volume": 177100,
+      "foreign_pct": 12.87408243929983
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PVB",
+      "buy_value": 200200000.0,
+      "sell_value": 1077530000.0,
+      "net_value": -877330000.0,
+      "buy_volume": 6100,
+      "sell_volume": 30100,
+      "net_volume": -24000,
+      "price": 33.0,
+      "total_volume": 443800,
+      "foreign_pct": 8.156827399729607
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PVB",
+      "buy_value": 833730000.0,
+      "sell_value": 1129860000.0,
+      "net_value": -296130000.0,
+      "buy_volume": 25400,
+      "sell_volume": 34400,
+      "net_volume": -9000,
+      "price": 33.0,
+      "total_volume": 197300,
+      "foreign_pct": 30.3091738469336
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 614210000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 18.762725041354,
+    "buy_days_count": 1,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "VGS",
+  "last_updated": "2026-02-11T22:57:39.379230",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VGS",
+      "buy_value": 641340000.0,
+      "sell_value": 977280000.0,
+      "net_value": -335940000.0,
+      "buy_volume": 23800,
+      "sell_volume": 36300,
+      "net_volume": -12500,
+      "price": 26.5,
+      "total_volume": 1040100,
+      "foreign_pct": 5.778290548985675
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VGS",
+      "buy_value": 58520000.0,
+      "sell_value": 1255130000.0,
+      "net_value": -1196610000.0,
+      "buy_volume": 2200,
+      "sell_volume": 47100,
+      "net_volume": -44900,
+      "price": 26.5,
+      "total_volume": 224300,
+      "foreign_pct": 21.9794917521177
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VGS",
+      "buy_value": 0.0,
+      "sell_value": 997650000.0,
+      "net_value": -997650000.0,
+      "buy_volume": 0,
+      "sell_volume": 37600,
+      "net_volume": -37600,
+      "price": 25.9,
+      "total_volume": 506100,
+      "foreign_pct": 7.4293617862082595
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VGS",
+      "buy_value": 21040000.0,
+      "sell_value": 428960000.0,
+      "net_value": -407920000.0,
+      "buy_volume": 800,
+      "sell_volume": 16300,
+      "net_volume": -15500,
+      "price": 26.3,
+      "total_volume": 232400,
+      "foreign_pct": 7.3580034423407925
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2938120000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

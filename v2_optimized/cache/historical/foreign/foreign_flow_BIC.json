@@ -1,0 +1,66 @@
+{
+  "symbol": "BIC",
+  "last_updated": "2026-02-11T23:09:57.407096",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BIC",
+      "buy_value": 127650600.0,
+      "sell_value": 780146600.0,
+      "net_value": -652496000.0,
+      "buy_volume": 5101,
+      "sell_volume": 30861,
+      "net_volume": -25760,
+      "price": 25.0,
+      "total_volume": 308100,
+      "foreign_pct": 11.67218435572866
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BIC",
+      "buy_value": 149215000.0,
+      "sell_value": 2342070400.0,
+      "net_value": -2192855400.0,
+      "buy_volume": 6200,
+      "sell_volume": 95827,
+      "net_volume": -89627,
+      "price": 24.35,
+      "total_volume": 213800,
+      "foreign_pct": 47.720767072029936
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BIC",
+      "buy_value": 88535000.0,
+      "sell_value": 159110000.0,
+      "net_value": -70575000.0,
+      "buy_volume": 3600,
+      "sell_volume": 6600,
+      "net_volume": -3000,
+      "price": 23.9,
+      "total_volume": 122800,
+      "foreign_pct": 8.306188925081432
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BIC",
+      "buy_value": 525385000.0,
+      "sell_value": 0.0,
+      "net_value": 525385000.0,
+      "buy_volume": 21800,
+      "sell_volume": 0,
+      "net_volume": 21800,
+      "price": 24.65,
+      "total_volume": 142600,
+      "foreign_pct": 15.287517531556801
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2390541400.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

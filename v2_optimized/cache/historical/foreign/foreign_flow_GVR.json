@@ -1,0 +1,66 @@
+{
+  "symbol": "GVR",
+  "last_updated": "2026-02-11T23:15:07.432378",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GVR",
+      "buy_value": 47096975000.0,
+      "sell_value": 22843485000.0,
+      "net_value": 24253490000.0,
+      "buy_volume": 1191300,
+      "sell_volume": 569300,
+      "net_volume": 622000,
+      "price": 39.0,
+      "total_volume": 5838700,
+      "foreign_pct": 30.153972630893865
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GVR",
+      "buy_value": 21878105000.0,
+      "sell_value": 28510535000.0,
+      "net_value": -6632430000.0,
+      "buy_volume": 560000,
+      "sell_volume": 729500,
+      "net_volume": -169500,
+      "price": 38.65,
+      "total_volume": 2801400,
+      "foreign_pct": 46.03055615049618
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GVR",
+      "buy_value": 94934935000.0,
+      "sell_value": 37280275000.0,
+      "net_value": 57654660000.0,
+      "buy_volume": 2571800,
+      "sell_volume": 1025600,
+      "net_volume": 1546200,
+      "price": 35.95,
+      "total_volume": 10816400,
+      "foreign_pct": 33.25875522354942
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GVR",
+      "buy_value": 42524790000.0,
+      "sell_value": 65716470000.0,
+      "net_value": -23191680000.0,
+      "buy_volume": 1192800,
+      "sell_volume": 1835300,
+      "net_volume": -642500,
+      "price": 35.3,
+      "total_volume": 5445000,
+      "foreign_pct": 55.61248852157943
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 52084040000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 28.872573811641082,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

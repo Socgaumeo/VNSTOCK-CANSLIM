@@ -1,0 +1,66 @@
+{
+  "symbol": "VCK",
+  "last_updated": "2026-02-11T22:48:10.858726",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VCK",
+      "buy_value": 5287375000.0,
+      "sell_value": 15090815000.0,
+      "net_value": -9803440000.0,
+      "buy_volume": 122900,
+      "sell_volume": 344500,
+      "net_volume": -221600,
+      "price": 42.8,
+      "total_volume": 2423800,
+      "foreign_pct": 19.28376928789504
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VCK",
+      "buy_value": 14641240000.0,
+      "sell_value": 7075880000.0,
+      "net_value": 7565360000.0,
+      "buy_volume": 343700,
+      "sell_volume": 165600,
+      "net_volume": 178100,
+      "price": 42.7,
+      "total_volume": 1435900,
+      "foreign_pct": 35.46904380527892
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VCK",
+      "buy_value": 44835145000.0,
+      "sell_value": 904975000.0,
+      "net_value": 43930170000.0,
+      "buy_volume": 1027700,
+      "sell_volume": 21300,
+      "net_volume": 1006400,
+      "price": 45.65,
+      "total_volume": 3065700,
+      "foreign_pct": 34.21730762957889
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VCK",
+      "buy_value": 26083580500.0,
+      "sell_value": 1795135000.0,
+      "net_value": 24288445500.0,
+      "buy_volume": 570510,
+      "sell_volume": 39300,
+      "net_volume": 531210,
+      "price": 45.9,
+      "total_volume": 2245400,
+      "foreign_pct": 27.15819007749176
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 65980535500.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

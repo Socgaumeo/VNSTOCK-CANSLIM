@@ -1,0 +1,66 @@
+{
+  "symbol": "NVL",
+  "last_updated": "2026-02-11T22:53:53.933054",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NVL",
+      "buy_value": 21638475600.0,
+      "sell_value": 11404855000.0,
+      "net_value": 10233620600.0,
+      "buy_volume": 1776380,
+      "sell_volume": 938000,
+      "net_volume": 838380,
+      "price": 12.2,
+      "total_volume": 7101300,
+      "foreign_pct": 38.22370551870784
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NVL",
+      "buy_value": 4819920000.0,
+      "sell_value": 12557545000.0,
+      "net_value": -7737625000.0,
+      "buy_volume": 393200,
+      "sell_volume": 1028000,
+      "net_volume": -634800,
+      "price": 12.2,
+      "total_volume": 3929200,
+      "foreign_pct": 36.17021276595745
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NVL",
+      "buy_value": 12616865000.0,
+      "sell_value": 172900000.0,
+      "net_value": 12443965000.0,
+      "buy_volume": 1023200,
+      "sell_volume": 14000,
+      "net_volume": 1009200,
+      "price": 12.3,
+      "total_volume": 4514500,
+      "foreign_pct": 22.974858788348655
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NVL",
+      "buy_value": 10146180000.0,
+      "sell_value": 6004715000.0,
+      "net_value": 4141465000.0,
+      "buy_volume": 809900,
+      "sell_volume": 473600,
+      "net_volume": 336300,
+      "price": 12.8,
+      "total_volume": 6272500,
+      "foreign_pct": 20.46233559186927
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 19081425600.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 48.08738815521423,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

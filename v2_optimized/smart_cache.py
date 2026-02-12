@@ -40,6 +40,11 @@ class CacheDataType(Enum):
     DAILY_PRICE = "daily_price"                      # Giá, Volume
     VOLUME_AVERAGE = "volume_average"                # Volume TB 20 ngày
 
+    # Historical data tracking (NEW)
+    DAILY_PRICE_SNAPSHOT = "daily_price_snapshot"    # Daily OHLCV + indicators (30 ngày)
+    DAILY_FOREIGN_FLOW = "daily_foreign_flow"        # Daily foreign buy/sell (30 ngày)
+    RECOMMENDATION_HISTORY = "recommendation_history" # Daily picks + tracking
+
 
 # TTL mặc định cho từng loại dữ liệu (ngày)
 DEFAULT_TTL = {
@@ -51,6 +56,10 @@ DEFAULT_TTL = {
     CacheDataType.COMPANY_INFO: 30,              # 30 ngày
     CacheDataType.DAILY_PRICE: 0,                # Không cache (0 = always fetch)
     CacheDataType.VOLUME_AVERAGE: 1,             # 1 ngày
+    # Historical data (keep 30-90 days of snapshots)
+    CacheDataType.DAILY_PRICE_SNAPSHOT: 30,      # Giữ 30 ngày snapshot
+    CacheDataType.DAILY_FOREIGN_FLOW: 30,        # Giữ 30 ngày foreign flow
+    CacheDataType.RECOMMENDATION_HISTORY: 90,    # Giữ 90 ngày recommendations
 }
 
 

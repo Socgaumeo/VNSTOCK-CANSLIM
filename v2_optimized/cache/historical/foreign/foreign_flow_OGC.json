@@ -1,0 +1,66 @@
+{
+  "symbol": "OGC",
+  "last_updated": "2026-02-11T22:49:38.771605",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "OGC",
+      "buy_value": 1025000.0,
+      "sell_value": 17550000.0,
+      "net_value": -16525000.0,
+      "buy_volume": 300,
+      "sell_volume": 5000,
+      "net_volume": -4700,
+      "price": 3.45,
+      "total_volume": 501100,
+      "foreign_pct": 1.0576731191378965
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "OGC",
+      "buy_value": 1025000.0,
+      "sell_value": 17550000.0,
+      "net_value": -16525000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 3.46,
+      "total_volume": 586200,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "OGC",
+      "buy_value": 1025000.0,
+      "sell_value": 17550000.0,
+      "net_value": -16525000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 3.45,
+      "total_volume": 390900,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "OGC",
+      "buy_value": 1025000.0,
+      "sell_value": 17550000.0,
+      "net_value": -16525000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 3.44,
+      "total_volume": 334300,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -66100000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

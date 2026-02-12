@@ -1,0 +1,66 @@
+{
+  "symbol": "ANV",
+  "last_updated": "2026-02-11T23:08:13.624677",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ANV",
+      "buy_value": 4301200000.0,
+      "sell_value": 2903945000.0,
+      "net_value": 1397255000.0,
+      "buy_volume": 154300,
+      "sell_volume": 103000,
+      "net_volume": 51300,
+      "price": 27.3,
+      "total_volume": 2996000,
+      "foreign_pct": 8.588117489986649
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ANV",
+      "buy_value": 1291525000.0,
+      "sell_value": 6783550000.0,
+      "net_value": -5492025000.0,
+      "buy_volume": 47900,
+      "sell_volume": 250900,
+      "net_volume": -203000,
+      "price": 26.7,
+      "total_volume": 1235700,
+      "foreign_pct": 24.18062636562272
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ANV",
+      "buy_value": 7340245000.0,
+      "sell_value": 4140970000.0,
+      "net_value": 3199275000.0,
+      "buy_volume": 284600,
+      "sell_volume": 156600,
+      "net_volume": 128000,
+      "price": 25.55,
+      "total_volume": 2325500,
+      "foreign_pct": 18.972264029241025
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ANV",
+      "buy_value": 3002660000.0,
+      "sell_value": 2510310000.0,
+      "net_value": 492350000.0,
+      "buy_volume": 114700,
+      "sell_volume": 96100,
+      "net_volume": 18600,
+      "price": 26.4,
+      "total_volume": 1334300,
+      "foreign_pct": 15.798546054110771
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -403145000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 2.498233507325697,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

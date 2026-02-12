@@ -1,0 +1,66 @@
+{
+  "symbol": "VPB",
+  "last_updated": "2026-02-11T22:47:34.723053",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VPB",
+      "buy_value": 6920630000.0,
+      "sell_value": 74078185000.0,
+      "net_value": -67157555000.0,
+      "buy_volume": 256100,
+      "sell_volume": 2742300,
+      "net_volume": -2486200,
+      "price": 26.8,
+      "total_volume": 18137700,
+      "foreign_pct": 16.53131323155637
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VPB",
+      "buy_value": 11491855000.0,
+      "sell_value": 85665255000.0,
+      "net_value": -74173400000.0,
+      "buy_volume": 428600,
+      "sell_volume": 3197800,
+      "net_volume": -2769200,
+      "price": 26.75,
+      "total_volume": 8770500,
+      "foreign_pct": 41.34769967504703
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VPB",
+      "buy_value": 3839228000.0,
+      "sell_value": 64182886650.0,
+      "net_value": -60343658650.0,
+      "buy_volume": 144010,
+      "sell_volume": 2399704,
+      "net_volume": -2255694,
+      "price": 26.6,
+      "total_volume": 11076900,
+      "foreign_pct": 22.964132564165062
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VPB",
+      "buy_value": 192241155000.0,
+      "sell_value": 29668511000.0,
+      "net_value": 162572644000.0,
+      "buy_volume": 6874700,
+      "sell_volume": 1080120,
+      "net_volume": 5794580,
+      "price": 28.3,
+      "total_volume": 28252000,
+      "foreign_pct": 28.156661475293788
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -39101969650.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 16.707112439837267,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

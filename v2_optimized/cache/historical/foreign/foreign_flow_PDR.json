@@ -1,0 +1,66 @@
+{
+  "symbol": "PDR",
+  "last_updated": "2026-02-11T22:53:48.684864",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PDR",
+      "buy_value": 1920370800.0,
+      "sell_value": 12265330000.0,
+      "net_value": -10344959200.0,
+      "buy_volume": 112840,
+      "sell_volume": 719700,
+      "net_volume": -606860,
+      "price": 17.0,
+      "total_volume": 9062200,
+      "foreign_pct": 9.18695239566551
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PDR",
+      "buy_value": 5547820000.0,
+      "sell_value": 4014630000.0,
+      "net_value": 1533190000.0,
+      "buy_volume": 327100,
+      "sell_volume": 236000,
+      "net_volume": 91100,
+      "price": 17.3,
+      "total_volume": 3906400,
+      "foreign_pct": 14.414806471431497
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PDR",
+      "buy_value": 23540275000.0,
+      "sell_value": 925550000.0,
+      "net_value": 22614725000.0,
+      "buy_volume": 1364900,
+      "sell_volume": 53500,
+      "net_volume": 1311400,
+      "price": 17.3,
+      "total_volume": 5645700,
+      "foreign_pct": 25.12354535310059
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PDR",
+      "buy_value": 40202995000.0,
+      "sell_value": 5704250000.0,
+      "net_value": 34498745000.0,
+      "buy_volume": 2271900,
+      "sell_volume": 325100,
+      "net_volume": 1946800,
+      "price": 17.9,
+      "total_volume": 11829900,
+      "foreign_pct": 21.952848291194346
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 48301700800.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

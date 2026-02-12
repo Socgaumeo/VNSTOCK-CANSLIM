@@ -1,0 +1,66 @@
+{
+  "symbol": "BCM",
+  "last_updated": "2026-02-11T22:56:40.249773",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BCM",
+      "buy_value": 18839180000.0,
+      "sell_value": 61384050000.0,
+      "net_value": -42544870000.0,
+      "buy_volume": 282200,
+      "sell_volume": 921400,
+      "net_volume": -639200,
+      "price": 65.5,
+      "total_volume": 2006400,
+      "foreign_pct": 59.988038277511954
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BCM",
+      "buy_value": 27677790000.0,
+      "sell_value": 71469830000.0,
+      "net_value": -43792040000.0,
+      "buy_volume": 426800,
+      "sell_volume": 1104900,
+      "net_volume": -678100,
+      "price": 64.1,
+      "total_volume": 1810700,
+      "foreign_pct": 84.59159441100127
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BCM",
+      "buy_value": 10815930000.0,
+      "sell_value": 2259850000.0,
+      "net_value": 8556080000.0,
+      "buy_volume": 167200,
+      "sell_volume": 34800,
+      "net_volume": 132400,
+      "price": 64.5,
+      "total_volume": 818100,
+      "foreign_pct": 24.691358024691358
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BCM",
+      "buy_value": 479583500.0,
+      "sell_value": 13417280000.0,
+      "net_value": -12937696500.0,
+      "buy_volume": 7405,
+      "sell_volume": 207400,
+      "net_volume": -199995,
+      "price": 64.6,
+      "total_volume": 617100,
+      "foreign_pct": 34.80878301733917
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -90718526500.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 87.92962158508769,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

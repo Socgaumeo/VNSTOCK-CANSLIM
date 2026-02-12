@@ -1,0 +1,66 @@
+{
+  "symbol": "NT2",
+  "last_updated": "2026-02-11T23:14:39.448458",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NT2",
+      "buy_value": 25652880000.0,
+      "sell_value": 2683565000.0,
+      "net_value": 22969315000.0,
+      "buy_volume": 960900,
+      "sell_volume": 101000,
+      "net_volume": 859900,
+      "price": 26.75,
+      "total_volume": 2061400,
+      "foreign_pct": 51.513534491122535
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NT2",
+      "buy_value": 21496255000.0,
+      "sell_value": 10197940000.0,
+      "net_value": 11298315000.0,
+      "buy_volume": 797000,
+      "sell_volume": 378900,
+      "net_volume": 418100,
+      "price": 26.95,
+      "total_volume": 1059500,
+      "foreign_pct": 110.98631429919774
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NT2",
+      "buy_value": 8663815000.0,
+      "sell_value": 5896030000.0,
+      "net_value": 2767785000.0,
+      "buy_volume": 325100,
+      "sell_volume": 221200,
+      "net_volume": 103900,
+      "price": 26.8,
+      "total_volume": 903600,
+      "foreign_pct": 60.45816733067729
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NT2",
+      "buy_value": 9185785000.0,
+      "sell_value": 1373400000.0,
+      "net_value": 7812385000.0,
+      "buy_volume": 343000,
+      "sell_volume": 51500,
+      "net_volume": 291500,
+      "price": 26.9,
+      "total_volume": 630400,
+      "foreign_pct": 62.579314720812185
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 44847800000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 4,
+    "sell_days_count": 0
+  }
+}

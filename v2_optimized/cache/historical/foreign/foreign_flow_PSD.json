@@ -1,0 +1,66 @@
+{
+  "symbol": "PSD",
+  "last_updated": "2026-02-11T23:05:43.198813",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PSD",
+      "buy_value": 0.0,
+      "sell_value": 1380000.0,
+      "net_value": -1380000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 17.4,
+      "total_volume": 195400,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PSD",
+      "buy_value": 0.0,
+      "sell_value": 1380000.0,
+      "net_value": -1380000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 17.3,
+      "total_volume": 31600,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PSD",
+      "buy_value": 0.0,
+      "sell_value": 1380000.0,
+      "net_value": -1380000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 16.4,
+      "total_volume": 238700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PSD",
+      "buy_value": 0.0,
+      "sell_value": 1380000.0,
+      "net_value": -1380000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 16.8,
+      "total_volume": 71500,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -5520000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

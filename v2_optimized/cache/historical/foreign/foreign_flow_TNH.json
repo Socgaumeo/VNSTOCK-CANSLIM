@@ -1,0 +1,66 @@
+{
+  "symbol": "TNH",
+  "last_updated": "2026-02-11T23:04:40.902752",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TNH",
+      "buy_value": 695220000.0,
+      "sell_value": 58690000.0,
+      "net_value": 636530000.0,
+      "buy_volume": 58300,
+      "sell_volume": 4900,
+      "net_volume": 53400,
+      "price": 11.9,
+      "total_volume": 129000,
+      "foreign_pct": 48.992248062015506
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TNH",
+      "buy_value": 140670000.0,
+      "sell_value": 493670000.0,
+      "net_value": -353000000.0,
+      "buy_volume": 11900,
+      "sell_volume": 41600,
+      "net_volume": -29700,
+      "price": 11.8,
+      "total_volume": 69100,
+      "foreign_pct": 77.42402315484804
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TNH",
+      "buy_value": 304115000.0,
+      "sell_value": 1901000.0,
+      "net_value": 302214000.0,
+      "buy_volume": 25600,
+      "sell_volume": 160,
+      "net_volume": 25440,
+      "price": 11.9,
+      "total_volume": 102400,
+      "foreign_pct": 25.156250000000004
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TNH",
+      "buy_value": 0.0,
+      "sell_value": 3600000.0,
+      "net_value": -3600000.0,
+      "buy_volume": 0,
+      "sell_volume": 300,
+      "net_volume": -300,
+      "price": 11.95,
+      "total_volume": 31000,
+      "foreign_pct": 0.967741935483871
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 582144000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 68.5736094603461,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

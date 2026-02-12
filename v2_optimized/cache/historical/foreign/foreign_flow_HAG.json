@@ -1,0 +1,66 @@
+{
+  "symbol": "HAG",
+  "last_updated": "2026-02-11T23:07:48.639544",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HAG",
+      "buy_value": 364430000.0,
+      "sell_value": 1161895000.0,
+      "net_value": -797465000.0,
+      "buy_volume": 22300,
+      "sell_volume": 70200,
+      "net_volume": -47900,
+      "price": 16.1,
+      "total_volume": 8043200,
+      "foreign_pct": 1.1500397851601352
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HAG",
+      "buy_value": 1456610000.0,
+      "sell_value": 34230000.0,
+      "net_value": 1422380000.0,
+      "buy_volume": 91500,
+      "sell_volume": 2100,
+      "net_volume": 89400,
+      "price": 16.25,
+      "total_volume": 4842100,
+      "foreign_pct": 1.9330455793973689
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HAG",
+      "buy_value": 244262500.0,
+      "sell_value": 54825000.0,
+      "net_value": 189437500.0,
+      "buy_volume": 15090,
+      "sell_volume": 3400,
+      "net_volume": 11690,
+      "price": 15.9,
+      "total_volume": 3487000,
+      "foreign_pct": 0.5302552337252653
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HAG",
+      "buy_value": 2022480000.0,
+      "sell_value": 1163152200.0,
+      "net_value": 859327800.0,
+      "buy_volume": 125600,
+      "sell_volume": 72102,
+      "net_volume": 53498,
+      "price": 16.35,
+      "total_volume": 4156500,
+      "foreign_pct": 4.756453747143029
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 1673680300.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 51.48292771171411,
+    "buy_days_count": 1,
+    "sell_days_count": 0
+  }
+}

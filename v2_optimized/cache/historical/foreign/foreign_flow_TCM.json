@@ -1,0 +1,66 @@
+{
+  "symbol": "TCM",
+  "last_updated": "2026-02-11T23:05:38.172278",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TCM",
+      "buy_value": 154120000.0,
+      "sell_value": 1265395000.0,
+      "net_value": -1111275000.0,
+      "buy_volume": 5800,
+      "sell_volume": 47500,
+      "net_volume": -41700,
+      "price": 26.5,
+      "total_volume": 1526100,
+      "foreign_pct": 3.4925627416289893
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TCM",
+      "buy_value": 0.0,
+      "sell_value": 1180685000.0,
+      "net_value": -1180685000.0,
+      "buy_volume": 0,
+      "sell_volume": 44600,
+      "net_volume": -44600,
+      "price": 26.5,
+      "total_volume": 1510300,
+      "foreign_pct": 2.953055684301132
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TCM",
+      "buy_value": 0.0,
+      "sell_value": 151945000.0,
+      "net_value": -151945000.0,
+      "buy_volume": 0,
+      "sell_volume": 5800,
+      "net_volume": -5800,
+      "price": 26.3,
+      "total_volume": 1546400,
+      "foreign_pct": 0.3750646663217796
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TCM",
+      "buy_value": 70470000.0,
+      "sell_value": 73690000.0,
+      "net_value": -3220000.0,
+      "buy_volume": 2700,
+      "sell_volume": 2800,
+      "net_volume": -100,
+      "price": 26.3,
+      "total_volume": 2024500,
+      "foreign_pct": 0.27167201778216843
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2447125000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 2
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "DCL",
+  "last_updated": "2026-02-11T23:16:49.971416",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DCL",
+      "buy_value": 0.0,
+      "sell_value": 231000000.0,
+      "net_value": -231000000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 57.6,
+      "total_volume": 341700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DCL",
+      "buy_value": 0.0,
+      "sell_value": 231000000.0,
+      "net_value": -231000000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 57.7,
+      "total_volume": 268000,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DCL",
+      "buy_value": 0.0,
+      "sell_value": 22960000.0,
+      "net_value": -22960000.0,
+      "buy_volume": 0,
+      "sell_volume": 400,
+      "net_volume": -400,
+      "price": 57.7,
+      "total_volume": 255300,
+      "foreign_pct": 0.15667841754798276
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DCL",
+      "buy_value": 0.0,
+      "sell_value": 22960000.0,
+      "net_value": -22960000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 57.6,
+      "total_volume": 317400,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -507920000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

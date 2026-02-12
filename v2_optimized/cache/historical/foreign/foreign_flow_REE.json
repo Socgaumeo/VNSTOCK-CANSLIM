@@ -1,0 +1,66 @@
+{
+  "symbol": "REE",
+  "last_updated": "2026-02-11T22:59:01.229999",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "REE",
+      "buy_value": 3116025400.0,
+      "sell_value": 0.0,
+      "net_value": 3116025400.0,
+      "buy_volume": 49936,
+      "sell_volume": 0,
+      "net_volume": 49936,
+      "price": 61.3,
+      "total_volume": 645700,
+      "foreign_pct": 7.733622425274896
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "REE",
+      "buy_value": 3116025400.0,
+      "sell_value": 0.0,
+      "net_value": 3116025400.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 61.4,
+      "total_volume": 311300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "REE",
+      "buy_value": 861000.0,
+      "sell_value": 0.0,
+      "net_value": 861000.0,
+      "buy_volume": 14,
+      "sell_volume": 0,
+      "net_volume": 14,
+      "price": 60.5,
+      "total_volume": 744400,
+      "foreign_pct": 0.0018807092960773778
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "REE",
+      "buy_value": 861000.0,
+      "sell_value": 0.0,
+      "net_value": 861000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 61.8,
+      "total_volume": 242000,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 6233772800.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 2,
+    "sell_days_count": 0
+  }
+}

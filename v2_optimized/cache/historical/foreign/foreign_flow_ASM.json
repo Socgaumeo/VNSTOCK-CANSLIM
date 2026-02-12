@@ -1,0 +1,66 @@
+{
+  "symbol": "ASM",
+  "last_updated": "2026-02-11T23:08:08.525023",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ASM",
+      "buy_value": 0.0,
+      "sell_value": 180411000.0,
+      "net_value": -180411000.0,
+      "buy_volume": 0,
+      "sell_volume": 29000,
+      "net_volume": -29000,
+      "price": 6.1,
+      "total_volume": 330700,
+      "foreign_pct": 8.769277290595706
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ASM",
+      "buy_value": 0.0,
+      "sell_value": 190955000.0,
+      "net_value": -190955000.0,
+      "buy_volume": 0,
+      "sell_volume": 31000,
+      "net_volume": -31000,
+      "price": 6.05,
+      "total_volume": 393500,
+      "foreign_pct": 7.878017789072427
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ASM",
+      "buy_value": 1214000.0,
+      "sell_value": 12771270.0,
+      "net_value": -11557270.0,
+      "buy_volume": 200,
+      "sell_volume": 2127,
+      "net_volume": -1927,
+      "price": 5.96,
+      "total_volume": 279200,
+      "foreign_pct": 0.8334527220630373
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ASM",
+      "buy_value": 101292000.0,
+      "sell_value": 11463040.0,
+      "net_value": 89828960.0,
+      "buy_volume": 16800,
+      "sell_volume": 1901,
+      "net_volume": 14899,
+      "price": 6.02,
+      "total_volume": 315200,
+      "foreign_pct": 5.933058375634518
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -293094310.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

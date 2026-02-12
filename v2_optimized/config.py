@@ -189,6 +189,34 @@ class CacheConfig:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# HISTORICAL DATA CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+@dataclass
+class HistoricalDataConfig:
+    """Cấu hình theo dõi dữ liệu lịch sử"""
+
+    # Thư mục lưu historical cache
+    HISTORICAL_CACHE_DIR: str = "./cache/historical"
+
+    # Số ngày lưu trữ cho từng loại dữ liệu
+    PRICE_HISTORY_DAYS: int = 30           # Lịch sử giá (OHLCV + indicators)
+    FOREIGN_HISTORY_DAYS: int = 30         # Lịch sử giao dịch khối ngoại
+    RECOMMENDATION_HISTORY_DAYS: int = 90  # Lịch sử khuyến nghị
+
+    # Rolling window cho tính toán
+    FOREIGN_ROLLING_WINDOW: int = 20       # 20-day rolling average khối ngoại
+
+    # Ngưỡng phát hiện pattern
+    ACCUMULATION_MIN_BUY_DAYS: int = 12    # Tối thiểu 12/20 ngày mua ròng
+    DISTRIBUTION_MIN_SELL_DAYS: int = 12   # Tối thiểu 12/20 ngày bán ròng
+
+    # Auto cleanup
+    AUTO_CLEANUP_ENABLED: bool = True
+    CLEANUP_OLDER_THAN_DAYS: int = 90
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # STOCK UNIVERSE CONFIGURATION
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -375,6 +403,7 @@ class UnifiedConfig:
     ai: AIProviderConfig = field(default_factory=AIProviderConfig)
     rate_limit: RateLimitConfig = field(default_factory=RateLimitConfig)
     cache: CacheConfig = field(default_factory=CacheConfig)
+    historical: HistoricalDataConfig = field(default_factory=HistoricalDataConfig)
     stock_universe: StockUniverseConfig = field(default_factory=StockUniverseConfig)
     volume_profile: VolumeProfileConfig = field(default_factory=VolumeProfileConfig)
     analysis: AnalysisConfig = field(default_factory=AnalysisConfig)

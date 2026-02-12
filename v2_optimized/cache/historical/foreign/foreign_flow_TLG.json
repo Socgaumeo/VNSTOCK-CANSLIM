@@ -1,0 +1,66 @@
+{
+  "symbol": "TLG",
+  "last_updated": "2026-02-11T23:17:08.633990",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TLG",
+      "buy_value": 2018970000.0,
+      "sell_value": 3675580000.0,
+      "net_value": -1656610000.0,
+      "buy_volume": 39000,
+      "sell_volume": 70800,
+      "net_volume": -31800,
+      "price": 51.1,
+      "total_volume": 410400,
+      "foreign_pct": 26.75438596491228
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TLG",
+      "buy_value": 1188710000.0,
+      "sell_value": 3286490000.0,
+      "net_value": -2097780000.0,
+      "buy_volume": 23000,
+      "sell_volume": 63600,
+      "net_volume": -40600,
+      "price": 51.5,
+      "total_volume": 224700,
+      "foreign_pct": 38.54027592345349
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TLG",
+      "buy_value": 1309680000.0,
+      "sell_value": 716830000.0,
+      "net_value": 592850000.0,
+      "buy_volume": 25400,
+      "sell_volume": 13900,
+      "net_volume": 11500,
+      "price": 51.3,
+      "total_volume": 217700,
+      "foreign_pct": 18.05236564079008
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TLG",
+      "buy_value": 978630000.0,
+      "sell_value": 461610000.0,
+      "net_value": 517020000.0,
+      "buy_volume": 18900,
+      "sell_volume": 8900,
+      "net_volume": 10000,
+      "price": 51.9,
+      "total_volume": 88000,
+      "foreign_pct": 31.590909090909093
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2644520000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 38.78590547427859,
+    "buy_days_count": 0,
+    "sell_days_count": 2
+  }
+}

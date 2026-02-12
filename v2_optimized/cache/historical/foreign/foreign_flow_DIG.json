@@ -1,0 +1,66 @@
+{
+  "symbol": "DIG",
+  "last_updated": "2026-02-11T22:56:18.662547",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DIG",
+      "buy_value": 425891000.0,
+      "sell_value": 14171035000.0,
+      "net_value": -13745144000.0,
+      "buy_volume": 27652,
+      "sell_volume": 911900,
+      "net_volume": -884248,
+      "price": 15.3,
+      "total_volume": 12010500,
+      "foreign_pct": 7.822755089296865
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DIG",
+      "buy_value": 14937160000.0,
+      "sell_value": 13945335000.0,
+      "net_value": 991825000.0,
+      "buy_volume": 966000,
+      "sell_volume": 905600,
+      "net_volume": 60400,
+      "price": 15.5,
+      "total_volume": 7976400,
+      "foreign_pct": 23.464219447369743
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DIG",
+      "buy_value": 9945782500.0,
+      "sell_value": 1550000.0,
+      "net_value": 9944232500.0,
+      "buy_volume": 645315,
+      "sell_volume": 100,
+      "net_volume": 645215,
+      "price": 15.35,
+      "total_volume": 3885200,
+      "foreign_pct": 16.61214351899516
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DIG",
+      "buy_value": 40608270000.0,
+      "sell_value": 7977580000.0,
+      "net_value": 32630690000.0,
+      "buy_volume": 2572000,
+      "sell_volume": 509900,
+      "net_volume": 2062100,
+      "price": 16.15,
+      "total_volume": 14805700,
+      "foreign_pct": 20.8156318174757
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 29821603500.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 58.46650801339464,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}
