@@ -1644,6 +1644,59 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
 # Timezone Vietnam
 VN_TZ = pytz.timezone('Asia/Ho_Chi_Minh')
 
+
+def is_market_holiday(date=None) -> tuple:
+    """
+    Kiểm tra ngày nghỉ lễ sàn chứng khoán Việt Nam
+    Returns: (is_holiday: bool, reason: str)
+    """
+    if date is None:
+        date = datetime.now(VN_TZ).date()
+
+    # Ngày nghỉ lễ cố định hàng năm
+    fixed_holidays = {
+        (1, 1): "Tết Dương lịch",
+        (4, 30): "Giải phóng miền Nam",
+        (5, 1): "Quốc tế Lao động",
+        (9, 2): "Quốc khánh",
+    }
+
+    # Ngày nghỉ Tết Nguyên Đán 2026
+    # Mùng 1 Tết: 17/02/2026 (Thứ Ba)
+    # Phiên giao dịch cuối: 13/02/2026 (Thứ Sáu)
+    # Phiên giao dịch đầu tiên sau Tết: 23/02/2026 (Thứ Hai)
+    tet_2026 = [
+        (2026, 2, 14), (2026, 2, 15), (2026, 2, 16),
+        (2026, 2, 17), (2026, 2, 18), (2026, 2, 19), (2026, 2, 20),
+        (2026, 2, 21), (2026, 2, 22),
+    ]
+
+    # Ngày nghỉ bù
+    extra_holidays_2026 = [
+        (2026, 1, 2),   # Nghỉ bù Tết Dương lịch
+        (2026, 4, 29),  # Nghỉ bù 30/4
+        (2026, 5, 4),   # Nghỉ bù 1/5
+        (2026, 9, 3),   # Nghỉ bù Quốc khánh
+    ]
+
+    # Kiểm tra Tết Nguyên Đán
+    for y, m, d in tet_2026:
+        if date.year == y and date.month == m and date.day == d:
+            return True, "Tết Nguyên Đán"
+
+    # Kiểm tra ngày nghỉ bù
+    for y, m, d in extra_holidays_2026:
+        if date.year == y and date.month == m and date.day == d:
+            return True, "Nghỉ bù"
+
+    # Kiểm tra ngày lễ cố định
+    key = (date.month, date.day)
+    if key in fixed_holidays:
+        return True, fixed_holidays[key]
+
+    return False, ""
+
+
 async def scheduled_scan_job(context):
     """
     Job chạy tự động lúc 16h hàng ngày (thứ 2-6)
@@ -1656,6 +1709,22 @@ async def scheduled_scan_job(context):
     # Chỉ chạy thứ 2-6 (0-4)
     if weekday > 4:
         logger.info(f"Skipping scheduled scan - weekend (weekday={weekday})")
+        return
+
+    # Kiểm tra ngày nghỉ lễ
+    is_holiday, holiday_name = is_market_holiday(now.date())
+    if is_holiday:
+        logger.info(f"Skipping scheduled scan - holiday: {holiday_name}")
+        load_subscribers()
+        for user_id in alert_subscribers:
+            try:
+                await context.bot.send_message(
+                    chat_id=user_id,
+                    text=f"📅 *Hôm nay nghỉ lễ: {holiday_name}*\n\nThị trường đóng cửa, không có scan.",
+                    parse_mode='Markdown'
+                )
+            except:
+                pass
         return
 
     logger.info("=" * 50)
