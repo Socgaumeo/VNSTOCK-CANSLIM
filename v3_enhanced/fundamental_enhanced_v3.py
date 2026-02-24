@@ -81,6 +81,21 @@ class QuarterlyData:
     pe: float = 0.0
     pb: float = 0.0
 
+    # Balance Sheet Fields (NEW - for Piotroski & Altman)
+    total_assets: float = 0.0
+    total_liabilities: float = 0.0
+    total_equity: float = 0.0
+    current_assets: float = 0.0
+    current_liabilities: float = 0.0
+    long_term_debt: float = 0.0
+    retained_earnings: float = 0.0
+    shares_outstanding: float = 0.0
+
+    # Income Statement Fields (NEW - for Piotroski & Altman)
+    gross_profit: float = 0.0
+    operating_profit: float = 0.0  # EBIT
+    profit_before_tax: float = 0.0  # EBT
+
 
 @dataclass
 class FundamentalData:
@@ -122,7 +137,36 @@ class FundamentalData:
     
     # Historical data
     quarterly_data: List[QuarterlyData] = field(default_factory=list)
-    
+
+    # Balance Sheet Fields (NEW - for Piotroski & Altman)
+    total_assets: float = 0.0
+    total_liabilities: float = 0.0
+    total_equity: float = 0.0
+    current_assets: float = 0.0
+    current_liabilities: float = 0.0
+    long_term_debt: float = 0.0
+    retained_earnings: float = 0.0
+    shares_outstanding: float = 0.0
+    market_cap: float = 0.0
+
+    # Income Statement (NEW)
+    gross_profit: float = 0.0
+    operating_profit: float = 0.0  # EBIT
+    profit_before_tax: float = 0.0
+    net_income: float = 0.0
+    revenue: float = 0.0
+    ocf: float = 0.0  # Operating Cash Flow
+
+    # Previous Period (for Piotroski YoY comparison)
+    prev_total_assets: float = 0.0
+    prev_total_liabilities: float = 0.0
+    prev_current_assets: float = 0.0
+    prev_current_liabilities: float = 0.0
+    prev_shares_outstanding: float = 0.0
+    prev_gross_profit: float = 0.0
+    prev_revenue: float = 0.0
+    prev_roa: float = 0.0
+
     # Validation
     confidence_score: float = 0.0     # Độ tin cậy data (0-100)
     sources_used: List[str] = field(default_factory=list)
@@ -151,7 +195,23 @@ class FundamentalData:
             'cash_flow_quality_score': self.cash_flow_quality_score,
             'cash_flow_warning': self.cash_flow_warning,
             'confidence_score': self.confidence_score,
-            'sources_used': self.sources_used
+            'sources_used': self.sources_used,
+            # Balance Sheet (for Piotroski & Altman)
+            'total_assets': self.total_assets,
+            'total_liabilities': self.total_liabilities,
+            'total_equity': self.total_equity,
+            'current_assets': self.current_assets,
+            'current_liabilities': self.current_liabilities,
+            'long_term_debt': self.long_term_debt,
+            'retained_earnings': self.retained_earnings,
+            'shares_outstanding': self.shares_outstanding,
+            'market_cap': self.market_cap,
+            'gross_profit': self.gross_profit,
+            'operating_profit': self.operating_profit,
+            'profit_before_tax': self.profit_before_tax,
+            'net_income': self.net_income,
+            'revenue': self.revenue,
+            'ocf': self.ocf,
         }
 
 
@@ -253,16 +313,23 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
         
         try:
             stock = Vnstock().stock(symbol=symbol, source='VCI')
-            
+
             # 1. Income statement
             income_df = stock.finance.income_statement(period='quarter', lang='vi')
-            
+
             # 2. Ratio
             ratio_df = stock.finance.ratio(period='quarter', lang='vi')
-            
+
             # 3. Cash flow statement (BAO CAO LUU CHUYEN TIEN TE)
             cf_df = stock.finance.cash_flow(period='quarter', lang='vi')
-            
+
+            # 4. Balance sheet (NEW - for Piotroski & Altman)
+            try:
+                balance_df = stock.finance.balance_sheet(period='quarter', lang='vi')
+            except Exception as e:
+                print(f"      ⚠️ Balance sheet fetch error: {e}")
+                balance_df = pd.DataFrame()
+
             if income_df.empty:
                 return []
             
@@ -278,32 +345,47 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
                     # Extract values - handle MultiIndex columns
                     revenue = 0.0
                     profit = 0.0
-                    
+                    gross_profit = 0.0
+                    operating_profit = 0.0
+                    profit_before_tax = 0.0
+
                     for col in income_df.columns:
                         col_str = str(col).lower()
                         if 'doanh thu' in col_str and 'thuần' in col_str:
                             revenue = float(row[col]) if pd.notna(row[col]) else 0.0
                         elif 'lợi nhuận sau thuế' in col_str and 'cổ đông' in col_str:
                             profit = float(row[col]) if pd.notna(row[col]) else 0.0
+                        elif any(x in col_str for x in ['lợi nhuận gộp', 'lãi gộp']):
+                            gross_profit = float(row[col]) if pd.notna(row[col]) else 0.0
+                        elif any(x in col_str for x in ['lợi nhuận thuần từ hoạt động kinh doanh',
+                                                         'lợi nhuận từ hoạt động kinh doanh',
+                                                         'lãi/lỗ từ hoạt động kinh doanh',
+                                                         'lãi lỗ từ hoạt động kinh doanh']):
+                            operating_profit = float(row[col]) if pd.notna(row[col]) else 0.0
+                        elif any(x in col_str for x in ['lợi nhuận trước thuế', 'ln trước thuế']):
+                            profit_before_tax = float(row[col]) if pd.notna(row[col]) else 0.0
                     
                     # Get ratio data if available
                     roe = 0.0
                     roa = 0.0
                     pe = 0.0
                     pb = 0.0
-                    
+                    eps = 0.0
+
                     if not ratio_df.empty and i < len(ratio_df):
                         ratio_row = ratio_df.iloc[i]
                         for col in ratio_df.columns:
                             col_str = str(col).lower()
-                            if 'roe' in col_str:
+                            if 'roe' in col_str and '%' in col_str:
                                 roe = float(ratio_row[col]) * 100 if pd.notna(ratio_row[col]) else 0.0
-                            elif 'roa' in col_str:
+                            elif 'roa' in col_str and '%' in col_str:
                                 roa = float(ratio_row[col]) * 100 if pd.notna(ratio_row[col]) else 0.0
                             elif 'p/e' in col_str or 'pe' == col_str:
                                 pe = float(ratio_row[col]) if pd.notna(ratio_row[col]) else 0.0
                             elif 'p/b' in col_str or 'pb' == col_str:
                                 pb = float(ratio_row[col]) if pd.notna(ratio_row[col]) else 0.0
+                            elif 'eps' in col_str and 'vnd' in col_str:
+                                eps = float(ratio_row[col]) if pd.notna(ratio_row[col]) else 0.0
                     
                     # Get cash flow data if available
                     ocf = 0.0
@@ -335,21 +417,72 @@ class VnstockFundamentalScraper(BaseFundamentalScraper):
                                 val = float(cf_row[col]) if pd.notna(cf_row[col]) else 0.0
                                 if val != 0: fcf = val
                     
+                    # Get balance sheet data if available (NEW - for Piotroski & Altman)
+                    total_assets = 0.0
+                    total_liabilities = 0.0
+                    total_equity = 0.0
+                    current_assets = 0.0
+                    current_liabilities = 0.0
+                    long_term_debt = 0.0
+                    retained_earnings = 0.0
+                    shares_outstanding = 0.0
+
+                    if not balance_df.empty and i < len(balance_df):
+                        bs_row = balance_df.iloc[i]
+                        for col in balance_df.columns:
+                            col_str = str(col).lower()
+                            # Total Assets - matches "TỔNG CỘNG TÀI SẢN (đồng)"
+                            if 'tổng cộng tài sản' in col_str:
+                                total_assets = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+                            # Total Liabilities - matches "NỢ PHẢI TRẢ (đồng)"
+                            elif col_str.startswith('nợ phải trả'):
+                                total_liabilities = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+                            # Total Equity - matches "VỐN CHỦ SỞ HỮU (đồng)"
+                            elif col_str.startswith('vốn chủ sở hữu'):
+                                total_equity = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+                            # Current Assets - matches "TÀI SẢN NGẮN HẠN (đồng)"
+                            elif col_str.startswith('tài sản ngắn hạn'):
+                                current_assets = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+                            # Current Liabilities - matches "Nợ ngắn hạn (đồng)"
+                            elif col_str.startswith('nợ ngắn hạn'):
+                                current_liabilities = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+                            # Long-term Debt - matches "Nợ dài hạn (đồng)"
+                            elif col_str.startswith('nợ dài hạn'):
+                                long_term_debt = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+                            # Retained Earnings - matches "Lãi chưa phân phối (đồng)"
+                            elif 'lãi chưa phân phối' in col_str or 'lợi nhuận chưa phân phối' in col_str:
+                                retained_earnings = float(bs_row[col]) if pd.notna(bs_row[col]) else 0.0
+
                     # Debug print for first row
                     if i == 0:
                         print(f"      - {symbol} Q1 CF: OCF={ocf/1e9:.1f}B, ICF={icf/1e9:.1f}B, FCF={fcf/1e9:.1f}B")
-                    
+                        if total_assets > 0:
+                            print(f"      - {symbol} Q1 BS: TA={total_assets/1e9:.1f}B, TL={total_liabilities/1e9:.1f}B, TE={total_equity/1e9:.1f}B")
+
                     qdata = QuarterlyData(
                         period=period,
                         revenue=revenue,
                         profit=profit,
+                        eps=eps,
                         roe=roe,
                         roa=roa,
                         operating_cash_flow=ocf,
                         investing_cash_flow=icf,
                         financing_cash_flow=fcf,
                         pe=pe,
-                        pb=pb
+                        pb=pb,
+                        # Balance Sheet (NEW)
+                        total_assets=total_assets,
+                        total_liabilities=total_liabilities,
+                        total_equity=total_equity,
+                        current_assets=current_assets,
+                        current_liabilities=current_liabilities,
+                        long_term_debt=long_term_debt,
+                        retained_earnings=retained_earnings,
+                        # Income Statement (NEW)
+                        gross_profit=gross_profit,
+                        operating_profit=operating_profit,
+                        profit_before_tax=profit_before_tax,
                     )
                     result.append(qdata)
                     
@@ -794,16 +927,64 @@ class FundamentalAggregator:
             result.pb = latest.pb
             result.roe = latest.roe
             result.roa = latest.roa
+
+            # Balance Sheet fields (NEW - for Piotroski & Altman)
+            result.total_assets = latest.total_assets
+            result.total_liabilities = latest.total_liabilities
+            result.total_equity = latest.total_equity
+            result.current_assets = latest.current_assets
+            result.current_liabilities = latest.current_liabilities
+            result.long_term_debt = latest.long_term_debt
+            result.retained_earnings = latest.retained_earnings
+            result.shares_outstanding = latest.shares_outstanding
+
+            # Income Statement fields (NEW)
+            result.gross_profit = latest.gross_profit
+            result.operating_profit = latest.operating_profit
+            result.profit_before_tax = latest.profit_before_tax
+            result.net_income = latest.profit
+            result.revenue = latest.revenue
+            result.ocf = latest.operating_cash_flow
+
+            # Previous period for Piotroski YoY comparison
+            if len(primary_data) >= 5:
+                prev = primary_data[4]  # 4 quarters ago (YoY)
+                result.prev_total_assets = prev.total_assets
+                result.prev_total_liabilities = prev.total_liabilities
+                result.prev_current_assets = prev.current_assets
+                result.prev_current_liabilities = prev.current_liabilities
+                result.prev_shares_outstanding = prev.shares_outstanding
+                result.prev_gross_profit = prev.gross_profit
+                result.prev_revenue = prev.revenue
+                result.prev_roa = prev.roa
+
         # Calculate growth metrics
         self._calculate_growth_metrics(result, primary_data)
-        
+
         # Cross-validate với các nguồn khác
         confidence = self._calculate_confidence(all_data)
         result.confidence_score = confidence
-        
+
         # Calculate quality metrics
         self._calculate_quality_metrics(result, primary_data)
-        
+
+        # Fetch market_cap from current price (for Altman Z-Score)
+        try:
+            from vnstock import Vnstock
+            stock = Vnstock().stock(symbol=symbol, source='VCI')
+            quote = stock.quote.history(start='2026-01-01', end='2026-12-31', interval='1D')
+            if quote is not None and len(quote) > 0:
+                current_price = float(quote.iloc[-1]['close'])
+                # Market cap = shares_outstanding * price
+                if result.shares_outstanding > 0:
+                    result.market_cap = result.shares_outstanding * current_price
+                elif result.total_equity > 0 and result.pb > 0:
+                    # Fallback: market_cap = total_equity * P/B
+                    result.market_cap = result.total_equity * result.pb
+        except Exception as e:
+            # Silently fail - market_cap will be 0
+            pass
+
         return result
     
     def _calculate_growth_metrics(self, 

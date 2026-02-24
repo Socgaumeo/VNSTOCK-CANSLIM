@@ -93,6 +93,17 @@ except ImportError:
     get_recommendation_tracker = None
     RecommendationHistoryTracker = None
 
+# Import Enhanced Scoring (Piotroski, Altman, PEG, DuPont, etc.)
+try:
+    from enhanced_scoring import get_enhanced_scorer, EnhancedScorer
+    HAS_ENHANCED_SCORING = True
+    print("✓ Enhanced Scoring module loaded")
+except ImportError as e:
+    HAS_ENHANCED_SCORING = False
+    get_enhanced_scorer = None
+    EnhancedScorer = None
+    print(f"⚠️ Enhanced Scoring not available: {e}")
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # ENUMS & CONSTANTS
@@ -343,10 +354,31 @@ class FundamentalData:
     ocf_to_profit_ratio: float = 0.0
     cash_flow_quality_score: float = 0.0
     cash_flow_warning: str = ""
-    
+
     # Fundamental Scores
     c_score: float = 0.0
     a_score: float = 0.0
+
+    # Enhanced Scoring (NEW)
+    piotroski_score: int = 0              # 0-9
+    piotroski_rating: str = ""            # Very Strong, Strong, Average, Weak
+    altman_z_score: float = 0.0
+    altman_zone: str = ""                 # safe, grey, distress
+    peg_ratio: float = 0.0
+    peg_rating: str = ""                  # very_cheap, cheap, fair, expensive
+    dupont_roe: float = 0.0
+    dupont_driver: str = ""               # Strongest ROE component
+    dupont_weakness: str = ""             # Weakest ROE component
+    valuation_status: str = ""            # undervalued, fair, overvalued
+    dividend_yield_pct: float = 0.0
+    dividend_rating: str = ""             # excellent, high, good, average, low, none
+    industry_health_score: int = 0        # 0-100
+    financial_health_score: float = 0.0   # Composite 0-100
+
+    # V3 Enhanced
+    eps_growth_3y_cagr: float = 0.0
+    eps_growth_5y_cagr: float = 0.0
+    eps_acceleration: float = 0.0
 
 
 
@@ -530,7 +562,7 @@ class FundamentalAnalyzer:
     def __init__(self, config: ScreenerConfig):
         self.config = config
         self.collector = get_data_collector()
-        
+
         # V3 Enhanced: Initialize FundamentalAggregator
         self.v3_aggregator = None
         self.v3_scorer = None
@@ -544,6 +576,15 @@ class FundamentalAnalyzer:
                 print("   ✓ V3 FundamentalAggregator initialized")
             except Exception as e:
                 print(f"   ⚠️ V3 Aggregator init failed: {e}")
+
+        # Enhanced Scoring: Piotroski, Altman, PEG, DuPont
+        self.enhanced_scorer = None
+        if HAS_ENHANCED_SCORING and get_enhanced_scorer:
+            try:
+                self.enhanced_scorer = get_enhanced_scorer()
+                print("   ✓ Enhanced Scorer initialized (Piotroski, Altman, PEG, DuPont)")
+            except Exception as e:
+                print(f"   ⚠️ Enhanced Scorer init failed: {e}")
     
     def analyze(self, symbol: str) -> FundamentalData:
         """Phân tích fundamental cho một mã"""
@@ -585,8 +626,13 @@ class FundamentalAnalyzer:
                 else:
                     data.c_score = self._calc_c_score(data)
                     data.a_score = self._calc_a_score(data)
-                
+
                 print(f"   📊 Funda V3: ROE={data.roe:.1f}% EPS_3Y={data.eps_growth_3y_cagr:.1f}% Conf={data.confidence_score:.0f}%")
+
+                # Apply Enhanced Scoring (Piotroski, Altman, PEG, DuPont) to V3 data
+                if self.enhanced_scorer:
+                    self._apply_enhanced_scoring_v3(symbol, data, v3_data)
+
                 return data
             
             # Fallback to original logic
@@ -622,13 +668,113 @@ class FundamentalAnalyzer:
             data.a_score = self._calc_a_score(data)
             
             print(f"   📊 Funda: ROE={data.roe:.1f}% EPS_YoY={data.eps_growth_yoy:.1f}%")
-            
+
+            # Run Enhanced Scoring (Piotroski, Altman, PEG, DuPont)
+            self._apply_enhanced_scoring(symbol, data, ratios, flow)
+
         except Exception as e:
             print(f"   ⚠️ Fundamental error {symbol}: {e}")
-        
+
         return data
 
-    
+    def _apply_enhanced_scoring(self, symbol: str, data: FundamentalData,
+                                ratios: Dict = None, flow: Dict = None):
+        """Apply enhanced scoring (Piotroski, Altman, PEG, DuPont) to FundamentalData"""
+        if not self.enhanced_scorer:
+            return
+
+        try:
+            # Build financials dict for enhanced scorer
+            current_financials = {
+                'roa': data.roa / 100 if data.roa else 0,
+                'cfo': flow.get('ocf', 0) if flow else 0,
+                'net_income': flow.get('net_income', 0) if flow else 0,
+                'total_assets': flow.get('total_assets', 0) if flow else 0,
+                'total_liabilities': flow.get('total_liabilities', 0) if flow else 0,
+                'total_equity': flow.get('total_equity', 0) if flow else 0,
+                'current_assets': flow.get('current_assets', 0) if flow else 0,
+                'current_liabilities': flow.get('current_liabilities', 0) if flow else 0,
+                'shares_outstanding': data.outstanding_shares,
+                'gross_profit': flow.get('gross_profit', 0) if flow else 0,
+                'revenue': flow.get('revenue', 0) if flow else 0,
+                'retained_earnings': flow.get('retained_earnings', 0) if flow else 0,
+                'ebit': flow.get('operating_profit', 0) if flow else 0,
+                'pe': data.pe,
+                'pb': data.pb,
+                'market_cap': data.market_cap,
+            }
+
+            # Quick health check (Piotroski + Altman)
+            health = self.enhanced_scorer.quick_health_check(current_financials)
+            data.piotroski_score = health.get('piotroski_score', 0)
+            data.piotroski_rating = health.get('piotroski_rating', '')
+            data.altman_z_score = health.get('altman_z_score', 0)
+            data.altman_zone = health.get('altman_zone', '')
+
+            # Log enhanced metrics
+            if data.piotroski_score > 0 or data.altman_z_score > 0:
+                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})")
+
+        except Exception as e:
+            print(f"   ⚠️ Enhanced scoring error: {e}")
+
+    def _apply_enhanced_scoring_v3(self, symbol: str, data: FundamentalData, v3_data):
+        """Apply enhanced scoring using V3 aggregated data"""
+        if not self.enhanced_scorer:
+            return
+
+        try:
+            # Build current financials dict from v3_data
+            current_financials = {
+                'roa': data.roa / 100 if data.roa else 0,
+                'cfo': getattr(v3_data, 'ocf', 0) or 0,
+                'net_income': getattr(v3_data, 'net_income', 0) or 0,
+                'total_assets': getattr(v3_data, 'total_assets', 0) or 0,
+                'total_liabilities': getattr(v3_data, 'total_liabilities', 0) or 0,
+                'total_equity': getattr(v3_data, 'total_equity', 0) or 0,
+                'current_assets': getattr(v3_data, 'current_assets', 0) or 0,
+                'current_liabilities': getattr(v3_data, 'current_liabilities', 0) or 0,
+                'long_term_debt': getattr(v3_data, 'long_term_debt', 0) or 0,
+                'shares_outstanding': getattr(v3_data, 'shares_outstanding', 0) or data.outstanding_shares,
+                'gross_profit': getattr(v3_data, 'gross_profit', 0) or 0,
+                'revenue': getattr(v3_data, 'revenue', 0) or 0,
+                'retained_earnings': getattr(v3_data, 'retained_earnings', 0) or 0,
+                'ebit': getattr(v3_data, 'operating_profit', 0) or 0,
+                'operating_profit': getattr(v3_data, 'operating_profit', 0) or 0,
+                'profit_before_tax': getattr(v3_data, 'profit_before_tax', 0) or 0,
+                'pe': data.pe,
+                'pb': data.pb,
+                'market_cap': data.market_cap,
+            }
+
+            # Build previous financials for Piotroski YoY comparison
+            previous_financials = None
+            if getattr(v3_data, 'prev_total_assets', 0) > 0:
+                previous_financials = {
+                    'roa': getattr(v3_data, 'prev_roa', 0) / 100 if getattr(v3_data, 'prev_roa', 0) else 0,
+                    'total_assets': getattr(v3_data, 'prev_total_assets', 0) or 0,
+                    'total_liabilities': getattr(v3_data, 'prev_total_liabilities', 0) or 0,
+                    'current_assets': getattr(v3_data, 'prev_current_assets', 0) or 0,
+                    'current_liabilities': getattr(v3_data, 'prev_current_liabilities', 0) or 0,
+                    'shares_outstanding': getattr(v3_data, 'prev_shares_outstanding', 0) or 0,
+                    'gross_profit': getattr(v3_data, 'prev_gross_profit', 0) or 0,
+                    'revenue': getattr(v3_data, 'prev_revenue', 0) or 0,
+                }
+
+            # Quick health check (Piotroski + Altman)
+            health = self.enhanced_scorer.quick_health_check(current_financials, previous_financials)
+            data.piotroski_score = health.get('piotroski_score', 0)
+            data.piotroski_rating = health.get('piotroski_rating', '')
+            data.altman_z_score = health.get('altman_z_score', 0)
+            data.altman_zone = health.get('altman_zone', '')
+
+            # Log enhanced metrics
+            if data.piotroski_score > 0 or data.altman_z_score > 0:
+                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})")
+
+        except Exception as e:
+            print(f"   ⚠️ Enhanced scoring V3 error: {e}")
+
     def _calc_c_score(self, data: FundamentalData) -> float:
         """Tính C score (0-100)"""
         score = 0
@@ -702,27 +848,45 @@ class FundamentalAnalyzer:
         # Weighted average of C and A scores
         c_weight = 0.6  # Current important hơn
         a_weight = 0.4
-        
+
         base_score = data.c_score * c_weight + data.a_score * a_weight
-        
+
         # Bonus/Penalty
         bonus = 0
-        
+
         # ROE bonus
         if data.roe >= 20:
             bonus += 5
-        
+
         # PE reasonable
         if 5 <= data.pe <= 20:
             bonus += 5
         elif data.pe > 40:
             bonus -= 5
-        
+
         # Foreign interest
         if data.foreign_net_buy_20d > 0:
             bonus += 5
-        
-        return min(100, max(0, base_score + bonus))
+
+        # Enhanced Scoring Bonus (NEW)
+        # Piotroski F-Score bonus (max +10)
+        if data.piotroski_score >= 8:
+            bonus += 10
+        elif data.piotroski_score >= 6:
+            bonus += 5
+        elif data.piotroski_score <= 2:
+            bonus -= 5
+
+        # Altman Z-Score bonus/penalty (max +5/-10)
+        if data.altman_zone == 'safe':
+            bonus += 5
+        elif data.altman_zone == 'distress':
+            bonus -= 10
+
+        # Store financial health score
+        data.financial_health_score = min(100, max(0, base_score + bonus))
+
+        return data.financial_health_score
 
 
 # ══════════════════════════════════════════════════════════════════════════════
