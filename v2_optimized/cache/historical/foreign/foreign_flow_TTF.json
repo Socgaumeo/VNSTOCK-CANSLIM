@@ -1,0 +1,66 @@
+{
+  "symbol": "TTF",
+  "last_updated": "2026-02-11T22:57:49.878332",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TTF",
+      "buy_value": 6000000.0,
+      "sell_value": 791968000.0,
+      "net_value": -785968000.0,
+      "buy_volume": 2000,
+      "sell_volume": 265200,
+      "net_volume": -263200,
+      "price": 2.97,
+      "total_volume": 1044500,
+      "foreign_pct": 25.581617999042606
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TTF",
+      "buy_value": 598000.0,
+      "sell_value": 301478000.0,
+      "net_value": -300880000.0,
+      "buy_volume": 200,
+      "sell_volume": 101300,
+      "net_volume": -101100,
+      "price": 2.96,
+      "total_volume": 686000,
+      "foreign_pct": 14.795918367346939
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TTF",
+      "buy_value": 0.0,
+      "sell_value": 219526000.0,
+      "net_value": -219526000.0,
+      "buy_volume": 0,
+      "sell_volume": 74100,
+      "net_volume": -74100,
+      "price": 2.93,
+      "total_volume": 610700,
+      "foreign_pct": 12.133617160635337
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TTF",
+      "buy_value": 94370000.0,
+      "sell_value": 0.0,
+      "net_value": 94370000.0,
+      "buy_volume": 32000,
+      "sell_volume": 0,
+      "net_volume": 32000,
+      "price": 2.96,
+      "total_volume": 330400,
+      "foreign_pct": 9.685230024213075
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1212004000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

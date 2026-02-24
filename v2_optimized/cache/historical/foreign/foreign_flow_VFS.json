@@ -1,0 +1,66 @@
+{
+  "symbol": "VFS",
+  "last_updated": "2026-02-11T22:48:00.259770",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VFS",
+      "buy_value": 1343810000.0,
+      "sell_value": 3628170000.0,
+      "net_value": -2284360000.0,
+      "buy_volume": 90500,
+      "sell_volume": 242200,
+      "net_volume": -151700,
+      "price": 14.8,
+      "total_volume": 2288300,
+      "foreign_pct": 14.539177555390465
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VFS",
+      "buy_value": 1883770000.0,
+      "sell_value": 578120000.0,
+      "net_value": 1305650000.0,
+      "buy_volume": 127100,
+      "sell_volume": 38800,
+      "net_volume": 88300,
+      "price": 14.9,
+      "total_volume": 1402400,
+      "foreign_pct": 11.829720479178551
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VFS",
+      "buy_value": 0.0,
+      "sell_value": 341210000.0,
+      "net_value": -341210000.0,
+      "buy_volume": 0,
+      "sell_volume": 22900,
+      "net_volume": -22900,
+      "price": 14.9,
+      "total_volume": 421200,
+      "foreign_pct": 5.43684710351377
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VFS",
+      "buy_value": 1151440000.0,
+      "sell_value": 539890000.0,
+      "net_value": 611550000.0,
+      "buy_volume": 77800,
+      "sell_volume": 36100,
+      "net_volume": 41700,
+      "price": 15.0,
+      "total_volume": 1393700,
+      "foreign_pct": 8.17249049293248
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -708370000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 14.965969147755063,
+    "buy_days_count": 1,
+    "sell_days_count": 1
+  }
+}

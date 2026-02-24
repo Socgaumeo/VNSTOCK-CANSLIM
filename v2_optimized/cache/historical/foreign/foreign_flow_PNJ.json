@@ -1,0 +1,66 @@
+{
+  "symbol": "PNJ",
+  "last_updated": "2026-02-11T23:17:18.523435",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PNJ",
+      "buy_value": 53558277500.0,
+      "sell_value": 190406419500.0,
+      "net_value": -136848142000.0,
+      "buy_volume": 491800,
+      "sell_volume": 1737700,
+      "net_volume": -1245900,
+      "price": 108.9,
+      "total_volume": 5025100,
+      "foreign_pct": 44.36727627310899
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PNJ",
+      "buy_value": 79214290000.0,
+      "sell_value": 101785638100.0,
+      "net_value": -22571348100.0,
+      "buy_volume": 707800,
+      "sell_volume": 907230,
+      "net_volume": -199430,
+      "price": 112.9,
+      "total_volume": 2245000,
+      "foreign_pct": 71.93897550111359
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PNJ",
+      "buy_value": 130639060000.0,
+      "sell_value": 74656167200.0,
+      "net_value": 55982892800.0,
+      "buy_volume": 1154700,
+      "sell_volume": 660770,
+      "net_volume": 493930,
+      "price": 112.9,
+      "total_volume": 2252400,
+      "foreign_pct": 80.60158053631682
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PNJ",
+      "buy_value": 104029200000.0,
+      "sell_value": 150315620000.0,
+      "net_value": -46286420000.0,
+      "buy_volume": 923800,
+      "sell_volume": 1342700,
+      "net_volume": -418900,
+      "price": 115.9,
+      "total_volume": 2808300,
+      "foreign_pct": 80.70718940284158
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -149723017300.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 33.85083122175139,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

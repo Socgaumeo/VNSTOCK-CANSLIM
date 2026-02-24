@@ -1,0 +1,66 @@
+{
+  "symbol": "SZC",
+  "last_updated": "2026-02-11T23:11:03.938697",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SZC",
+      "buy_value": 41201180000.0,
+      "sell_value": 9052355000.0,
+      "net_value": 32148825000.0,
+      "buy_volume": 1158000,
+      "sell_volume": 253200,
+      "net_volume": 904800,
+      "price": 35.05,
+      "total_volume": 3483400,
+      "foreign_pct": 40.51214330826205
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SZC",
+      "buy_value": 6927430000.0,
+      "sell_value": 2065532600.0,
+      "net_value": 4861897400.0,
+      "buy_volume": 200900,
+      "sell_volume": 59454,
+      "net_volume": 141446,
+      "price": 34.2,
+      "total_volume": 1160400,
+      "foreign_pct": 22.436573595311962
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SZC",
+      "buy_value": 9086640000.0,
+      "sell_value": 8216830200.0,
+      "net_value": 869809800.0,
+      "buy_volume": 268600,
+      "sell_volume": 242006,
+      "net_volume": 26594,
+      "price": 33.4,
+      "total_volume": 1930900,
+      "foreign_pct": 26.443938059972034
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SZC",
+      "buy_value": 4942095000.0,
+      "sell_value": 6651455000.0,
+      "net_value": -1709360000.0,
+      "buy_volume": 145900,
+      "sell_volume": 195900,
+      "net_volume": -50000,
+      "price": 33.95,
+      "total_volume": 1031700,
+      "foreign_pct": 33.12978579044296
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 36171172200.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 82.0733574125629,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

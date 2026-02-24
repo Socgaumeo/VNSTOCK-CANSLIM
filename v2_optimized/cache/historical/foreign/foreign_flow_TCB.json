@@ -1,0 +1,66 @@
+{
+  "symbol": "TCB",
+  "last_updated": "2026-02-11T22:48:51.211250",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TCB",
+      "buy_value": 42886894800.0,
+      "sell_value": 43217121600.0,
+      "net_value": -330226800.0,
+      "buy_volume": 1183378,
+      "sell_volume": 1193000,
+      "net_volume": -9622,
+      "price": 34.6,
+      "total_volume": 12492400,
+      "foreign_pct": 19.02258973455861
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TCB",
+      "buy_value": 10995165600.0,
+      "sell_value": 12695700.0,
+      "net_value": 10982469900.0,
+      "buy_volume": 314148,
+      "sell_volume": 366,
+      "net_volume": 313782,
+      "price": 34.75,
+      "total_volume": 7754700,
+      "foreign_pct": 4.055785523617935
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TCB",
+      "buy_value": 13780800.0,
+      "sell_value": 312520850.0,
+      "net_value": -298740050.0,
+      "buy_volume": 396,
+      "sell_volume": 8995,
+      "net_volume": -8599,
+      "price": 34.6,
+      "total_volume": 9951100,
+      "foreign_pct": 0.0943714765201837
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TCB",
+      "buy_value": 347624600.0,
+      "sell_value": 1251000.0,
+      "net_value": 346373600.0,
+      "buy_volume": 10018,
+      "sell_volume": 36,
+      "net_volume": 9982,
+      "price": 35.3,
+      "total_volume": 11045000,
+      "foreign_pct": 0.09102761430511544
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 10699876650.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 21.884034968577403,
+    "buy_days_count": 1,
+    "sell_days_count": 0
+  }
+}

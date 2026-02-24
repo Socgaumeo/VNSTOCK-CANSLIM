@@ -1,0 +1,66 @@
+{
+  "symbol": "EVF",
+  "last_updated": "2026-02-11T22:51:00.699485",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "EVF",
+      "buy_value": 2846390000.0,
+      "sell_value": 7535030000.0,
+      "net_value": -4688640000.0,
+      "buy_volume": 247100,
+      "sell_volume": 649700,
+      "net_volume": -402600,
+      "price": 11.4,
+      "total_volume": 4671900,
+      "foreign_pct": 19.19561634452792
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "EVF",
+      "buy_value": 0.0,
+      "sell_value": 4972165000.0,
+      "net_value": -4972165000.0,
+      "buy_volume": 0,
+      "sell_volume": 434400,
+      "net_volume": -434400,
+      "price": 11.35,
+      "total_volume": 2439300,
+      "foreign_pct": 17.8083876521953
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "EVF",
+      "buy_value": 21620000.0,
+      "sell_value": 3259895000.0,
+      "net_value": -3238275000.0,
+      "buy_volume": 1900,
+      "sell_volume": 285800,
+      "net_volume": -283900,
+      "price": 11.3,
+      "total_volume": 2659600,
+      "foreign_pct": 10.817416152804933
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "EVF",
+      "buy_value": 1450115000.0,
+      "sell_value": 2405760000.0,
+      "net_value": -955645000.0,
+      "buy_volume": 126300,
+      "sell_volume": 209200,
+      "net_volume": -82900,
+      "price": 11.6,
+      "total_volume": 2078700,
+      "foreign_pct": 16.139895126761918
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -13854725000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

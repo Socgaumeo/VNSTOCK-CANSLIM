@@ -1,0 +1,66 @@
+{
+  "symbol": "VHM",
+  "last_updated": "2026-02-11T23:10:26.410385",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VHM",
+      "buy_value": 165020497200.0,
+      "sell_value": 300988830000.0,
+      "net_value": -135968332800.0,
+      "buy_volume": 1685057,
+      "sell_volume": 3047900,
+      "net_volume": -1362843,
+      "price": 97.5,
+      "total_volume": 8492200,
+      "foreign_pct": 55.73299027342738
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VHM",
+      "buy_value": 61928254800.0,
+      "sell_value": 164235885800.0,
+      "net_value": -102307631000.0,
+      "buy_volume": 651440,
+      "sell_volume": 1728560,
+      "net_volume": -1077120,
+      "price": 95.0,
+      "total_volume": 4463200,
+      "foreign_pct": 53.324968632371395
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VHM",
+      "buy_value": 147169516000.0,
+      "sell_value": 171710236000.0,
+      "net_value": -24540720000.0,
+      "buy_volume": 1479400,
+      "sell_volume": 1723900,
+      "net_volume": -244500,
+      "price": 101.3,
+      "total_volume": 8656800,
+      "foreign_pct": 37.00328065797985
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VHM",
+      "buy_value": 166681634300.0,
+      "sell_value": 193550363600.0,
+      "net_value": -26868729300.0,
+      "buy_volume": 1615469,
+      "sell_volume": 1875401,
+      "net_volume": -259932,
+      "price": 103.0,
+      "total_volume": 6203200,
+      "foreign_pct": 56.275309517668305
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -289685413100.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 42.25020577205337,
+    "buy_days_count": 0,
+    "sell_days_count": 4
+  }
+}

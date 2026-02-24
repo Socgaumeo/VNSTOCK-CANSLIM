@@ -1,0 +1,66 @@
+{
+  "symbol": "SBT",
+  "last_updated": "2026-02-11T23:06:55.233947",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SBT",
+      "buy_value": 11875000.0,
+      "sell_value": 1926726400.0,
+      "net_value": -1914851400.0,
+      "buy_volume": 500,
+      "sell_volume": 81236,
+      "net_volume": -80736,
+      "price": 23.8,
+      "total_volume": 398700,
+      "foreign_pct": 20.500627037873087
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SBT",
+      "buy_value": 18980000.0,
+      "sell_value": 2370000.0,
+      "net_value": 16610000.0,
+      "buy_volume": 800,
+      "sell_volume": 100,
+      "net_volume": 700,
+      "price": 23.7,
+      "total_volume": 430400,
+      "foreign_pct": 0.2091078066914498
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SBT",
+      "buy_value": 0.0,
+      "sell_value": 134570000.0,
+      "net_value": -134570000.0,
+      "buy_volume": 0,
+      "sell_volume": 5700,
+      "net_volume": -5700,
+      "price": 23.6,
+      "total_volume": 458000,
+      "foreign_pct": 1.244541484716157
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SBT",
+      "buy_value": 0.0,
+      "sell_value": 383960000.0,
+      "net_value": -383960000.0,
+      "buy_volume": 0,
+      "sell_volume": 16300,
+      "net_volume": -16300,
+      "price": 23.6,
+      "total_volume": 578900,
+      "foreign_pct": 2.8156849196752463
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2416771400.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

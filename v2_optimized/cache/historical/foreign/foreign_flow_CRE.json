@@ -1,0 +1,66 @@
+{
+  "symbol": "CRE",
+  "last_updated": "2026-02-11T22:56:24.285870",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "CRE",
+      "buy_value": 64151000.0,
+      "sell_value": 458509000.0,
+      "net_value": -394358000.0,
+      "buy_volume": 9100,
+      "sell_volume": 65500,
+      "net_volume": -56400,
+      "price": 6.9,
+      "total_volume": 414800,
+      "foreign_pct": 17.984570877531343
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "CRE",
+      "buy_value": 793870000.0,
+      "sell_value": 132481000.0,
+      "net_value": 661389000.0,
+      "buy_volume": 115900,
+      "sell_volume": 19200,
+      "net_volume": 96700,
+      "price": 6.9,
+      "total_volume": 366900,
+      "foreign_pct": 36.822022349414006
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "CRE",
+      "buy_value": 291206000.0,
+      "sell_value": 143163000.0,
+      "net_value": 148043000.0,
+      "buy_volume": 42200,
+      "sell_volume": 20300,
+      "net_volume": 21900,
+      "price": 7.1,
+      "total_volume": 211700,
+      "foreign_pct": 29.522909777987717
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "CRE",
+      "buy_value": 104461000.0,
+      "sell_value": 279758000.0,
+      "net_value": -175297000.0,
+      "buy_volume": 14400,
+      "sell_volume": 38200,
+      "net_volume": -23800,
+      "price": 7.5,
+      "total_volume": 307200,
+      "foreign_pct": 17.122395833333336
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 239777000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 21.14809540840334,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

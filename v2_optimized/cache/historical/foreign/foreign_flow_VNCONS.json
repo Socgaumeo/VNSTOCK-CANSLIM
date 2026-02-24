@@ -1,0 +1,66 @@
+{
+  "symbol": "VNCONS",
+  "last_updated": "2026-02-11T22:47:21.998769",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VNCONS",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 738.51,
+      "total_volume": 52039234,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VNCONS",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 740.03,
+      "total_volume": 29057519,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VNCONS",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 729.43,
+      "total_volume": 34370100,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VNCONS",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 737.55,
+      "total_volume": 32116229,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 0.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 0.0,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

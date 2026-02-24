@@ -1,0 +1,66 @@
+{
+  "symbol": "VSC",
+  "last_updated": "2026-02-11T23:12:22.922927",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VSC",
+      "buy_value": 62614305000.0,
+      "sell_value": 3493225000.0,
+      "net_value": 59121080000.0,
+      "buy_volume": 2834800,
+      "sell_volume": 159500,
+      "net_volume": 2675300,
+      "price": 22.3,
+      "total_volume": 14183000,
+      "foreign_pct": 21.111894521610377
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VSC",
+      "buy_value": 4216025000.0,
+      "sell_value": 21163575000.0,
+      "net_value": -16947550000.0,
+      "buy_volume": 188500,
+      "sell_volume": 955600,
+      "net_volume": -767100,
+      "price": 22.35,
+      "total_volume": 6730200,
+      "foreign_pct": 16.999494814418593
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VSC",
+      "buy_value": 27029580000.0,
+      "sell_value": 30551860900.0,
+      "net_value": -3522280900.0,
+      "buy_volume": 1203400,
+      "sell_volume": 1367286,
+      "net_volume": -163886,
+      "price": 22.65,
+      "total_volume": 10856900,
+      "foreign_pct": 23.677900689883852
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VSC",
+      "buy_value": 10886165000.0,
+      "sell_value": 49530215000.0,
+      "net_value": -38644050000.0,
+      "buy_volume": 466000,
+      "sell_volume": 2140700,
+      "net_volume": -1674700,
+      "price": 23.5,
+      "total_volume": 18049900,
+      "foreign_pct": 14.441631255574825
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 7199100.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 0.00687314288598857,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

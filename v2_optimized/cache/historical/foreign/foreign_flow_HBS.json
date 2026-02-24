@@ -1,0 +1,66 @@
+{
+  "symbol": "HBS",
+  "last_updated": "2026-02-11T22:50:43.897066",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HBS",
+      "buy_value": 440000.0,
+      "sell_value": 0.0,
+      "net_value": 440000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.5,
+      "total_volume": 4800,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HBS",
+      "buy_value": 440000.0,
+      "sell_value": 0.0,
+      "net_value": 440000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.5,
+      "total_volume": 4800,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HBS",
+      "buy_value": 440000.0,
+      "sell_value": 0.0,
+      "net_value": 440000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.5,
+      "total_volume": 4800,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HBS",
+      "buy_value": 440000.0,
+      "sell_value": 0.0,
+      "net_value": 440000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.5,
+      "total_volume": 4800,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 1760000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "PET",
+  "last_updated": "2026-02-11T23:05:53.682124",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PET",
+      "buy_value": 0.0,
+      "sell_value": 720000.0,
+      "net_value": -720000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 32.3,
+      "total_volume": 3027400,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PET",
+      "buy_value": 0.0,
+      "sell_value": 720000.0,
+      "net_value": -720000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 32.8,
+      "total_volume": 894700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PET",
+      "buy_value": 0.0,
+      "sell_value": 720000.0,
+      "net_value": -720000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 32.1,
+      "total_volume": 2240700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PET",
+      "buy_value": 0.0,
+      "sell_value": 660000.0,
+      "net_value": -660000.0,
+      "buy_volume": 0,
+      "sell_volume": 20,
+      "net_volume": -20,
+      "price": 33.3,
+      "total_volume": 1034400,
+      "foreign_pct": 0.0019334880123743233
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2820000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

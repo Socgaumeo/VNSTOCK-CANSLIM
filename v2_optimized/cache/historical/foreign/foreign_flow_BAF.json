@@ -1,0 +1,66 @@
+{
+  "symbol": "BAF",
+  "last_updated": "2026-02-11T23:19:13.668318",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BAF",
+      "buy_value": 16150605000.0,
+      "sell_value": 19073830000.0,
+      "net_value": -2923225000.0,
+      "buy_volume": 427500,
+      "sell_volume": 503600,
+      "net_volume": -76100,
+      "price": 38.05,
+      "total_volume": 5617100,
+      "foreign_pct": 16.57616919762867
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BAF",
+      "buy_value": 0.0,
+      "sell_value": 11232315000.0,
+      "net_value": -11232315000.0,
+      "buy_volume": 0,
+      "sell_volume": 297800,
+      "net_volume": -297800,
+      "price": 37.6,
+      "total_volume": 1102500,
+      "foreign_pct": 27.011337868480727
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BAF",
+      "buy_value": 10436130000.0,
+      "sell_value": 15064015000.0,
+      "net_value": -4627885000.0,
+      "buy_volume": 280000,
+      "sell_volume": 403600,
+      "net_volume": -123600,
+      "price": 37.35,
+      "total_volume": 1831700,
+      "foreign_pct": 37.320521919528304
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BAF",
+      "buy_value": 8928485000.0,
+      "sell_value": 6642850000.0,
+      "net_value": 2285635000.0,
+      "buy_volume": 239300,
+      "sell_volume": 178100,
+      "net_volume": 61200,
+      "price": 37.65,
+      "total_volume": 2381600,
+      "foreign_pct": 17.52603291904602
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -16497790000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 37.69707213318492,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

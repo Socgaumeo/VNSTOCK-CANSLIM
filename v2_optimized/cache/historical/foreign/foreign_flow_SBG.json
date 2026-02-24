@@ -1,0 +1,66 @@
+{
+  "symbol": "SBG",
+  "last_updated": "2026-02-11T22:58:55.922436",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SBG",
+      "buy_value": 0.0,
+      "sell_value": 261130000.0,
+      "net_value": -261130000.0,
+      "buy_volume": 0,
+      "sell_volume": 20400,
+      "net_volume": -20400,
+      "price": 12.95,
+      "total_volume": 51900,
+      "foreign_pct": 39.30635838150289
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SBG",
+      "buy_value": 0.0,
+      "sell_value": 267910000.0,
+      "net_value": -267910000.0,
+      "buy_volume": 0,
+      "sell_volume": 20900,
+      "net_volume": -20900,
+      "price": 12.85,
+      "total_volume": 57100,
+      "foreign_pct": 36.602451838879155
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SBG",
+      "buy_value": 0.0,
+      "sell_value": 245450000.0,
+      "net_value": -245450000.0,
+      "buy_volume": 0,
+      "sell_volume": 19200,
+      "net_volume": -19200,
+      "price": 12.9,
+      "total_volume": 64500,
+      "foreign_pct": 29.767441860465116
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SBG",
+      "buy_value": 0.0,
+      "sell_value": 151350000.0,
+      "net_value": -151350000.0,
+      "buy_volume": 0,
+      "sell_volume": 12000,
+      "net_volume": -12000,
+      "price": 12.5,
+      "total_volume": 70000,
+      "foreign_pct": 17.142857142857142
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -925840000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

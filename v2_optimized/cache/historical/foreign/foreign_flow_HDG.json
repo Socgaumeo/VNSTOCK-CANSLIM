@@ -1,0 +1,66 @@
+{
+  "symbol": "HDG",
+  "last_updated": "2026-02-11T22:55:34.633865",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HDG",
+      "buy_value": 4125755000.0,
+      "sell_value": 9997573850.0,
+      "net_value": -5871818850.0,
+      "buy_volume": 157400,
+      "sell_volume": 377290,
+      "net_volume": -219890,
+      "price": 26.1,
+      "total_volume": 2437600,
+      "foreign_pct": 21.9351000984575
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HDG",
+      "buy_value": 2029390000.0,
+      "sell_value": 4433235850.0,
+      "net_value": -2403845850.0,
+      "buy_volume": 77800,
+      "sell_volume": 170340,
+      "net_volume": -92540,
+      "price": 26.2,
+      "total_volume": 1122800,
+      "foreign_pct": 22.100106875667976
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HDG",
+      "buy_value": 3039685000.0,
+      "sell_value": 8934043550.0,
+      "net_value": -5894358550.0,
+      "buy_volume": 117300,
+      "sell_volume": 343880,
+      "net_volume": -226580,
+      "price": 26.0,
+      "total_volume": 1429300,
+      "foreign_pct": 32.26614426642412
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HDG",
+      "buy_value": 14280335000.0,
+      "sell_value": 6632050000.0,
+      "net_value": 7648285000.0,
+      "buy_volume": 539400,
+      "sell_volume": 249500,
+      "net_volume": 289900,
+      "price": 26.8,
+      "total_volume": 1770500,
+      "foreign_pct": 44.558034453544195
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -6521738250.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 24.39306525234322,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

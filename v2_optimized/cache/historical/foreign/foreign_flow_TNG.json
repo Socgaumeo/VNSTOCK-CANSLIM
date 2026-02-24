@@ -1,0 +1,66 @@
+{
+  "symbol": "TNG",
+  "last_updated": "2026-02-11T23:16:59.418602",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TNG",
+      "buy_value": 13471460000.0,
+      "sell_value": 8237830000.0,
+      "net_value": 5233630000.0,
+      "buy_volume": 626400,
+      "sell_volume": 375600,
+      "net_volume": 250800,
+      "price": 21.2,
+      "total_volume": 4323500,
+      "foreign_pct": 23.175667861686133
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TNG",
+      "buy_value": 2864790000.0,
+      "sell_value": 2369100000.0,
+      "net_value": 495690000.0,
+      "buy_volume": 133400,
+      "sell_volume": 109500,
+      "net_volume": 23900,
+      "price": 21.8,
+      "total_volume": 1410300,
+      "foreign_pct": 17.22328582571084
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TNG",
+      "buy_value": 8027420000.0,
+      "sell_value": 2966628700.0,
+      "net_value": 5060791300.0,
+      "buy_volume": 386200,
+      "sell_volume": 137801,
+      "net_volume": 248399,
+      "price": 21.2,
+      "total_volume": 1944800,
+      "foreign_pct": 26.943696009872482
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TNG",
+      "buy_value": 222480000.0,
+      "sell_value": 6694380000.0,
+      "net_value": -6471900000.0,
+      "buy_volume": 10400,
+      "sell_volume": 303800,
+      "net_volume": -293400,
+      "price": 22.4,
+      "total_volume": 2724800,
+      "foreign_pct": 11.531121550205519
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 4318211300.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 19.254482367847103,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

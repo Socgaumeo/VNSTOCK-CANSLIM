@@ -1,0 +1,66 @@
+{
+  "symbol": "DSE",
+  "last_updated": "2026-02-11T23:09:20.355719",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DSE",
+      "buy_value": 0.0,
+      "sell_value": 1080115000.0,
+      "net_value": -1080115000.0,
+      "buy_volume": 0,
+      "sell_volume": 45400,
+      "net_volume": -45400,
+      "price": 23.4,
+      "total_volume": 209400,
+      "foreign_pct": 21.680993314231138
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DSE",
+      "buy_value": 645845000.0,
+      "sell_value": 205205000.0,
+      "net_value": 440640000.0,
+      "buy_volume": 27400,
+      "sell_volume": 8700,
+      "net_volume": 18700,
+      "price": 23.5,
+      "total_volume": 183800,
+      "foreign_pct": 19.640914036996733
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DSE",
+      "buy_value": 865010000.0,
+      "sell_value": 94970000.0,
+      "net_value": 770040000.0,
+      "buy_volume": 36600,
+      "sell_volume": 4000,
+      "net_volume": 32600,
+      "price": 23.85,
+      "total_volume": 186800,
+      "foreign_pct": 21.734475374732334
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DSE",
+      "buy_value": 296180000.0,
+      "sell_value": 203500000.0,
+      "net_value": 92680000.0,
+      "buy_volume": 12400,
+      "sell_volume": 8500,
+      "net_volume": 3900,
+      "price": 24.1,
+      "total_volume": 218000,
+      "foreign_pct": 9.587155963302752
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 223245000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 13.167591957709407,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "SMC",
+  "last_updated": "2026-02-11T22:58:34.857311",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SMC",
+      "buy_value": 123755000.0,
+      "sell_value": 919550000.0,
+      "net_value": -795795000.0,
+      "buy_volume": 9500,
+      "sell_volume": 70300,
+      "net_volume": -60800,
+      "price": 12.8,
+      "total_volume": 566500,
+      "foreign_pct": 14.0864960282436
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SMC",
+      "buy_value": 0.0,
+      "sell_value": 533960000.0,
+      "net_value": -533960000.0,
+      "buy_volume": 0,
+      "sell_volume": 42200,
+      "net_volume": -42200,
+      "price": 12.55,
+      "total_volume": 307600,
+      "foreign_pct": 13.719115734720416
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SMC",
+      "buy_value": 2510000.0,
+      "sell_value": 175815000.0,
+      "net_value": -173305000.0,
+      "buy_volume": 200,
+      "sell_volume": 14000,
+      "net_volume": -13800,
+      "price": 12.5,
+      "total_volume": 135800,
+      "foreign_pct": 10.456553755522828
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SMC",
+      "buy_value": 315940000.0,
+      "sell_value": 99805000.0,
+      "net_value": 216135000.0,
+      "buy_volume": 25100,
+      "sell_volume": 7900,
+      "net_volume": 17200,
+      "price": 12.5,
+      "total_volume": 271800,
+      "foreign_pct": 12.141280353200882
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1286925000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

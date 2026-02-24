@@ -1,0 +1,66 @@
+{
+  "symbol": "AAA",
+  "last_updated": "2026-02-11T23:03:57.441390",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "AAA",
+      "buy_value": 65563000.0,
+      "sell_value": 833636000.0,
+      "net_value": -768073000.0,
+      "buy_volume": 8350,
+      "sell_volume": 105100,
+      "net_volume": -96750,
+      "price": 7.77,
+      "total_volume": 1576500,
+      "foreign_pct": 7.196320964161116
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "AAA",
+      "buy_value": 77900000.0,
+      "sell_value": 3013979000.0,
+      "net_value": -2936079000.0,
+      "buy_volume": 10000,
+      "sell_volume": 387000,
+      "net_volume": -377000,
+      "price": 7.75,
+      "total_volume": 919500,
+      "foreign_pct": 43.17563893420337
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "AAA",
+      "buy_value": 24373840.0,
+      "sell_value": 1875712000.0,
+      "net_value": -1851338160.0,
+      "buy_volume": 3101,
+      "sell_volume": 240240,
+      "net_volume": -237139,
+      "price": 7.84,
+      "total_volume": 1375700,
+      "foreign_pct": 17.6885222068765
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "AAA",
+      "buy_value": 55575000.0,
+      "sell_value": 7850000.0,
+      "net_value": 47725000.0,
+      "buy_volume": 7100,
+      "sell_volume": 1000,
+      "net_volume": 6100,
+      "price": 7.85,
+      "total_volume": 699000,
+      "foreign_pct": 1.1587982832618025
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -5507765160.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 2
+  }
+}

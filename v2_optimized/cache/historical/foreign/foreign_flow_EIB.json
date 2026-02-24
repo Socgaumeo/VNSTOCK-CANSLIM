@@ -1,0 +1,66 @@
+{
+  "symbol": "EIB",
+  "last_updated": "2026-02-11T22:51:05.664508",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "EIB",
+      "buy_value": 6384891300.0,
+      "sell_value": 5966775000.0,
+      "net_value": 418116300.0,
+      "buy_volume": 309640,
+      "sell_volume": 287300,
+      "net_volume": 22340,
+      "price": 20.6,
+      "total_volume": 7748100,
+      "foreign_pct": 7.704340418941418
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "EIB",
+      "buy_value": 5811525000.0,
+      "sell_value": 3043225000.0,
+      "net_value": 2768300000.0,
+      "buy_volume": 280300,
+      "sell_volume": 146600,
+      "net_volume": 133700,
+      "price": 20.5,
+      "total_volume": 7314200,
+      "foreign_pct": 5.836591835060567
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "EIB",
+      "buy_value": 49777455000.0,
+      "sell_value": 1410600000.0,
+      "net_value": 48366855000.0,
+      "buy_volume": 2377700,
+      "sell_volume": 67100,
+      "net_volume": 2310600,
+      "price": 20.0,
+      "total_volume": 24655700,
+      "foreign_pct": 9.915759844579549
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "EIB",
+      "buy_value": 13268545000.0,
+      "sell_value": 1042719000.0,
+      "net_value": 12225826000.0,
+      "buy_volume": 630700,
+      "sell_volume": 49720,
+      "net_volume": 580980,
+      "price": 21.4,
+      "total_volume": 6526200,
+      "foreign_pct": 10.425975299561767
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 63779097300.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 0
+  }
+}

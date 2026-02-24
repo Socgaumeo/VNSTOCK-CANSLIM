@@ -1,0 +1,228 @@
+{
+  "timestamp": "2026-01-05 18:36:41",
+  "vnindex": {
+    "price": 1788.4,
+    "change_1d": 0.2191102219681884,
+    "change_1m": 3.270064731459721
+  },
+  "market_context": {
+    "traffic_light": "🟡 VÀNG - PHÒNG THỦ",
+    "distribution_days": 0,
+    "market_regime": "UPTREND"
+  },
+  "sectors": [
+    {
+      "rank": 1,
+      "code": "VNREAL",
+      "name": "Bất động sản",
+      "type": "Cyclical",
+      "rs_rating": 99,
+      "rs_trend": "📉 DECLINING",
+      "change_1d": 2.711466063151491,
+      "change_1m": 18.993575387304574,
+      "rs_vs_vnindex": 15.723510655844853,
+      "phase": "🚀 LEADING",
+      "composite_score": 85.2,
+      "technical": {
+        "rsi": 69.69685709313839,
+        "above_ma20": "True",
+        "above_ma50": "True"
+      },
+      "volume_profile": {
+        "poc": 2353.5467999999983,
+        "vah": 2636.035599999993,
+        "val": 2311.473999999999,
+        "position": "ABOVE_VA"
+      }
+    },
+    {
+      "rank": 2,
+      "code": "VNHEAL",
+      "name": "Y tế",
+      "type": "Defensive",
+      "rs_rating": 50,
+      "rs_trend": "📈 IMPROVING",
+      "change_1d": -0.5439766171245308,
+      "change_1m": 0.23730216796948866,
+      "rs_vs_vnindex": -3.032762563490232,
+      "phase": "⛔ LAGGING",
+      "composite_score": 72.9,
+      "technical": {
+        "rsi": 56.138551146814436,
+        "above_ma20": "True",
+        "above_ma50": "True"
+      },
+      "volume_profile": {
+        "poc": 2052.4981000000007,
+        "vah": 2079.6706000000013,
+        "val": 2034.0208000000005,
+        "position": "ABOVE_VA"
+      }
+    },
+    {
+      "rank": 3,
+      "code": "VNCOND",
+      "name": "Tiêu dùng không thiết yếu",
+      "type": "Growth",
+      "rs_rating": 82,
+      "rs_trend": "📉 DECLINING",
+      "change_1d": -0.3578970859903441,
+      "change_1m": 2.6219125490012596,
+      "rs_vs_vnindex": -0.6481521824584613,
+      "phase": "📈 IMPROVING",
+      "composite_score": 71.9,
+      "technical": {
+        "rsi": 62.50857524263872,
+        "above_ma20": "True",
+        "above_ma50": "True"
+      },
+      "volume_profile": {
+        "poc": 2296.0049999999974,
+        "vah": 2412.5099999999948,
+        "val": 2283.0599999999977,
+        "position": "IN_VA"
+      }
+    },
+    {
+      "rank": 4,
+      "code": "VNIT",
+      "name": "Công nghệ",
+      "type": "Growth",
+      "rs_rating": 66,
+      "rs_trend": "➡️ FLAT",
+      "change_1d": -0.5876880032664289,
+      "change_1m": -1.7755066498830518,
+      "rs_vs_vnindex": -5.045571381342773,
+      "phase": "⛔ LAGGING",
+      "composite_score": 51.4,
+      "technical": {
+        "rsi": 48.40755768224571,
+        "above_ma20": "True",
+        "above_ma50": "False"
+      },
+      "volume_profile": {
+        "poc": 4404.2945,
+        "vah": 4512.938000000001,
+        "val": 4382.5658,
+        "position": "IN_VA"
+      }
+    },
+    {
+      "rank": 5,
+      "code": "VNFIN",
+      "name": "Tài chính",
+      "type": "Cyclical",
+      "rs_rating": 17,
+      "rs_trend": "📈 IMPROVING",
+      "change_1d": -1.5542339943138916,
+      "change_1m": -2.0718571984731926,
+      "rs_vs_vnindex": -5.341921929932914,
+      "phase": "⛔ LAGGING",
+      "composite_score": 51.1,
+      "technical": {
+        "rsi": 48.67446765491577,
+        "above_ma20": "True",
+        "above_ma50": "False"
+      },
+      "volume_profile": {
+        "poc": 2203.6738000000055,
+        "vah": 2243.767600000007,
+        "val": 2150.9188000000036,
+        "position": "IN_VA"
+      }
+    },
+    {
+      "rank": 6,
+      "code": "VNCONS",
+      "name": "Tiêu dùng thiết yếu",
+      "type": "Defensive",
+      "rs_rating": 33,
+      "rs_trend": "📈 IMPROVING",
+      "change_1d": -1.103137751512595,
+      "change_1m": -4.527363859873135,
+      "rs_vs_vnindex": -7.797428591332856,
+      "phase": "⛔ LAGGING",
+      "composite_score": 36.0,
+      "technical": {
+        "rsi": 43.55624834741502,
+        "above_ma20": "False",
+        "above_ma50": "False"
+      },
+      "volume_profile": {
+        "poc": 716.3491000000004,
+        "vah": 722.1510000000005,
+        "val": 703.4064000000002,
+        "position": "BELOW_VA"
+      }
+    },
+    {
+      "rank": 7,
+      "code": "VNMAT",
+      "name": "Nguyên vật liệu",
+      "type": "Cyclical",
+      "rs_rating": 1,
+      "rs_trend": "📈 IMPROVING",
+      "change_1d": -1.6972564895101128,
+      "change_1m": -7.029154845775098,
+      "rs_vs_vnindex": -10.299219577234819,
+      "phase": "⛔ LAGGING",
+      "composite_score": 25.9,
+      "technical": {
+        "rsi": 33.223663576159325,
+        "above_ma20": "False",
+        "above_ma50": "False"
+      },
+      "volume_profile": {
+        "poc": 2202.8049000000024,
+        "vah": 2270.326000000005,
+        "val": 2174.4896000000012,
+        "position": "BELOW_VA"
+      }
+    }
+  ],
+  "classification": {
+    "leading": [
+      "Bất động sản"
+    ],
+    "improving": [
+      "Tiêu dùng không thiết yếu"
+    ],
+    "weakening": [],
+    "lagging": [
+      "Y tế",
+      "Công nghệ",
+      "Tài chính",
+      "Tiêu dùng thiết yếu",
+      "Nguyên vật liệu"
+    ]
+  },
+  "rotation": {
+    "clock": "🌱 EARLY CYCLE",
+    "confidence": 66.66666666666666,
+    "leading_now": [
+      "Bất động sản",
+      "Tiêu dùng không thiết yếu"
+    ],
+    "expected_leaders": [
+      "Tài chính",
+      "Tiêu dùng không thiết yếu",
+      "Bất động sản"
+    ],
+    "allocation": {
+      "cyclical": 50,
+      "defensive": 20,
+      "growth": 30
+    }
+  },
+  "recommendations": {
+    "top_sectors": [
+      "Bất động sản",
+      "Y tế",
+      "Tiêu dùng không thiết yếu"
+    ],
+    "avoid_sectors": [
+      "Tiêu dùng thiết yếu",
+      "Nguyên vật liệu"
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "NDN",
+  "last_updated": "2026-02-11T22:54:14.380009",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NDN",
+      "buy_value": 10900000.0,
+      "sell_value": 0.0,
+      "net_value": 10900000.0,
+      "buy_volume": 1000,
+      "sell_volume": 0,
+      "net_volume": 1000,
+      "price": 11.0,
+      "total_volume": 177400,
+      "foreign_pct": 0.5636978579481398
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NDN",
+      "buy_value": 3270000.0,
+      "sell_value": 11880000.0,
+      "net_value": -8610000.0,
+      "buy_volume": 300,
+      "sell_volume": 1100,
+      "net_volume": -800,
+      "price": 10.9,
+      "total_volume": 113200,
+      "foreign_pct": 1.2367491166077738
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NDN",
+      "buy_value": 3270000.0,
+      "sell_value": 11880000.0,
+      "net_value": -8610000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.9,
+      "total_volume": 86300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NDN",
+      "buy_value": 3270000.0,
+      "sell_value": 11880000.0,
+      "net_value": -8610000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 11.1,
+      "total_volume": 225400,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -14930000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 52.9902395740905,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

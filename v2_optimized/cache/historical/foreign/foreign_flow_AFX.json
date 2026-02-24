@@ -1,0 +1,66 @@
+{
+  "symbol": "AFX",
+  "last_updated": "2026-02-11T23:06:29.224942",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "AFX",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.5,
+      "total_volume": 115800,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "AFX",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.4,
+      "total_volume": 81400,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "AFX",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.45,
+      "total_volume": 85300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "AFX",
+      "buy_value": 0.0,
+      "sell_value": 0.0,
+      "net_value": 0.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.4,
+      "total_volume": 102100,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 0.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 0.0,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

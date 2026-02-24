@@ -9,6 +9,18 @@ import sys
 import time
 from datetime import datetime
 
+# ══════════════════════════════════════════════════════════════════════════════
+# CONFIG - Tùy chỉnh phạm vi scan
+# ══════════════════════════════════════════════════════════════════════════════
+
+# Scan tất cả 7 ngành thay vì chỉ top sectors theo RS Rating
+SCAN_ALL_SECTORS = True
+
+# Danh sách tất cả 7 ngành hợp lệ
+ALL_SECTORS = ['VNFIN', 'VNREAL', 'VNMAT', 'VNIT', 'VNHEAL', 'VNCOND', 'VNCONS']
+
+# ══════════════════════════════════════════════════════════════════════════════
+
 # Import modules
 from config import get_config, APIKeys
 from module1_market_timing_v2 import MarketTimingModule, create_config_from_unified as create_m1_config
@@ -91,12 +103,21 @@ def run_with_provider(provider: str, output_dir: str):
         
         # === MODULE 3: STOCK SCREENER ===
         print(f"[{provider}] Module 3: Stock Screener...")
-        target_sectors = []
-        if hasattr(results['sector_report'], 'sectors') and results['sector_report'].sectors:
-            for sector in results['sector_report'].sectors[:6]:
-                sector_code = getattr(sector, 'code', getattr(sector, 'symbol', None))
-                if sector_code:
-                    target_sectors.append(sector_code)
+
+        # Quyết định target_sectors dựa trên config
+        if SCAN_ALL_SECTORS:
+            # Scan tất cả 7 ngành
+            target_sectors = ALL_SECTORS.copy()
+            print(f"   📊 SCAN_ALL_SECTORS=True → Scanning all 7 sectors")
+        else:
+            # Chỉ scan top sectors theo RS Rating từ Module 2
+            target_sectors = []
+            if hasattr(results['sector_report'], 'sectors') and results['sector_report'].sectors:
+                for sector in results['sector_report'].sectors[:6]:
+                    sector_code = getattr(sector, 'code', getattr(sector, 'symbol', None))
+                    if sector_code:
+                        target_sectors.append(sector_code)
+            print(f"   📊 SCAN_ALL_SECTORS=False → Scanning top {len(target_sectors)} sectors by RS")
         
         m3_config = create_m3_config()
         m3_config.SAVE_REPORT = False
@@ -213,8 +234,17 @@ def _convert_json_to_markdown(text: str) -> str:
 
 def _generate_ai_report(results: dict, provider: str) -> str:
     """Tạo báo cáo full pipeline cho từng AI"""
+
+    # Helper to safely get attribute from dict or object
+    def safe_get(obj, key, default=None):
+        if obj is None:
+            return default
+        if isinstance(obj, dict):
+            return obj.get(key, default)
+        return getattr(obj, key, default)
+
     timestamp = results.get('timestamp', datetime.now().strftime("%Y-%m-%d %H:%M"))
-    
+
     market_report = results.get('market_report')
     sector_report = results.get('sector_report')
     screener_report = results.get('screener_report')
@@ -308,99 +338,101 @@ def _generate_ai_report(results: dict, provider: str) -> str:
 |------|--------|--------|-------|----| --------|------|--------|
 """
             for i, stock in enumerate(screener_report.top_picks[:10], 1):
-                symbol = getattr(stock, 'symbol', 'N/A')
-                sector = getattr(stock, 'sector_name', 'N/A')
-                
-                # Get the correct score (ai_score first, then score_total)
-                score = getattr(stock, 'ai_score', None)
+                symbol = safe_get(stock, 'symbol', 'N/A')
+                sector = safe_get(stock, 'sector_name', 'N/A')
+
+                # Get the correct score (ai_score first, then score/score_total)
+                score = safe_get(stock, 'ai_score', None) or safe_get(stock, 'score', None)
                 if score is None:
-                    score = getattr(stock, 'score_total', 0)
-                
-                # Get RS from technical data
-                technical = getattr(stock, 'technical', None)
-                rs = 0
-                if technical:
-                    rs = getattr(technical, 'rs_rating', 0)
-                
+                    score = safe_get(stock, 'score_total', 0)
+
+                # Get RS from technical data (handle dict from AI selection)
+                technical = safe_get(stock, 'technical', None)
+                rs = safe_get(technical, 'rs_rating', 0) if technical else 0
+
                 # Get pattern name properly
-                pattern_data = getattr(stock, 'pattern', None)
+                pattern_data = safe_get(stock, 'pattern', None)
                 pattern_str = "No Pattern"
                 if pattern_data:
-                    pattern_type = getattr(pattern_data, 'pattern_type', None)
+                    pattern_type = safe_get(pattern_data, 'pattern_type', None)
                     if pattern_type:
-                        pattern_str = getattr(pattern_type, 'value', str(pattern_type))
-                
+                        pattern_str = safe_get(pattern_type, 'value', str(pattern_type)) if hasattr(pattern_type, 'value') else str(pattern_type)
+
                 # Get signal name properly
-                signal = getattr(stock, 'signal', None)
+                signal = safe_get(stock, 'signal', None)
                 signal_str = "➖ NEUTRAL"
                 if signal:
-                    signal_str = getattr(signal, 'value', str(signal))
-                
+                    signal_str = safe_get(signal, 'value', str(signal)) if hasattr(signal, 'value') else str(signal)
+
                 # Volume confirmed
                 vol_confirmed = "⭕"
-                if pattern_data and getattr(pattern_data, 'volume_confirmed', False):
+                if pattern_data and safe_get(pattern_data, 'volume_confirmed', False):
                     vol_confirmed = "✓"
-                elif pattern_data and getattr(pattern_data, 'has_dryup', False):
+                elif pattern_data and safe_get(pattern_data, 'has_dryup', False):
                     vol_confirmed = "🚀"
-                
+
                 content += f"| {i} | {symbol} | {sector} | {score:.0f} | {rs} | {pattern_str} | {vol_confirmed} | {signal_str} |\n"
             
-            # --- ADDED: Foreign Trade Summary Table (Mid-Session Parity) ---
+            # --- Foreign Trade Summary Table ---
             content += "\n### 💰 Khối ngoại (Session):\n"
             content += "| Symbol | Buy | Sell | Net (VND) |\n|---|---|---|---|\n"
             for stock in screener_report.top_picks[:10]:
-                f_buy = getattr(stock.technical, 'foreign_buy_value', 0)
-                f_sell = getattr(stock.technical, 'foreign_sell_value', 0)
-                f_net = getattr(stock.technical, 'foreign_net_value', 0)
+                symbol = safe_get(stock, 'symbol', 'N/A')
+                tech = safe_get(stock, 'technical', None)
+                f_buy = safe_get(tech, 'foreign_buy_value', 0) if tech else 0
+                f_sell = safe_get(tech, 'foreign_sell_value', 0) if tech else 0
+                f_net = safe_get(tech, 'foreign_net_value', 0) if tech else 0
                 f_icon = "🟢" if f_net > 0 else ("🔴" if f_net < 0 else "⚪")
-                content += f"| **{stock.symbol}** | {f_buy/1e6:,.1f}M | {f_sell/1e6:,.1f}M | {f_icon} {f_net/1e6:+,.1f}M |\n"
+                content += f"| **{symbol}** | {f_buy/1e6:,.1f}M | {f_sell/1e6:,.1f}M | {f_icon} {f_net/1e6:+,.1f}M |\n"
             # -------------------------------------------------------------
             
             # Detail for each stock
             content += "\n## 📝 Chi tiết Top 5 Candidates\n\n"
-            
+
             for i, stock in enumerate(screener_report.top_picks[:5], 1):
-                symbol = getattr(stock, 'symbol', 'N/A')
-                sector_name = getattr(stock, 'sector_name', 'N/A')
-                
+                symbol = safe_get(stock, 'symbol', 'N/A')
+                sector_name = safe_get(stock, 'sector_name', 'N/A')
+
                 # Technical data
-                tech = getattr(stock, 'technical', None)
-                price = tech.price if tech else 0
-                rs = tech.rs_rating if tech else 0
-                rsi = tech.rsi_14 if tech else 0
-                vol_ratio = tech.volume_ratio if tech else 0
-                above_ma50 = "✅ TRÊN MA50" if tech and tech.above_ma50 else "❌ DƯỚI MA50"
-                
+                tech = safe_get(stock, 'technical', None)
+                price = safe_get(tech, 'price', 0)
+                rs = safe_get(tech, 'rs_rating', 0)
+                rsi = safe_get(tech, 'rsi_14', 0)
+                vol_ratio = safe_get(tech, 'volume_ratio', 0)
+                above_ma50_val = safe_get(tech, 'above_ma50', False)
+                above_ma50 = "✅ TRÊN MA50" if above_ma50_val else "❌ DƯỚI MA50"
+
                 # Fundamental data
-                funda = getattr(stock, 'fundamental', None)
-                roe = funda.roe if funda else 0
-                roa = funda.roa if funda else 0
-                eps_qoq = funda.eps_growth_qoq if funda else 0
-                eps_yoy = funda.eps_growth_yoy if funda else 0
-                eps_3y = funda.eps_growth_3y if funda else 0
-                c_score = funda.c_score if funda else 0
-                a_score = funda.a_score if funda else 0
-                conf = funda.confidence_score if funda else 50
-                
+                funda = safe_get(stock, 'fundamental', None)
+                roe = safe_get(funda, 'roe', 0)
+                roa = safe_get(funda, 'roa', 0)
+                eps_qoq = safe_get(funda, 'eps_growth_qoq', 0)
+                eps_yoy = safe_get(funda, 'eps_growth_yoy', 0)
+                eps_3y = safe_get(funda, 'eps_growth_3y', 0)
+                c_score = safe_get(funda, 'c_score', 0)
+                a_score = safe_get(funda, 'a_score', 0)
+                conf = safe_get(funda, 'confidence_score', 50)
+
                 # Pattern data
-                pattern_data = getattr(stock, 'pattern', None)
-                pattern_type = pattern_data.pattern_type.value if pattern_data and pattern_data.pattern_type else "No Pattern"
-                pattern_quality = pattern_data.pattern_quality if pattern_data else 0
-                vol_score = pattern_data.volume_score if pattern_data else 0
-                has_shakeout = "✅ Shakeout detected" if pattern_data and pattern_data.has_shakeout else "⭕ No shakeout"
-                has_dryup = "✅ Dry-up" if pattern_data and pattern_data.has_dryup else "⭕ No dry-up"
-                breakout_ready = "✅ Ready for breakout" if pattern_data and pattern_data.breakout_ready else "⏳ Waiting for confirmation"
-                
+                pattern_data = safe_get(stock, 'pattern', None)
+                pattern_type_obj = safe_get(pattern_data, 'pattern_type', None)
+                pattern_type = pattern_type_obj.value if pattern_type_obj and hasattr(pattern_type_obj, 'value') else (pattern_type_obj if pattern_type_obj else "No Pattern")
+                pattern_quality = safe_get(pattern_data, 'pattern_quality', 0)
+                vol_score = safe_get(pattern_data, 'volume_score', 0)
+                has_shakeout = "✅ Shakeout detected" if safe_get(pattern_data, 'has_shakeout', False) else "⭕ No shakeout"
+                has_dryup = "✅ Dry-up" if safe_get(pattern_data, 'has_dryup', False) else "⭕ No dry-up"
+                breakout_ready = "✅ Ready for breakout" if safe_get(pattern_data, 'breakout_ready', False) else "⏳ Waiting for confirmation"
+
                 # Scores
-                score_funda = getattr(stock, 'score_fundamental', 0)
-                score_tech = getattr(stock, 'score_technical', 0)
-                score_pattern = getattr(stock, 'score_pattern', 0)
-                score_news = getattr(stock, 'score_news', 0)
-                score_total = getattr(stock, 'score_total', 0)
-                
+                score_funda = safe_get(stock, 'score_fundamental', 0)
+                score_tech = safe_get(stock, 'score_technical', 0)
+                score_pattern = safe_get(stock, 'score_pattern', 0)
+                score_news = safe_get(stock, 'score_news', 0)
+                score_total = safe_get(stock, 'score_total', 0)
+
                 # Signal
-                signal = getattr(stock, 'signal', None)
-                signal_str = signal.value if signal else "NEUTRAL"
+                signal = safe_get(stock, 'signal', None)
+                signal_str = signal.value if signal and hasattr(signal, 'value') else (signal if signal else "NEUTRAL")
                 
                 content += f"""### {i}. {symbol} - {sector_name}
 
@@ -419,16 +451,16 @@ def _generate_ai_report(results: dict, provider: str) -> str:
 """
                 
                 # VWAP (if available)
-                if tech and hasattr(tech, 'vwap') and tech.vwap > 0:
-                    vwap = tech.vwap
-                    vwap_pos = getattr(tech, 'price_vs_vwap', 'N/A')
-                    vwap_score = getattr(tech, 'vwap_score', 50)
+                vwap = safe_get(tech, 'vwap', 0)
+                if vwap > 0:
+                    vwap_pos = safe_get(tech, 'price_vs_vwap', 'N/A')
+                    vwap_score = safe_get(tech, 'vwap_score', 50)
                     content += f"- VWAP: {vwap:,.0f} | Vị thế: {vwap_pos} | VWAP Score: {vwap_score:.0f}/100\n"
-                
+
                 # ATR for trading plan
-                atr_pct = getattr(tech, 'atr_pct', 3.0) if tech else 3.0
+                atr_pct = safe_get(tech, 'atr_pct', 3.0)
                 content += f"- ATR(14): {atr_pct:.1f}% (biến động)\n"
-                
+
                 content += f"""
 **Pattern:** {pattern_type} (Quality: {pattern_quality:.0f})
 - 📊 Volume Score: {vol_score:.0f}/80
@@ -436,48 +468,48 @@ def _generate_ai_report(results: dict, provider: str) -> str:
 - {has_dryup}
 - {breakout_ready}
 """
-                
+
                 # Foreign Trade Section
-                f_buy = getattr(tech, 'foreign_buy_value', 0)
-                f_sell = getattr(tech, 'foreign_sell_value', 0)
-                f_net = getattr(tech, 'foreign_net_value', 0)
+                f_buy = safe_get(tech, 'foreign_buy_value', 0)
+                f_sell = safe_get(tech, 'foreign_sell_value', 0)
+                f_net = safe_get(tech, 'foreign_net_value', 0)
                 f_icon = "🟢" if f_net > 0 else ("🔴" if f_net < 0 else "⚪")
-                
+
                 content += f"""
 **💰 Khối ngoại (Session):**
 - Mua: {f_buy/1e6:,.1f}M VND
 - Bán: {f_sell/1e6:,.1f}M VND
 - Net: {f_icon} {f_net/1e6:+,.1f}M VND
 """
-                
+
                 # News section (if available)
-                news_data = getattr(stock, 'news', None)
+                news_data = safe_get(stock, 'news', None)
                 if news_data:
-                    articles = getattr(news_data, 'articles', [])
-                    sentiment = getattr(news_data, 'sentiment', 'neutral')
-                    sentiment_score = getattr(news_data, 'sentiment_score', 0)
-                    key_topics = getattr(news_data, 'key_topics', [])
-                    
+                    articles = safe_get(news_data, 'articles', [])
+                    sentiment = safe_get(news_data, 'sentiment', 'neutral')
+                    sentiment_score = safe_get(news_data, 'sentiment_score', 0)
+                    key_topics = safe_get(news_data, 'key_topics', [])
+
                     if articles:
                         sentiment_icon = "🟢" if sentiment_score > 0.1 else ("🔴" if sentiment_score < -0.1 else "🟡")
                         content += f"\n**📰 News ({len(articles)} bài):**\n"
                         for article in articles[:3]:
-                            title = getattr(article, 'title', str(article)) if hasattr(article, 'title') else str(article)[:80]
-                            url = getattr(article, 'url', '#') if hasattr(article, 'url') else '#'
+                            title = safe_get(article, 'title', str(article)[:80])
+                            url = safe_get(article, 'url', '#')
                             content += f"- [{title[:80]}...]({url})\n"
                         content += f"- Sentiment: {sentiment_icon} {sentiment.upper()} ({sentiment_score:+.2f})\n"
                         if key_topics:
                             content += f"- Topics: {', '.join(key_topics[:5])}\n"
-                
+
                 # Trading Plan (dynamic based on ATR and pattern)
-                buy_point = getattr(pattern_data, 'buy_point', price * 1.02) if pattern_data else price * 1.02
+                buy_point = safe_get(pattern_data, 'buy_point', price * 1.02)
                 buy_zone_high = buy_point * 1.05
-                stop_loss_price = getattr(stock, 'stop_loss', 0)
+                stop_loss_price = safe_get(stock, 'stop_loss', 0)
                 if stop_loss_price == 0:
                     stop_loss_price = buy_point * (1 - atr_pct/100)
                 target_1 = buy_point * 1.10
                 target_2 = buy_point * 1.15
-                
+
                 content += f"""
 **📈 TRADING PLAN (Dynamic):**
 | Level | Giá | % | Lý do |
@@ -488,9 +520,9 @@ def _generate_ai_report(results: dict, provider: str) -> str:
 | 💰 **Target 1** | {target_1:,.0f} | +10% | R:R ≥ 1:3 |
 | 💰 **Target 2** | {target_2:,.0f} | +15% | Trailing stop sau T1 |
 """
-                
+
                 # AI Analysis for each stock (if available)
-                stock_ai = getattr(stock, 'ai_analysis', None)
+                stock_ai = safe_get(stock, 'ai_analysis', None)
                 if stock_ai and len(str(stock_ai)) > 50:
                     content += f"""
 **🤖 AI Analysis:**
@@ -657,8 +689,15 @@ def generate_comparison(claude_results: dict, gemini_results: dict, output_dir: 
             if not report or not hasattr(report, 'candidates'):
                 return None
             for c in report.candidates:
-                if c.symbol == symbol:
-                    return getattr(c.technical, 'foreign_net_value', 0)
+                # Handle both dict and object types
+                c_symbol = c.get('symbol') if isinstance(c, dict) else getattr(c, 'symbol', None)
+                if c_symbol == symbol:
+                    if isinstance(c, dict):
+                        tech = c.get('technical', {})
+                        return tech.get('foreign_net_value', 0) if isinstance(tech, dict) else getattr(tech, 'foreign_net_value', 0)
+                    else:
+                        tech = getattr(c, 'technical', None)
+                        return getattr(tech, 'foreign_net_value', 0) if tech else 0
             return None
 
         for sym in all_symbols:

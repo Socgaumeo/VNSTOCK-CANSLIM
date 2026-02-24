@@ -1,0 +1,66 @@
+{
+  "symbol": "HSG",
+  "last_updated": "2026-02-11T23:01:26.443626",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HSG",
+      "buy_value": 1637915000.0,
+      "sell_value": 9814320000.0,
+      "net_value": -8176405000.0,
+      "buy_volume": 102150,
+      "sell_volume": 614500,
+      "net_volume": -512350,
+      "price": 15.6,
+      "total_volume": 4600900,
+      "foreign_pct": 15.576300289073878
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HSG",
+      "buy_value": 63570000.0,
+      "sell_value": 9578902400.0,
+      "net_value": -9515332400.0,
+      "buy_volume": 4050,
+      "sell_volume": 614179,
+      "net_volume": -610129,
+      "price": 15.5,
+      "total_volume": 3797000,
+      "foreign_pct": 16.282038451409004
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HSG",
+      "buy_value": 69427500.0,
+      "sell_value": 3091875000.0,
+      "net_value": -3022447500.0,
+      "buy_volume": 4450,
+      "sell_volume": 198300,
+      "net_volume": -193850,
+      "price": 15.45,
+      "total_volume": 2727600,
+      "foreign_pct": 7.433274673705823
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HSG",
+      "buy_value": 1598130000.0,
+      "sell_value": 708316550.0,
+      "net_value": 889813450.0,
+      "buy_volume": 102500,
+      "sell_volume": 45407,
+      "net_volume": 57093,
+      "price": 15.6,
+      "total_volume": 2847900,
+      "foreign_pct": 5.1935461217037115
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -19824371450.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

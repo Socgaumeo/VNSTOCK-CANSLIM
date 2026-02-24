@@ -1,0 +1,66 @@
+{
+  "symbol": "MWG",
+  "last_updated": "2026-02-11T23:17:27.452423",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "MWG",
+      "buy_value": 134741634000.0,
+      "sell_value": 167823215000.0,
+      "net_value": -33081581000.0,
+      "buy_volume": 1524110,
+      "sell_volume": 1903550,
+      "net_volume": -379440,
+      "price": 88.4,
+      "total_volume": 13814700,
+      "foreign_pct": 24.811686102485034
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "MWG",
+      "buy_value": 225048166200.0,
+      "sell_value": 185547420200.0,
+      "net_value": 39500746000.0,
+      "buy_volume": 2522480,
+      "sell_volume": 2082800,
+      "net_volume": 439680,
+      "price": 89.3,
+      "total_volume": 5452400,
+      "foreign_pct": 84.4633555865307
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "MWG",
+      "buy_value": 283659651900.0,
+      "sell_value": 83353300000.0,
+      "net_value": 200306351900.0,
+      "buy_volume": 3198323,
+      "sell_volume": 938600,
+      "net_volume": 2259723,
+      "price": 89.3,
+      "total_volume": 5950600,
+      "foreign_pct": 69.52110711524888
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "MWG",
+      "buy_value": 222747426000.0,
+      "sell_value": 102402440000.0,
+      "net_value": 120344986000.0,
+      "buy_volume": 2449004,
+      "sell_volume": 1123100,
+      "net_volume": 1325904,
+      "price": 91.9,
+      "total_volume": 8987000,
+      "foreign_pct": 39.74745743852231
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 327070502900.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 46.54736938735887,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

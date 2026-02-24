@@ -1,0 +1,66 @@
+{
+  "symbol": "GEG",
+  "last_updated": "2026-02-11T23:02:12.034597",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "GEG",
+      "buy_value": 17480000.0,
+      "sell_value": 309695000.0,
+      "net_value": -292215000.0,
+      "buy_volume": 1200,
+      "sell_volume": 21000,
+      "net_volume": -19800,
+      "price": 14.6,
+      "total_volume": 605400,
+      "foreign_pct": 3.6669970267591676
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "GEG",
+      "buy_value": 14500000.0,
+      "sell_value": 961925000.0,
+      "net_value": -947425000.0,
+      "buy_volume": 1000,
+      "sell_volume": 66500,
+      "net_volume": -65500,
+      "price": 14.55,
+      "total_volume": 236500,
+      "foreign_pct": 28.541226215644823
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "GEG",
+      "buy_value": 0.0,
+      "sell_value": 309235000.0,
+      "net_value": -309235000.0,
+      "buy_volume": 0,
+      "sell_volume": 21400,
+      "net_volume": -21400,
+      "price": 14.25,
+      "total_volume": 408800,
+      "foreign_pct": 5.234833659491193
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "GEG",
+      "buy_value": 351970000.0,
+      "sell_value": 122270000.0,
+      "net_value": 229700000.0,
+      "buy_volume": 24700,
+      "sell_volume": 8500,
+      "net_volume": 16200,
+      "price": 14.45,
+      "total_volume": 253600,
+      "foreign_pct": 13.09148264984227
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1319175000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

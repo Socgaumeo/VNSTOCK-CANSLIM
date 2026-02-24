@@ -1,0 +1,66 @@
+{
+  "symbol": "DXP",
+  "last_updated": "2026-02-11T23:15:35.633889",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DXP",
+      "buy_value": 128960000.0,
+      "sell_value": 12800000.0,
+      "net_value": 116160000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 12.2,
+      "total_volume": 470000,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DXP",
+      "buy_value": 225520000.0,
+      "sell_value": 0.0,
+      "net_value": 225520000.0,
+      "buy_volume": 18400,
+      "sell_volume": 0,
+      "net_volume": 18400,
+      "price": 12.2,
+      "total_volume": 191700,
+      "foreign_pct": 9.598330725091289
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DXP",
+      "buy_value": 0.0,
+      "sell_value": 55920000.0,
+      "net_value": -55920000.0,
+      "buy_volume": 0,
+      "sell_volume": 4600,
+      "net_volume": -4600,
+      "price": 12.1,
+      "total_volume": 399400,
+      "foreign_pct": 1.1517275913870806
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DXP",
+      "buy_value": 0.0,
+      "sell_value": 55920000.0,
+      "net_value": -55920000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 12.1,
+      "total_volume": 115900,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 229840000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 95.94256136249791,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

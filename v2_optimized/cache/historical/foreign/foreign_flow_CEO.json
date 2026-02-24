@@ -1,0 +1,66 @@
+{
+  "symbol": "CEO",
+  "last_updated": "2026-02-11T22:56:29.647001",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "CEO",
+      "buy_value": 249450000.0,
+      "sell_value": 1829320000.0,
+      "net_value": -1579870000.0,
+      "buy_volume": 13500,
+      "sell_volume": 96400,
+      "net_volume": -82900,
+      "price": 18.3,
+      "total_volume": 14705100,
+      "foreign_pct": 0.7473597595392075
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "CEO",
+      "buy_value": 1396760000.0,
+      "sell_value": 10881579500.0,
+      "net_value": -9484819500.0,
+      "buy_volume": 75500,
+      "sell_volume": 589375,
+      "net_volume": -513875,
+      "price": 18.5,
+      "total_volume": 6139300,
+      "foreign_pct": 10.82981773166322
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "CEO",
+      "buy_value": 2016650000.0,
+      "sell_value": 4788680000.0,
+      "net_value": -2772030000.0,
+      "buy_volume": 109600,
+      "sell_volume": 256600,
+      "net_volume": -147000,
+      "price": 18.4,
+      "total_volume": 5619100,
+      "foreign_pct": 6.517057891833211
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "CEO",
+      "buy_value": 13547940000.0,
+      "sell_value": 239100000.0,
+      "net_value": 13308840000.0,
+      "buy_volume": 707000,
+      "sell_volume": 12500,
+      "net_volume": 694500,
+      "price": 19.3,
+      "total_volume": 13216800,
+      "foreign_pct": 5.443829066037164
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -527879500.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 3.0208146590566534,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

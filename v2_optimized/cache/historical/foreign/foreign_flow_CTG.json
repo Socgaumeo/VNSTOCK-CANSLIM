@@ -1,0 +1,66 @@
+{
+  "symbol": "CTG",
+  "last_updated": "2026-02-11T23:09:29.297456",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "CTG",
+      "buy_value": 86828004900.0,
+      "sell_value": 209943409850.0,
+      "net_value": -123115404950.0,
+      "buy_volume": 2296098,
+      "sell_volume": 5533301,
+      "net_volume": -3237203,
+      "price": 37.4,
+      "total_volume": 24838700,
+      "foreign_pct": 31.52096929388414
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "CTG",
+      "buy_value": 28467351000.0,
+      "sell_value": 12041680000.0,
+      "net_value": 16425671000.0,
+      "buy_volume": 765233,
+      "sell_volume": 323500,
+      "net_volume": 441733,
+      "price": 37.1,
+      "total_volume": 9918300,
+      "foreign_pct": 10.977012189588942
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "CTG",
+      "buy_value": 26040087550.0,
+      "sell_value": 25513806850.0,
+      "net_value": 526280700.0,
+      "buy_volume": 703983,
+      "sell_volume": 687053,
+      "net_volume": 16930,
+      "price": 37.1,
+      "total_volume": 12648100,
+      "foreign_pct": 10.997983886907916
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "CTG",
+      "buy_value": 31395700000.0,
+      "sell_value": 52177669200.0,
+      "net_value": -20781969200.0,
+      "buy_volume": 825800,
+      "sell_volume": 1375430,
+      "net_volume": -549630,
+      "price": 37.9,
+      "total_volume": 13723100,
+      "foreign_pct": 16.040326165370796
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -126945422450.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 53.74400964991365,
+    "buy_days_count": 1,
+    "sell_days_count": 2
+  }
+}

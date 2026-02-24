@@ -1,0 +1,66 @@
+{
+  "symbol": "VRE",
+  "last_updated": "2026-02-11T22:52:22.008385",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VRE",
+      "buy_value": 6199008400.0,
+      "sell_value": 102129135850.0,
+      "net_value": -95930127450.0,
+      "buy_volume": 218436,
+      "sell_volume": 3601400,
+      "net_volume": -3382964,
+      "price": 28.05,
+      "total_volume": 8635700,
+      "foreign_pct": 44.23307896290979
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VRE",
+      "buy_value": 26813881500.0,
+      "sell_value": 20307845000.0,
+      "net_value": 6506036500.0,
+      "buy_volume": 954150,
+      "sell_volume": 728800,
+      "net_volume": 225350,
+      "price": 28.2,
+      "total_volume": 5565300,
+      "foreign_pct": 30.240058936625157
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VRE",
+      "buy_value": 61337308000.0,
+      "sell_value": 43840140000.0,
+      "net_value": 17497168000.0,
+      "buy_volume": 2117210,
+      "sell_volume": 1516300,
+      "net_volume": 600910,
+      "price": 28.95,
+      "total_volume": 11245800,
+      "foreign_pct": 32.309929040175
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VRE",
+      "buy_value": 11790327500.0,
+      "sell_value": 22020194700.0,
+      "net_value": -10229867200.0,
+      "buy_volume": 402550,
+      "sell_volume": 756773,
+      "net_volume": -354223,
+      "price": 29.4,
+      "total_volume": 6146600,
+      "foreign_pct": 18.861207822210655
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -82156790150.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 55.80586373335855,
+    "buy_days_count": 2,
+    "sell_days_count": 2
+  }
+}

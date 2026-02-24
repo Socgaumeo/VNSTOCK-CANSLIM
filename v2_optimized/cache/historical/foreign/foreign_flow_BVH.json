@@ -1,0 +1,66 @@
+{
+  "symbol": "BVH",
+  "last_updated": "2026-02-11T23:09:38.706412",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BVH",
+      "buy_value": 65704100000.0,
+      "sell_value": 11343213200.0,
+      "net_value": 54360886800.0,
+      "buy_volume": 833930,
+      "sell_volume": 144550,
+      "net_volume": 689380,
+      "price": 78.0,
+      "total_volume": 1731400,
+      "foreign_pct": 56.51380385814947
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BVH",
+      "buy_value": 4681910000.0,
+      "sell_value": 8119917400.0,
+      "net_value": -3438007400.0,
+      "buy_volume": 60800,
+      "sell_volume": 104810,
+      "net_volume": -44010,
+      "price": 76.5,
+      "total_volume": 524900,
+      "foreign_pct": 31.5507715755382
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BVH",
+      "buy_value": 39741150000.0,
+      "sell_value": 9883158200.0,
+      "net_value": 29857991800.0,
+      "buy_volume": 526000,
+      "sell_volume": 127750,
+      "net_volume": 398250,
+      "price": 74.9,
+      "total_volume": 1152300,
+      "foreign_pct": 56.734357372212095
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BVH",
+      "buy_value": 34117050000.0,
+      "sell_value": 18430325000.0,
+      "net_value": 15686725000.0,
+      "buy_volume": 436300,
+      "sell_volume": 234140,
+      "net_volume": 202160,
+      "price": 78.3,
+      "total_volume": 1019800,
+      "foreign_pct": 65.74230241223769
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 96467596200.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

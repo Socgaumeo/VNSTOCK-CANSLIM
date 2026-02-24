@@ -1,0 +1,66 @@
+{
+  "symbol": "IVS",
+  "last_updated": "2026-02-11T22:50:28.749723",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "IVS",
+      "buy_value": 654680000.0,
+      "sell_value": 0.0,
+      "net_value": 654680000.0,
+      "buy_volume": 81200,
+      "sell_volume": 0,
+      "net_volume": 81200,
+      "price": 8.1,
+      "total_volume": 124800,
+      "foreign_pct": 65.06410256410257
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "IVS",
+      "buy_value": 64810000.0,
+      "sell_value": 6480000.0,
+      "net_value": 58330000.0,
+      "buy_volume": 8100,
+      "sell_volume": 800,
+      "net_volume": 7300,
+      "price": 8.1,
+      "total_volume": 35000,
+      "foreign_pct": 25.428571428571427
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "IVS",
+      "buy_value": 0.0,
+      "sell_value": 45360000.0,
+      "net_value": -45360000.0,
+      "buy_volume": 0,
+      "sell_volume": 5600,
+      "net_volume": -5600,
+      "price": 8.1,
+      "total_volume": 25700,
+      "foreign_pct": 21.78988326848249
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "IVS",
+      "buy_value": 8100000.0,
+      "sell_value": 0.0,
+      "net_value": 8100000.0,
+      "buy_volume": 1000,
+      "sell_volume": 0,
+      "net_volume": 1000,
+      "price": 8.1,
+      "total_volume": 14900,
+      "foreign_pct": 6.7114093959731544
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 675750000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

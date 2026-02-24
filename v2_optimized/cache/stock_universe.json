@@ -1,0 +1,5645 @@
+{
+  "data": [
+    {
+      "symbol": "YEG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Yeah1",
+      "exchange": "HSX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "YBM",
+      "organ_name": "Công ty Cổ phần Khoáng sản Công nghiệp Yên Bái",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "X20",
+      "organ_name": "Công ty Cổ phần X20",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "WSS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Phố Wall",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "WCS",
+      "organ_name": "Công ty Cổ phần Bến xe Miền Tây",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VVS",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Máy Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VTZ",
+      "organ_name": "Công ty Cổ phần Sản xuất và Thương mại Nhựa Việt Thành",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VTV",
+      "organ_name": "Công ty Cổ phần Năng lượng và Môi trường VICEM",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VTP",
+      "organ_name": "Tổng Công ty Cổ phần Bưu chính Viettel",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VTO",
+      "organ_name": "Công ty Cổ phần Vận tải Xăng dầu VITACO",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VTJ",
+      "organ_name": "Công ty Cổ phần Thương mại và Đầu tư VI NA TA BA",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Thuốc lá",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "VTH",
+      "organ_name": "Công ty Cổ phần Dây cáp điện Việt Thái",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VTC",
+      "organ_name": "Công ty Cổ phần Viễn Thông VTC",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "VTB",
+      "organ_name": "Công ty Cổ phần Viettronics Tân Bình",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VSM",
+      "organ_name": "Công ty Cổ phần Container Miền Trung",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VSI",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng Cấp thoát nước",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VSH",
+      "organ_name": "Công ty Cổ phần Thủy điện Vĩnh Sơn - Sông Hinh",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VSC",
+      "organ_name": "Công ty Cổ phần Container Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VSA",
+      "organ_name": "Công ty Cổ phần Đại lý Hàng hải Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VRE",
+      "organ_name": "Công ty Cổ phần Vincom Retail",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VRC",
+      "organ_name": "Công ty Cổ phần Bất động sản và Đầu tư VRC",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VPX",
+      "organ_name": "Công ty Cổ phần Chứng khoán VPBank",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VPS",
+      "organ_name": "Công ty Cổ phần Thuốc sát trùng Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VPL",
+      "organ_name": "Công ty Cổ phần Vinpearl",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VPI",
+      "organ_name": "Công ty Cổ phần Phát triển Bất động sản Văn Phú",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VPH",
+      "organ_name": "Công ty Cổ phần Vạn Phát Hưng",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VPG",
+      "organ_name": "Công ty Cổ phần Đầu tư Thương mại Xuất nhập khẩu Việt Phát",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VPD",
+      "organ_name": "Công ty Cổ phần Phát triển Điện lực Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VPB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Việt Nam Thịnh Vượng",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VOS",
+      "organ_name": "Công ty Cổ phần Vận tải Biển Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VNT",
+      "organ_name": "Công ty Cổ phần Giao nhận Vận tải Ngoại Thương",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VNS",
+      "organ_name": "Công ty Cổ phần Ánh Dương Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VNR",
+      "organ_name": "Tổng Công ty Cổ phần Tái bảo hiểm Quốc gia Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VNM",
+      "organ_name": "Công ty Cổ phần Sữa Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "VNL",
+      "organ_name": "Công ty Cổ phần Logistics Vinalink",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VNG",
+      "organ_name": "Công ty Cổ phần Du Lịch Thành Thành Công",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VNF",
+      "organ_name": "Công ty Cổ phần Vinafreight",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VNE",
+      "organ_name": "Tổng Công ty Cổ phần Xây dựng điện Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VND",
+      "organ_name": "Công ty Cổ phần Chứng khoán VNDIRECT",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VNC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Vinacontrol",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VMS",
+      "organ_name": "Công ty Cổ phần Phát triển Hàng Hải",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VMD",
+      "organ_name": "Công ty Cổ phần Y Dược phẩm Vimedimex",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "VMC",
+      "organ_name": "Công ty Cổ phần VIMECO",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VLA",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Công nghệ Văn Lang",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "VJC",
+      "organ_name": "Công ty Cổ phần Hàng không Vietjet",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VIX",
+      "organ_name": "Công ty Cổ phần Chứng khoán VIX",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VIT",
+      "organ_name": "Công ty Cổ phần Viglacera Tiên Sơn",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VIP",
+      "organ_name": "Công ty Cổ phần Vận tải Xăng dầu VIPCO",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VIG",
+      "organ_name": "Công ty Cổ phần Chứng khoán Đầu tư Tài chính Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VIF",
+      "organ_name": "Tổng Công ty Lâm nghiệp Việt Nam - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VID",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Thương mại Viễn Đông",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VIC",
+      "organ_name": "Tập đoàn Vingroup - Công ty CP",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VIB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Quốc tế Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VHM",
+      "organ_name": "Công ty Cổ phần Vinhomes",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VHL",
+      "organ_name": "Công ty Cổ phần Viglacera Hạ Long",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VHE",
+      "organ_name": "Công ty Cổ phần Dược liệu và Thực phẩm Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "VHC",
+      "organ_name": "Công ty Cổ phần Vĩnh Hoàn",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "VGS",
+      "organ_name": "Công ty Cổ phần Ống thép Việt - Đức VG PIPE",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VGP",
+      "organ_name": "Công ty Cổ phần Cảng Rau Quả",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VGC",
+      "organ_name": "Tổng Công ty Viglacera - Công ty Cổ phần",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VFS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Nhất Việt",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VFG",
+      "organ_name": "Công ty Cổ phần Khử trùng Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VE4",
+      "organ_name": "Công ty Cổ phần Xây dựng điện VNECO4",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VE3",
+      "organ_name": "Công ty Cổ phần Xây dựng điện VNECO 3",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VE1",
+      "organ_name": "Công ty Cổ phần Xây dựng điện VNECO 1",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VDS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Rồng Việt",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VDP",
+      "organ_name": "Công ty Cổ phần Dược phẩm Trung ương VIDIPHA",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "VDL",
+      "organ_name": "Công ty Cổ phần Thực phẩm Lâm Đồng",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "VCS",
+      "organ_name": "Công ty Cổ phần VICOSTONE",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VCM",
+      "organ_name": "Công ty Cổ phần BV Life",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VCK",
+      "organ_name": "Công ty Cổ phần Chứng Khoán VPS",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VCI",
+      "organ_name": "Công ty Cổ phần Chứng khoán Vietcap",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VCG",
+      "organ_name": "Tổng Công ty Cổ phần Xuất nhập khẩu và Xây dựng Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VCF",
+      "organ_name": "Công ty Cổ phần VinaCafé Biên Hòa",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "VCC",
+      "organ_name": "Công ty Cổ phần Vinaconex 25",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VCB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Ngoại thương Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "VCA",
+      "organ_name": "Công ty Cổ phần Thép VICASA - VNSTEEL",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VC9",
+      "organ_name": "Công ty Cổ phần Xây dựng số 9 - VC9",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VC7",
+      "organ_name": "Công ty Cổ phần Tập đoàn BGI",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VC6",
+      "organ_name": "Công ty cổ phần Xây dựng và Đầu tư Visicons",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VC3",
+      "organ_name": "Công ty Cổ phần Tập đoàn Nam Mê Kông",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "VC2",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng VINA2",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VC1",
+      "organ_name": "Công ty Cổ phần Xây dựng số 1",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "VBC",
+      "organ_name": "Công ty Cổ phần Nhựa, Bao bì Vinh",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VAF",
+      "organ_name": "Công ty Cổ phần Phân lân nung chảy Văn Điển",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "VAB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Việt Á",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "V21",
+      "organ_name": "Công ty Cổ phần Vinaconex 21",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "V12",
+      "organ_name": "Công ty Cổ phần Xây dựng số 12",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "UNI",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Sao Mai Việt",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "UIC",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Nhà và Đô thị IDICO",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TYA",
+      "organ_name": "Công ty Cổ phần Dây và Cáp điện Taya Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TXM",
+      "organ_name": "Công ty Cổ phần VICEM Thạch cao Xi Măng",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TVT",
+      "organ_name": "Tổng Công ty Việt Thắng - CTCP",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "TVS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Thiên Việt",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TVD",
+      "organ_name": "Công ty Cổ phần Than Vàng Danh - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TVC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Quản lý tài sản T-Corp",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TVB",
+      "organ_name": "Công ty Cổ phần Chứng khoán T-Cap",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TV4",
+      "organ_name": "Công ty Cổ phần Tư vấn Xây dựng Điện 4",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TV3",
+      "organ_name": "Công ty Cổ phần Tư vấn Xây dựng Điện 3",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TV2",
+      "organ_name": "Công ty Cổ phần Tư vấn Xây dựng Điện 2",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TTT",
+      "organ_name": "Công ty Cổ phần Du Lịch - Thương Mại Tây Ninh",
+      "exchange": "HNX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TTL",
+      "organ_name": "Tổng Công ty Thăng Long - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TTH",
+      "organ_name": "Công ty Cổ phần Thương mại và Dịch vụ Tiến Thành",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TTF",
+      "organ_name": "Công ty Cổ phần Tập đoàn Kỹ nghệ Gỗ Trường Thành",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TTE",
+      "organ_name": "Công ty Cổ phần Đầu tư Năng lượng Trường Thịnh",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TTC",
+      "organ_name": "Công ty Cổ phần Gạch men Thanh Thanh",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TTA",
+      "organ_name": "Công ty Cổ phần Đầu tư Xây dựng và Phát triển Trường Thành",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TSC",
+      "organ_name": "Công ty Cổ phần Vật tư Kỹ thuật Nông nghiệp Cần Thơ",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TSB",
+      "organ_name": "Công ty Cổ phần Ắc quy Tia Sáng",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TSA",
+      "organ_name": "Công ty Cổ Phần Đầu Tư Và Xây Lắp Trường Sơn",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TRC",
+      "organ_name": "Công ty Cổ phần Cao su Tây Ninh",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TRA",
+      "organ_name": "Công ty Cổ phần Traphaco",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "TPP",
+      "organ_name": "Công ty Cổ phần Tân Phú Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TPC",
+      "organ_name": "Công ty Cổ phần Nhựa Tân Đại Hưng",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TPB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Tiên Phong",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TOT",
+      "organ_name": "Công ty Cổ phần Transimex Logistics",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TNT",
+      "organ_name": "Công ty Cổ phần Tập đoàn TNT",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TNI",
+      "organ_name": "Công ty Cổ phần Tập đoàn Thành Nam",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TNH",
+      "organ_name": "Công ty Cổ phần Tập đoàn Bệnh viện TNH",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Thiết bị và Dịch vụ Y tế",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "TNG",
+      "organ_name": "Công ty Cổ phần Đầu tư và Thương mại TNG",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "TNC",
+      "organ_name": "Công ty Cổ phần Cao su Thống Nhất",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TN1",
+      "organ_name": "Công ty Cổ phần Rox Key Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TMX",
+      "organ_name": "Công ty Cổ phần VICEM Thương mại Xi măng",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TMT",
+      "organ_name": "Công ty Cổ phần Ô tô TMT",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TMS",
+      "organ_name": "Công ty Cổ phần Transimex",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TMP",
+      "organ_name": "Công ty Cổ phần Thủy điện Thác Mơ",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TMC",
+      "organ_name": "Công ty Cổ phần Thương mại Xuất nhập khẩu Thủ Đức",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TMB",
+      "organ_name": "Công ty Cổ phần Kinh doanh Than Miền Bắc - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TLH",
+      "organ_name": "Công ty Cổ phần Tập đoàn Thép Tiến Lên",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TLG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Thiên Long",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "TLD",
+      "organ_name": "Công ty Cổ phần Đầu tư Xây dựng và Phát triển Đô thị Thăng Long",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TKU",
+      "organ_name": "Công ty Cổ phần Công nghiệp Tung Kuang",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TJC",
+      "organ_name": "Công ty Cổ phần Dịch vụ Vận tải và Thương mại",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TIX",
+      "organ_name": "Công ty Cổ phần Sản xuất Kinh doanh Xuất nhập khẩu Dịch vụ và Đầu tư Tân Bình",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TIP",
+      "organ_name": "Công ty Cổ phần Phát triển Khu công nghiệp Tín Nghĩa",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TIG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đầu tư Thăng Long",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "THT",
+      "organ_name": "Công ty Cổ phần Than Hà Tu - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "THS",
+      "organ_name": "Công ty Cổ phần Thanh Hoa Sông Đà",
+      "exchange": "HNX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "THG",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng Tiền Giang",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "THD",
+      "organ_name": "Công ty Cổ phần Thaiholdings",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "THB",
+      "organ_name": "Công ty Cổ phần Bia Hà Nội - Thanh Hóa",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "TFC",
+      "organ_name": "Công ty Cổ phần Trang",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "TET",
+      "organ_name": "Công ty Cổ phần Vải sợi May mặc Miền Bắc",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "TEG",
+      "organ_name": "Công ty Cổ phần Trường Thành Energy Group",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TDW",
+      "organ_name": "Công ty Cổ phần Cấp nước Thủ Đức",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TDT",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển TDT",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "TDP",
+      "organ_name": "Công ty Cổ phần Thuận Đức",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TDM",
+      "organ_name": "Công ty Cổ phần Nước Thủ Dầu Một",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TDH",
+      "organ_name": "Công ty Cổ phần Phát triển Nhà Thủ Đức",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TDG",
+      "organ_name": "Công ty Cổ phần Đầu tư TDG Global",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TDC",
+      "organ_name": "Công ty Cổ phần Kinh doanh và Phát triển Bình Dương",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TD6",
+      "organ_name": "Công ty Cổ Phần Than Đèo Nai - Cọc Sáu - TKV",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TCX",
+      "organ_name": "Công ty Cổ phần Chứng khoán Kỹ Thương",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TCT",
+      "organ_name": "Công ty Cổ phần Cáp treo Núi Bà Tây Ninh",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TCR",
+      "organ_name": "Công ty Cổ phần Công nghiệp Gốm sứ TAICERA",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TCO",
+      "organ_name": "Công ty Cổ phần TCO Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "TCM",
+      "organ_name": "Công ty Cổ phần Dệt may - Đầu tư - Thương mại Thành Công",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "TCL",
+      "organ_name": "Công ty Cổ phần Đại lý Giao nhận Vận tải Xếp dỡ Tân Cảng",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TCI",
+      "organ_name": "Công ty Cổ phần Chứng khoán Thành Công",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TCH",
+      "organ_name": "Công ty Cổ phần Đầu tư Dịch vụ Tài chính Hoàng Huy",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TCD",
+      "organ_name": "Công ty cổ phần Tập đoàn Xây dựng Tracodi",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "TCB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Kỹ thương Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "TBC",
+      "organ_name": "Công ty Cổ phần Thủy điện Thác Bà",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "TAL",
+      "organ_name": "Công Ty Cổ Phần Đầu Tư Bất Động Sản Taseco",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "TA9",
+      "organ_name": "Công ty Cổ phần Xây lắp Thành An 96",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SZL",
+      "organ_name": "Công ty Cổ phần Sonadezi Long Thành",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SZC",
+      "organ_name": "Công ty Cổ phần Sonadezi Châu Đức",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SZB",
+      "organ_name": "Công ty Cổ phần Sonadezi Long Bình",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SVT",
+      "organ_name": "Công ty Cổ phần Công nghệ Sài Gòn Viễn Đông",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SVN",
+      "organ_name": "Công ty Cổ phần Tập đoàn Vexilla Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SVI",
+      "organ_name": "Công ty Cổ phần Bao bì Biên Hòa",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SVD",
+      "organ_name": "Công ty Cổ phần Đầu tư & Thương mại Vũ Đăng",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SVC",
+      "organ_name": "Công ty Cổ phần Dịch vụ tổng hợp Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "STP",
+      "organ_name": "Công ty Cổ phần Công nghiệp Thương mại Sông Đà",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "STK",
+      "organ_name": "Công ty Cổ phần Sợi Thế Kỷ",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "STG",
+      "organ_name": "Công ty Cổ phần Kho Vận Miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "STC",
+      "organ_name": "Công ty Cổ phần Sách và Thiết bị trường học Thành phố Hồ Chí Minh",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "STB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Sài Gòn Thương Tín",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "ST8",
+      "organ_name": "Công ty Cổ phần Tập đoàn ST8",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "SSM",
+      "organ_name": "Công ty Cổ phần Chế tạo kết cấu thép VNECO.SSM",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SSI",
+      "organ_name": "Công ty Cổ phần Chứng khoán SSI",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "SSC",
+      "organ_name": "Công ty Cổ phần Giống cây trồng Miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SSB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Đông Nam Á",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "SRF",
+      "organ_name": "Công ty Cổ phần Searefico",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SRC",
+      "organ_name": "Công ty Cổ phần Cao su Sao Vàng",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SRA",
+      "organ_name": "Công ty Cổ phần SARA Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Thiết bị và Dịch vụ Y tế",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "SPM",
+      "organ_name": "Công ty Cổ phần S.P.M",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "SPC",
+      "organ_name": "Công ty Cổ phần Bảo vệ Thực vật Sài Gòn",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SMT",
+      "organ_name": "Công ty Cổ phần SAMETEL",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "SMN",
+      "organ_name": "Công ty Cổ phần Sách và thiết bị giáo dục Miền Nam",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SMC",
+      "organ_name": "Công ty Cổ phần Đầu tư Thương mại SMC",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SMB",
+      "organ_name": "Công ty Cổ phần Bia Sài Gòn - Miền Trung",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SMA",
+      "organ_name": "Công ty Cổ phần Thiết bị Phụ tùng Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SLS",
+      "organ_name": "Công ty Cổ phần Mía đường Sơn La",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SKG",
+      "organ_name": "Công ty Cổ phần Tàu Cao tốc Superdong - Kiên Giang",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SJS",
+      "organ_name": "Công ty Cổ phần SJ Group",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SJE",
+      "organ_name": "Công ty Cổ phần Sông Đà 11",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SJD",
+      "organ_name": "Công ty Cổ phần Thủy điện Cần Đơn",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SJ1",
+      "organ_name": "Công ty Cổ phần Nông nghiệp Hùng Hậu",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SIP",
+      "organ_name": "Công ty Cổ phần Đầu tư Sài Gòn VRG",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SHS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Sài Gòn - Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "SHP",
+      "organ_name": "Công ty Cổ phần Thủy điện Miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SHN",
+      "organ_name": "Công ty Cổ phần Đầu tư Tổng hợp Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SHI",
+      "organ_name": "Công ty Cổ phần Quốc tế Sơn Hà",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SHE",
+      "organ_name": "Công ty Cổ phần Phát triển Năng Lượng Sơn Hà",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SHB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Sài Gòn – Hà Nội",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "SHA",
+      "organ_name": "Công ty Cổ phần Sơn Hà Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SGT",
+      "organ_name": "Công ty Cổ phần Công nghệ Viễn thông Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "SGR",
+      "organ_name": "Công ty Cổ phần Tổng Công ty Cổ phần Địa ốc Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SGN",
+      "organ_name": "Công ty Cổ phần Phục vụ mặt đất Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SGH",
+      "organ_name": "Công ty Cổ phần Khách sạn Sài Gòn",
+      "exchange": "HNX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SGD",
+      "organ_name": "Công ty Cổ phần Sách Giáo dục tại Thành phố Hồ Chí Minh",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SGC",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Sa Giang",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SFN",
+      "organ_name": "Công ty Cổ phần Dệt lưới Sài Gòn",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SFI",
+      "organ_name": "Công ty Cổ phần Đại lý Vận tải SAFI",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SFG",
+      "organ_name": "Công ty Cổ phần Phân bón Miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SFC",
+      "organ_name": "Công ty Cổ phần Nhiên liệu Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SED",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Giáo dục Phương Nam",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SEB",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Điện Miền Trung",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SDU",
+      "organ_name": "Công ty Cổ phần Đầu tư Xây dựng và Phát triển Đô thị Sông Đà",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SDN",
+      "organ_name": "Công ty Cổ phần Sơn Đồng Nai",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SDG",
+      "organ_name": "Công ty Cổ phần Sadico Cần Thơ",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SDC",
+      "organ_name": "Công ty Cổ phần Tư vấn Sông Đà",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SDA",
+      "organ_name": "Công ty Cổ phần SIMCO Sông Đà",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SD9",
+      "organ_name": "Công ty Cổ phần Sông Đà 9",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SD5",
+      "organ_name": "Công ty Cổ phần Sông Đà 5",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SCS",
+      "organ_name": "Công ty Cổ phần Dịch vụ Hàng hóa Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SCR",
+      "organ_name": "Công ty Cổ phần Địa Ốc Sài Gòn Thương Tín",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "SCI",
+      "organ_name": "Công ty Cổ phần SCI E&C",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SCG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Xây dựng SCG",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SC5",
+      "organ_name": "Công ty Cổ phần Xây dựng số 5",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "SBV",
+      "organ_name": "Công ty Cổ phần Siam Brothers Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "SBT",
+      "organ_name": "Công ty Cổ phần Thành Thành Công - Biên Hòa",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SBG",
+      "organ_name": "Công ty Cổ Phần Tập Đoàn Cơ Khí Công Nghệ Cao Siba",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SBA",
+      "organ_name": "Công ty Cổ phần Sông Ba",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SAV",
+      "organ_name": "Công ty Cổ phần Hợp tác Kinh tế và Xuất nhập khẩu Savimex",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "SAM",
+      "organ_name": "Công ty Cổ phần SAM Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "SAF",
+      "organ_name": "Công ty Cổ phần Lương thực Thực phẩm SAFOCO",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "SAB",
+      "organ_name": "Tổng Công ty Cổ phần Bia - Rượu - Nước Giải khát Sài Gòn",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "S99",
+      "organ_name": "Công ty Cổ phần SCI",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "S55",
+      "organ_name": "Công ty Cổ phần Sông Đà 505",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "S4A",
+      "organ_name": "Công ty Cổ phần Thủy điện Sê San 4A",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "RYG",
+      "organ_name": "Công ty Cổ phần Sản xuất và Đầu tư Hoàng Gia",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "REE",
+      "organ_name": "Công ty Cổ phần Cơ điện Lạnh",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "RCL",
+      "organ_name": "Công ty Cổ phần Địa ốc Chợ Lớn",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "RAL",
+      "organ_name": "Công ty Cổ phần Bóng đèn Phích nước Rạng Đông",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "QTC",
+      "organ_name": "Công ty Cổ phần Công trình Giao thông Vận tải Quảng Nam",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "QST",
+      "organ_name": "Công ty Cổ phần Sách và Thiết bị trường học Quảng Ninh",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "QNP",
+      "organ_name": "Công ty Cổ phần Cảng Quy Nhơn",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "QHD",
+      "organ_name": "Công ty Cổ phần Que hàn điện Việt Đức",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "QCG",
+      "organ_name": "Công ty Cổ phần Quốc Cường Gia Lai",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "PVT",
+      "organ_name": "Tổng Công ty Cổ phần Vận tải Dầu khí",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PVS",
+      "organ_name": "Tổng Công ty Cổ phần Dịch vụ Kỹ thuật Dầu khí Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Dầu khí",
+      "icb_name3": "Thiết bị, Dịch vụ và Phân phối Dầu khí",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PVP",
+      "organ_name": "Công ty Cổ phần Vận tải Dầu khí Thái Bình Dương",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PVI",
+      "organ_name": "Công ty Cổ phần PVI",
+      "exchange": "HNX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "PVG",
+      "organ_name": "Công ty Cổ phần Kinh doanh LPG Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PVD",
+      "organ_name": "Tổng Công ty Cổ phần Khoan và Dịch vụ khoan Dầu khí",
+      "exchange": "HSX",
+      "icb_name2": "Dầu khí",
+      "icb_name3": "Thiết bị, Dịch vụ và Phân phối Dầu khí",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PVC",
+      "organ_name": "Tổng Công ty Hóa chất và Dịch vụ Dầu khí - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Dầu khí",
+      "icb_name3": "Thiết bị, Dịch vụ và Phân phối Dầu khí",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PVB",
+      "organ_name": "Công ty Cổ phần Bọc ống Dầu khí Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Dầu khí",
+      "icb_name3": "Thiết bị, Dịch vụ và Phân phối Dầu khí",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PV2",
+      "organ_name": "Công ty Cổ phần Đầu tư PV2",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "PTX",
+      "organ_name": "Công ty Cổ phần Vận tải và Dịch vụ Petrolimex Nghệ Tĩnh",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PTS",
+      "organ_name": "Công ty Cổ phần Vận tải và Dịch vụ Petrolimex Hải Phòng",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PTL",
+      "organ_name": "Công ty Cổ phần Victory Group",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "PTI",
+      "organ_name": "Tổng Công ty Cổ phần Bảo hiểm Bưu điện",
+      "exchange": "HNX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "PTD",
+      "organ_name": "Công ty Cổ phần Thiết kế - Xây dựng - Thương mại Phúc Thịnh",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PTC",
+      "organ_name": "Công ty Cổ phần Đầu tư ICAPITAL",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PTB",
+      "organ_name": "Công ty Cổ phần Phú Tài",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PSW",
+      "organ_name": "Công ty Cổ phần Phân bón và hóa chất dầu khí Tây Nam Bộ",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PSI",
+      "organ_name": "Công ty Cổ phần Chứng khoán Dầu khí",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "PSE",
+      "organ_name": "Công ty Cổ phần Phân bón và hóa chất dầu khí Đông Nam Bộ",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PSD",
+      "organ_name": "Công ty Cổ phần Dịch vụ Phân phối Tổng hợp Dầu khí",
+      "exchange": "HNX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "PSC",
+      "organ_name": "Công ty Cổ phần Vận tải và Dịch vụ Petrolimex Sài Gòn",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PRE",
+      "organ_name": "Tổng Công ty Cổ phần Tái bảo hiểm Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "PRC",
+      "organ_name": "Công ty Cổ phần Logistics Portserco",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PPY",
+      "organ_name": "Công ty Cổ phần Xăng dầu dầu khí Phú Yên",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PPT",
+      "organ_name": "Công ty cổ phần Petro Times",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PPS",
+      "organ_name": "Công ty Cổ phần Dịch vụ Kỹ thuật Điện lực Dầu khí Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PPP",
+      "organ_name": "Công ty Cổ phần Dược phẩm Phong Phú",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "PPE",
+      "organ_name": "Công ty Cổ phần Tư vấn Đầu tư PP Enterprise",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PPC",
+      "organ_name": "Công ty Cổ phần Nhiệt điện Phả Lại",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "POW",
+      "organ_name": "Tổng Công ty Điện lực Dầu khí Việt Nam - CTCP",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "POT",
+      "organ_name": "Công ty Cổ phần Thiết bị Bưu điện",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "PNJ",
+      "organ_name": "Công ty Cổ phần Vàng bạc Đá quý Phú Nhuận",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "PNC",
+      "organ_name": "Công ty Cổ phần Văn hóa Phương Nam",
+      "exchange": "HSX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "PMS",
+      "organ_name": "Công ty Cổ phần Cơ khí Xăng dầu",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PMP",
+      "organ_name": "Công ty Cổ phần Bao bì Đạm Phú Mỹ",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PMG",
+      "organ_name": "Công ty Cổ phần Đầu tư và Sản xuất Petro Miền Trung",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PMC",
+      "organ_name": "Công ty Cổ phần Dược phẩm Dược liệu Pharmedic",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "PMB",
+      "organ_name": "Công ty Cổ phần Phân bón và Hóa chất Dầu khí Miền Bắc",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PLX",
+      "organ_name": "Tập đoàn Xăng dầu Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Dầu khí",
+      "icb_name3": "Sản xuất Dầu khí",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PLP",
+      "organ_name": "Công ty Cổ phần Sản xuất và Công nghệ Nhựa Pha Lê",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PLC",
+      "organ_name": "Tổng Công ty Hóa dầu Petrolimex - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PJT",
+      "organ_name": "Công ty Cổ phần Vận tải Xăng dầu đường thủy Petrolimex",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PJC",
+      "organ_name": "Công ty Cổ phần Thương mại và Vận tải Petrolimex Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PIT",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Petrolimex",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "PIC",
+      "organ_name": "Công ty Cổ phần Đầu tư Điện lực 3",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PIA",
+      "organ_name": "Công ty Cổ phần Tin học Viễn thông Petrolimex",
+      "exchange": "HNX",
+      "icb_name2": "Viễn thông",
+      "icb_name3": "Viễn thông cố định",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "PHR",
+      "organ_name": "Công ty Cổ phần Cao su Phước Hòa",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PHN",
+      "organ_name": "Công ty Cổ phần Pin Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PHC",
+      "organ_name": "Công ty Cổ phần Xây dựng Phục Hưng Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PGV",
+      "organ_name": "Tổng Công ty Phát điện 3 - Công ty Cổ phần",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PGT",
+      "organ_name": "Công ty Cổ phần PGT Holdings",
+      "exchange": "HNX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PGS",
+      "organ_name": "Công ty Cổ phần Kinh doanh Khí Miền Nam",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PGN",
+      "organ_name": "Công ty Cổ phần Phụ Gia Nhựa",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PGI",
+      "organ_name": "Tổng Công ty Cổ phần Bảo hiểm Petrolimex",
+      "exchange": "HSX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "PGD",
+      "organ_name": "Công ty Cổ phần Phân phối khí thấp áp dầu khí Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PGC",
+      "organ_name": "Tổng Công ty Gas Petrolimex - Công ty Cổ phần",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PET",
+      "organ_name": "Tổng Công ty Cổ phần Dịch vụ Tổng hợp Dầu khí",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "PEN",
+      "organ_name": "Công ty Cổ phần Xây lắp III Petrolimex",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PDV",
+      "organ_name": "Công ty Cổ phần Vận tải và Tiếp vận Phương Đông Việt",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PDR",
+      "organ_name": "Công ty Cổ phần Phát triển Bất động sản Phát Đạt",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "PDN",
+      "organ_name": "Công ty Cổ phần Cảng Đồng Nai",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PDB",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đầu tư DIN Capital",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PCT",
+      "organ_name": "Công ty Cổ phần Vận tải Biển Global Pacific",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PCH",
+      "organ_name": "Công ty Cổ phần Nhựa Picomat",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PCE",
+      "organ_name": "Công ty Cổ phần Phân bón và hóa chất dầu khí Miền Trung",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PC1",
+      "organ_name": "Công ty Cổ phần Tập đoàn PC1",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "PBP",
+      "organ_name": "Công ty Cổ phần Bao bì Dầu khí Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "PAN",
+      "organ_name": "Công ty Cổ phần Tập đoàn PAN",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "PAC",
+      "organ_name": "Công ty Cổ phần Pin Ắc quy Miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ORS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Tiên Phong",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "OPC",
+      "organ_name": "Công ty Cổ phần Dược Phẩm OPC",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "ONE",
+      "organ_name": "Công ty Cổ phần Công nghệ ONE",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "OGC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đại Dương",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "OCH",
+      "organ_name": "Công ty Cổ phần One Capital Hospitality",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "OCB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Phương Đông",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "NVT",
+      "organ_name": "Công ty Cổ phần Bất động sản Du lịch Ninh Vân Bay",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NVL",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đầu tư Địa ốc No Va",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NVB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Quốc Dân",
+      "exchange": "HNX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "NTP",
+      "organ_name": "Công ty Cổ phần Nhựa Thiếu niên Tiền Phong",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "NTL",
+      "organ_name": "Công ty Cổ phần Phát triển Đô thị Từ Liêm",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NTH",
+      "organ_name": "Công ty Cổ phần Thủy điện Nước Trong",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NTC",
+      "organ_name": "Công ty Cổ phần Khu Công nghiệp Nam Tân Uyên",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NT2",
+      "organ_name": "Công ty Cổ phần Điện lực Dầu khí Nhơn Trạch 2",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NST",
+      "organ_name": "Công ty Cổ phần Ngân Sơn",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Thuốc lá",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "NSH",
+      "organ_name": "Công ty Cổ phần Tập đoàn Nhôm Sông Hồng Shalumi",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NSC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Giống cây trồng Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "NRC",
+      "organ_name": "Công ty Cổ phần Tập đoàn NRC",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NO1",
+      "organ_name": "Công ty Cổ phần Tâp đoàn 911",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NNC",
+      "organ_name": "Công ty Cổ phần Đá Núi Nhỏ",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "NLG",
+      "organ_name": "Công ty Cổ phần Đầu tư Nam Long",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NKG",
+      "organ_name": "Công ty Cổ phần Thép Nam Kim",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NHT",
+      "organ_name": "Công ty Cổ phần Sản xuất và Thương mại Nam Hoa",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng hóa giải trí",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "NHH",
+      "organ_name": "Công ty Cổ phần Nhựa Hà Nội",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NHC",
+      "organ_name": "Công ty Cổ phần Gạch ngói Nhị Hiệp",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "NHA",
+      "organ_name": "Tổng Công ty Đầu tư Phát triển Nhà và Đô thị Nam Hà Nội",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "NFC",
+      "organ_name": "Công ty Cổ phần Phân lân Ninh Bình",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NET",
+      "organ_name": "Công ty Cổ phần Bột giặt Net",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "NDX",
+      "organ_name": "Công ty Cổ phần Xây lắp Phát triển Nhà Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "NDN",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Nhà Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NCT",
+      "organ_name": "Công ty Cổ phần Dịch vụ Hàng hóa Nội Bài",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NBW",
+      "organ_name": "Công ty Cổ phần Cấp nước Nhà Bè",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NBP",
+      "organ_name": "Công ty Cổ phần Nhiệt Điện Ninh Bình",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NBC",
+      "organ_name": "Công ty Cổ phần Than Núi Béo - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NBB",
+      "organ_name": "Công ty Cổ phần Đầu tư Năm Bảy Bảy",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "NAV",
+      "organ_name": "Công ty Cổ phần Nam Việt",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "NAP",
+      "organ_name": "Công ty Cổ phần Cảng Nghệ Tĩnh",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NAG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Nagakawa",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "NAF",
+      "organ_name": "Công ty Cổ phần Nafoods Group",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "NAB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Nam Á",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "MWG",
+      "organ_name": "Công ty Cổ phần Đầu tư Thế Giới Di Động",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "MVB",
+      "organ_name": "Tổng Công ty Công nghiệp mỏ Việt Bắc TKV - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "MST",
+      "organ_name": "Công ty Cổ phần Đầu tư MST",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "MSN",
+      "organ_name": "Công ty Cổ phần Tập đoàn Masan",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "MSH",
+      "organ_name": "Công ty Cổ phần May Sông Hồng",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "MSB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Hàng Hải Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "MKV",
+      "organ_name": "Công ty Cổ phần Dược Thú Y Cai Lậy",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "MIG",
+      "organ_name": "Tổng Công ty Cổ phần Bảo hiểm Quân đội",
+      "exchange": "HSX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "MIC",
+      "organ_name": "Công ty Cổ phần Kỹ nghệ Khoáng sản Quảng Nam",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "MHC",
+      "organ_name": "Công ty Cổ phần MHC",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "MEL",
+      "organ_name": "Công ty Cổ phần Thép Mê Lin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "MED",
+      "organ_name": "Công ty Cổ phần Dược Trung ương Mediplantex",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "MDG",
+      "organ_name": "Công ty Cổ phần Miền Đông",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "MDC",
+      "organ_name": "Công ty Cổ phần Than Mông Dương - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "MCP",
+      "organ_name": "Công ty Cổ phần In và Bao bì Mỹ Châu",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "MCO",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng BDC Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "MCM",
+      "organ_name": "Công ty Cổ phần Giống bò sữa Mộc Châu",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "MCH",
+      "organ_name": "Công ty Cổ phần Hàng Tiêu Dùng MaSan",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "MCF",
+      "organ_name": "Công ty Cổ phần Xây lắp Cơ khí và Lương thực Thực phẩm",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "MCC",
+      "organ_name": "Công ty Cổ phần Gạch ngói cao cấp",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "MBS",
+      "organ_name": "Công ty Cổ phần Chứng khoán MB",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "MBG",
+      "organ_name": "Công ty Cổ phần Tập đoàn MBG",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "MBB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Quân đội",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "MAS",
+      "organ_name": "Công ty cổ phần Dịch vụ Hàng Không Sân Bay Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "MAC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Macstar",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "LSS",
+      "organ_name": "Công ty Cổ phần Mía đường Lam Sơn",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "LPB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Lộc Phát Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "LM8",
+      "organ_name": "Công ty Cổ phần Lilama 18",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LIX",
+      "organ_name": "Công ty Cổ phần Bột Giặt LIX",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "LIG",
+      "organ_name": "Công ty Cổ phần Licogi 13",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LHG",
+      "organ_name": "Công ty Cổ phần Long Hậu",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "LHC",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng Thủy lợi Lâm Đồng",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LGL",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Đô thị Long Giang",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "LGC",
+      "organ_name": "Công ty Cổ phần Đầu tư Cầu đường CII",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LDP",
+      "organ_name": "Công ty Cổ phần Dược Lâm Đồng - Ladophar",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "LDG",
+      "organ_name": "Công ty Cổ phần Đầu tư LDG",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "LCG",
+      "organ_name": "Công ty Cổ phần Lizen",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LCD",
+      "organ_name": "Công ty Cổ phần Lắp máy - Thí nghiệm cơ điện",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LBM",
+      "organ_name": "Công ty Cổ phần Khoáng sản và Vật liệu xây dựng Lâm Đồng",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "LBE",
+      "organ_name": "Công ty Cổ phần Thương mại và Dịch vụ LVA",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "LAS",
+      "organ_name": "Công ty Cổ phần Supe Phốt phát và Hóa chất Lâm Thao",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "LAF",
+      "organ_name": "Công ty Cổ phần Chế biến Hàng Xuất khẩu Long An",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "L40",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng 40",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "L18",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng số 18",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "L14",
+      "organ_name": "Công ty Cổ phần Licogi 14",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "L10",
+      "organ_name": "Công ty Cổ phần Lilama 10",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "KTS",
+      "organ_name": "Công ty Cổ phần Đường Kon Tum",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "KSV",
+      "organ_name": "Tổng Công ty Khoáng sản TKV - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "KST",
+      "organ_name": "Công ty Cổ phần KASATI",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "KSF",
+      "organ_name": "Công ty Cổ phần Tập đoàn Sunshine",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "KSD",
+      "organ_name": "Công ty Cổ phần Đầu tư DNA",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "KSB",
+      "organ_name": "Công ty Cổ phần Khoáng sản và Xây dựng Bình Dương",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "KOS",
+      "organ_name": "Công ty Cổ phần KOSY",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "KMT",
+      "organ_name": "Công ty Cổ phần Kim khí Miền Trung",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "KMR",
+      "organ_name": "Công ty Cổ phần Mirae",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "KLB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Kiên Long",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "KKC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Thành Thái",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "KHS",
+      "organ_name": "Công ty Cổ phần Kiên Hùng",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "KHP",
+      "organ_name": "Công ty Cổ phần Điện lực Khánh Hòa",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "KHG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Khải Hoàn Land",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "KDM",
+      "organ_name": "Công ty Cổ phần Tập đoàn GCL",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "KDH",
+      "organ_name": "Công ty Cổ phần Đầu tư và Kinh doanh nhà Khang Điền",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "KDC",
+      "organ_name": "Công ty Cổ phần Tập đoàn KIDO",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "KBC",
+      "organ_name": "Tổng Công ty Phát triển Đô thị Kinh Bắc",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "JVC",
+      "organ_name": "Công ty Cổ phần Đầu tư Y tế - Dược phẩm Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Thiết bị và Dịch vụ Y tế",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "IVS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Guotai Junan (Việt Nam)",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "ITQ",
+      "organ_name": "Công ty Cổ phần Tập đoàn Thiên Quang",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ITD",
+      "organ_name": "Công ty Cổ phần Công nghệ ITD",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "ITC",
+      "organ_name": "Công ty Cổ phần Đầu tư - Kinh doanh nhà",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "IPA",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đầu tư I.P.A",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "INN",
+      "organ_name": "Công ty Cổ phần Bao bì và In Nông nghiệp",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "INC",
+      "organ_name": "Công ty Cổ phần Tư vấn Đầu tư IDICO",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "IMP",
+      "organ_name": "Công ty Cổ phần Dược phẩm IMEXPHARM",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "ILB",
+      "organ_name": "Công ty Cổ phần ICD Tân Cảng - Long Bình",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "IJC",
+      "organ_name": "Công ty Cổ phần Phát triển Hạ tầng Kỹ thuật",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "IDV",
+      "organ_name": "Công ty Cổ phần Phát triển Hạ tầng Vĩnh Phúc",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "IDJ",
+      "organ_name": "Công ty Cổ phần Đầu tư IDJ Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "IDI",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Đa Quốc Gia I.D.I",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "IDC",
+      "organ_name": "Tổng Công ty IDICO - CTCP",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "ICT",
+      "organ_name": "Công ty Cổ phần Viễn thông - Tin học Bưu điện",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "ICG",
+      "organ_name": "Công ty Cổ phần Xây dựng Sông Hồng",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HVX",
+      "organ_name": "Công ty Cổ phần Xi măng Vicem Hải Vân",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HVT",
+      "organ_name": "Công ty Cổ phần Hóa chất Việt Trì",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HVN",
+      "organ_name": "Tổng Công ty Hàng không Việt Nam - CTCP",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HVH",
+      "organ_name": "Công ty Cổ phần Đầu tư và Công nghệ HVC",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HUT",
+      "organ_name": "Công ty Cổ phần Tasco",
+      "exchange": "HNX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HUB",
+      "organ_name": "Công ty Cổ phần Xây lắp Thừa Thiên Huế",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HU1",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng HUD1",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HTV",
+      "organ_name": "Công ty Cổ phần Logistics Vicem",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HTN",
+      "organ_name": "Công ty Cổ phần Hưng Thịnh Incons",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HTL",
+      "organ_name": "Công ty Cổ phần Kỹ thuật và Ô tô Trường Long",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HTI",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Hạ tầng IDICO",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HTG",
+      "organ_name": "Tổng Công ty Cổ phần Dệt may Hòa Thọ",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "HTC",
+      "organ_name": "Công ty Cổ phần Thương mại Hóc Môn",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HT1",
+      "organ_name": "Công ty Cổ phần Xi măng VICEM Hà Tiên",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HSL",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Thực phẩm Hồng Hà",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "HSG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Hoa Sen",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HRC",
+      "organ_name": "Công ty Cổ phần Cao su Hòa Bình",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HQC",
+      "organ_name": "Công ty Cổ phần Tư vấn - Thương mại - Dịch vụ Địa ốc Hoàng Quân",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HPX",
+      "organ_name": "Công ty Cổ phần Đầu tư Hải Phát",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HPG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Hòa Phát",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HOM",
+      "organ_name": "Công ty Cổ phần Xi măng VICEM Hoàng Mai",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HNA",
+      "organ_name": "Công ty Cổ phần Thủy điện Hủa Na",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HMR",
+      "organ_name": "Công ty Cổ phần Đá Hoàng Mai",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HMH",
+      "organ_name": "Công ty Cổ phần Hải Minh",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HMC",
+      "organ_name": "Công ty Cổ phần Kim khí Thành phố Hồ Chí Minh - VNSTEEL",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HLD",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Bất động sản HUDLAND",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HLC",
+      "organ_name": "Công ty Cổ phần Than Hà Lầm - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HKT",
+      "organ_name": "Công ty Cổ phần Đầu tư QP Xanh",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "HJS",
+      "organ_name": "Công ty Cổ phần Thủy điện Nậm Mu",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HII",
+      "organ_name": "Công ty Cổ phần An Tiến Industries",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HID",
+      "organ_name": "Công ty Cổ phần Halcom Vietnam",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HHV",
+      "organ_name": "Công ty Cổ phần Đầu tư Hạ tầng Giao thông Đèo Cả",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HHS",
+      "organ_name": "Công ty Cổ phần Đầu tư Dịch vụ Hoàng Huy",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HHP",
+      "organ_name": "Công ty Cổ phần HHP Global",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HHC",
+      "organ_name": "Công ty Cổ phần Bánh kẹo Hải Hà",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "HGM",
+      "organ_name": "Công ty Cổ phần Cơ khí và Khoáng sản Hà Giang",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HEV",
+      "organ_name": "Công ty Cổ phần Sách Đại học - Dạy nghề",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "HDG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Hà Đô",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HDC",
+      "organ_name": "Công ty Cổ phần Phát triển Nhà Bà Rịa Vũng Tàu",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HDB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Phát Triển Thành phố Hồ Chí Minh",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "HDA",
+      "organ_name": "Công ty Cổ phần Hãng sơn Đông Á",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HCT",
+      "organ_name": "Công ty Cổ phần Thương mại - Dịch vụ - Vận tải Xi măng Hải Phòng",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HCM",
+      "organ_name": "Công ty Cổ phần Chứng khoán Thành phố Hồ Chí Minh",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "HCD",
+      "organ_name": "Công ty Cổ phần Đầu tư Sản xuất và Thương mại HCD",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HCC",
+      "organ_name": "Công ty Cổ phần Bê tông Hòa Cầm - Intimex",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HBS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Hòa Bình",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "HAX",
+      "organ_name": "Công ty Cổ phần Dịch vụ Ô tô Hàng Xanh",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HAT",
+      "organ_name": "Công ty Cổ phần Thương mại Bia Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "HAS",
+      "organ_name": "Công ty Cổ phần Hacisco",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "HAR",
+      "organ_name": "Công ty Cổ phần Đầu tư Thương mại Bất động sản An Dương Thảo Điền",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "HAP",
+      "organ_name": "Công ty Cổ phần Tập Đoàn Hapaco",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HAH",
+      "organ_name": "Công ty Cổ phần Vận tải và Xếp dỡ Hải An",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "HAG",
+      "organ_name": "Công ty Cổ phần Hoàng Anh Gia Lai",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "HAD",
+      "organ_name": "Công ty Cổ phần Bia Hà Nội - Hải Dương",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "GVR",
+      "organ_name": "Tập đoàn Công nghiệp Cao su Việt Nam - Công ty Cổ phần",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GTA",
+      "organ_name": "Công ty Cổ phần Chế biến Gỗ Thuận An",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GSP",
+      "organ_name": "Công ty Cổ phần Vận tải Sản phẩm Khí Quốc tế",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GMX",
+      "organ_name": "Công ty Cổ phần Gạch ngói Gốm xây dựng Mỹ Xuân",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "GMH",
+      "organ_name": "Công ty Cổ phần Minh Hưng Quảng Trị",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "GMD",
+      "organ_name": "Công ty Cổ phần Gemadept",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GMA",
+      "organ_name": "Công ty Cổ phần G-Automobile",
+      "exchange": "HNX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "GLT",
+      "organ_name": "Công ty Cổ phần Kỹ thuật điện Toàn Cầu",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng hóa giải trí",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "GKM",
+      "organ_name": "Công ty Cổ phần GKM Holdings",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "GIL",
+      "organ_name": "Công ty Cổ phần Sản xuất Kinh doanh Xuất nhập khẩu Bình Thạnh",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "GIC",
+      "organ_name": "Công ty Cổ phần VSC Green Logistics",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GHC",
+      "organ_name": "Công ty Cổ phần Thủy điện Gia Lai",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GEX",
+      "organ_name": "Công ty Cổ phần Tập đoàn Gelex",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GEG",
+      "organ_name": "Công ty Cổ phần Điện Gia Lai",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GEE",
+      "organ_name": "Công ty Cổ phần Điện lực Gelex",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GDW",
+      "organ_name": "Công ty Cổ phần Cấp nước Gia Định",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "GDT",
+      "organ_name": "Công ty Cổ phần Chế biến Gỗ Đức Thành",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "GAS",
+      "organ_name": "Tổng Công ty Khí Việt Nam - Công ty Cổ phần",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "FTS",
+      "organ_name": "Công ty Cổ phần Chứng khoán FPT",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "FRT",
+      "organ_name": "Công ty Cổ phần Bán lẻ Kỹ thuật số FPT",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "FPT",
+      "organ_name": "Công ty Cổ phần FPT",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "FMC",
+      "organ_name": "Công ty Cổ phần Thực phẩm Sao Ta",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "FIT",
+      "organ_name": "Công ty Cổ phần Tập đoàn F.I.T",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "FIR",
+      "organ_name": "Công ty Cổ phần Địa ốc First Real",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "FID",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Doanh nghiệp Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "FDC",
+      "organ_name": "Công ty Cổ phần Ngoại thương và Phát triển Đầu tư Thành phố Hồ Chí Minh",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "FCN",
+      "organ_name": "Công ty Cổ phần FECON",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "FCM",
+      "organ_name": "Công ty Cổ phần Bê tông Phan Vũ Hà Nam",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "EVS",
+      "organ_name": "Công ty Cổ phần Chứng khoán EVS",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "EVG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Everland",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "EVF",
+      "organ_name": "Công ty Tài chính Tổng hợp Cổ phần Điện Lực",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "EVE",
+      "organ_name": "Công ty Cổ phần Everpia",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "ELC",
+      "organ_name": "Công ty Cổ phần Công nghệ - Viễn thông ELCOM",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "EID",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Giáo dục Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "EIB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Xuất nhập khẩu Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "ECI",
+      "organ_name": "Công ty Cổ phần Tập đoàn ECI",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "EBS",
+      "organ_name": "Công ty Cổ phần Sách Giáo dục tại Thành phố Hà Nội",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "DXV",
+      "organ_name": "Công ty Cổ phần VICEM Vật liệu Xây dựng Đà Nẵng",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DXS",
+      "organ_name": "Công ty Cổ phần Dịch vụ Bất động sản Đất Xanh",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "DXP",
+      "organ_name": "Công ty Cổ phần Cảng Đoạn Xá",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DXG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đất Xanh",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "DVP",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Cảng Đình Vũ",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DVM",
+      "organ_name": "Công ty Cổ phần Dược liệu Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DTT",
+      "organ_name": "Công ty Cổ phần Kỹ nghệ Đô Thành",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DTL",
+      "organ_name": "Công ty Cổ phần Đại Thiên Lộc",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Kim loại",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DTK",
+      "organ_name": "Tổng Công ty Điện lực TKV - Công ty Cổ phần",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DTG",
+      "organ_name": "Công ty Cổ phần Dược phẩm Tipharco",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DTD",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Thành Đạt",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "DTA",
+      "organ_name": "Công ty Cổ phần Đệ Tam",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "DST",
+      "organ_name": "Công ty Cổ phần Đầu tư Sao Thăng Long",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "DSN",
+      "organ_name": "Công ty Cổ phần Công viên nước Đầm Sen",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DSE",
+      "organ_name": "Công ty Cổ phần Chứng khoán DNSE",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "DSC",
+      "organ_name": "Công ty Cổ phần Chứng khoán DSC",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "DS3",
+      "organ_name": "Công ty Cổ phần DS3",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DRL",
+      "organ_name": "Công ty Cổ phần Thủy điện - Điện lực 3",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DRH",
+      "organ_name": "Công ty Cổ phần DRH Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "DRC",
+      "organ_name": "Công ty Cổ phần Cao su Đà Nẵng",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DQC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Điện Quang",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "DPR",
+      "organ_name": "Công ty Cổ phần Cao su Đồng Phú",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DPM",
+      "organ_name": "Tổng Công ty Phân bón và Hóa chất Dầu khí - Công ty Cổ phần",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DPG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đạt Phương",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DP3",
+      "organ_name": "Công ty Cổ Phần Dược Phẩm Trung Ương 3",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DNP",
+      "organ_name": "Công ty Cổ phần DNP Holding",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DNC",
+      "organ_name": "Công ty Cổ phần Điện nước Lắp máy Hải Phòng",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DMC",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Y tế DOMESCO",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DLG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đức Long Gia Lai",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DL1",
+      "organ_name": "Công ty Cổ phần Tập đoàn Alpha Seven",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DIH",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Xây dựng - Hội An",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DIG",
+      "organ_name": "Tổng Công ty Cổ phần Đầu tư Phát triển Xây dựng",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "DHT",
+      "organ_name": "Công ty Cổ phần Dược phẩm Hà Tây",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DHP",
+      "organ_name": "Công ty Cổ phần Điện cơ Hải Phòng",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DHM",
+      "organ_name": "Công ty Cổ phần Thương mại & Khai thác Khoáng sản Dương Hiếu",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DHG",
+      "organ_name": "Công ty Cổ phần Dược Hậu Giang",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DHC",
+      "organ_name": "Công ty Cổ phần Đông Hải Bến Tre",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DHA",
+      "organ_name": "Công ty Cổ phần Hóa An",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DGW",
+      "organ_name": "Công ty Cổ phần Thế Giới Số",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "DGC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Hóa chất Đức Giang",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DDG",
+      "organ_name": "Công ty Cổ phần Đầu tư Công nghiệp Xuất nhập khẩu Đông Dương",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DCM",
+      "organ_name": "Công ty Cổ phần - Tổng Công ty Phân bón Dầu Khí Cà Mau",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "DCL",
+      "organ_name": "Công ty Cổ phần Dược phẩm Cửu Long",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DC4",
+      "organ_name": "Công ty Cổ phần Dicera Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DC2",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển - Xây dựng (DIC) số 2",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DBT",
+      "organ_name": "Công ty Cổ phần Dược phẩm Bến Tre",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DBD",
+      "organ_name": "Công ty Cổ phần Dược - Trang thiết bị y tế Bình Định (BIDIPHAR)",
+      "exchange": "HSX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Dược phẩm",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "DBC",
+      "organ_name": "Công ty Cổ phần Tập đoàn Dabaco Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "DAT",
+      "organ_name": "Công ty Cổ phần Đầu tư Du lịch và Phát triển Thủy sản",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "DAH",
+      "organ_name": "Công ty Cổ phần Tập đoàn Khách sạn Đông Á",
+      "exchange": "HSX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "DAE",
+      "organ_name": "Công ty Cổ phần Sách Giáo dục tại Thành phố Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "DAD",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Giáo dục Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "D2D",
+      "organ_name": "Công ty Cổ phần Phát triển Đô thị Công nghiệp số 2",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "D11",
+      "organ_name": "Công ty Cổ phần Địa ốc 11",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "CX8",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây lắp Constrexim số 8",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CVT",
+      "organ_name": "Công ty Cổ phần CMC",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CTT",
+      "organ_name": "Công ty Cổ phần Chế tạo máy - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CTS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Vietinbank",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "CTR",
+      "organ_name": "Tổng Công ty Cổ phần Công trình Viettel",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CTP",
+      "organ_name": "Công ty Cổ phần Hoà Bình Takara",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "CTI",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Cường Thuận IDICO",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CTG",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Công thương Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "CTF",
+      "organ_name": "Công ty Cổ phần City Auto",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CTD",
+      "organ_name": "Công ty Cổ phần Xây dựng Coteccons",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CTB",
+      "organ_name": "Công ty Cổ phần Chế tạo Bơm Hải Dương",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CSV",
+      "organ_name": "Công ty Cổ phần Hóa chất Cơ bản miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CST",
+      "organ_name": "Công ty Cổ phần Than Cao Sơn - TKV",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CSM",
+      "organ_name": "Công ty Cổ phần Công nghiệp Cao su Miền Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ô tô và phụ tùng",
+      "icb_name3": "Ô tô và phụ tùng",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CSC",
+      "organ_name": "Công ty Cổ phần Tập đoàn COTANA",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CRV",
+      "organ_name": "Công ty Cổ phần Tập đoàn Bất động sản CRV",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "CRE",
+      "organ_name": "Công ty Cổ phần Bất động sản Thế Kỷ",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "CRC",
+      "organ_name": "Công ty Cổ phần Create Capital Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CPC",
+      "organ_name": "Công ty Cổ phần Thuốc sát trùng Cần Thơ",
+      "exchange": "HNX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "COM",
+      "organ_name": "Công ty Cổ phần Vật tư Xăng dầu",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "CNG",
+      "organ_name": "Công ty Cổ phần CNG Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CMX",
+      "organ_name": "Công ty Cổ phần CAMIMEX Group",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "CMV",
+      "organ_name": "Công ty Cổ phần Thương nghiệp Cà Mau",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "CMS",
+      "organ_name": "Công ty Cổ phần Tập đoàn CMH Việt Nam",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CMG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Công nghệ CMC",
+      "exchange": "HSX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Phần mềm & Dịch vụ Máy tính",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "CMC",
+      "organ_name": "Công ty Cổ phần Đầu tư CMC",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Công nghiệp nặng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CLW",
+      "organ_name": "Công ty Cổ phần Cấp nước Chợ Lớn",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CLM",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Than - Vinacomin",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CLL",
+      "organ_name": "Công ty Cổ phần Cảng Cát Lái",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CLH",
+      "organ_name": "Công ty Cổ phần Xi măng La Hiên VVMI",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CLC",
+      "organ_name": "Công ty Cổ phần Cát Lợi",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Thuốc lá",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "CKV",
+      "organ_name": "Công ty Cổ phần CokyVina",
+      "exchange": "HNX",
+      "icb_name2": "Công nghệ Thông tin",
+      "icb_name3": "Thiết bị và Phần cứng",
+      "sector_code": "VNIT"
+    },
+    {
+      "symbol": "CKG",
+      "organ_name": "Công ty Cổ phần Tập đoàn CIC",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "CJC",
+      "organ_name": "Công ty Cổ phần Cơ điện Miền Trung",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CII",
+      "organ_name": "Công ty Cổ phần Đầu tư Hạ tầng Kỹ thuật Thành phố Hồ Chí Minh",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CIG",
+      "organ_name": "Công ty Cổ phần COMA 18",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CIA",
+      "organ_name": "Công ty Cổ Phần Dịch Vụ Sân Bay Quốc Tế Cam Ranh",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CHP",
+      "organ_name": "Công ty Cổ phần Thủy điện Miền Trung",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CET",
+      "organ_name": "Công ty Cổ phần HTC Holding",
+      "exchange": "HNX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "CEO",
+      "organ_name": "Công ty Cổ phần Tập đoàn C.E.O",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "CDN",
+      "organ_name": "Công ty Cổ phần Cảng Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CDC",
+      "organ_name": "Công ty Cổ phần Chương Dương",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CCR",
+      "organ_name": "Công ty Cổ phần Cảng Cam Ranh",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CCL",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Đô thị Dầu khí Cửu Long",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "CCI",
+      "organ_name": "Công ty Cổ phần Đầu tư Phát triển Công nghiệp Thương mại Củ Chi",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CCC",
+      "organ_name": "Công ty Cổ Phần Xây Dựng CDC",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "CAR",
+      "organ_name": "Công ty cổ phần Tập đoàn Giáo dục Trí Việt",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CAP",
+      "organ_name": "Công ty Cổ phần Lâm Nông sản Thực phẩm Yên Bái",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "CAN",
+      "organ_name": "Công ty Cổ phần Đồ hộp Hạ Long",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "CAG",
+      "organ_name": "Công ty Cổ phần Cảng An Giang",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "C69",
+      "organ_name": "Công ty Cổ phần Xây dựng 1369",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "C47",
+      "organ_name": "Công ty Cổ phần Xây dựng 47",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "C32",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng 3-2",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "BXH",
+      "organ_name": "Công ty Cổ phần VICEM Bao bì Hải Phòng",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BWE",
+      "organ_name": "Công ty Cổ phần - Tổng công ty Nước - Môi trường Bình Dương",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BVS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Bảo Việt",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BVH",
+      "organ_name": "Tập đoàn Bảo Việt",
+      "exchange": "HSX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BTW",
+      "organ_name": "Công ty Cổ phần Cấp nước Bến Thành",
+      "exchange": "HNX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BTT",
+      "organ_name": "Công ty Cổ phần Thương mại - Dịch vụ Bến Thành",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "BTS",
+      "organ_name": "Công ty Cổ phần Xi măng VICEM Bút Sơn",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "BTP",
+      "organ_name": "Công ty Cổ phần Nhiệt điện Bà Rịa",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Sản xuất & Phân phối Điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BSR",
+      "organ_name": "Công ty Cổ phần Lọc Hóa dầu Bình Sơn",
+      "exchange": "HSX",
+      "icb_name2": "Dầu khí",
+      "icb_name3": "Sản xuất Dầu khí",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BSI",
+      "organ_name": "Công ty Cổ phần Chứng khoán BIDV",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BRC",
+      "organ_name": "Công ty Cổ phần Cao su Bến Thành",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BPC",
+      "organ_name": "Công ty Cổ phần Vicem Bao bì Bỉm Sơn",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BNA",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đầu tư Bảo Ngọc",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "BMP",
+      "organ_name": "Công ty Cổ phần Nhựa Bình Minh",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "BMI",
+      "organ_name": "Tổng Công ty Cổ phần Bảo Minh",
+      "exchange": "HSX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BMC",
+      "organ_name": "Công ty Cổ phần Khoáng sản Bình Định",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BKG",
+      "organ_name": "Công ty Cổ phần Đầu tư BKG Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng gia dụng",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "BKC",
+      "organ_name": "Công ty Cổ phần Khoáng sản Bắc Kạn",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BID",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Đầu tư và Phát triển Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BIC",
+      "organ_name": "Tổng Công ty Cổ phần Bảo hiểm Ngân hàng Đầu tư và Phát triển Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Bảo hiểm",
+      "icb_name3": "Bảo hiểm phi nhân thọ",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BHN",
+      "organ_name": "Tổng Công ty Cổ phần Bia - Rượu - Nước giải khát Hà Nội",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Bia và đồ uống",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "BFC",
+      "organ_name": "Công ty Cổ phần Phân bón Bình Điền",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BED",
+      "organ_name": "Công ty Cổ phần Sách và Thiết bị trường học Đà Nẵng",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "BCM",
+      "organ_name": "Tập đoàn Đầu tư và Phát triển Công nghiệp Becamex - CTCP",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "BCG",
+      "organ_name": "Công ty Cổ phần Tập đoàn Bamboo Capital",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "BCF",
+      "organ_name": "Công ty Cổ phần Thực phẩm Bích Chi",
+      "exchange": "HNX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "BCE",
+      "organ_name": "Công ty Cổ phần Xây dựng và Giao thông Bình Dương",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "BCC",
+      "organ_name": "Công ty Cổ phần Xi măng Bỉm Sơn",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "BBS",
+      "organ_name": "Công ty Cổ phần VICEM Bao bì Bút Sơn",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "BAX",
+      "organ_name": "Công ty Cổ phần Thống Nhất",
+      "exchange": "HNX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "BAF",
+      "organ_name": "Công ty Cổ phần Nông nghiệp BAF Việt Nam",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "BAB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Bắc Á",
+      "exchange": "HNX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "ATS",
+      "organ_name": "Công ty Cổ phần Tập đoàn Đầu tư ATS",
+      "exchange": "HNX",
+      "icb_name2": "Du lịch và Giải trí",
+      "icb_name3": "Du lịch & Giải trí",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "AST",
+      "organ_name": "Công ty Cổ phần Dịch vụ Hàng không Taseco",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Bán lẻ",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "ASP",
+      "organ_name": "Công ty Cổ phần Tập đoàn Dầu khí An Pha",
+      "exchange": "HSX",
+      "icb_name2": "Điện, nước & xăng dầu khí đốt",
+      "icb_name3": "Nước & Khí đốt",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ASM",
+      "organ_name": "Công ty Cổ phần Tập đoàn Sao Mai",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "ASG",
+      "organ_name": "Công ty Cổ phần Tập đoàn ASG",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Vận tải",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ARM",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Hàng không",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "APS",
+      "organ_name": "Công ty Cổ phần Chứng khoán Châu Á - Thái Bình Dương",
+      "exchange": "HNX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "API",
+      "organ_name": "Công ty Cổ phần Đầu tư Châu Á - Thái Bình Dương",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "APH",
+      "organ_name": "Công ty Cổ phần Tập đoàn An Phát Holdings",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Hàng công nghiệp",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "APG",
+      "organ_name": "Công ty Cổ phần Chứng khoán APG",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "ANV",
+      "organ_name": "Công ty Cổ phần Nam Việt",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "ANT",
+      "organ_name": "Công ty Cổ phần Rau quả Thực phẩm An Giang",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "AMV",
+      "organ_name": "Công ty Cổ phần Sản xuất Kinh doanh Dược và Trang thiết bị Y tế Việt Mỹ",
+      "exchange": "HNX",
+      "icb_name2": "Y tế",
+      "icb_name3": "Thiết bị và Dịch vụ Y tế",
+      "sector_code": "VNHEAL"
+    },
+    {
+      "symbol": "AME",
+      "organ_name": "Công ty cổ phần Alphanam E&C",
+      "exchange": "HNX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Điện tử & Thiết bị điện",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "AMC",
+      "organ_name": "Công ty Cổ phần Khoáng sản Á Châu",
+      "exchange": "HNX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Khai khoáng",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ALT",
+      "organ_name": "Công ty Cổ phần Văn hóa Tân Bình",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "AGR",
+      "organ_name": "Công ty Cổ phần Chứng khoán AGRIBANK",
+      "exchange": "HSX",
+      "icb_name2": "Dịch vụ tài chính",
+      "icb_name3": "Dịch vụ tài chính",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "AGG",
+      "organ_name": "Công ty Cổ phần Đầu tư và Phát triển Bất động sản An Gia",
+      "exchange": "HSX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "AFX",
+      "organ_name": "Công ty Cổ phần Xuất Nhập khẩu Nông sản Thực phẩm An Giang",
+      "exchange": "HSX",
+      "icb_name2": "Bán lẻ",
+      "icb_name3": "Phân phối thực phẩm & dược phẩm",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "ADS",
+      "organ_name": "Công ty Cổ phần DAMSAN",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "ADP",
+      "organ_name": "Công ty Cổ phần Sơn Á Đông",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "ADG",
+      "organ_name": "Công ty Cổ phần Clever Group",
+      "exchange": "HSX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "ADC",
+      "organ_name": "Công ty Cổ phần Mĩ thuật và Truyền thông",
+      "exchange": "HNX",
+      "icb_name2": "Truyền thông",
+      "icb_name3": "Truyền thông",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "ACL",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Thủy sản Cửu Long An Giang",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "ACG",
+      "organ_name": "Công ty Cổ phần Gỗ An Cường",
+      "exchange": "HSX",
+      "icb_name2": "Tài nguyên Cơ bản",
+      "icb_name3": "Lâm nghiệp và Giấy",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ACC",
+      "organ_name": "Công ty Cổ phần Đầu tư và Xây dựng Bình Dương ACC",
+      "exchange": "HSX",
+      "icb_name2": "Xây dựng và Vật liệu",
+      "icb_name3": "Xây dựng và Vật liệu",
+      "sector_code": "OTHER"
+    },
+    {
+      "symbol": "ACB",
+      "organ_name": "Ngân hàng Thương mại Cổ phần Á Châu",
+      "exchange": "HSX",
+      "icb_name2": "Ngân hàng",
+      "icb_name3": "Ngân hàng",
+      "sector_code": "VNFIN"
+    },
+    {
+      "symbol": "ABT",
+      "organ_name": "Công ty Cổ phần Xuất nhập khẩu Thủy sản Bến Tre",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "ABS",
+      "organ_name": "Công ty Cổ phần Dịch vụ Nông nghiệp Bình Thuận",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "ABR",
+      "organ_name": "Công ty Cổ phần Đầu tư Nhãn Hiệu Việt",
+      "exchange": "HSX",
+      "icb_name2": "Hàng & Dịch vụ Công nghiệp",
+      "icb_name3": "Tư vấn & Hỗ trợ Kinh doanh",
+      "sector_code": "VNMAT"
+    },
+    {
+      "symbol": "AAV",
+      "organ_name": "Công ty Cổ phần AAV Group",
+      "exchange": "HNX",
+      "icb_name2": "Bất động sản",
+      "icb_name3": "Bất động sản",
+      "sector_code": "VNREAL"
+    },
+    {
+      "symbol": "AAT",
+      "organ_name": "Công ty Cổ phần Tập đoàn Tiên Sơn Thanh Hóa",
+      "exchange": "HSX",
+      "icb_name2": "Hàng cá nhân & Gia dụng",
+      "icb_name3": "Hàng cá nhân",
+      "sector_code": "VNCOND"
+    },
+    {
+      "symbol": "AAM",
+      "organ_name": "Công ty Cổ Phần Thủy Sản MeKong",
+      "exchange": "HSX",
+      "icb_name2": "Thực phẩm và đồ uống",
+      "icb_name3": "Sản xuất thực phẩm",
+      "sector_code": "VNCONS"
+    },
+    {
+      "symbol": "AAA",
+      "organ_name": "Công ty Cổ phần Nhựa An Phát Xanh",
+      "exchange": "HSX",
+      "icb_name2": "Hóa chất",
+      "icb_name3": "Hóa chất",
+      "sector_code": "VNMAT"
+    }
+  ],
+  "timestamp": "2026-02-05T09:11:24.548922"
+}

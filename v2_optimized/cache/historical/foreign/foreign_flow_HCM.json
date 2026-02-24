@@ -1,0 +1,66 @@
+{
+  "symbol": "HCM",
+  "last_updated": "2026-02-11T22:50:38.713778",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HCM",
+      "buy_value": 6225142100.0,
+      "sell_value": 7442360000.0,
+      "net_value": -1217217900.0,
+      "buy_volume": 273604,
+      "sell_volume": 325750,
+      "net_volume": -52146,
+      "price": 22.5,
+      "total_volume": 10291300,
+      "foreign_pct": 5.8238900819138495
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HCM",
+      "buy_value": 766245000.0,
+      "sell_value": 3368660000.0,
+      "net_value": -2602415000.0,
+      "buy_volume": 33600,
+      "sell_volume": 148300,
+      "net_volume": -114700,
+      "price": 22.9,
+      "total_volume": 3948100,
+      "foreign_pct": 4.6072794508751045
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HCM",
+      "buy_value": 15139210000.0,
+      "sell_value": 3988925000.0,
+      "net_value": 11150285000.0,
+      "buy_volume": 662300,
+      "sell_volume": 174100,
+      "net_volume": 488200,
+      "price": 22.8,
+      "total_volume": 4437500,
+      "foreign_pct": 18.848450704225353
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HCM",
+      "buy_value": 5139630000.0,
+      "sell_value": 7754198500.0,
+      "net_value": -2614568500.0,
+      "buy_volume": 220600,
+      "sell_volume": 334145,
+      "net_volume": -113545,
+      "price": 23.4,
+      "total_volume": 7222900,
+      "foreign_pct": 7.680363842777832
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 4716083600.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 18.930830608425186,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

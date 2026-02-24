@@ -1,0 +1,66 @@
+{
+  "symbol": "CMX",
+  "last_updated": "2026-02-11T23:07:58.829349",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "CMX",
+      "buy_value": 0.0,
+      "sell_value": 58975000.0,
+      "net_value": -58975000.0,
+      "buy_volume": 0,
+      "sell_volume": 9100,
+      "net_volume": -9100,
+      "price": 6.44,
+      "total_volume": 138200,
+      "foreign_pct": 6.58465991316932
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "CMX",
+      "buy_value": 0.0,
+      "sell_value": 58975000.0,
+      "net_value": -58975000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 6.41,
+      "total_volume": 89300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "CMX",
+      "buy_value": 0.0,
+      "sell_value": 10441000.0,
+      "net_value": -10441000.0,
+      "buy_volume": 0,
+      "sell_volume": 1600,
+      "net_volume": -1600,
+      "price": 6.5,
+      "total_volume": 74900,
+      "foreign_pct": 2.1361815754339117
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "CMX",
+      "buy_value": 0.0,
+      "sell_value": 16027000.0,
+      "net_value": -16027000.0,
+      "buy_volume": 0,
+      "sell_volume": 2400,
+      "net_volume": -2400,
+      "price": 6.58,
+      "total_volume": 66400,
+      "foreign_pct": 3.614457831325301
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -144418000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

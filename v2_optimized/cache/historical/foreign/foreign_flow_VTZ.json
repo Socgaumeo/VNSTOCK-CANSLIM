@@ -1,0 +1,66 @@
+{
+  "symbol": "VTZ",
+  "last_updated": "2026-02-11T23:12:13.470789",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VTZ",
+      "buy_value": 82820000.0,
+      "sell_value": 85260000.0,
+      "net_value": -2440000.0,
+      "buy_volume": 4100,
+      "sell_volume": 4200,
+      "net_volume": -100,
+      "price": 20.1,
+      "total_volume": 1328100,
+      "foreign_pct": 0.6249529402906407
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VTZ",
+      "buy_value": 182000000.0,
+      "sell_value": 68000000.0,
+      "net_value": 114000000.0,
+      "buy_volume": 9100,
+      "sell_volume": 3400,
+      "net_volume": 5700,
+      "price": 19.9,
+      "total_volume": 999200,
+      "foreign_pct": 1.2510008006405124
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VTZ",
+      "buy_value": 0.0,
+      "sell_value": 88000000.0,
+      "net_value": -88000000.0,
+      "buy_volume": 0,
+      "sell_volume": 4400,
+      "net_volume": -4400,
+      "price": 20.0,
+      "total_volume": 1088500,
+      "foreign_pct": 0.4042259990813046
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VTZ",
+      "buy_value": 70700000.0,
+      "sell_value": 572650000.0,
+      "net_value": -501950000.0,
+      "buy_volume": 3500,
+      "sell_volume": 28500,
+      "net_volume": -25000,
+      "price": 20.1,
+      "total_volume": 1318000,
+      "foreign_pct": 2.4279210925644916
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -478390000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 83.23951871797325,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

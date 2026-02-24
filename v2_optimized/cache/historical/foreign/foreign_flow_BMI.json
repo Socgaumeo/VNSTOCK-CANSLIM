@@ -1,0 +1,66 @@
+{
+  "symbol": "BMI",
+  "last_updated": "2026-02-11T22:51:41.105282",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BMI",
+      "buy_value": 642265000.0,
+      "sell_value": 2246610000.0,
+      "net_value": -1604345000.0,
+      "buy_volume": 33200,
+      "sell_volume": 117300,
+      "net_volume": -84100,
+      "price": 18.75,
+      "total_volume": 842600,
+      "foreign_pct": 17.861381438404937
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BMI",
+      "buy_value": 80665000.0,
+      "sell_value": 2607042150.0,
+      "net_value": -2526377150.0,
+      "buy_volume": 4300,
+      "sell_volume": 139168,
+      "net_volume": -134868,
+      "price": 18.45,
+      "total_volume": 411200,
+      "foreign_pct": 34.89007782101167
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BMI",
+      "buy_value": 85755000.0,
+      "sell_value": 1669779350.0,
+      "net_value": -1584024350.0,
+      "buy_volume": 4700,
+      "sell_volume": 90484,
+      "net_volume": -85784,
+      "price": 18.05,
+      "total_volume": 644900,
+      "foreign_pct": 14.759497596526593
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BMI",
+      "buy_value": 1322625000.0,
+      "sell_value": 443154900.0,
+      "net_value": 879470100.0,
+      "buy_volume": 72300,
+      "sell_volume": 23874,
+      "net_volume": 48426,
+      "price": 18.8,
+      "total_volume": 356200,
+      "foreign_pct": 27.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -4835276400.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

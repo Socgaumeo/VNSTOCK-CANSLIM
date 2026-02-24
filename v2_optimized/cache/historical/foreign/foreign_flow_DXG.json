@@ -1,0 +1,66 @@
+{
+  "symbol": "DXG",
+  "last_updated": "2026-02-11T22:56:01.098151",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DXG",
+      "buy_value": 975960000.0,
+      "sell_value": 77410104450.0,
+      "net_value": -76434144450.0,
+      "buy_volume": 67150,
+      "sell_volume": 5319901,
+      "net_volume": -5252751,
+      "price": 14.3,
+      "total_volume": 17976600,
+      "foreign_pct": 29.967018234816372
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DXG",
+      "buy_value": 52647690000.0,
+      "sell_value": 7179425000.0,
+      "net_value": 45468265000.0,
+      "buy_volume": 3565200,
+      "sell_volume": 493400,
+      "net_volume": 3071800,
+      "price": 15.0,
+      "total_volume": 11540400,
+      "foreign_pct": 35.168625004332604
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DXG",
+      "buy_value": 18538060000.0,
+      "sell_value": 12149175000.0,
+      "net_value": 6388885000.0,
+      "buy_volume": 1249100,
+      "sell_volume": 815600,
+      "net_volume": 433500,
+      "price": 14.7,
+      "total_volume": 5753200,
+      "foreign_pct": 35.88785371619273
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DXG",
+      "buy_value": 84403385000.0,
+      "sell_value": 11202865000.0,
+      "net_value": 73200520000.0,
+      "buy_volume": 5437400,
+      "sell_volume": 730400,
+      "net_volume": 4707000,
+      "price": 15.65,
+      "total_volume": 36923700,
+      "foreign_pct": 16.704176450355735
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 48623525550.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 36.76544456912265,
+    "buy_days_count": 3,
+    "sell_days_count": 1
+  }
+}

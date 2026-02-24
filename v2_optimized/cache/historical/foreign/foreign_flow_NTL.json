@@ -1,0 +1,66 @@
+{
+  "symbol": "NTL",
+  "last_updated": "2026-02-11T22:53:59.175487",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NTL",
+      "buy_value": 865535000.0,
+      "sell_value": 602340000.0,
+      "net_value": 263195000.0,
+      "buy_volume": 51100,
+      "sell_volume": 35600,
+      "net_volume": 15500,
+      "price": 16.7,
+      "total_volume": 837700,
+      "foreign_pct": 10.349767219768413
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NTL",
+      "buy_value": 46060000.0,
+      "sell_value": 1007020000.0,
+      "net_value": -960960000.0,
+      "buy_volume": 2800,
+      "sell_volume": 60500,
+      "net_volume": -57700,
+      "price": 16.7,
+      "total_volume": 393300,
+      "foreign_pct": 16.09458428680397
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NTL",
+      "buy_value": 69490000.0,
+      "sell_value": 179405000.0,
+      "net_value": -109915000.0,
+      "buy_volume": 4200,
+      "sell_volume": 10700,
+      "net_volume": -6500,
+      "price": 16.5,
+      "total_volume": 449800,
+      "foreign_pct": 3.3125833703868386
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NTL",
+      "buy_value": 1702055000.0,
+      "sell_value": 0.0,
+      "net_value": 1702055000.0,
+      "buy_volume": 101000,
+      "sell_volume": 0,
+      "net_volume": 101000,
+      "price": 16.9,
+      "total_volume": 773000,
+      "foreign_pct": 13.065976714100906
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 894375000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 39.99973165798468,
+    "buy_days_count": 1,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "FIT",
+  "last_updated": "2026-02-11T23:05:01.256825",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "FIT",
+      "buy_value": 0.0,
+      "sell_value": 28320.0,
+      "net_value": -28320.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.56,
+      "total_volume": 627700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "FIT",
+      "buy_value": 0.0,
+      "sell_value": 28320.0,
+      "net_value": -28320.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.57,
+      "total_volume": 286000,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "FIT",
+      "buy_value": 0.0,
+      "sell_value": 28320.0,
+      "net_value": -28320.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.57,
+      "total_volume": 180800,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "FIT",
+      "buy_value": 0.0,
+      "sell_value": 28320.0,
+      "net_value": -28320.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 4.58,
+      "total_volume": 221200,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -113280.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "TRC",
+  "last_updated": "2026-02-11T22:58:08.211320",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TRC",
+      "buy_value": 45020000.0,
+      "sell_value": 1571780000.0,
+      "net_value": -1526760000.0,
+      "buy_volume": 600,
+      "sell_volume": 20900,
+      "net_volume": -20300,
+      "price": 74.0,
+      "total_volume": 147300,
+      "foreign_pct": 14.596062457569586
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TRC",
+      "buy_value": 400180000.0,
+      "sell_value": 735300000.0,
+      "net_value": -335120000.0,
+      "buy_volume": 5400,
+      "sell_volume": 9900,
+      "net_volume": -4500,
+      "price": 74.1,
+      "total_volume": 34500,
+      "foreign_pct": 44.34782608695652
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TRC",
+      "buy_value": 0.0,
+      "sell_value": 864950000.0,
+      "net_value": -864950000.0,
+      "buy_volume": 0,
+      "sell_volume": 11700,
+      "net_volume": -11700,
+      "price": 73.9,
+      "total_volume": 23400,
+      "foreign_pct": 50.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TRC",
+      "buy_value": 0.0,
+      "sell_value": 194200000.0,
+      "net_value": -194200000.0,
+      "buy_volume": 0,
+      "sell_volume": 2600,
+      "net_volume": -2600,
+      "price": 74.4,
+      "total_volume": 26700,
+      "foreign_pct": 9.737827715355806
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2921030000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

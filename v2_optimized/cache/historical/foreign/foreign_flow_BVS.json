@@ -1,0 +1,66 @@
+{
+  "symbol": "BVS",
+  "last_updated": "2026-02-11T22:51:25.655130",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BVS",
+      "buy_value": 509850000.0,
+      "sell_value": 133820000.0,
+      "net_value": 376030000.0,
+      "buy_volume": 17500,
+      "sell_volume": 4500,
+      "net_volume": 13000,
+      "price": 29.2,
+      "total_volume": 229200,
+      "foreign_pct": 9.598603839441536
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BVS",
+      "buy_value": 36000000.0,
+      "sell_value": 0.0,
+      "net_value": 36000000.0,
+      "buy_volume": 1200,
+      "sell_volume": 0,
+      "net_volume": 1200,
+      "price": 29.3,
+      "total_volume": 117100,
+      "foreign_pct": 1.0247651579846286
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BVS",
+      "buy_value": 0.0,
+      "sell_value": 85360000.0,
+      "net_value": -85360000.0,
+      "buy_volume": 0,
+      "sell_volume": 2900,
+      "net_volume": -2900,
+      "price": 29.3,
+      "total_volume": 76000,
+      "foreign_pct": 3.8157894736842106
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BVS",
+      "buy_value": 197330000.0,
+      "sell_value": 138620000.0,
+      "net_value": 58710000.0,
+      "buy_volume": 6600,
+      "sell_volume": 4700,
+      "net_volume": 1900,
+      "price": 29.6,
+      "total_volume": 99300,
+      "foreign_pct": 11.379657603222558
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 385380000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 70.00672128467366,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

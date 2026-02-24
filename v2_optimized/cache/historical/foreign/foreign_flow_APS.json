@@ -1,0 +1,66 @@
+{
+  "symbol": "APS",
+  "last_updated": "2026-02-11T22:52:01.565828",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "APS",
+      "buy_value": 48240000.0,
+      "sell_value": 0.0,
+      "net_value": 48240000.0,
+      "buy_volume": 7600,
+      "sell_volume": 0,
+      "net_volume": 7600,
+      "price": 6.2,
+      "total_volume": 636500,
+      "foreign_pct": 1.1940298507462688
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "APS",
+      "buy_value": 48240000.0,
+      "sell_value": 0.0,
+      "net_value": 48240000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 6.3,
+      "total_volume": 163600,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "APS",
+      "buy_value": 48240000.0,
+      "sell_value": 0.0,
+      "net_value": 48240000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 6.3,
+      "total_volume": 177200,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "APS",
+      "buy_value": 48240000.0,
+      "sell_value": 0.0,
+      "net_value": 48240000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 6.6,
+      "total_volume": 382300,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 192960000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "TTA",
+  "last_updated": "2026-02-11T22:57:57.059399",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TTA",
+      "buy_value": 0.0,
+      "sell_value": 89380000.0,
+      "net_value": -89380000.0,
+      "buy_volume": 0,
+      "sell_volume": 8200,
+      "net_volume": -8200,
+      "price": 10.85,
+      "total_volume": 413900,
+      "foreign_pct": 1.9811548683256825
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TTA",
+      "buy_value": 0.0,
+      "sell_value": 89380000.0,
+      "net_value": -89380000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.8,
+      "total_volume": 289100,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TTA",
+      "buy_value": 0.0,
+      "sell_value": 38700000.0,
+      "net_value": -38700000.0,
+      "buy_volume": 0,
+      "sell_volume": 3600,
+      "net_volume": -3600,
+      "price": 10.8,
+      "total_volume": 32700,
+      "foreign_pct": 11.009174311926607
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TTA",
+      "buy_value": 0.0,
+      "sell_value": 38700000.0,
+      "net_value": -38700000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 10.95,
+      "total_volume": 653800,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -256160000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

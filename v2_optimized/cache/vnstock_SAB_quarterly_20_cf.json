@@ -1,8 +1,23 @@
 {
-  "timestamp": "2025-12-29T16:18:16.152244",
+  "timestamp": "2026-02-08T09:22:30.841702",
   "data": [
     {
       "period": "Q1",
+      "revenue": 6836551694306.0,
+      "profit": 1062388614644.0,
+      "eps": 0.0,
+      "roe": 19.910203160000002,
+      "roa": 13.397204290000001,
+      "gross_margin": 0.0,
+      "net_margin": 0.0,
+      "operating_cash_flow": 552886852176.0,
+      "investing_cash_flow": 482874447216.0,
+      "financing_cash_flow": 70671326086.0,
+      "pe": 14.1345886198,
+      "pb": 2.9558717029
+    },
+    {
+      "period": "Q2",
       "revenue": 6436577577988.0,
       "profit": 1360541153913.0,
       "eps": 0.0,
@@ -12,10 +27,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1158834150043.0,
       "investing_cash_flow": -866929038040.0,
-      "financing_cash_flow": -3884328027822.0
+      "financing_cash_flow": -3884328027822.0,
+      "pe": 15.9186069279,
+      "pb": 3.0351670062
     },
     {
-      "period": "Q2",
+      "period": "Q3",
       "revenue": 6804334314775.0,
       "profit": 1207496669486.0,
       "eps": 0.0,
@@ -25,10 +42,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 2317370499649.0,
       "investing_cash_flow": 538520041627.0,
-      "financing_cash_flow": -351210848871.0
+      "financing_cash_flow": -351210848871.0,
+      "pe": 14.2536032551,
+      "pb": 2.7241851947
     },
     {
-      "period": "Q3",
+      "period": "Q4",
       "revenue": 5810728641052.0,
       "profit": 793113384493.0,
       "eps": 0.0,
@@ -38,10 +57,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": -125015342601.0,
       "investing_cash_flow": 2268609844705.0,
-      "financing_cash_flow": -2622882185316.0
+      "financing_cash_flow": -2622882185316.0,
+      "pe": 14.9208976169,
+      "pb": 2.5582188751
     },
     {
-      "period": "Q4",
+      "period": "Q5",
       "revenue": 8932511366916.0,
       "profit": 965458506669.0,
       "eps": 0.0,
@@ -51,10 +72,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 647757834596.0,
       "investing_cash_flow": -1663275915879.0,
-      "financing_cash_flow": 64554541117.0
+      "financing_cash_flow": 64554541117.0,
+      "pe": 14.4247475906,
+      "pb": 2.6827792181
     },
     {
-      "period": "Q5",
+      "period": "Q6",
       "revenue": 7670108601205.0,
       "profit": 1119097179306.0,
       "eps": 0.0,
@@ -64,10 +87,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1596846380822.0,
       "investing_cash_flow": 726292210277.0,
-      "financing_cash_flow": -2928740802528.0
+      "financing_cash_flow": -2928740802528.0,
+      "pe": 16.2131176117,
+      "pb": 2.8030878222
     },
     {
-      "period": "Q6",
+      "period": "Q7",
       "revenue": 8086285927217.0,
       "profit": 1248288726219.0,
       "eps": 0.0,
@@ -77,10 +102,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1741355655828.0,
       "investing_cash_flow": 1248223364674.0,
-      "financing_cash_flow": -168219432263.0
+      "financing_cash_flow": -168219432263.0,
+      "pe": 17.3163210851,
+      "pb": 3.0763378271
     },
     {
-      "period": "Q7",
+      "period": "Q8",
       "revenue": 7183511591318.0,
       "profit": 997268619176.0,
       "eps": 0.0,
@@ -90,10 +117,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 376549697294.0,
       "investing_cash_flow": -292355273750.0,
-      "financing_cash_flow": -1911044534290.0
+      "financing_cash_flow": -1911044534290.0,
+      "pe": 17.3170062984,
+      "pb": 2.8520225326
     },
     {
-      "period": "Q8",
+      "period": "Q9",
       "revenue": 8520387133059.0,
       "profit": 946647653441.0,
       "eps": 0.0,
@@ -103,10 +132,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": -16048282894.0,
       "investing_cash_flow": 2652794619150.0,
-      "financing_cash_flow": 11631296729.0
+      "financing_cash_flow": 11631296729.0,
+      "pe": 17.4430261363,
+      "pb": 2.9664037371
     },
     {
-      "period": "Q9",
+      "period": "Q10",
       "revenue": 7414903873948.0,
       "profit": 1044408963102.0,
       "eps": 0.0,
@@ -116,10 +147,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 988315322638.0,
       "investing_cash_flow": -1108096044226.0,
-      "financing_cash_flow": -1230325681127.0
+      "financing_cash_flow": -1230325681127.0,
+      "pe": 18.5949414188,
+      "pb": 3.1065831526
     },
     {
-      "period": "Q10",
+      "period": "Q11",
       "revenue": 8312141827828.0,
       "profit": 1159244592128.0,
       "eps": 0.0,
@@ -129,10 +162,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1838515245559.0,
       "investing_cash_flow": -975085792889.0,
-      "financing_cash_flow": -116570300981.0
+      "financing_cash_flow": -116570300981.0,
+      "pe": 19.5859800121,
+      "pb": 3.6511123678
     },
     {
-      "period": "Q11",
+      "period": "Q12",
       "revenue": 6213934447380.0,
       "profit": 967303860017.0,
       "eps": 0.0,
@@ -142,10 +177,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": -881132554907.0,
       "investing_cash_flow": 2156385063656.0,
-      "financing_cash_flow": -2349760358833.0
+      "financing_cash_flow": -2349760358833.0,
+      "pe": 19.2877686254,
+      "pb": 4.0196948367
     },
     {
-      "period": "Q12",
+      "period": "Q13",
       "revenue": 10029204274418.0,
       "profit": 1043337169730.0,
       "eps": 0.0,
@@ -155,10 +192,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": -355352247294.0,
       "investing_cash_flow": 1428284231995.0,
-      "financing_cash_flow": 153318722707.0
+      "financing_cash_flow": 153318722707.0,
+      "pe": 20.5009578769,
+      "pb": 4.6280292865
     },
     {
-      "period": "Q13",
+      "period": "Q14",
       "revenue": 8635078197536.0,
       "profit": 1341941071312.0,
       "eps": 0.0,
@@ -168,10 +207,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 2490007347588.0,
       "investing_cash_flow": -2324917955402.0,
-      "financing_cash_flow": -61345687935.0
+      "financing_cash_flow": -61345687935.0,
+      "pe": 21.6980131231,
+      "pb": 4.8911615774
     },
     {
-      "period": "Q14",
+      "period": "Q15",
       "revenue": 9008445193172.0,
       "profit": 1667877287817.0,
       "eps": 0.0,
@@ -181,10 +222,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1155274032676.0,
       "investing_cash_flow": -1714851241251.0,
-      "financing_cash_flow": 49800707971.0
+      "financing_cash_flow": 49800707971.0,
+      "pe": 26.5092093677,
+      "pb": 5.2974519575
     },
     {
-      "period": "Q15",
+      "period": "Q16",
       "revenue": 7306356328709.0,
       "profit": 1170695898236.0,
       "eps": 0.0,
@@ -194,10 +237,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1088760769093.0,
       "investing_cash_flow": 743716717767.0,
-      "financing_cash_flow": -2189481125459.0
+      "financing_cash_flow": -2189481125459.0,
+      "pe": 25.0822460716,
+      "pb": 4.6026205227
     },
     {
-      "period": "Q16",
+      "period": "Q17",
       "revenue": 9003847095919.0,
       "profit": 1313729469068.0,
       "eps": 0.0,
@@ -207,10 +252,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1873925613895.0,
       "investing_cash_flow": -1415647215455.0,
-      "financing_cash_flow": -145107387732.0
+      "financing_cash_flow": -145107387732.0,
+      "pe": 29.4023901338,
+      "pb": 5.0948400872
     },
     {
-      "period": "Q17",
+      "period": "Q18",
       "revenue": 4282336672670.0,
       "profit": 443965141857.0,
       "eps": 0.0,
@@ -220,10 +267,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 128046223044.0,
       "investing_cash_flow": 103470883707.0,
-      "financing_cash_flow": -88480724799.0
+      "financing_cash_flow": -88480724799.0,
+      "pe": 25.2874102477,
+      "pb": 4.5618041445
     },
     {
-      "period": "Q18",
+      "period": "Q19",
       "revenue": 7226269519114.0,
       "profit": 998721516151.0,
       "eps": 0.0,
@@ -233,10 +282,12 @@
       "net_margin": 0.0,
       "operating_cash_flow": 1948168225363.0,
       "investing_cash_flow": -1466057755082.0,
-      "financing_cash_flow": -112179011097.0
+      "financing_cash_flow": -112179011097.0,
+      "pe": 21.6070333138,
+      "pb": 4.9587883097
     },
     {
-      "period": "Q19",
+      "period": "Q20",
       "revenue": 5861293006155.0,
       "profit": 920836214228.0,
       "eps": 0.0,
@@ -246,20 +297,9 @@
       "net_margin": 0.0,
       "operating_cash_flow": -406890434540.0,
       "investing_cash_flow": 1533023839853.0,
-      "financing_cash_flow": -1071790728354.0
-    },
-    {
-      "period": "Q20",
-      "revenue": 7865362096244.0,
-      "profit": 1465792116422.0,
-      "eps": 0.0,
-      "roe": 22.87877252,
-      "roa": 17.3857881,
-      "gross_margin": 0.0,
-      "net_margin": 0.0,
-      "operating_cash_flow": 1114372614960.0,
-      "investing_cash_flow": -66635535235.0,
-      "financing_cash_flow": -1494936304028.0
+      "financing_cash_flow": -1071790728354.0,
+      "pe": 20.597356667,
+      "pb": 5.1300997042
     }
   ]
 }

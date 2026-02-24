@@ -1,0 +1,66 @@
+{
+  "symbol": "PAC",
+  "last_updated": "2026-02-11T23:00:30.559152",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PAC",
+      "buy_value": 361475000.0,
+      "sell_value": 332285000.0,
+      "net_value": 29190000.0,
+      "buy_volume": 15900,
+      "sell_volume": 14400,
+      "net_volume": 1500,
+      "price": 22.3,
+      "total_volume": 303000,
+      "foreign_pct": 10.0
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PAC",
+      "buy_value": 0.0,
+      "sell_value": 1280650000.0,
+      "net_value": -1280650000.0,
+      "buy_volume": 0,
+      "sell_volume": 57200,
+      "net_volume": -57200,
+      "price": 22.25,
+      "total_volume": 151600,
+      "foreign_pct": 37.73087071240106
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PAC",
+      "buy_value": 0.0,
+      "sell_value": 655855000.0,
+      "net_value": -655855000.0,
+      "buy_volume": 0,
+      "sell_volume": 29400,
+      "net_volume": -29400,
+      "price": 22.15,
+      "total_volume": 210100,
+      "foreign_pct": 13.99333650642551
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PAC",
+      "buy_value": 4452250.0,
+      "sell_value": 311205000.0,
+      "net_value": -306752750.0,
+      "buy_volume": 201,
+      "sell_volume": 13900,
+      "net_volume": -13699,
+      "price": 22.45,
+      "total_volume": 153800,
+      "foreign_pct": 9.168400520156046
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2214067750.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

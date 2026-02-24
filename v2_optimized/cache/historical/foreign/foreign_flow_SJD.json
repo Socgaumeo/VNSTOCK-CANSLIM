@@ -1,0 +1,66 @@
+{
+  "symbol": "SJD",
+  "last_updated": "2026-02-11T22:58:40.073194",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SJD",
+      "buy_value": 2770000.0,
+      "sell_value": 0.0,
+      "net_value": 2770000.0,
+      "buy_volume": 200,
+      "sell_volume": 0,
+      "net_volume": 200,
+      "price": 13.95,
+      "total_volume": 129100,
+      "foreign_pct": 0.1549186676994578
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SJD",
+      "buy_value": 19525000.0,
+      "sell_value": 166800000.0,
+      "net_value": -147275000.0,
+      "buy_volume": 1400,
+      "sell_volume": 12000,
+      "net_volume": -10600,
+      "price": 13.8,
+      "total_volume": 67000,
+      "foreign_pct": 20.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SJD",
+      "buy_value": 0.0,
+      "sell_value": 283920000.0,
+      "net_value": -283920000.0,
+      "buy_volume": 0,
+      "sell_volume": 20500,
+      "net_volume": -20500,
+      "price": 13.9,
+      "total_volume": 55600,
+      "foreign_pct": 36.8705035971223
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SJD",
+      "buy_value": 6950000.0,
+      "sell_value": 328040000.0,
+      "net_value": -321090000.0,
+      "buy_volume": 500,
+      "sell_volume": 23600,
+      "net_volume": -23100,
+      "price": 13.9,
+      "total_volume": 62400,
+      "foreign_pct": 38.621794871794876
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -749515000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

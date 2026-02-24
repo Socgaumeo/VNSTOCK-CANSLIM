@@ -1,0 +1,66 @@
+{
+  "symbol": "SSB",
+  "last_updated": "2026-02-11T22:49:08.306201",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SSB",
+      "buy_value": 563905000.0,
+      "sell_value": 5334435000.0,
+      "net_value": -4770530000.0,
+      "buy_volume": 33900,
+      "sell_volume": 320200,
+      "net_volume": -286300,
+      "price": 16.8,
+      "total_volume": 2245700,
+      "foreign_pct": 15.767912009618382
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SSB",
+      "buy_value": 256145000.0,
+      "sell_value": 2340390000.0,
+      "net_value": -2084245000.0,
+      "buy_volume": 15300,
+      "sell_volume": 140200,
+      "net_volume": -124900,
+      "price": 16.75,
+      "total_volume": 2211700,
+      "foreign_pct": 7.030790794411539
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SSB",
+      "buy_value": 41490000.0,
+      "sell_value": 1764260000.0,
+      "net_value": -1722770000.0,
+      "buy_volume": 2500,
+      "sell_volume": 106100,
+      "net_volume": -103600,
+      "price": 16.75,
+      "total_volume": 2014100,
+      "foreign_pct": 5.391986495208778
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SSB",
+      "buy_value": 2003245000.0,
+      "sell_value": 1069780000.0,
+      "net_value": 933465000.0,
+      "buy_volume": 119500,
+      "sell_volume": 63300,
+      "net_volume": 56200,
+      "price": 17.0,
+      "total_volume": 2253800,
+      "foreign_pct": 8.110746295145976
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -7644080000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

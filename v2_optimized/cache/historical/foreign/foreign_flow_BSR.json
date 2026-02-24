@@ -1,0 +1,79 @@
+{
+  "symbol": "BSR",
+  "last_updated": "2026-02-12T07:25:49.775686",
+  "count": 5,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BSR",
+      "buy_value": 144169350000.0,
+      "sell_value": 8159075000.0,
+      "net_value": 136010275000.0,
+      "buy_volume": 5909900,
+      "sell_volume": 340200,
+      "net_volume": 5569700,
+      "price": 24.55,
+      "total_volume": 31341200,
+      "foreign_pct": 19.942120914323638
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BSR",
+      "buy_value": 61555080000.0,
+      "sell_value": 20694725000.0,
+      "net_value": 40860355000.0,
+      "buy_volume": 2481000,
+      "sell_volume": 834900,
+      "net_volume": 1646100,
+      "price": 24.65,
+      "total_volume": 10409100,
+      "foreign_pct": 31.85578003862005
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BSR",
+      "buy_value": 47899395000.0,
+      "sell_value": 13540785000.0,
+      "net_value": 34358610000.0,
+      "buy_volume": 1978900,
+      "sell_volume": 552300,
+      "net_volume": 1426600,
+      "price": 23.1,
+      "total_volume": 37264600,
+      "foreign_pct": 6.792505487781971
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BSR",
+      "buy_value": 66748360000.0,
+      "sell_value": 21903765000.0,
+      "net_value": 44844595000.0,
+      "buy_volume": 2882800,
+      "sell_volume": 940400,
+      "net_volume": 1942400,
+      "price": 23.45,
+      "total_volume": 13784700,
+      "foreign_pct": 27.735097608217806
+    },
+    {
+      "date": "2026-02-12",
+      "symbol": "BSR",
+      "buy_value": 66748360000.0,
+      "sell_value": 21903765000.0,
+      "net_value": 44844595000.0,
+      "buy_volume": 2882800,
+      "sell_volume": 940400,
+      "net_volume": 1942400,
+      "price": 23.45,
+      "total_volume": 13784700,
+      "foreign_pct": 27.735097608217806
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 300918430000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 5,
+    "sell_days_count": 0
+  }
+}

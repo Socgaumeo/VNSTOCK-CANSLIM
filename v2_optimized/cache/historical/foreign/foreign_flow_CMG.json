@@ -1,0 +1,66 @@
+{
+  "symbol": "CMG",
+  "last_updated": "2026-02-11T23:04:30.268183",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "CMG",
+      "buy_value": 2853965000.0,
+      "sell_value": 2523469750.0,
+      "net_value": 330495250.0,
+      "buy_volume": 81400,
+      "sell_volume": 71919,
+      "net_volume": 9481,
+      "price": 34.75,
+      "total_volume": 685900,
+      "foreign_pct": 22.352966904796617
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "CMG",
+      "buy_value": 432225000.0,
+      "sell_value": 5421566000.0,
+      "net_value": -4989341000.0,
+      "buy_volume": 12500,
+      "sell_volume": 155864,
+      "net_volume": -143364,
+      "price": 34.6,
+      "total_volume": 250200,
+      "foreign_pct": 67.29176658673062
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "CMG",
+      "buy_value": 522655000.0,
+      "sell_value": 1502642000.0,
+      "net_value": -979987000.0,
+      "buy_volume": 15300,
+      "sell_volume": 43485,
+      "net_volume": -28185,
+      "price": 34.15,
+      "total_volume": 381200,
+      "foreign_pct": 15.421038824763903
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "CMG",
+      "buy_value": 797788000.0,
+      "sell_value": 1029615000.0,
+      "net_value": -231827000.0,
+      "buy_volume": 23170,
+      "sell_volume": 29900,
+      "net_volume": -6730,
+      "price": 34.3,
+      "total_volume": 276200,
+      "foreign_pct": 19.214337436640115
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -5870659750.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 77.83994494934451,
+    "buy_days_count": 0,
+    "sell_days_count": 1
+  }
+}

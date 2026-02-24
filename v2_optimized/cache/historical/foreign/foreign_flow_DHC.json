@@ -1,0 +1,66 @@
+{
+  "symbol": "DHC",
+  "last_updated": "2026-02-11T23:15:54.629072",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DHC",
+      "buy_value": 5437825000.0,
+      "sell_value": 2902420000.0,
+      "net_value": 2535405000.0,
+      "buy_volume": 145500,
+      "sell_volume": 77500,
+      "net_volume": 68000,
+      "price": 36.8,
+      "total_volume": 722900,
+      "foreign_pct": 30.84797344030986
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DHC",
+      "buy_value": 4404475000.0,
+      "sell_value": 7585585000.0,
+      "net_value": -3181110000.0,
+      "buy_volume": 117800,
+      "sell_volume": 201400,
+      "net_volume": -83600,
+      "price": 37.0,
+      "total_volume": 590000,
+      "foreign_pct": 54.10169491525424
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DHC",
+      "buy_value": 5934765000.0,
+      "sell_value": 4994945000.0,
+      "net_value": 939820000.0,
+      "buy_volume": 159000,
+      "sell_volume": 133900,
+      "net_volume": 25100,
+      "price": 37.0,
+      "total_volume": 670100,
+      "foreign_pct": 43.709894045664825
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DHC",
+      "buy_value": 6471160000.0,
+      "sell_value": 1851035000.0,
+      "net_value": 4620125000.0,
+      "buy_volume": 171600,
+      "sell_volume": 48800,
+      "net_volume": 122800,
+      "price": 37.65,
+      "total_volume": 620100,
+      "foreign_pct": 35.54265441057894
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 4914240000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 24.83054887536598,
+    "buy_days_count": 2,
+    "sell_days_count": 1
+  }
+}

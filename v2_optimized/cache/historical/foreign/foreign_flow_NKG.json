@@ -1,0 +1,66 @@
+{
+  "symbol": "NKG",
+  "last_updated": "2026-02-11T23:00:47.909291",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "NKG",
+      "buy_value": 4074415000.0,
+      "sell_value": 1100780000.0,
+      "net_value": 2973635000.0,
+      "buy_volume": 267100,
+      "sell_volume": 72400,
+      "net_volume": 194700,
+      "price": 14.65,
+      "total_volume": 7141200,
+      "foreign_pct": 4.754102951884837
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "NKG",
+      "buy_value": 8865000.0,
+      "sell_value": 10211065000.0,
+      "net_value": -10202200000.0,
+      "buy_volume": 600,
+      "sell_volume": 691300,
+      "net_volume": -690700,
+      "price": 14.75,
+      "total_volume": 3286300,
+      "foreign_pct": 21.05407296960107
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "NKG",
+      "buy_value": 1475000.0,
+      "sell_value": 418169750.0,
+      "net_value": -416694750.0,
+      "buy_volume": 100,
+      "sell_volume": 28301,
+      "net_volume": -28201,
+      "price": 14.75,
+      "total_volume": 2044000,
+      "foreign_pct": 1.389481409001957
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "NKG",
+      "buy_value": 2079180000.0,
+      "sell_value": 3246283000.0,
+      "net_value": -1167103000.0,
+      "buy_volume": 139100,
+      "sell_volume": 217620,
+      "net_volume": -78520,
+      "price": 14.95,
+      "total_volume": 3074300,
+      "foreign_pct": 11.603291806264842
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -8812362750.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 83.37053668437024,
+    "buy_days_count": 1,
+    "sell_days_count": 2
+  }
+}

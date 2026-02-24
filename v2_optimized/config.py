@@ -158,6 +158,90 @@ class RateLimitConfig:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# CACHE CONFIGURATION (Smart Cache)
+# ══════════════════════════════════════════════════════════════════════════════
+
+@dataclass
+class CacheConfig:
+    """Cấu hình Smart Cache với TTL khác nhau theo loại dữ liệu"""
+
+    # Thư mục cache
+    CACHE_DIR: str = "./cache"
+
+    # TTL cho từng loại dữ liệu (ngày)
+    TTL_STOCK_LIST: int = 7              # Danh sách cổ phiếu
+    TTL_QUARTERLY_FINANCIALS: int = 30   # EPS, Revenue, Profit (theo BCTC quý)
+    TTL_CASH_FLOW: int = 30              # Cash flow statement
+    TTL_FINANCIAL_RATIOS: int = 30       # ROE, ROA, PE, PB
+    TTL_SECTOR_MAPPING: int = 30         # ICB → Sector mapping
+    TTL_VOLUME_AVERAGE: int = 1          # Volume TB (cập nhật hàng ngày)
+
+    # Auto-refresh theo mùa BCTC
+    ENABLE_EARNINGS_REFRESH: bool = True
+
+    # Các mốc công bố BCTC (tháng, ngày)
+    EARNINGS_DATES: List[tuple] = field(default_factory=lambda: [
+        (1, 25),   # Q4 năm trước
+        (4, 25),   # Q1
+        (7, 25),   # Q2
+        (10, 25),  # Q3
+    ])
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# HISTORICAL DATA CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+@dataclass
+class HistoricalDataConfig:
+    """Cấu hình theo dõi dữ liệu lịch sử"""
+
+    # Thư mục lưu historical cache
+    HISTORICAL_CACHE_DIR: str = "./cache/historical"
+
+    # Số ngày lưu trữ cho từng loại dữ liệu
+    PRICE_HISTORY_DAYS: int = 30           # Lịch sử giá (OHLCV + indicators)
+    FOREIGN_HISTORY_DAYS: int = 30         # Lịch sử giao dịch khối ngoại
+    RECOMMENDATION_HISTORY_DAYS: int = 90  # Lịch sử khuyến nghị
+
+    # Rolling window cho tính toán
+    FOREIGN_ROLLING_WINDOW: int = 20       # 20-day rolling average khối ngoại
+
+    # Ngưỡng phát hiện pattern
+    ACCUMULATION_MIN_BUY_DAYS: int = 12    # Tối thiểu 12/20 ngày mua ròng
+    DISTRIBUTION_MIN_SELL_DAYS: int = 12   # Tối thiểu 12/20 ngày bán ròng
+
+    # Auto cleanup
+    AUTO_CLEANUP_ENABLED: bool = True
+    CLEANUP_OLDER_THAN_DAYS: int = 90
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# STOCK UNIVERSE CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+@dataclass
+class StockUniverseConfig:
+    """Cấu hình Stock Universe - Phạm vi scan"""
+
+    # Filter thanh khoản
+    MIN_VOLUME: int = 100_000              # Volume TB tối thiểu (cp/ngày)
+    MIN_MARKET_CAP: float = 0              # Vốn hóa tối thiểu (VND). 0 = không filter
+
+    # Sàn giao dịch (HSX = HoSE, HNX)
+    EXCHANGES: List[str] = field(default_factory=lambda: ['HSX', 'HNX'])
+
+    # Loại trừ
+    EXCLUDE_TYPES: List[str] = field(default_factory=lambda: ['FUND', 'ETF', 'CW', 'BOND'])
+
+    # Dùng dynamic stock list từ API (True) hay hardcode (False)
+    USE_DYNAMIC_LIST: bool = True
+
+    # Scan tất cả 7 ngành hay chỉ top sectors theo RS
+    SCAN_ALL_SECTORS: bool = True
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # VOLUME PROFILE CONFIGURATION
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -266,6 +350,29 @@ class EmailConfig:
 
 
 # ══════════════════════════════════════════════════════════════════════════════
+# TELEGRAM BOT CONFIGURATION
+# ══════════════════════════════════════════════════════════════════════════════
+
+@dataclass
+class TelegramConfig:
+    """Cấu hình Telegram Bot"""
+
+    # Bật/Tắt tính năng Telegram
+    ENABLED: bool = True
+
+    # Bot Token (lấy từ @BotFather)
+    BOT_TOKEN: str = "7058792437:AAHcArFXfdP-UOlw3Mnk_E_syhX_iPORJ5o"
+
+    # Admin User ID (để nhận thông báo lỗi)
+    ADMIN_USER_ID: int = 348988385
+
+    # Gửi alert hàng ngày lúc 16h
+    DAILY_ALERT_ENABLED: bool = True
+    DAILY_ALERT_HOUR: int = 16
+    DAILY_ALERT_MINUTE: int = 0
+
+
+# ══════════════════════════════════════════════════════════════════════════════
 # UNIFIED CONFIG CLASS
 # ══════════════════════════════════════════════════════════════════════════════
 
@@ -295,11 +402,15 @@ class UnifiedConfig:
     data_source: DataSourceConfig = field(default_factory=DataSourceConfig)
     ai: AIProviderConfig = field(default_factory=AIProviderConfig)
     rate_limit: RateLimitConfig = field(default_factory=RateLimitConfig)
+    cache: CacheConfig = field(default_factory=CacheConfig)
+    historical: HistoricalDataConfig = field(default_factory=HistoricalDataConfig)
+    stock_universe: StockUniverseConfig = field(default_factory=StockUniverseConfig)
     volume_profile: VolumeProfileConfig = field(default_factory=VolumeProfileConfig)
     analysis: AnalysisConfig = field(default_factory=AnalysisConfig)
     output: OutputConfig = field(default_factory=OutputConfig)
     email: EmailConfig = field(default_factory=EmailConfig)
-    
+    telegram: TelegramConfig = field(default_factory=TelegramConfig)
+
     def __post_init__(self):
         """Thiết lập environment variables"""
         if APIKeys.VNSTOCK:

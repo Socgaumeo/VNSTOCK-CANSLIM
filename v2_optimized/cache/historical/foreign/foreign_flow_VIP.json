@@ -1,0 +1,66 @@
+{
+  "symbol": "VIP",
+  "last_updated": "2026-02-11T22:57:34.186225",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VIP",
+      "buy_value": 0.0,
+      "sell_value": 26950000.0,
+      "net_value": -26950000.0,
+      "buy_volume": 0,
+      "sell_volume": 2200,
+      "net_volume": -2200,
+      "price": 12.15,
+      "total_volume": 174200,
+      "foreign_pct": 1.2629161882893225
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VIP",
+      "buy_value": 0.0,
+      "sell_value": 30375000.0,
+      "net_value": -30375000.0,
+      "buy_volume": 0,
+      "sell_volume": 2500,
+      "net_volume": -2500,
+      "price": 12.05,
+      "total_volume": 181200,
+      "foreign_pct": 1.379690949227373
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VIP",
+      "buy_value": 0.0,
+      "sell_value": 21690000.0,
+      "net_value": -21690000.0,
+      "buy_volume": 0,
+      "sell_volume": 1800,
+      "net_volume": -1800,
+      "price": 12.1,
+      "total_volume": 90900,
+      "foreign_pct": 1.9801980198019802
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VIP",
+      "buy_value": 0.0,
+      "sell_value": 14520000.0,
+      "net_value": -14520000.0,
+      "buy_volume": 0,
+      "sell_volume": 1200,
+      "net_volume": -1200,
+      "price": 12.15,
+      "total_volume": 92200,
+      "foreign_pct": 1.3015184381778742
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -93535000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

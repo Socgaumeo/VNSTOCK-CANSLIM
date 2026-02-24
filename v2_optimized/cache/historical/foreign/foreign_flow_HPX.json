@@ -1,0 +1,66 @@
+{
+  "symbol": "HPX",
+  "last_updated": "2026-02-11T23:11:54.369839",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HPX",
+      "buy_value": 604926000.0,
+      "sell_value": 383473000.0,
+      "net_value": 221453000.0,
+      "buy_volume": 118000,
+      "sell_volume": 74300,
+      "net_volume": 43700,
+      "price": 5.1,
+      "total_volume": 1238300,
+      "foreign_pct": 15.52935476055883
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HPX",
+      "buy_value": 650855000.0,
+      "sell_value": 107253000.0,
+      "net_value": 543602000.0,
+      "buy_volume": 126100,
+      "sell_volume": 20800,
+      "net_volume": 105300,
+      "price": 5.12,
+      "total_volume": 1430600,
+      "foreign_pct": 10.26841884523976
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HPX",
+      "buy_value": 224379000.0,
+      "sell_value": 0.0,
+      "net_value": 224379000.0,
+      "buy_volume": 43600,
+      "sell_volume": 0,
+      "net_volume": 43600,
+      "price": 5.12,
+      "total_volume": 1113400,
+      "foreign_pct": 3.9159331776540323
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HPX",
+      "buy_value": 300657000.0,
+      "sell_value": 101093000.0,
+      "net_value": 199564000.0,
+      "buy_volume": 58100,
+      "sell_volume": 19500,
+      "net_volume": 38600,
+      "price": 5.17,
+      "total_volume": 476900,
+      "foreign_pct": 16.271755084923463
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 1188998000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

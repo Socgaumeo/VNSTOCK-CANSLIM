@@ -1,0 +1,66 @@
+{
+  "symbol": "IPA",
+  "last_updated": "2026-02-11T23:01:21.019626",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "IPA",
+      "buy_value": 130240000.0,
+      "sell_value": 0.0,
+      "net_value": 130240000.0,
+      "buy_volume": 7400,
+      "sell_volume": 0,
+      "net_volume": 7400,
+      "price": 18.1,
+      "total_volume": 223500,
+      "foreign_pct": 3.3109619686800893
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "IPA",
+      "buy_value": 130240000.0,
+      "sell_value": 0.0,
+      "net_value": 130240000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 18.2,
+      "total_volume": 58700,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "IPA",
+      "buy_value": 33630000.0,
+      "sell_value": 0.0,
+      "net_value": 33630000.0,
+      "buy_volume": 1900,
+      "sell_volume": 0,
+      "net_volume": 1900,
+      "price": 18.4,
+      "total_volume": 90100,
+      "foreign_pct": 2.108768035516093
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "IPA",
+      "buy_value": 33630000.0,
+      "sell_value": 0.0,
+      "net_value": 33630000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 19.1,
+      "total_volume": 389700,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 327740000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

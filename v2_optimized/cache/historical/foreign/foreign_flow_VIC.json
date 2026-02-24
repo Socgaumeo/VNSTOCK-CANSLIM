@@ -1,0 +1,66 @@
+{
+  "symbol": "VIC",
+  "last_updated": "2026-02-11T23:10:16.280630",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VIC",
+      "buy_value": 160032164000.0,
+      "sell_value": 474179884300.0,
+      "net_value": -314147720300.0,
+      "buy_volume": 1213204,
+      "sell_volume": 3579062,
+      "net_volume": -2365858,
+      "price": 131.0,
+      "total_volume": 7311200,
+      "foreign_pct": 65.54691432323011
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VIC",
+      "buy_value": 34649380600.0,
+      "sell_value": 159907185600.0,
+      "net_value": -125257805000.0,
+      "buy_volume": 262415,
+      "sell_volume": 1217681,
+      "net_volume": -955266,
+      "price": 132.3,
+      "total_volume": 2803700,
+      "foreign_pct": 52.790812141099266
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VIC",
+      "buy_value": 319086630700.0,
+      "sell_value": 109539166900.0,
+      "net_value": 209547463800.0,
+      "buy_volume": 2278495,
+      "sell_volume": 780763,
+      "net_volume": 1497732,
+      "price": 141.5,
+      "total_volume": 6103600,
+      "foreign_pct": 50.12219018284291
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VIC",
+      "buy_value": 321621741000.0,
+      "sell_value": 364081265700.0,
+      "net_value": -42459524700.0,
+      "buy_volume": 2155147,
+      "sell_volume": 2436186,
+      "net_volume": -281039,
+      "price": 150.8,
+      "total_volume": 5289000,
+      "foreign_pct": 86.80909434675742
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -272317586200.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 28.029226282249436,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

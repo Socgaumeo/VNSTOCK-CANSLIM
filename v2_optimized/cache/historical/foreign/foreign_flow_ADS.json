@@ -1,0 +1,66 @@
+{
+  "symbol": "ADS",
+  "last_updated": "2026-02-11T23:06:34.444618",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ADS",
+      "buy_value": 67430000.0,
+      "sell_value": 71825000.0,
+      "net_value": -4395000.0,
+      "buy_volume": 8000,
+      "sell_volume": 8500,
+      "net_volume": -500,
+      "price": 8.3,
+      "total_volume": 164100,
+      "foreign_pct": 10.054844606946983
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ADS",
+      "buy_value": 25380000.0,
+      "sell_value": 4250000.0,
+      "net_value": 21130000.0,
+      "buy_volume": 3000,
+      "sell_volume": 500,
+      "net_volume": 2500,
+      "price": 8.43,
+      "total_volume": 51100,
+      "foreign_pct": 6.8493150684931505
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ADS",
+      "buy_value": 25380000.0,
+      "sell_value": 4250000.0,
+      "net_value": 21130000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.4,
+      "total_volume": 52300,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ADS",
+      "buy_value": 25380000.0,
+      "sell_value": 4250000.0,
+      "net_value": 21130000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.4,
+      "total_volume": 52600,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 58995000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 51.71710973284534,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "FPT",
+  "last_updated": "2026-02-11T23:04:19.931231",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "FPT",
+      "buy_value": 85945738000.0,
+      "sell_value": 223255375100.0,
+      "net_value": -137309637100.0,
+      "buy_volume": 876620,
+      "sell_volume": 2273448,
+      "net_volume": -1396828,
+      "price": 97.6,
+      "total_volume": 9766800,
+      "foreign_pct": 32.25281566121964
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "FPT",
+      "buy_value": 100941395400.0,
+      "sell_value": 147285848100.0,
+      "net_value": -46344452700.0,
+      "buy_volume": 1022812,
+      "sell_volume": 1492905,
+      "net_volume": -470093,
+      "price": 99.0,
+      "total_volume": 5108600,
+      "foreign_pct": 49.24474415691187
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "FPT",
+      "buy_value": 53459490400.0,
+      "sell_value": 185282422600.0,
+      "net_value": -131822932200.0,
+      "buy_volume": 544316,
+      "sell_volume": 1884756,
+      "net_volume": -1340440,
+      "price": 97.8,
+      "total_volume": 6113500,
+      "foreign_pct": 39.73291894986505
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "FPT",
+      "buy_value": 96921088800.0,
+      "sell_value": 201251468500.0,
+      "net_value": -104330379700.0,
+      "buy_volume": 982936,
+      "sell_volume": 2040822,
+      "net_volume": -1057886,
+      "price": 98.6,
+      "total_volume": 5507500,
+      "foreign_pct": 54.90255106672719
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -419807401700.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 76.72319704223027,
+    "buy_days_count": 0,
+    "sell_days_count": 4
+  }
+}

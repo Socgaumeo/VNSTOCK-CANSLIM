@@ -1,0 +1,66 @@
+{
+  "symbol": "PVG",
+  "last_updated": "2026-02-11T22:59:22.661625",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PVG",
+      "buy_value": 29480000.0,
+      "sell_value": 48960000.0,
+      "net_value": -19480000.0,
+      "buy_volume": 4400,
+      "sell_volume": 7200,
+      "net_volume": -2800,
+      "price": 6.7,
+      "total_volume": 237600,
+      "foreign_pct": 4.882154882154882
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PVG",
+      "buy_value": 29480000.0,
+      "sell_value": 48960000.0,
+      "net_value": -19480000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 6.8,
+      "total_volume": 40000,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PVG",
+      "buy_value": 41350000.0,
+      "sell_value": 28140000.0,
+      "net_value": 13210000.0,
+      "buy_volume": 6200,
+      "sell_volume": 4200,
+      "net_volume": 2000,
+      "price": 6.5,
+      "total_volume": 87300,
+      "foreign_pct": 11.912943871706757
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PVG",
+      "buy_value": 41350000.0,
+      "sell_value": 28140000.0,
+      "net_value": 13210000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 6.6,
+      "total_volume": 24400,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -12540000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 8.476982356519976,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

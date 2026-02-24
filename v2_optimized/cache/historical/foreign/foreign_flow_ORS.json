@@ -1,0 +1,66 @@
+{
+  "symbol": "ORS",
+  "last_updated": "2026-02-11T22:49:33.789467",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ORS",
+      "buy_value": 4050000.0,
+      "sell_value": 4105000.0,
+      "net_value": -55000.0,
+      "buy_volume": 300,
+      "sell_volume": 300,
+      "net_volume": 0,
+      "price": 13.15,
+      "total_volume": 1853800,
+      "foreign_pct": 0.03236595101952745
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ORS",
+      "buy_value": 4050000.0,
+      "sell_value": 4105000.0,
+      "net_value": -55000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 13.25,
+      "total_volume": 808400,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ORS",
+      "buy_value": 119220000.0,
+      "sell_value": 0.0,
+      "net_value": 119220000.0,
+      "buy_volume": 9000,
+      "sell_volume": 0,
+      "net_volume": 9000,
+      "price": 13.15,
+      "total_volume": 769000,
+      "foreign_pct": 1.1703511053315996
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ORS",
+      "buy_value": 549005000.0,
+      "sell_value": 0.0,
+      "net_value": 549005000.0,
+      "buy_volume": 40800,
+      "sell_volume": 0,
+      "net_volume": 40800,
+      "price": 13.4,
+      "total_volume": 713700,
+      "foreign_pct": 5.7166876839007985
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 668115000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "symbol": "TIP",
+  "last_updated": "2026-02-11T23:10:35.524627",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TIP",
+      "buy_value": 0.0,
+      "sell_value": 79175000.0,
+      "net_value": -79175000.0,
+      "buy_volume": 0,
+      "sell_volume": 4100,
+      "net_volume": -4100,
+      "price": 19.25,
+      "total_volume": 122700,
+      "foreign_pct": 3.341483292583537
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TIP",
+      "buy_value": 0.0,
+      "sell_value": 101810000.0,
+      "net_value": -101810000.0,
+      "buy_volume": 0,
+      "sell_volume": 5300,
+      "net_volume": -5300,
+      "price": 19.15,
+      "total_volume": 132100,
+      "foreign_pct": 4.0121120363361085
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TIP",
+      "buy_value": 0.0,
+      "sell_value": 101810000.0,
+      "net_value": -101810000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 19.0,
+      "total_volume": 159800,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TIP",
+      "buy_value": 0.0,
+      "sell_value": 101810000.0,
+      "net_value": -101810000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 19.3,
+      "total_volume": 217000,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -384605000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

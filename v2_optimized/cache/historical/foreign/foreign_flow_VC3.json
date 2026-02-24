@@ -1,0 +1,66 @@
+{
+  "symbol": "VC3",
+  "last_updated": "2026-02-11T22:52:44.567491",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VC3",
+      "buy_value": 554410000.0,
+      "sell_value": 439070000.0,
+      "net_value": 115340000.0,
+      "buy_volume": 20600,
+      "sell_volume": 16300,
+      "net_volume": 4300,
+      "price": 26.9,
+      "total_volume": 1193400,
+      "foreign_pct": 3.092006033182504
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VC3",
+      "buy_value": 463750000.0,
+      "sell_value": 2440980000.0,
+      "net_value": -1977230000.0,
+      "buy_volume": 17200,
+      "sell_volume": 90200,
+      "net_volume": -73000,
+      "price": 27.1,
+      "total_volume": 1288100,
+      "foreign_pct": 8.337861967238569
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VC3",
+      "buy_value": 1132140000.0,
+      "sell_value": 2731460000.0,
+      "net_value": -1599320000.0,
+      "buy_volume": 41800,
+      "sell_volume": 100700,
+      "net_volume": -58900,
+      "price": 27.1,
+      "total_volume": 1253000,
+      "foreign_pct": 11.372705506783719
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VC3",
+      "buy_value": 732240000.0,
+      "sell_value": 1907470000.0,
+      "net_value": -1175230000.0,
+      "buy_volume": 27000,
+      "sell_volume": 70100,
+      "net_volume": -43100,
+      "price": 27.4,
+      "total_volume": 1190900,
+      "foreign_pct": 8.153497354941642
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -4636440000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 89.1492781824195,
+    "buy_days_count": 0,
+    "sell_days_count": 3
+  }
+}

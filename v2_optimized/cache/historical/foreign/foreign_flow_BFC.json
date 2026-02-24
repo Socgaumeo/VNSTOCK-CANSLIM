@@ -1,0 +1,66 @@
+{
+  "symbol": "BFC",
+  "last_updated": "2026-02-11T23:16:21.675228",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BFC",
+      "buy_value": 584990000.0,
+      "sell_value": 930810000.0,
+      "net_value": -345820000.0,
+      "buy_volume": 11000,
+      "sell_volume": 17500,
+      "net_volume": -6500,
+      "price": 54.2,
+      "total_volume": 391900,
+      "foreign_pct": 7.272263332482776
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BFC",
+      "buy_value": 280860000.0,
+      "sell_value": 689770000.0,
+      "net_value": -408910000.0,
+      "buy_volume": 5200,
+      "sell_volume": 12900,
+      "net_volume": -7700,
+      "price": 53.3,
+      "total_volume": 206400,
+      "foreign_pct": 8.769379844961241
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BFC",
+      "buy_value": 384010000.0,
+      "sell_value": 574740000.0,
+      "net_value": -190730000.0,
+      "buy_volume": 7200,
+      "sell_volume": 10800,
+      "net_volume": -3600,
+      "price": 52.9,
+      "total_volume": 142100,
+      "foreign_pct": 12.66713581984518
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BFC",
+      "buy_value": 8991420000.0,
+      "sell_value": 636500000.0,
+      "net_value": 8354920000.0,
+      "buy_volume": 162300,
+      "sell_volume": 11500,
+      "net_volume": 150800,
+      "price": 56.6,
+      "total_volume": 1110600,
+      "foreign_pct": 15.649198631370432
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 7409460000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 1,
+    "sell_days_count": 0
+  }
+}

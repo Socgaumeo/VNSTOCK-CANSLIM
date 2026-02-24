@@ -1,0 +1,66 @@
+{
+  "symbol": "LPB",
+  "last_updated": "2026-02-11T22:50:19.280973",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "LPB",
+      "buy_value": 13257580000.0,
+      "sell_value": 5483270000.0,
+      "net_value": 7774310000.0,
+      "buy_volume": 321300,
+      "sell_volume": 133500,
+      "net_volume": 187800,
+      "price": 41.9,
+      "total_volume": 1869700,
+      "foreign_pct": 24.324757982564048
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "LPB",
+      "buy_value": 8736545000.0,
+      "sell_value": 5240105000.0,
+      "net_value": 3496440000.0,
+      "buy_volume": 207200,
+      "sell_volume": 124700,
+      "net_volume": 82500,
+      "price": 41.85,
+      "total_volume": 817400,
+      "foreign_pct": 40.60435527281624
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "LPB",
+      "buy_value": 23270270400.0,
+      "sell_value": 5451760000.0,
+      "net_value": 17818510400.0,
+      "buy_volume": 560587,
+      "sell_volume": 130800,
+      "net_volume": 429787,
+      "price": 41.8,
+      "total_volume": 1588400,
+      "foreign_pct": 43.5272601359859
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "LPB",
+      "buy_value": 13808580000.0,
+      "sell_value": 2149005000.0,
+      "net_value": 11659575000.0,
+      "buy_volume": 329000,
+      "sell_volume": 51300,
+      "net_volume": 277700,
+      "price": 42.05,
+      "total_volume": 1276800,
+      "foreign_pct": 29.78540100250627
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 40748835400.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 4,
+    "sell_days_count": 0
+  }
+}

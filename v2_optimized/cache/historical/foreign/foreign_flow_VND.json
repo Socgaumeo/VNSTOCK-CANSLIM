@@ -1,0 +1,66 @@
+{
+  "symbol": "VND",
+  "last_updated": "2026-02-11T22:47:39.739921",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "VND",
+      "buy_value": 1168795400.0,
+      "sell_value": 33261925000.0,
+      "net_value": -32093129600.0,
+      "buy_volume": 65543,
+      "sell_volume": 1854300,
+      "net_volume": -1788757,
+      "price": 17.65,
+      "total_volume": 14092000,
+      "foreign_pct": 13.623637524836788
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "VND",
+      "buy_value": 1995015000.0,
+      "sell_value": 12686705000.0,
+      "net_value": -10691690000.0,
+      "buy_volume": 112800,
+      "sell_volume": 711900,
+      "net_volume": -599100,
+      "price": 17.65,
+      "total_volume": 5759200,
+      "foreign_pct": 14.319697180163912
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "VND",
+      "buy_value": 2730105000.0,
+      "sell_value": 6731021000.0,
+      "net_value": -4000916000.0,
+      "buy_volume": 154400,
+      "sell_volume": 379419,
+      "net_volume": -225019,
+      "price": 17.75,
+      "total_volume": 5095100,
+      "foreign_pct": 10.477105454259975
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "VND",
+      "buy_value": 23847225000.0,
+      "sell_value": 2098410000.0,
+      "net_value": 21748815000.0,
+      "buy_volume": 1303100,
+      "sell_volume": 116200,
+      "net_volume": 1186900,
+      "price": 18.4,
+      "total_volume": 9377800,
+      "foreign_pct": 15.134679775640342
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -25036920600.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 59.245520982880464,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

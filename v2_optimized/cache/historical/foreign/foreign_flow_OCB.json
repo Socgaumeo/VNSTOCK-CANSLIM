@@ -1,0 +1,66 @@
+{
+  "symbol": "OCB",
+  "last_updated": "2026-02-11T22:49:43.723315",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "OCB",
+      "buy_value": 499990000.0,
+      "sell_value": 2496335000.0,
+      "net_value": -1996345000.0,
+      "buy_volume": 43200,
+      "sell_volume": 214900,
+      "net_volume": -171700,
+      "price": 11.55,
+      "total_volume": 2193000,
+      "foreign_pct": 11.769265845873234
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "OCB",
+      "buy_value": 57400000.0,
+      "sell_value": 1685050000.0,
+      "net_value": -1627650000.0,
+      "buy_volume": 5000,
+      "sell_volume": 146300,
+      "net_volume": -141300,
+      "price": 11.45,
+      "total_volume": 1464200,
+      "foreign_pct": 10.333287802212812
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "OCB",
+      "buy_value": 75485000.0,
+      "sell_value": 429200000.0,
+      "net_value": -353715000.0,
+      "buy_volume": 6600,
+      "sell_volume": 37500,
+      "net_volume": -30900,
+      "price": 11.4,
+      "total_volume": 1090600,
+      "foreign_pct": 4.043645699614891
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "OCB",
+      "buy_value": 1577875000.0,
+      "sell_value": 2481000.0,
+      "net_value": 1575394000.0,
+      "buy_volume": 136900,
+      "sell_volume": 214,
+      "net_volume": 136686,
+      "price": 11.6,
+      "total_volume": 974900,
+      "foreign_pct": 14.064416863268029
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -2402316000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 70.40975313519591,
+    "buy_days_count": 1,
+    "sell_days_count": 2
+  }
+}

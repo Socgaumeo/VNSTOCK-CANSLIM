@@ -1,0 +1,66 @@
+{
+  "symbol": "BWE",
+  "last_updated": "2026-02-11T23:03:17.543803",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "BWE",
+      "buy_value": 0.0,
+      "sell_value": 1517685000.0,
+      "net_value": -1517685000.0,
+      "buy_volume": 0,
+      "sell_volume": 34800,
+      "net_volume": -34800,
+      "price": 43.5,
+      "total_volume": 100500,
+      "foreign_pct": 34.626865671641795
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "BWE",
+      "buy_value": 82770000.0,
+      "sell_value": 473473550.0,
+      "net_value": -390703550.0,
+      "buy_volume": 1900,
+      "sell_volume": 10888,
+      "net_volume": -8988,
+      "price": 43.85,
+      "total_volume": 105600,
+      "foreign_pct": 12.109848484848484
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "BWE",
+      "buy_value": 901708000.0,
+      "sell_value": 653410000.0,
+      "net_value": 248298000.0,
+      "buy_volume": 20405,
+      "sell_volume": 14900,
+      "net_volume": 5505,
+      "price": 44.0,
+      "total_volume": 527900,
+      "foreign_pct": 6.687819662814927
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "BWE",
+      "buy_value": 434116600.0,
+      "sell_value": 4069253350.0,
+      "net_value": -3635136750.0,
+      "buy_volume": 9916,
+      "sell_volume": 92962,
+      "net_volume": -83046,
+      "price": 43.5,
+      "total_volume": 208600,
+      "foreign_pct": 49.3183125599233
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -5295227300.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 2
+  }
+}

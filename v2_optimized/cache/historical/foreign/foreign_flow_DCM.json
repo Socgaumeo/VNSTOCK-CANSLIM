@@ -1,0 +1,66 @@
+{
+  "symbol": "DCM",
+  "last_updated": "2026-02-11T23:16:03.533073",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "DCM",
+      "buy_value": 101213045000.0,
+      "sell_value": 9277645000.0,
+      "net_value": 91935400000.0,
+      "buy_volume": 2639900,
+      "sell_volume": 242500,
+      "net_volume": 2397400,
+      "price": 38.8,
+      "total_volume": 5823900,
+      "foreign_pct": 49.49260804615464
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "DCM",
+      "buy_value": 125510375000.0,
+      "sell_value": 11293618200.0,
+      "net_value": 114216756800.0,
+      "buy_volume": 3196800,
+      "sell_volume": 291270,
+      "net_volume": 2905530,
+      "price": 39.9,
+      "total_volume": 5856700,
+      "foreign_pct": 59.55691771816893
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "DCM",
+      "buy_value": 100092065000.0,
+      "sell_value": 18384206600.0,
+      "net_value": 81707858400.0,
+      "buy_volume": 2563600,
+      "sell_volume": 467021,
+      "net_volume": 2096579,
+      "price": 39.0,
+      "total_volume": 4612400,
+      "foreign_pct": 65.70594484433266
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "DCM",
+      "buy_value": 52165745000.0,
+      "sell_value": 29131526200.0,
+      "net_value": 23034218800.0,
+      "buy_volume": 1329400,
+      "sell_volume": 755938,
+      "net_volume": 573462,
+      "price": 39.5,
+      "total_volume": 3795100,
+      "foreign_pct": 54.94817000869542
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 310894234000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 4,
+    "sell_days_count": 0
+  }
+}

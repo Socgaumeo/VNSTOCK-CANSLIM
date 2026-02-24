@@ -1,0 +1,66 @@
+{
+  "symbol": "SHB",
+  "last_updated": "2026-02-11T22:49:18.183865",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "SHB",
+      "buy_value": 1448865000.0,
+      "sell_value": 6807795000.0,
+      "net_value": -5358930000.0,
+      "buy_volume": 92606,
+      "sell_volume": 438000,
+      "net_volume": -345394,
+      "price": 15.35,
+      "total_volume": 62805800,
+      "foreign_pct": 0.8448359864853245
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "SHB",
+      "buy_value": 2859545000.0,
+      "sell_value": 13069031500.0,
+      "net_value": -10209486500.0,
+      "buy_volume": 187400,
+      "sell_volume": 854255,
+      "net_volume": -666855,
+      "price": 15.25,
+      "total_volume": 53793600,
+      "foreign_pct": 1.9363920615091759
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "SHB",
+      "buy_value": 5763785000.0,
+      "sell_value": 50184645000.0,
+      "net_value": -44420860000.0,
+      "buy_volume": 381760,
+      "sell_volume": 3313100,
+      "net_volume": -2931340,
+      "price": 15.25,
+      "total_volume": 45414500,
+      "foreign_pct": 8.135859692388994
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "SHB",
+      "buy_value": 28093035000.0,
+      "sell_value": 17987508550.0,
+      "net_value": 10105526450.0,
+      "buy_volume": 1822100,
+      "sell_volume": 1158619,
+      "net_volume": 663481,
+      "price": 15.5,
+      "total_volume": 59290200,
+      "foreign_pct": 5.027338413430887
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -49883750050.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 79.04617083962013,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

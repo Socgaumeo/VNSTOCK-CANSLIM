@@ -24,13 +24,15 @@ class EmailNotifier:
         
     def send_report(self, 
                    report_content: str, 
-                   attachment_path: Optional[str] = None) -> bool:
+                   attachment_path: Optional[str] = None,
+                   subject: Optional[str] = None) -> bool:
         """
         Gửi email báo cáo
         
         Args:
             report_content: Nội dung báo cáo (HTML/Markdown)
             attachment_path: Đường dẫn file đính kèm (Optional)
+            subject: Tiêu đề email (Optional)
         """
         if not self.config.ENABLED:
             print("📧 Email notification is disabled.")
@@ -47,8 +49,11 @@ class EmailNotifier:
             msg['To'] = self.config.RECEIVER_EMAIL
             
             # Subject with Date
-            date_str = datetime.now().strftime("%d/%m/%Y")
-            msg['Subject'] = f"{self.config.SUBJECT_PREFIX} Report {date_str}"
+            if subject:
+                 msg['Subject'] = subject
+            else:
+                date_str = datetime.now().strftime("%d/%m/%Y")
+                msg['Subject'] = f"{self.config.SUBJECT_PREFIX} Report {date_str}"
             
             # 2. Body (Convert Markdown to HTML)
             try:

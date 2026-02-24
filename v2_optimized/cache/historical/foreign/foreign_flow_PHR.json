@@ -1,0 +1,66 @@
+{
+  "symbol": "PHR",
+  "last_updated": "2026-02-11T23:00:19.547918",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "PHR",
+      "buy_value": 4975860000.0,
+      "sell_value": 20192140000.0,
+      "net_value": -15216280000.0,
+      "buy_volume": 81300,
+      "sell_volume": 331200,
+      "net_volume": -249900,
+      "price": 58.8,
+      "total_volume": 1759300,
+      "foreign_pct": 23.446825441937133
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "PHR",
+      "buy_value": 3237290000.0,
+      "sell_value": 3167580000.0,
+      "net_value": 69710000.0,
+      "buy_volume": 54800,
+      "sell_volume": 53500,
+      "net_volume": 1300,
+      "price": 58.5,
+      "total_volume": 428500,
+      "foreign_pct": 25.274212368728122
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "PHR",
+      "buy_value": 6420780000.0,
+      "sell_value": 1283760000.0,
+      "net_value": 5137020000.0,
+      "buy_volume": 110500,
+      "sell_volume": 21800,
+      "net_volume": 88700,
+      "price": 57.8,
+      "total_volume": 598900,
+      "foreign_pct": 22.090499248622475
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "PHR",
+      "buy_value": 3302880000.0,
+      "sell_value": 21112450000.0,
+      "net_value": -17809570000.0,
+      "buy_volume": 56200,
+      "sell_volume": 360200,
+      "net_volume": -304000,
+      "price": 58.0,
+      "total_volume": 706000,
+      "foreign_pct": 58.980169971671394
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -27819120000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 87.35413172678707,
+    "buy_days_count": 1,
+    "sell_days_count": 2
+  }
+}

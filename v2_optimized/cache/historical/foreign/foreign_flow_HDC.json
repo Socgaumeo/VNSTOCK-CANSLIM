@@ -1,0 +1,66 @@
+{
+  "symbol": "HDC",
+  "last_updated": "2026-02-11T22:55:39.869313",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "HDC",
+      "buy_value": 30140000.0,
+      "sell_value": 5489795000.0,
+      "net_value": -5459655000.0,
+      "buy_volume": 1400,
+      "sell_volume": 253200,
+      "net_volume": -251800,
+      "price": 21.05,
+      "total_volume": 3337000,
+      "foreign_pct": 7.629607431824994
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "HDC",
+      "buy_value": 0.0,
+      "sell_value": 7019890000.0,
+      "net_value": -7019890000.0,
+      "buy_volume": 0,
+      "sell_volume": 332900,
+      "net_volume": -332900,
+      "price": 20.95,
+      "total_volume": 1645400,
+      "foreign_pct": 20.232162392123495
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "HDC",
+      "buy_value": 204830000.0,
+      "sell_value": 2042200000.0,
+      "net_value": -1837370000.0,
+      "buy_volume": 9900,
+      "sell_volume": 98600,
+      "net_volume": -88700,
+      "price": 20.7,
+      "total_volume": 2426900,
+      "foreign_pct": 4.470723968849149
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "HDC",
+      "buy_value": 12701720000.0,
+      "sell_value": 331890000.0,
+      "net_value": 12369830000.0,
+      "buy_volume": 591200,
+      "sell_volume": 15800,
+      "net_volume": 575400,
+      "price": 21.5,
+      "total_volume": 3071200,
+      "foreign_pct": 19.764261526439178
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1947085000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 13.997501479576277,
+    "buy_days_count": 1,
+    "sell_days_count": 3
+  }
+}

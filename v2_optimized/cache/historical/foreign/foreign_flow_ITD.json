@@ -1,0 +1,66 @@
+{
+  "symbol": "ITD",
+  "last_updated": "2026-02-11T23:16:31.206057",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "ITD",
+      "buy_value": 0.0,
+      "sell_value": 11760000.0,
+      "net_value": -11760000.0,
+      "buy_volume": 0,
+      "sell_volume": 700,
+      "net_volume": -700,
+      "price": 16.8,
+      "total_volume": 7900,
+      "foreign_pct": 8.860759493670885
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "ITD",
+      "buy_value": 0.0,
+      "sell_value": 11760000.0,
+      "net_value": -11760000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 16.5,
+      "total_volume": 43400,
+      "foreign_pct": 0.0
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "ITD",
+      "buy_value": 18600000.0,
+      "sell_value": 0.0,
+      "net_value": 18600000.0,
+      "buy_volume": 1200,
+      "sell_volume": 0,
+      "net_volume": 1200,
+      "price": 16.25,
+      "total_volume": 66300,
+      "foreign_pct": 1.809954751131222
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "ITD",
+      "buy_value": 0.0,
+      "sell_value": 106260000.0,
+      "net_value": -106260000.0,
+      "buy_volume": 0,
+      "sell_volume": 6600,
+      "net_volume": -6600,
+      "price": 16.45,
+      "total_volume": 18100,
+      "foreign_pct": 36.46408839779006
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -111180000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

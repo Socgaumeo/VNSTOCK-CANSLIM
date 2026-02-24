@@ -1,0 +1,66 @@
+{
+  "symbol": "TIG",
+  "last_updated": "2026-02-11T23:10:44.760577",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TIG",
+      "buy_value": 247550000.0,
+      "sell_value": 208720000.0,
+      "net_value": 38830000.0,
+      "buy_volume": 29100,
+      "sell_volume": 24200,
+      "net_volume": 4900,
+      "price": 8.6,
+      "total_volume": 326500,
+      "foreign_pct": 16.324655436447166
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TIG",
+      "buy_value": 267940000.0,
+      "sell_value": 90950000.0,
+      "net_value": 176990000.0,
+      "buy_volume": 31400,
+      "sell_volume": 10700,
+      "net_volume": 20700,
+      "price": 8.5,
+      "total_volume": 332900,
+      "foreign_pct": 12.64644037248423
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TIG",
+      "buy_value": 35530000.0,
+      "sell_value": 25500000.0,
+      "net_value": 10030000.0,
+      "buy_volume": 4200,
+      "sell_volume": 3000,
+      "net_volume": 1200,
+      "price": 8.6,
+      "total_volume": 280700,
+      "foreign_pct": 2.5650160313501957
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TIG",
+      "buy_value": 35530000.0,
+      "sell_value": 25500000.0,
+      "net_value": 10030000.0,
+      "buy_volume": 0,
+      "sell_volume": 0,
+      "net_volume": 0,
+      "price": 8.7,
+      "total_volume": 248200,
+      "foreign_pct": 0.0
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 235880000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 50.336100381980756,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

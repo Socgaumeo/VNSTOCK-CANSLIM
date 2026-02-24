@@ -39,12 +39,15 @@ except ImportError:
     VolumeProfileCalculator = None
     VolumeProfileResult = None
 
-# Import Database
+# Import Historical Trackers
 try:
-    from database import get_db, PriceStore, FundamentalStore, ForeignFlowStore
-    _DB_AVAILABLE = True
+    from historical_price_tracker import get_price_tracker, HistoricalPriceTracker
+    from historical_foreign_tracker import get_foreign_tracker, HistoricalForeignTracker
 except ImportError:
-    _DB_AVAILABLE = False
+    get_price_tracker = None
+    get_foreign_tracker = None
+    HistoricalPriceTracker = None
+    HistoricalForeignTracker = None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -54,50 +57,51 @@ except ImportError:
 class DataSourceManager:
     """
     Quản lý nhiều nguồn dữ liệu với auto-fallback
-    
+
     Usage:
         manager = DataSourceManager()
         df = manager.get_price_history("VCB", days=60)
     """
-    
+
     SOURCES = ["VCI", "TCBS", "SSI"]
-    
-    def __init__(self, 
+
+    def __init__(self,
                  primary_source: str = "VCI",
                  api_key: str = None,
-                 auto_fallback: bool = True):
+                 auto_fallback: bool = True,
+                 enable_ohlcv_cache: bool = True):
         """
         Args:
             primary_source: Nguồn dữ liệu chính
             api_key: API key cho vnstock premium
             auto_fallback: Tự động chuyển nguồn khi lỗi
+            enable_ohlcv_cache: Bật cache OHLCV (same-day TTL)
         """
         self.primary_source = primary_source
         self.current_source = primary_source
         self.auto_fallback = auto_fallback
         self.failed_sources: Dict[str, datetime] = {}
-        
-        # Load từ config nếu có
-        if get_config and not api_key:
-            api_key = APIKeys.VNSTOCK if APIKeys else None
-        
-        self._init_vnstock(api_key)
 
-        # SQLite price cache
-        self._price_store = None
-        if _DB_AVAILABLE:
-            try:
-                self._price_store = PriceStore()
-            except Exception as e:
-                print(f"   ⚠️ Price store init failed: {e}")
+        # OHLCV Cache (same-day TTL - refresh mỗi ngày)
+        self.enable_ohlcv_cache = enable_ohlcv_cache
+        self.ohlcv_cache_dir = Path("cache/ohlcv")
+        if enable_ohlcv_cache:
+            self.ohlcv_cache_dir.mkdir(parents=True, exist_ok=True)
 
         # Statistics
         self.stats = {
             'requests': 0,
             'success': 0,
             'failures': 0,
-            'fallbacks': 0
+            'fallbacks': 0,
+            'cache_hits': 0
         }
+
+        # Load từ config nếu có
+        if get_config and not api_key:
+            api_key = APIKeys.VNSTOCK if APIKeys else None
+
+        self._init_vnstock(api_key)
     
     def _init_vnstock(self, api_key: str = None):
         """Khởi tạo vnstock"""
@@ -105,19 +109,124 @@ class DataSourceManager:
             # Set API key BEFORE importing vnstock
             if api_key:
                 os.environ['VNSTOCK_API_KEY'] = api_key
-            
+
             from vnstock import Vnstock, Listing
-            
+
             self.Vnstock = Vnstock
             self.Listing = Listing
             self._vnstock_available = True
-            
-            print(f"✓ Vnstock initialized | Primary: {self.primary_source}")
-            
+
+            cache_status = "ON" if self.enable_ohlcv_cache else "OFF"
+            print(f"✓ Vnstock initialized | Primary: {self.primary_source} | OHLCV Cache: {cache_status}")
+
         except ImportError:
             self._vnstock_available = False
             print("✗ vnstock not available: pip install -U vnstock")
-    
+
+    # ─────────────────────────────────────────────────────────────
+    # OHLCV CACHE METHODS
+    # ─────────────────────────────────────────────────────────────
+
+    def _get_ohlcv_cache_path(self, symbol: str, days: int) -> Path:
+        """Lấy path cache file cho OHLCV"""
+        return self.ohlcv_cache_dir / f"ohlcv_{symbol}_{days}d.json"
+
+    def _is_ohlcv_cache_valid(self, cache_path: Path) -> bool:
+        """
+        Kiểm tra cache còn valid không (same-day TTL)
+        Cache chỉ valid nếu được tạo trong cùng ngày giao dịch
+        """
+        if not cache_path.exists():
+            return False
+
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cached = json.load(f)
+
+            cached_date = cached.get('date', '')
+            today = datetime.now().strftime('%Y-%m-%d')
+
+            # Same day = valid
+            return cached_date == today
+        except:
+            return False
+
+    def _load_ohlcv_from_cache(self, symbol: str, days: int) -> Optional[pd.DataFrame]:
+        """Load OHLCV từ cache nếu còn valid"""
+        if not self.enable_ohlcv_cache:
+            return None
+
+        cache_path = self._get_ohlcv_cache_path(symbol, days)
+
+        if not self._is_ohlcv_cache_valid(cache_path):
+            return None
+
+        try:
+            with open(cache_path, 'r', encoding='utf-8') as f:
+                cached = json.load(f)
+
+            df = pd.DataFrame(cached['data'])
+
+            # Convert time column if exists
+            if 'time' in df.columns:
+                df['time'] = pd.to_datetime(df['time'])
+
+            self.stats['cache_hits'] += 1
+            return df
+        except Exception as e:
+            return None
+
+    def _save_ohlcv_to_cache(self, symbol: str, days: int, df: pd.DataFrame):
+        """Lưu OHLCV vào cache"""
+        if not self.enable_ohlcv_cache or df.empty:
+            return
+
+        cache_path = self._get_ohlcv_cache_path(symbol, days)
+
+        try:
+            # Convert DataFrame to JSON-serializable format
+            data_dict = df.copy()
+
+            # Convert datetime columns to string
+            for col in data_dict.columns:
+                if pd.api.types.is_datetime64_any_dtype(data_dict[col]):
+                    data_dict[col] = data_dict[col].astype(str)
+
+            cached = {
+                'symbol': symbol,
+                'days': days,
+                'date': datetime.now().strftime('%Y-%m-%d'),
+                'timestamp': datetime.now().isoformat(),
+                'rows': len(df),
+                'data': data_dict.to_dict(orient='records')
+            }
+
+            with open(cache_path, 'w', encoding='utf-8') as f:
+                json.dump(cached, f, ensure_ascii=False)
+
+        except Exception as e:
+            # Silent fail - caching is optional
+            pass
+
+    def clear_ohlcv_cache(self, symbol: str = None):
+        """
+        Xóa cache OHLCV
+
+        Args:
+            symbol: Mã cụ thể (None = xóa tất cả)
+        """
+        if symbol:
+            pattern = f"ohlcv_{symbol}_*.json"
+        else:
+            pattern = "ohlcv_*.json"
+
+        count = 0
+        for cache_file in self.ohlcv_cache_dir.glob(pattern):
+            cache_file.unlink()
+            count += 1
+
+        print(f"✓ Cleared {count} OHLCV cache files")
+
     def _get_stock(self, symbol: str, source: str = None):
         """Tạo stock object với source cụ thể"""
         if not self._vnstock_available:
@@ -165,59 +274,31 @@ class DataSourceManager:
     def get_price_history(self,
                           symbol: str,
                           days: int = 120,
-                          source: str = None) -> pd.DataFrame:
+                          source: str = None,
+                          force_refresh: bool = False) -> pd.DataFrame:
         """
-        Lấy lịch sử giá với auto-fallback + SQLite cache.
+        Lấy lịch sử giá với auto-fallback và OHLCV caching
 
-        Flow:
-        1. Check SQLite cache for existing data
-        2. Only fetch missing dates from API
-        3. Save new data to SQLite
-        4. Return combined result
+        Args:
+            symbol: Mã cổ phiếu
+            days: Số ngày
+            source: Nguồn cụ thể (None = auto)
+            force_refresh: Bỏ qua cache, luôn fetch từ API
+
+        Returns:
+            DataFrame với OHLCV
         """
-        end_date = datetime.now().strftime('%Y-%m-%d')
-        start_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+        # 1. Kiểm tra cache trước (same-day TTL)
+        if not force_refresh:
+            cached_df = self._load_ohlcv_from_cache(symbol, days)
+            if cached_df is not None and not cached_df.empty:
+                return cached_df
 
-        # Try SQLite cache first
-        if _DB_AVAILABLE and self._price_store:
-            cached_df = self._price_store.get_prices(symbol, start=start_date, end=end_date)
-            latest = self._price_store.get_latest_date(symbol)
-
-            # If we have enough cached data and it's recent (within 1 day)
-            if not cached_df.empty and latest:
-                days_old = (datetime.now() - datetime.strptime(latest, '%Y-%m-%d')).days
-                if days_old <= 1 and len(cached_df) >= days * 0.6:
-                    self.stats['requests'] += 1
-                    self.stats['success'] += 1
-                    return cached_df
-
-                # Incremental: only fetch from latest cached date
-                if len(cached_df) > 20:
-                    start_date = latest
-
-        # Fetch from API
-        df = self._fetch_price_from_api(symbol, start_date, end_date, source)
-
-        # Save to SQLite cache
-        if not df.empty and _DB_AVAILABLE and self._price_store:
-            try:
-                self._price_store.save_prices(symbol, df)
-                # If incremental fetch, combine with cached data
-                if not cached_df.empty and start_date != (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d'):
-                    full_start = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
-                    df = self._price_store.get_prices(symbol, start=full_start, end=end_date)
-            except Exception as e:
-                print(f"   ⚠️ DB cache save error: {e}")
-
-        return df
-
-    def _fetch_price_from_api(
-        self, symbol: str, start_date: str, end_date: str, source: str = None
-    ) -> pd.DataFrame:
-        """Fetch price data from API with fallback."""
+        # 2. Fetch từ API nếu cache miss
         sources_to_try = [source] if source else [self.current_source]
 
         if self.auto_fallback and not source:
+            # Thêm các nguồn backup
             for s in self.SOURCES:
                 if s not in sources_to_try and not self._should_skip_source(s):
                     sources_to_try.append(s)
@@ -232,6 +313,9 @@ class DataSourceManager:
                 if stock is None:
                     continue
 
+                end_date = datetime.now().strftime('%Y-%m-%d')
+                start_date = (datetime.now() - timedelta(days=days)).strftime('%Y-%m-%d')
+
                 df = stock.quote.history(start=start_date, end=end_date)
 
                 if not df.empty:
@@ -241,6 +325,9 @@ class DataSourceManager:
                         self.stats['fallbacks'] += 1
                         print(f"   ⚠️ Fallback: {self.current_source} → {src}")
                         self.current_source = src
+
+                    # 3. Lưu vào cache
+                    self._save_ohlcv_to_cache(symbol, days, df)
 
                     return df
 
@@ -255,6 +342,7 @@ class DataSourceManager:
 
                 break
 
+        # Tất cả nguồn đều thất bại
         print(f"   ✗ Không lấy được dữ liệu {symbol}: {last_error}")
         return pd.DataFrame()
     
@@ -296,7 +384,8 @@ class DataSourceManager:
         """In thống kê"""
         print(f"\n📊 Data Source Stats:")
         print(f"   Current: {self.current_source}")
-        print(f"   Requests: {self.stats['requests']}")
+        print(f"   Cache Hits: {self.stats['cache_hits']}")
+        print(f"   API Requests: {self.stats['requests']}")
         print(f"   Success: {self.stats['success']}")
         print(f"   Failures: {self.stats['failures']}")
         print(f"   Fallbacks: {self.stats['fallbacks']}")
@@ -311,44 +400,48 @@ class EnhancedStockData:
     """Dữ liệu cổ phiếu đầy đủ bao gồm Volume Profile"""
     symbol: str
     name: str = ""
-    
+
     # Price
     price: float = 0.0
     open: float = 0.0
     high: float = 0.0
     low: float = 0.0
-    
+
     # Changes
     change_1d: float = 0.0
     change_5d: float = 0.0
     change_1m: float = 0.0
     change_3m: float = 0.0
-    
+
     # Moving Averages
     ma20: float = 0.0
     ma50: float = 0.0
     ma200: float = 0.0
     above_ma20: bool = False
     above_ma50: bool = False
-    
+
     # Technical Indicators
     rsi_14: float = 50.0
     macd: float = 0.0
     macd_signal: float = 0.0
     macd_hist: float = 0.0
+    macd_histogram: float = 0.0  # Alias for macd_hist
     adx: float = 25.0
-    
+
     # Volume
     volume: float = 0.0
     volume_ma20: float = 0.0
     volume_ratio: float = 1.0
     avg_value_20d: float = 0.0  # Tỷ VND
-    
+
     # Foreign Trade (Current Session)
-    foreign_buy_value: float = 0.0  # VND
-    foreign_sell_value: float = 0.0 # VND
-    foreign_net_value: float = 0.0  # VND
-    
+    foreign_buy_value: float = 0.0   # VND
+    foreign_sell_value: float = 0.0  # VND
+    foreign_net_value: float = 0.0   # VND
+    foreign_buy_volume: int = 0      # Shares
+    foreign_sell_volume: int = 0     # Shares
+    foreign_net_buy_20d: float = 0.0 # Rolling 20-day net buy (VND) - from tracker
+
     # Volume Profile
     poc: float = 0.0            # Point of Control
     vah: float = 0.0            # Value Area High
@@ -358,7 +451,10 @@ class EnhancedStockData:
     vp_support: List[float] = field(default_factory=list)
     vp_resistance: List[float] = field(default_factory=list)
     vp_signals: List[str] = field(default_factory=list)
-    
+
+    # RS Rating (for historical tracking)
+    rs_rating: int = 50
+
     # Raw data
     df: pd.DataFrame = field(default_factory=pd.DataFrame)
 
@@ -408,22 +504,17 @@ class EnhancedDataCollector:
             )
         else:
             self.vp_calculator = None
-            
-        # Caching (JSON legacy + SQLite)
+
+        # Historical Trackers (optional)
+        self.price_tracker = get_price_tracker() if get_price_tracker else None
+        self.foreign_tracker = get_foreign_tracker() if get_foreign_tracker else None
+        self.enable_historical_tracking = True  # Set to False to disable
+
+        # Caching
         self.cache_dir = Path("data_cache")
         self.cache_dir.mkdir(exist_ok=True)
         self.cache_file = self.cache_dir / "fundamental_cache.json"
         self.cache_data = self._load_cache()
-
-        # SQLite stores
-        self._fundamental_store = None
-        self._foreign_flow_store = None
-        if _DB_AVAILABLE:
-            try:
-                self._fundamental_store = FundamentalStore()
-                self._foreign_flow_store = ForeignFlowStore()
-            except Exception as e:
-                print(f"   ⚠️ DB stores init failed: {e}")
     
     def _load_cache(self) -> Dict:
         """Load cache from file"""
@@ -541,8 +632,39 @@ class EnhancedDataCollector:
         
         # 4. Lấy dữ liệu khối ngoại trong phiên (Foreign Trade)
         self._fetch_foreign_data_from_price_board(result)
-        
+
+        # 5. Historical Tracking (save daily snapshots)
+        if self.enable_historical_tracking:
+            self._save_historical_data(result)
+
         return result
+
+    def _save_historical_data(self, result: EnhancedStockData):
+        """Save data to historical trackers for trend analysis"""
+        try:
+            # Save price snapshot
+            if self.price_tracker and result.price > 0:
+                self.price_tracker.save_daily_snapshot(result.symbol, result)
+
+            # Save foreign flow and get rolling 20d value
+            if self.foreign_tracker:
+                # Save today's flow
+                self.foreign_tracker.save_daily_flow(
+                    symbol=result.symbol,
+                    buy_value=result.foreign_buy_value,
+                    sell_value=result.foreign_sell_value,
+                    buy_volume=result.foreign_buy_volume,
+                    sell_volume=result.foreign_sell_volume,
+                    price=result.price,
+                    total_volume=int(result.volume)
+                )
+
+                # Get rolling 20-day net buy
+                result.foreign_net_buy_20d = self.foreign_tracker.get_foreign_net_buy_20d(result.symbol)
+
+        except Exception as e:
+            # Silent fail - historical tracking is optional
+            pass
     
     def _calc_rsi(self, prices: np.ndarray, period: int = 14) -> float:
         """
@@ -585,13 +707,18 @@ class EnhancedDataCollector:
                 if df_pb is not None and not df_pb.empty:
                     # Lấy dòng đầu tiên (thường chỉ có 1 dòng cho 1 mã)
                     row = df_pb.iloc[0]
-                    
+
                     # Columns in vnstock can be complex, usually ('match', 'foreign_buy_value')
-                    f_buy = row.get(('match', 'foreign_buy_value'), 0)
-                    f_sell = row.get(('match', 'foreign_sell_value'), 0)
-                    
-                    if pd.notna(f_buy): result.foreign_buy_value = float(f_buy)
-                    if pd.notna(f_sell): result.foreign_sell_value = float(f_sell)
+                    f_buy_val = row.get(('match', 'foreign_buy_value'), 0)
+                    f_sell_val = row.get(('match', 'foreign_sell_value'), 0)
+                    f_buy_vol = row.get(('match', 'foreign_buy_volume'), 0)
+                    f_sell_vol = row.get(('match', 'foreign_sell_volume'), 0)
+
+                    if pd.notna(f_buy_val): result.foreign_buy_value = float(f_buy_val)
+                    if pd.notna(f_sell_val): result.foreign_sell_value = float(f_sell_val)
+                    if pd.notna(f_buy_vol): result.foreign_buy_volume = int(f_buy_vol)
+                    if pd.notna(f_sell_vol): result.foreign_sell_volume = int(f_sell_vol)
+
                     result.foreign_net_value = result.foreign_buy_value - result.foreign_sell_value
         except Exception as e:
             # Silent fail for optional data
@@ -667,90 +794,57 @@ class EnhancedDataCollector:
 
     def get_financial_ratios(self, symbol: str) -> Dict[str, float]:
         """
-        Lấy các chỉ số tài chính cơ bản (PE, PB, ROE, ROA).
-        Uses SQLite cache (7-day TTL), falls back to JSON cache, then API.
+        Lấy các chỉ số tài chính cơ bản (PE, PB, ROE, ROA)
         """
+        # Check cache
+        cache_key = f"{symbol}_ratios"
+        if cache_key in self.cache_data:
+            cached = self.cache_data[cache_key]
+            # Check expiry (7 days)
+            cached_time = datetime.strptime(cached['timestamp'], "%Y-%m-%d")
+            if (datetime.now() - cached_time).days < 7:
+                return cached['data']
+
         result = {
             'pe': 0.0, 'pb': 0.0, 'roe': 0.0, 'roa': 0.0,
             'book_value': 0.0
         }
-
-        # Check SQLite cache first
-        if self._fundamental_store and self._fundamental_store.is_fresh(symbol, max_days=7):
-            latest = self._fundamental_store.get_latest_quarter(symbol)
-            if latest and (latest.get('pe') or latest.get('roe')):
-                result['pe'] = latest.get('pe', 0) or 0
-                result['pb'] = latest.get('pb', 0) or 0
-                result['roe'] = latest.get('roe', 0) or 0
-                result['roa'] = latest.get('roa', 0) or 0
-                return result
-
-        # Check JSON cache
-        cache_key = f"{symbol}_ratios"
-        if cache_key in self.cache_data:
-            cached = self.cache_data[cache_key]
-            try:
-                cached_time = datetime.strptime(cached['timestamp'], "%Y-%m-%d")
-                if (datetime.now() - cached_time).days < 7:
-                    return cached['data']
-            except (ValueError, KeyError):
-                pass
-
+        
         try:
             stock = self.data_manager._get_stock(symbol)
             if stock:
+                # Retry wrapper for ratio
                 def fetch_ratio():
                     return stock.finance.ratio(period='quarter', lang='vi')
-
+                
                 df = self._retry_request(fetch_ratio)
-
+                
                 if df is not None and not df.empty:
+                    # Lấy dòng mới nhất (index 0)
                     latest = df.iloc[0]
-
+                    
                     try:
+                        # Accessing MultiIndex columns
                         result['pe'] = float(latest.get(('Chỉ tiêu định giá', 'P/E'), 0))
                         result['pb'] = float(latest.get(('Chỉ tiêu định giá', 'P/B'), 0))
                         result['roe'] = float(latest.get(('Chỉ tiêu khả năng sinh lợi', 'ROE (%)'), 0)) * 100
                         result['roa'] = float(latest.get(('Chỉ tiêu khả năng sinh lợi', 'ROA (%)'), 0)) * 100
                         result['book_value'] = float(latest.get(('Chỉ tiêu định giá', 'BVPS (VND)'), 0))
-
-                        # Save to JSON cache
+                        
+                        # Save to cache
                         self.cache_data[cache_key] = {
                             'data': result,
                             'timestamp': datetime.now().strftime("%Y-%m-%d")
                         }
                         self._save_cache()
-
-                        # Save to SQLite cache
-                        if self._fundamental_store:
-                            self._save_ratios_to_db(symbol, df)
-
+                        
                     except Exception as e:
                         print(f"   ⚠️ Ratio parsing error {symbol}: {e}")
-
+                        
         except Exception as e:
             print(f"   ⚠️ Lỗi lấy ratio {symbol}: {e}")
-
+            
         return result
-
-    def _save_ratios_to_db(self, symbol: str, df: pd.DataFrame):
-        """Save ratio DataFrame to SQLite fundamental_store."""
-        try:
-            records = []
-            for idx, row in df.head(8).iterrows():
-                period_str = str(idx) if isinstance(idx, str) else f"Q{idx}"
-                pe = float(row.get(('Chỉ tiêu định giá', 'P/E'), 0) or 0)
-                pb = float(row.get(('Chỉ tiêu định giá', 'P/B'), 0) or 0)
-                roe = float(row.get(('Chỉ tiêu khả năng sinh lợi', 'ROE (%)'), 0) or 0) * 100
-                roa = float(row.get(('Chỉ tiêu khả năng sinh lợi', 'ROA (%)'), 0) or 0) * 100
-                records.append({
-                    'period': period_str,
-                    'pe': pe, 'pb': pb, 'roe': roe, 'roa': roa,
-                })
-            if records:
-                self._fundamental_store.save_quarterly(symbol, records)
-        except Exception:
-            pass
 
     def get_historical_ratios(self, symbol: str, periods: int = 12) -> pd.DataFrame:
         """
@@ -820,9 +914,17 @@ class EnhancedDataCollector:
 
     def get_financial_flow(self, symbol: str) -> Dict[str, float]:
         """
-        Lấy dữ liệu tăng trưởng doanh thu/lợi nhuận (Income Statement).
-        Uses SQLite + JSON cache with 7-day TTL.
+        Lấy dữ liệu tăng trưởng doanh thu/lợi nhuận (Income Statement)
         """
+        # Check cache
+        cache_key = f"{symbol}_flow"
+        if cache_key in self.cache_data:
+            cached = self.cache_data[cache_key]
+            # Check expiry (7 days)
+            cached_time = datetime.strptime(cached['timestamp'], "%Y-%m-%d")
+            if (datetime.now() - cached_time).days < 7:
+                return cached['data']
+
         result = {
             'revenue_growth_qoq': 0.0,
             'revenue_growth_yoy': 0.0,
@@ -830,93 +932,52 @@ class EnhancedDataCollector:
             'eps_growth_yoy': 0.0,
             'gross_margin': 0.0
         }
-
-        # Check SQLite cache - if we have fresh fundamental data with revenue
-        if self._fundamental_store and self._fundamental_store.is_fresh(symbol, max_days=7):
-            eps_hist = self._fundamental_store.get_eps_history(symbol, periods=5)
-            if len(eps_hist) >= 2:
-                cur, prev = eps_hist[0], eps_hist[1]
-                if prev.get('profit') and prev['profit'] != 0:
-                    result['eps_growth_qoq'] = ((cur.get('profit', 0) - prev['profit']) / abs(prev['profit'])) * 100
-                if prev.get('revenue') and prev['revenue'] != 0:
-                    result['revenue_growth_qoq'] = ((cur.get('revenue', 0) - prev['revenue']) / abs(prev['revenue'])) * 100
-                if any(v != 0 for v in result.values()):
-                    return result
-
-        # Check JSON cache
-        cache_key = f"{symbol}_flow"
-        if cache_key in self.cache_data:
-            cached = self.cache_data[cache_key]
-            try:
-                cached_time = datetime.strptime(cached['timestamp'], "%Y-%m-%d")
-                if (datetime.now() - cached_time).days < 7:
-                    return cached['data']
-            except (ValueError, KeyError):
-                pass
-
+        
         try:
             stock = self.data_manager._get_stock(symbol)
             if stock:
+                # Lấy income statement 5 quý gần nhất
                 df = stock.finance.income_statement(period='quarter', lang='vi')
-
+                
                 if not df.empty and len(df) >= 2:
+                    # Columns
                     col_rev_growth = 'Tăng trưởng doanh thu (%)'
                     col_prof_growth = 'Tăng trưởng lợi nhuận (%)'
                     col_profit = 'Lợi nhuận sau thuế của Cổ đông công ty mẹ (đồng)'
                     col_rev = 'Doanh thu (đồng)'
-
+                    
+                    # Latest quarter (index 0)
                     latest = df.iloc[0]
                     prev = df.iloc[1]
-
+                    
+                    # YoY Growth (Available in data)
                     result['revenue_growth_yoy'] = float(latest.get(col_rev_growth, 0)) * 100
                     result['eps_growth_yoy'] = float(latest.get(col_prof_growth, 0)) * 100
-
+                    
+                    # QoQ Growth (Calculate manually)
                     prof_now = float(latest.get(col_profit, 0))
                     prof_prev = float(prev.get(col_profit, 0))
-
+                    
                     if prof_prev != 0:
                         result['eps_growth_qoq'] = ((prof_now - prof_prev) / abs(prof_prev)) * 100
-
+                        
                     rev_now = float(latest.get(col_rev, 0))
                     rev_prev = float(prev.get(col_rev, 0))
-
+                    
                     if rev_prev != 0:
                         result['revenue_growth_qoq'] = ((rev_now - rev_prev) / abs(rev_prev)) * 100
-
-                    # Save to JSON cache
+                    
+                    # Save to cache
                     self.cache_data[cache_key] = {
                         'data': result,
                         'timestamp': datetime.now().strftime("%Y-%m-%d")
                     }
                     self._save_cache()
-
-                    # Save to SQLite
-                    if self._fundamental_store:
-                        self._save_income_to_db(symbol, df)
-
+                        
         except Exception as e:
             print(f"   ⚠️ Lỗi lấy income statement {symbol}: {e}")
-
+            
         return result
-
-    def _save_income_to_db(self, symbol: str, df: pd.DataFrame):
-        """Save income statement data to SQLite fundamental_store."""
-        try:
-            col_rev = 'Doanh thu (đồng)'
-            col_profit = 'Lợi nhuận sau thuế của Cổ đông công ty mẹ (đồng)'
-
-            records = []
-            for idx, row in df.head(8).iterrows():
-                period_str = str(idx) if isinstance(idx, str) else f"Q{idx}"
-                records.append({
-                    'period': period_str,
-                    'revenue': float(row.get(col_rev, 0) or 0),
-                    'profit': float(row.get(col_profit, 0) or 0),
-                })
-            if records:
-                self._fundamental_store.save_quarterly(symbol, records)
-        except Exception:
-            pass
 
     def get_multiple_stocks(self, 
                             symbols: List[str], 

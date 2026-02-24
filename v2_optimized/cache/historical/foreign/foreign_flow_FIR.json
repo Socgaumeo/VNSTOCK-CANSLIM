@@ -1,0 +1,66 @@
+{
+  "symbol": "FIR",
+  "last_updated": "2026-02-11T22:55:50.329763",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "FIR",
+      "buy_value": 5940000.0,
+      "sell_value": 11900000.0,
+      "net_value": -5960000.0,
+      "buy_volume": 900,
+      "sell_volume": 1700,
+      "net_volume": -800,
+      "price": 7.03,
+      "total_volume": 73700,
+      "foreign_pct": 3.5278154681139755
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "FIR",
+      "buy_value": 27224000.0,
+      "sell_value": 10515000.0,
+      "net_value": 16709000.0,
+      "buy_volume": 4100,
+      "sell_volume": 1500,
+      "net_volume": 2600,
+      "price": 6.89,
+      "total_volume": 34100,
+      "foreign_pct": 16.422287390029325
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "FIR",
+      "buy_value": 37410000.0,
+      "sell_value": 100062000.0,
+      "net_value": -62652000.0,
+      "buy_volume": 5800,
+      "sell_volume": 15200,
+      "net_volume": -9400,
+      "price": 6.75,
+      "total_volume": 455500,
+      "foreign_pct": 4.610318331503842
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "FIR",
+      "buy_value": 0.0,
+      "sell_value": 15867000.0,
+      "net_value": -15867000.0,
+      "buy_volume": 0,
+      "sell_volume": 2300,
+      "net_volume": -2300,
+      "price": 6.95,
+      "total_volume": 104700,
+      "foreign_pct": 2.1967526265520534
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -67770000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 64.87712882566366,
+    "buy_days_count": 0,
+    "sell_days_count": 0
+  }
+}

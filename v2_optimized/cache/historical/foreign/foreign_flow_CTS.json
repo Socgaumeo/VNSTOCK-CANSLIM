@@ -1,0 +1,66 @@
+{
+  "symbol": "CTS",
+  "last_updated": "2026-02-11T22:51:15.596897",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "CTS",
+      "buy_value": 0.0,
+      "sell_value": 2736620000.0,
+      "net_value": -2736620000.0,
+      "buy_volume": 0,
+      "sell_volume": 88900,
+      "net_volume": -88900,
+      "price": 30.0,
+      "total_volume": 912700,
+      "foreign_pct": 9.740330886381066
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "CTS",
+      "buy_value": 0.0,
+      "sell_value": 985710000.0,
+      "net_value": -985710000.0,
+      "buy_volume": 0,
+      "sell_volume": 32700,
+      "net_volume": -32700,
+      "price": 30.0,
+      "total_volume": 358800,
+      "foreign_pct": 9.11371237458194
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "CTS",
+      "buy_value": 2975000.0,
+      "sell_value": 737280000.0,
+      "net_value": -734305000.0,
+      "buy_volume": 100,
+      "sell_volume": 24400,
+      "net_volume": -24300,
+      "price": 29.8,
+      "total_volume": 531800,
+      "foreign_pct": 4.606995110943964
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "CTS",
+      "buy_value": 3484445000.0,
+      "sell_value": 565990000.0,
+      "net_value": 2918455000.0,
+      "buy_volume": 115400,
+      "sell_volume": 18700,
+      "net_volume": 96700,
+      "price": 30.35,
+      "total_volume": 662700,
+      "foreign_pct": 20.235400633770936
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1538180000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 36.13711702779977,
+    "buy_days_count": 1,
+    "sell_days_count": 1
+  }
+}

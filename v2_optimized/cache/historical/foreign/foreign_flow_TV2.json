@@ -1,0 +1,66 @@
+{
+  "symbol": "TV2",
+  "last_updated": "2026-02-11T23:12:43.032442",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "TV2",
+      "buy_value": 7987260000.0,
+      "sell_value": 2379720000.0,
+      "net_value": 5607540000.0,
+      "buy_volume": 210000,
+      "sell_volume": 61400,
+      "net_volume": 148600,
+      "price": 38.05,
+      "total_volume": 1095000,
+      "foreign_pct": 24.78538812785388
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "TV2",
+      "buy_value": 0.0,
+      "sell_value": 3084305000.0,
+      "net_value": -3084305000.0,
+      "buy_volume": 0,
+      "sell_volume": 80700,
+      "net_volume": -80700,
+      "price": 37.5,
+      "total_volume": 318600,
+      "foreign_pct": 25.32956685499058
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "TV2",
+      "buy_value": 3182535000.0,
+      "sell_value": 3343645000.0,
+      "net_value": -161110000.0,
+      "buy_volume": 84800,
+      "sell_volume": 89000,
+      "net_volume": -4200,
+      "price": 37.9,
+      "total_volume": 665400,
+      "foreign_pct": 26.119627291854524
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "TV2",
+      "buy_value": 1486190000.0,
+      "sell_value": 4961110000.0,
+      "net_value": -3474920000.0,
+      "buy_volume": 38200,
+      "sell_volume": 127500,
+      "net_volume": -89300,
+      "price": 38.1,
+      "total_volume": 907200,
+      "foreign_pct": 18.264991181657848
+    }
+  ],
+  "analysis": {
+    "net_value_20d": -1112795000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 8.422364399456344,
+    "buy_days_count": 1,
+    "sell_days_count": 2
+  }
+}

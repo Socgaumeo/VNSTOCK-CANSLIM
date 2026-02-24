@@ -1,0 +1,66 @@
+{
+  "symbol": "QCG",
+  "last_updated": "2026-02-11T23:11:24.837568",
+  "count": 4,
+  "daily_flows": [
+    {
+      "date": "2026-02-08",
+      "symbol": "QCG",
+      "buy_value": 1616050000.0,
+      "sell_value": 82935000.0,
+      "net_value": 1533115000.0,
+      "buy_volume": 112600,
+      "sell_volume": 5700,
+      "net_volume": 106900,
+      "price": 14.5,
+      "total_volume": 596600,
+      "foreign_pct": 19.829031176667783
+    },
+    {
+      "date": "2026-02-09",
+      "symbol": "QCG",
+      "buy_value": 69900000.0,
+      "sell_value": 767410000.0,
+      "net_value": -697510000.0,
+      "buy_volume": 4900,
+      "sell_volume": 53500,
+      "net_volume": -48600,
+      "price": 14.6,
+      "total_volume": 522800,
+      "foreign_pct": 11.17061973986228
+    },
+    {
+      "date": "2026-02-10",
+      "symbol": "QCG",
+      "buy_value": 3125840000.0,
+      "sell_value": 706590000.0,
+      "net_value": 2419250000.0,
+      "buy_volume": 214900,
+      "sell_volume": 48400,
+      "net_volume": 166500,
+      "price": 14.55,
+      "total_volume": 826200,
+      "foreign_pct": 31.868796901476642
+    },
+    {
+      "date": "2026-02-11",
+      "symbol": "QCG",
+      "buy_value": 1219215000.0,
+      "sell_value": 110580000.0,
+      "net_value": 1108635000.0,
+      "buy_volume": 83400,
+      "sell_volume": 7600,
+      "net_volume": 75800,
+      "price": 14.75,
+      "total_volume": 528500,
+      "foreign_pct": 17.218543046357617
+    }
+  ],
+  "analysis": {
+    "net_value_20d": 4363490000.0,
+    "trend": "NEUTRAL",
+    "intensity_score": 100,
+    "buy_days_count": 3,
+    "sell_days_count": 0
+  }
+}
