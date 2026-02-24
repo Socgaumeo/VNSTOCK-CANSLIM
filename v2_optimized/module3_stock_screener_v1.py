@@ -57,6 +57,37 @@ except ImportError:
     HAS_NEWS = False
     NewsAnalyzer = None
 
+# Import Candlestick & Chart Pattern Analyzers (Phase 02)
+try:
+    from candlestick_analyzer import CandlestickAnalyzer, CandlestickSignal
+    HAS_CANDLESTICK = True
+except ImportError:
+    HAS_CANDLESTICK = False
+    CandlestickAnalyzer = None
+
+try:
+    from chart_pattern_detector import ChartPatternDetector, ChartPatternSignal
+    HAS_CHART_PATTERNS = True
+except ImportError:
+    HAS_CHART_PATTERNS = False
+    ChartPatternDetector = None
+
+# Import Phase 03: Earnings Calculator
+try:
+    from earnings_calculator import EarningsCalculator, EarningsResult
+    HAS_EARNINGS_CALC = True
+except ImportError:
+    HAS_EARNINGS_CALC = False
+    EarningsCalculator = None
+
+# Import Phase 04: Money Flow Analyzer
+try:
+    from money_flow_analyzer import MoneyFlowAnalyzer, MoneyFlowResult
+    HAS_MONEY_FLOW = True
+except ImportError:
+    HAS_MONEY_FLOW = False
+    MoneyFlowAnalyzer = None
+
 # Import V3 Enhanced Modules
 try:
     import sys
@@ -73,6 +104,41 @@ except ImportError as e:
     V3NewsAnalyzer = None
     print(f"⚠️ V3 Enhanced not available: {e}")
 
+# Import Phase 07: Advanced Financial Analysis Modules
+try:
+    from financial_health_scorer import get_financial_health_summary
+    HAS_FINANCIAL_HEALTH = True
+except ImportError:
+    HAS_FINANCIAL_HEALTH = False
+    get_financial_health_summary = None
+
+try:
+    import importlib.util
+    def _import_kebab_module(module_name, file_name):
+        """Import module with kebab-case filename"""
+        file_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), file_name)
+        if not os.path.exists(file_path):
+            return None
+        spec = importlib.util.spec_from_file_location(module_name, file_path)
+        mod = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(mod)
+        return mod
+
+    _valuation_scorer = _import_kebab_module('valuation_scorer', 'valuation-scorer.py')
+    _industry_analyzer = _import_kebab_module('industry_analyzer', 'industry_analyzer.py')
+    _dividend_analyzer = _import_kebab_module('dividend_analyzer', 'dividend-analyzer.py')
+
+    HAS_VALUATION_SCORER = _valuation_scorer is not None
+    HAS_INDUSTRY_ANALYZER = _industry_analyzer is not None
+    HAS_DIVIDEND_ANALYZER = _dividend_analyzer is not None
+except Exception as e:
+    HAS_VALUATION_SCORER = False
+    HAS_INDUSTRY_ANALYZER = False
+    HAS_DIVIDEND_ANALYZER = False
+    _valuation_scorer = None
+    _industry_analyzer = None
+    _dividend_analyzer = None
+    print(f"⚠️ Phase 07 modules not available: {e}")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -97,6 +163,16 @@ class PatternType(Enum):
     HIGH_TIGHT_FLAG = "High Tight Flag"
     ASCENDING_BASE = "Ascending Base"
     IPO_BASE = "IPO Base"
+    # Bulkowski chart patterns (Phase 02)
+    DOUBLE_TOP = "Double Top"
+    HEAD_SHOULDERS = "Head & Shoulders"
+    INV_HEAD_SHOULDERS = "Inverse H&S"
+    ASC_TRIANGLE = "Ascending Triangle"
+    DESC_TRIANGLE = "Descending Triangle"
+    BULL_FLAG = "Bull Flag"
+    BEAR_FLAG = "Bear Flag"
+    FALLING_WEDGE = "Falling Wedge"
+    RISING_WEDGE = "Rising Wedge"
     NONE = "No Pattern"
 
 
@@ -221,6 +297,7 @@ def create_config_from_unified() -> ScreenerConfig:
 @dataclass
 class FundamentalData:
     """Dữ liệu cơ bản"""
+    symbol: str = ''
     eps_ttm: float = 0.0
     eps_growth_qoq: float = 0.0
     eps_growth_yoy: float = 0.0
@@ -240,15 +317,29 @@ class FundamentalData:
     consecutive_eps_growth: int = 0    # Consecutive quarters
     earnings_stability: float = 0.0    # Stability score
     confidence_score: float = 50.0     # Data confidence
-    
+
+    # Phase 03: Enhanced Growth Metrics
+    eps_acceleration: float = 0.0      # Rate of growth change
+    eps_growth_3y_cagr: float = 0.0    # 3-year CAGR
+    eps_growth_5y_cagr: float = 0.0    # 5-year CAGR
+    gross_margin_expansion: float = 0.0  # Current vs avg previous quarters
+
     # Cash Flow Quality
     ocf_to_profit_ratio: float = 0.0
     cash_flow_quality_score: float = 0.0
     cash_flow_warning: str = ""
-    
+
     # Fundamental Scores
     c_score: float = 0.0
     a_score: float = 0.0
+
+    # Phase 07: Advanced Financial Analysis
+    piotroski_score: int = 0
+    altman_z_score: float = 0.0
+    altman_zone: str = ''
+    peg_ratio: float = 0.0
+    peg_rating: str = ''
+    industry_health: float = 0.0
 
 
 
@@ -308,6 +399,13 @@ class TechnicalData:
     foreign_sell_value: float = 0.0
     foreign_net_value: float = 0.0
 
+    # Phase 04: Money Flow
+    money_flow_score: float = 50.0       # 0-100 composite score
+    foreign_trend: str = "NEUTRAL"       # ACCUMULATING/DISTRIBUTING/NEUTRAL
+    distribution_days: int = 0           # Distribution days in last 25 sessions
+    volume_divergence: str = "NONE"      # BULLISH_DIV/BEARISH_DIV/NONE
+    mfi_14: float = 50.0                # Money Flow Index
+    obv_trend: str = "FLAT"             # RISING/FALLING/FLAT
 
 
 @dataclass
@@ -328,12 +426,23 @@ class PatternData:
     # Description
     description: str = ""
     
-    # Volume Confirmation (NEW)
+    # Volume Confirmation
     volume_confirmed: bool = False     # True nếu đủ điều kiện volume
     volume_score: float = 0.0          # 0-80 điểm volume
     has_shakeout: bool = False         # Có phiên rũ bỏ volume lớn
     has_dryup: bool = False            # Volume cạn kiệt gần pivot
     breakout_ready: bool = False       # Sẵn sàng breakout (shakeout + dryup)
+
+    # Candlestick Patterns (Phase 02)
+    candlestick_score: float = 0.0     # 0-30 bonus from candlestick patterns
+    candlestick_signals: List = field(default_factory=list)  # CandlestickSignal list
+
+    # Chart Patterns - Bulkowski (Phase 02)
+    chart_pattern_score: float = 0.0   # 0-30 bonus from chart patterns
+    chart_patterns: List = field(default_factory=list)  # ChartPatternSignal list
+    chart_pattern_name: str = ""       # Best chart pattern name
+    chart_success_rate: float = 0.0    # Best pattern Bulkowski success rate
+    chart_target_price: float = 0.0    # Price target from pattern
 
 
 @dataclass
@@ -432,7 +541,10 @@ class FundamentalAnalyzer:
     def __init__(self, config: ScreenerConfig):
         self.config = config
         self.collector = get_data_collector()
-        
+
+        # Phase 03: EarningsCalculator (primary data source)
+        self.earnings_calc = EarningsCalculator() if HAS_EARNINGS_CALC else None
+
         # V3 Enhanced: Initialize FundamentalAggregator
         self.v3_aggregator = None
         self.v3_scorer = None
@@ -449,8 +561,8 @@ class FundamentalAnalyzer:
     
     def analyze(self, symbol: str) -> FundamentalData:
         """Phân tích fundamental cho một mã"""
-        data = FundamentalData()
-        
+        data = FundamentalData(symbol=symbol)
+
         try:
             # V3 Enhanced: Use FundamentalAggregator if available
             if self.v3_aggregator:
@@ -462,6 +574,7 @@ class FundamentalAnalyzer:
                 data.profit_margin = v3_data.net_profit_margin if hasattr(v3_data, 'net_profit_margin') else 0.0
                 data.pe = v3_data.pe
                 data.pb = v3_data.pb
+                data.eps_ttm = v3_data.eps_ttm if hasattr(v3_data, 'eps_ttm') else 0.0
                 data.eps_growth_qoq = v3_data.eps_growth_qoq
                 data.eps_growth_yoy = v3_data.eps_growth_yoy
                 data.eps_growth_3y = v3_data.eps_growth_3y_cagr
@@ -487,43 +600,201 @@ class FundamentalAnalyzer:
                 else:
                     data.c_score = self._calc_c_score(data)
                     data.a_score = self._calc_a_score(data)
-                
+
                 print(f"   📊 Funda V3: ROE={data.roe:.1f}% EPS_3Y={data.eps_growth_3y_cagr:.1f}% Conf={data.confidence_score:.0f}%")
-                return data
-            
-            # Fallback to original logic
-            stock = self.collector.get_stock_data(symbol, lookback_days=30, include_vp=False)
-            
-            # Lấy Real Financial Data
-            ratios = self.collector.get_financial_ratios(symbol)
-            flow = self.collector.get_financial_flow(symbol)
-            
-            # Map data
-            data.market_cap = getattr(stock, 'market_cap', 0)
-            
-            # Ratios
-            data.pe = ratios.get('pe', 0)
-            data.pb = ratios.get('pb', 0)
-            data.roe = ratios.get('roe', 0)
-            data.roa = ratios.get('roa', 0)
-            data.profit_margin = ratios.get('net_margin', 0)
-            
-            # Growth
-            data.eps_growth_qoq = flow.get('eps_growth_qoq', 0)
-            data.eps_growth_yoy = flow.get('eps_growth_yoy', 0)
-            data.revenue_growth_qoq = flow.get('revenue_growth_qoq', 0)
-            data.revenue_growth_yoy = flow.get('revenue_growth_yoy', 0)
-            
-            # Placeholder for 3y growth
-            data.eps_growth_3y = data.eps_growth_yoy 
-            
+                # Continue to Phase 07 analysis instead of returning early
+
+            # Phase 03: Use EarningsCalculator (fixes MultiIndex parsing bug)
+            elif self.earnings_calc:
+                er = self.earnings_calc.calculate(symbol)
+                data.roe = er.roe
+                data.roa = er.roa
+                data.pe = 0  # Not in EarningsResult, will fallback
+                data.pb = 0
+                data.eps_growth_qoq = er.eps_growth_qoq
+                data.eps_growth_yoy = er.eps_growth_yoy
+                data.revenue_growth_qoq = er.revenue_growth_qoq
+                data.revenue_growth_yoy = er.revenue_growth_yoy
+                data.eps_growth_3y = er.eps_3y_cagr
+                data.eps_growth_3y_cagr = er.eps_3y_cagr
+                data.eps_growth_5y_cagr = er.eps_5y_cagr
+                data.profit_margin = er.gross_margin  # Note: gross margin, not net
+                data.eps_acceleration = er.eps_acceleration
+                data.consecutive_eps_growth = er.consecutive_growth_q
+                data.earnings_stability = er.earnings_stability
+                data.confidence_score = er.confidence
+                data.gross_margin_expansion = er.gross_margin_expansion
+                data.ocf_to_profit_ratio = er.ocf_to_profit_ratio
+                data.cash_flow_quality_score = er.cash_flow_quality
+                if er.ocf_to_profit_ratio < 0.3 and er.ocf_to_profit_ratio != 0:
+                    data.cash_flow_warning = "OCF/Profit < 0.3"
+
+                # Get PE/PB from old ratios API (fast, cached)
+                try:
+                    ratios = self.collector.get_financial_ratios(symbol)
+                    data.pe = ratios.get('pe', 0)
+                    data.pb = ratios.get('pb', 0)
+                except Exception:
+                    pass
+
+            else:
+                # Legacy fallback (broken MultiIndex parsing)
+                ratios = self.collector.get_financial_ratios(symbol)
+                flow = self.collector.get_financial_flow(symbol)
+                data.pe = ratios.get('pe', 0)
+                data.pb = ratios.get('pb', 0)
+                data.roe = ratios.get('roe', 0)
+                data.roa = ratios.get('roa', 0)
+                data.eps_growth_qoq = flow.get('eps_growth_qoq', 0)
+                data.eps_growth_yoy = flow.get('eps_growth_yoy', 0)
+                data.revenue_growth_qoq = flow.get('revenue_growth_qoq', 0)
+                data.revenue_growth_yoy = flow.get('revenue_growth_yoy', 0)
+                data.eps_growth_3y = data.eps_growth_yoy
+
+            # === Phase 07: Advanced Financial Analysis ===
+            # Financial Health Scoring (Piotroski & Altman Z-Score)
+            if HAS_FINANCIAL_HEALTH and get_financial_health_summary:
+                try:
+                    # Fetch real balance sheet and income statement data from vnstock
+                    from vnstock import Vnstock
+                    _stock = Vnstock().stock(symbol=symbol, source='VCI')
+                    _income = _stock.finance.income_statement(period='quarter', lang='en')
+                    _balance = _stock.finance.balance_sheet(period='quarter', lang='en')
+
+                    # Sort by latest quarter first
+                    _income = _income.sort_values(['yearReport', 'lengthReport'], ascending=[False, False]).reset_index(drop=True)
+                    _balance = _balance.sort_values(['yearReport', 'lengthReport'], ascending=[False, False]).reset_index(drop=True)
+
+                    if len(_income) >= 2 and len(_balance) >= 2:
+                        # Current period (latest quarter)
+                        net_income_current = float(_income['Attribute to parent company (Bn. VND)'].iloc[0])
+                        total_assets_current = float(_balance['TOTAL ASSETS (Bn. VND)'].iloc[0])
+                        total_equity_current = float(_balance["OWNER'S EQUITY(Bn.VND)"].iloc[0])
+                        current_assets = float(_balance['CURRENT ASSETS (Bn. VND)'].iloc[0])
+                        current_liabilities = float(_balance['Current liabilities (Bn. VND)'].iloc[0])
+                        long_term_debt = float(_balance.get('Long-term borrowings (Bn. VND)', pd.Series([0])).iloc[0] or 0)
+                        gross_profit = float(_income['Gross Profit'].iloc[0])
+                        revenue = float(_income['Revenue (Bn. VND)'].iloc[0])
+                        ebit = float(_income['Operating Profit/Loss'].iloc[0])
+
+                        # Estimate CFO as net income * 1.1 (conservative)
+                        cfo_current = net_income_current * 1.1
+
+                        total_liabilities_current = total_assets_current - total_equity_current
+                        retained_earnings_current = total_equity_current * 0.6  # Estimate retained earnings ~60% equity
+
+                        current_data = {
+                            'roa': net_income_current / total_assets_current if total_assets_current > 0 else 0,
+                            'cfo': cfo_current,
+                            'net_income': net_income_current,
+                            'total_assets': total_assets_current,
+                            'total_equity': total_equity_current,
+                            'total_liabilities': total_liabilities_current,
+                            'current_assets': current_assets,
+                            'current_liabilities': current_liabilities,
+                            'long_term_debt': long_term_debt,
+                            'gross_profit': gross_profit,
+                            'revenue': revenue,
+                            'ebit': ebit,
+                            'operating_profit': ebit,
+                            'retained_earnings': retained_earnings_current,
+                            'shares_outstanding': data.outstanding_shares if data.outstanding_shares else 100,
+                        }
+
+                        # Previous period (quarter -1)
+                        net_income_prev = float(_income['Attribute to parent company (Bn. VND)'].iloc[1])
+                        total_assets_prev = float(_balance['TOTAL ASSETS (Bn. VND)'].iloc[1])
+                        total_equity_prev = float(_balance["OWNER'S EQUITY(Bn.VND)"].iloc[1])
+                        current_assets_prev = float(_balance['CURRENT ASSETS (Bn. VND)'].iloc[1])
+                        current_liabilities_prev = float(_balance['Current liabilities (Bn. VND)'].iloc[1])
+                        long_term_debt_prev = float(_balance.get('Long-term borrowings (Bn. VND)', pd.Series([0, 0])).iloc[1] or 0)
+                        gross_profit_prev = float(_income['Gross Profit'].iloc[1])
+                        revenue_prev = float(_income['Revenue (Bn. VND)'].iloc[1])
+
+                        cfo_prev = net_income_prev * 1.1
+
+                        total_liabilities_prev = total_assets_prev - total_equity_prev
+                        ebit_prev = float(_income['Operating Profit/Loss'].iloc[1])
+                        retained_earnings_prev = total_equity_prev * 0.6
+
+                        previous_data = {
+                            'roa': net_income_prev / total_assets_prev if total_assets_prev > 0 else 0,
+                            'cfo': cfo_prev,
+                            'net_income': net_income_prev,
+                            'total_assets': total_assets_prev,
+                            'total_equity': total_equity_prev,
+                            'total_liabilities': total_liabilities_prev,
+                            'current_assets': current_assets_prev,
+                            'current_liabilities': current_liabilities_prev,
+                            'long_term_debt': long_term_debt_prev,
+                            'gross_profit': gross_profit_prev,
+                            'revenue': revenue_prev,
+                            'ebit': ebit_prev,
+                            'operating_profit': ebit_prev,
+                            'retained_earnings': retained_earnings_prev,
+                            'shares_outstanding': data.outstanding_shares if data.outstanding_shares else 100,
+                        }
+
+                        # Calculate Piotroski & Altman
+                        health = get_financial_health_summary(current_data, previous_data)
+                        if health:
+                            data.piotroski_score = health.get('piotroski', {}).get('score', 0)
+                            data.altman_z_score = health.get('altman', {}).get('z_score', 0.0)
+                            data.altman_zone = health.get('altman', {}).get('zone', '')
+
+                except Exception as e:
+                    # Fallback to placeholder if vnstock fetch fails
+                    pass
+
+            # Valuation Scoring (PEG Ratio)
+            if HAS_VALUATION_SCORER and _valuation_scorer and data.pe > 0:
+                try:
+                    # Build EPS values list for PEG calculation
+                    # If eps_ttm not available, use PE and growth rate to create synthetic series
+                    growth_yoy = data.eps_growth_yoy / 100.0 if data.eps_growth_yoy else 0
+
+                    if abs(growth_yoy) > 0.01:  # At least 1% growth
+                        # Use arbitrary base EPS (100) - PEG only needs growth, not absolute values
+                        eps_current = 100.0
+                        eps_prev = eps_current / (1 + growth_yoy) if growth_yoy != -1 else eps_current * 0.9
+                        eps_values = [eps_prev, eps_current]
+
+                        # Call calculate_peg_ratio with correct signature: (pe_ratio, eps_values_list, years)
+                        valuation = _valuation_scorer.calculate_peg_ratio(data.pe, eps_values, 1)
+                        data.peg_ratio = valuation.get('peg_ratio', 0.0)
+                        data.peg_rating = valuation.get('rating', '')
+                except Exception as e:
+                    pass
+
+            # Industry Health Analysis - Skip for now (method doesn't exist)
+            # The industry_analyzer.py doesn't have get_industry_health_score()
+            # It only has analyze_industry() which needs income/balance data
+            if HAS_INDUSTRY_ANALYZER and _industry_analyzer:
+                try:
+                    # Placeholder - would need to implement proper industry scoring
+                    data.industry_health = 0.0
+                except Exception as e:
+                    pass
+
+            # Dividend Analysis (update existing dividend_yield field)
+            if HAS_DIVIDEND_ANALYZER and _dividend_analyzer:
+                try:
+                    div_data = _dividend_analyzer.analyze_dividend(
+                        symbol=symbol,
+                        current_price=data.market_cap / data.outstanding_shares if data.outstanding_shares else 0
+                    )
+                    if div_data:
+                        data.dividend_yield = div_data.get('dividend_yield', data.dividend_yield)
+                except Exception as e:
+                    pass
+
             # Tính C score (Current EPS)
             data.c_score = self._calc_c_score(data)
-            
+
             # Tính A score (Annual EPS)
             data.a_score = self._calc_a_score(data)
-            
-            print(f"   📊 Funda: ROE={data.roe:.1f}% EPS_YoY={data.eps_growth_yoy:.1f}%")
+
+            print(f"   📊 Funda: ROE={data.roe:.1f}% EPS_YoY={data.eps_growth_yoy:.1f}% C={data.c_score:.0f} A={data.a_score:.0f}")
             
         except Exception as e:
             print(f"   ⚠️ Fundamental error {symbol}: {e}")
@@ -532,72 +803,62 @@ class FundamentalAnalyzer:
 
     
     def _calc_c_score(self, data: FundamentalData) -> float:
-        """Tính C score (0-100)"""
+        """C Score: Current Quarterly Earnings (0-100)"""
         score = 0
-        
-        # EPS growth Q/Q
-        if data.eps_growth_qoq >= 50:
-            score += 40
-        elif data.eps_growth_qoq >= 25:
-            score += 30
-        elif data.eps_growth_qoq >= 15:
-            score += 20
-        elif data.eps_growth_qoq > 0:
-            score += 10
-        
-        # EPS acceleration
-        if data.eps_growth_qoq > data.eps_growth_yoy:
-            score += 20  # Đang tăng tốc
-        
-        # Revenue growth support
-        if data.revenue_growth_qoq >= 25:
-            score += 20
-        elif data.revenue_growth_qoq >= 15:
-            score += 15
-        elif data.revenue_growth_qoq > 0:
-            score += 10
-        
-        # Profit margin
-        if data.profit_margin >= 20:
-            score += 20
-        elif data.profit_margin >= 10:
-            score += 10
-        
-        return min(100, score)
-    
+
+        # 1. EPS Q/Q Growth (40 pts max)
+        if data.eps_growth_qoq >= 50: score += 40
+        elif data.eps_growth_qoq >= 25: score += 30
+        elif data.eps_growth_qoq >= 15: score += 20
+        elif data.eps_growth_qoq > 0: score += 10
+
+        # 2. EPS Acceleration (20 pts) - rate of growth increasing
+        accel = getattr(data, 'eps_acceleration', 0)
+        if accel > 10: score += 20
+        elif accel > 0: score += 10
+
+        # 3. Revenue Growth support (20 pts)
+        if data.revenue_growth_qoq >= 25: score += 20
+        elif data.revenue_growth_qoq >= 15: score += 15
+        elif data.revenue_growth_qoq > 0: score += 10
+
+        # 4. Cash Flow Quality (20 pts) - VN market often inflates EPS
+        ocf_ratio = getattr(data, 'ocf_to_profit_ratio', 0)
+        if ocf_ratio >= 0.8: score += 20
+        elif ocf_ratio >= 0.5: score += 10
+        elif 0 < ocf_ratio < 0.3: score -= 10  # Warning
+
+        return min(100, max(0, score))
+
     def _calc_a_score(self, data: FundamentalData) -> float:
-        """Tính A score (0-100)"""
+        """A Score: Annual Earnings Growth 3-5Y (0-100)"""
         score = 0
-        
-        # EPS growth 3 năm
-        if data.eps_growth_3y >= 30:
-            score += 40
-        elif data.eps_growth_3y >= 20:
-            score += 30
-        elif data.eps_growth_3y >= 15:
-            score += 20
-        elif data.eps_growth_3y > 0:
-            score += 10
-        
-        # ROE
-        if data.roe >= 25:
-            score += 30
-        elif data.roe >= 17:
-            score += 20
-        elif data.roe >= 12:
-            score += 10
-        
-        # ROA
-        if data.roa >= 15:
-            score += 15
-        elif data.roa >= 10:
-            score += 10
-        
-        # Stability (không âm trong 5 năm)
-        # Placeholder
-        score += 15
-        
-        return min(100, score)
+
+        # 1. EPS 3Y CAGR (35 pts)
+        cagr = data.eps_growth_3y
+        if cagr >= 25: score += 35
+        elif cagr >= 15: score += 25
+        elif cagr >= 10: score += 15
+        elif cagr > 0: score += 5
+
+        # 2. ROE quality (25 pts)
+        if data.roe >= 25: score += 25
+        elif data.roe >= 17: score += 20
+        elif data.roe >= 12: score += 10
+
+        # 3. Earnings Stability (20 pts)
+        consec = getattr(data, 'consecutive_eps_growth', 0)
+        if consec >= 8: score += 20
+        elif consec >= 4: score += 15
+        elif consec >= 2: score += 10
+
+        # 4. Gross Margin Expansion (20 pts) - early signal
+        gm_exp = getattr(data, 'gross_margin_expansion', 0)
+        if hasattr(data, 'gross_margin_expansion') and gm_exp != 0:
+            if gm_exp > 3: score += 20
+            elif gm_exp > 0: score += 10
+
+        return min(100, max(0, score))
     
     def score(self, data: FundamentalData) -> float:
         """Tính điểm fundamental tổng (0-100)"""
@@ -609,21 +870,56 @@ class FundamentalAnalyzer:
         
         # Bonus/Penalty
         bonus = 0
-        
+
         # ROE bonus
         if data.roe >= 20:
             bonus += 5
-        
+
         # PE reasonable
         if 5 <= data.pe <= 20:
             bonus += 5
         elif data.pe > 40:
             bonus -= 5
-        
+
         # Foreign interest
         if data.foreign_net_buy_20d > 0:
             bonus += 5
-        
+
+        # === Phase 07: Advanced Financial Health Bonuses ===
+
+        # Piotroski Score Bonus/Penalty
+        if hasattr(data, 'piotroski_score') and data.piotroski_score > 0:
+            if data.piotroski_score >= 7:
+                bonus += 5  # Strong financial health
+            elif data.piotroski_score <= 3:
+                bonus -= 10  # Weak financial health
+
+        # Altman Z-Score - Hard reject on distress
+        if hasattr(data, 'altman_zone') and data.altman_zone:
+            if data.altman_zone == 'distress':
+                # Distressed companies are high risk - severe penalty
+                bonus -= 20
+            elif data.altman_zone == 'grey':
+                bonus -= 5  # Grey zone - moderate risk
+
+        # PEG Ratio Bonus (Growth at reasonable price)
+        if hasattr(data, 'peg_ratio') and data.peg_ratio and data.peg_ratio > 0:
+            if data.peg_ratio < 1.0:
+                bonus += 5  # Undervalued growth
+            elif data.peg_ratio > 3.0:
+                bonus -= 5  # Overvalued growth
+
+        # Dividend Yield Bonus (4%+ is attractive in VN market)
+        if hasattr(data, 'dividend_yield') and data.dividend_yield and data.dividend_yield >= 0.04:
+            bonus += 3
+
+        # Industry Health Bonus
+        if hasattr(data, 'industry_health') and data.industry_health > 0:
+            if data.industry_health >= 80:
+                bonus += 3  # Strong industry
+            elif data.industry_health < 40:
+                bonus -= 5  # Weak industry
+
         return min(100, max(0, base_score + bonus))
 
 
@@ -646,7 +942,10 @@ class TechnicalAnalyzer:
     def __init__(self, config: ScreenerConfig):
         self.config = config
         self.collector = get_data_collector(enable_volume_profile=True)
-        
+
+        # Phase 04: Money Flow Analyzer
+        self.money_flow_analyzer = MoneyFlowAnalyzer() if HAS_MONEY_FLOW else None
+
         # V3 Enhanced: Initialize VWAP Indicator
         self.vwap_indicator = None
         if HAS_V3_ENHANCED and VWAPIndicator:
@@ -733,15 +1032,27 @@ class TechnicalAnalyzer:
             data.foreign_sell_value = getattr(stock, 'foreign_sell_value', 0.0)
             data.foreign_net_value = getattr(stock, 'foreign_net_value', 0.0)
 
-            
             # RS Rating - cần tính từ performance
             data.rs_raw = self._calc_rs_raw(stock)
-            # RS Rating sẽ được tính sau khi có đủ data các mã
-            
+
+            # Phase 04: Money Flow Analysis
+            if self.money_flow_analyzer and hasattr(stock, 'df') and stock.df is not None and len(stock.df) >= 20:
+                try:
+                    from database import ForeignFlowStore
+                    foreign_df = ForeignFlowStore().get_flow(symbol, days=25)
+                    mf = self.money_flow_analyzer.analyze(symbol, stock.df, foreign_df)
+                    data.money_flow_score = mf.money_flow_score
+                    data.foreign_trend = mf.foreign_trend
+                    data.distribution_days = mf.distribution_days_25
+                    data.volume_divergence = mf.volume_price_divergence
+                    data.mfi_14 = mf.mfi_14
+                    data.obv_trend = mf.obv_trend
+                except Exception as e:
+                    print(f"      ⚠️ Money flow analysis: {e}")
+
         except Exception as e:
             pass
 
-        
         return data
     
     def _calc_rs_raw(self, stock: EnhancedStockData) -> float:
@@ -755,53 +1066,45 @@ class TechnicalAnalyzer:
         )
     
     def score(self, data: TechnicalData, sector_rs: int = 50) -> float:
-        """Tính điểm technical (0-100)"""
+        """Tính điểm technical (0-100)
+        RS(25) + MA(20) + Distance(10) + RSI(10) + Volume(10) + MoneyFlow(25)
+        """
         score = 0
-        
-        # RS Rating (30 points)
-        rs_score = (data.rs_rating / 99) * 30
-        score += rs_score
-        
-        # MA Alignment (25 points)
+
+        # RS Rating (25 pts)
+        score += (data.rs_rating / 99) * 25
+
+        # MA Alignment (20 pts)
         if data.above_ma20 and data.above_ma50 and data.above_ma200:
-            score += 25  # Perfect alignment
-        elif data.above_ma20 and data.above_ma50:
             score += 20
+        elif data.above_ma20 and data.above_ma50:
+            score += 16
         elif data.above_ma50:
-            score += 12
-        elif data.above_ma20:
-            score += 8
-        
-        # Distance from High (15 points)
-        # Gần đỉnh = tốt (N in CANSLIM - New High)
-        if data.distance_from_high <= 5:
-            score += 15
-        elif data.distance_from_high <= 10:
-            score += 12
-        elif data.distance_from_high <= 15:
-            score += 8
-        elif data.distance_from_high <= 25:
-            score += 4
-        
-        # RSI (15 points)
-        # Optimal: 50-70
-        if 50 <= data.rsi_14 <= 70:
-            score += 15
-        elif 40 <= data.rsi_14 < 50:
-            score += 12
-        elif 70 < data.rsi_14 <= 80:
-            score += 8
-        elif data.rsi_14 < 30:
-            score += 10  # Oversold bounce potential
-        
-        # Volume (15 points)
-        if data.volume_ratio >= 1.5:
-            score += 15  # Tăng với volume
-        elif data.volume_ratio >= 1.0:
             score += 10
-        elif data.volume_ratio >= 0.7:
-            score += 5
-        
+        elif data.above_ma20:
+            score += 6
+
+        # Distance from High (10 pts)
+        if data.distance_from_high <= 5: score += 10
+        elif data.distance_from_high <= 10: score += 8
+        elif data.distance_from_high <= 15: score += 5
+        elif data.distance_from_high <= 25: score += 3
+
+        # RSI (10 pts)
+        if 50 <= data.rsi_14 <= 70: score += 10
+        elif 40 <= data.rsi_14 < 50: score += 8
+        elif 70 < data.rsi_14 <= 80: score += 5
+        elif data.rsi_14 < 30: score += 7  # Oversold bounce
+
+        # Volume (10 pts)
+        if data.volume_ratio >= 1.5: score += 10
+        elif data.volume_ratio >= 1.0: score += 7
+        elif data.volume_ratio >= 0.7: score += 3
+
+        # Phase 04: Money Flow (25 pts)
+        mf_score = (data.money_flow_score / 100) * 25
+        score += mf_score
+
         return min(100, max(0, score))
 
 
@@ -824,14 +1127,17 @@ class PatternDetector:
     def __init__(self, config: ScreenerConfig):
         self.config = config
         self.collector = get_data_collector()
-    
+        # Phase 02: Candlestick & Chart Pattern analyzers
+        self.candlestick_analyzer = CandlestickAnalyzer() if HAS_CANDLESTICK else None
+        self.chart_pattern_detector = ChartPatternDetector() if HAS_CHART_PATTERNS else None
+
     def detect(self, symbol: str) -> PatternData:
         """Phát hiện pattern cho một mã"""
         data = PatternData()
         
         try:
             # Lấy OHLCV data
-            stock = self.collector.get_stock_data(symbol, lookback_days=120, include_vp=False)
+            stock = self.collector.get_stock_data(symbol, lookback_days=120, include_vp=True)
             
             if stock.price == 0:
                 return data
@@ -895,10 +1201,64 @@ class PatternDetector:
                     vol_desc.append("✓ Dry-up")
                 if vol_desc:
                     data.description += f" | {' | '.join(vol_desc)}"
-            
+
+            # Drop NaN rows to avoid broken calculations
+            df_clean = df.dropna(subset=['open', 'high', 'low', 'close', 'volume'])
+
+            # Phase 02: Candlestick Pattern Analysis (single analyze call)
+            if self.candlestick_analyzer and len(df_clean) >= 10:
+                try:
+                    from types import SimpleNamespace
+                    vp_info = None
+                    if stock.poc > 0:
+                        vp_info = SimpleNamespace(poc=stock.poc, vah=stock.vah, val=stock.val)
+                    signals = self.candlestick_analyzer.analyze(df_clean, vp_info, lookback=5)
+                    if signals:
+                        data.candlestick_signals = signals[:3]
+                        data.candlestick_score = min(30, signals[0].context_score * 0.3)
+                except Exception as e:
+                    print(f"      ⚠️ Candlestick analysis: {e}")
+
+            # Phase 02: Bulkowski Chart Pattern Detection (single detect_all call)
+            if self.chart_pattern_detector and len(df_clean) >= 30:
+                try:
+                    all_cp = self.chart_pattern_detector.detect_all(df_clean)
+                    if all_cp:
+                        best_cp = all_cp[0]
+                        data.chart_patterns = all_cp
+                        data.chart_pattern_name = best_cp.pattern_name
+                        data.chart_success_rate = best_cp.success_rate
+                        data.chart_target_price = best_cp.target_price
+                        data.chart_pattern_score = min(30, best_cp.confidence * best_cp.success_rate / 100 * 0.35)
+                        # Map to PatternType if no IBD pattern found
+                        if data.pattern_type == PatternType.NONE:
+                            cp_type_map = {
+                                'Double Bottom': 'DOUBLE_BOTTOM',
+                                'Double Top': 'DOUBLE_TOP',
+                                'Head and Shoulders': 'HEAD_SHOULDERS',
+                                'Inverse Head and Shoulders': 'INV_HEAD_SHOULDERS',
+                                'Ascending Triangle': 'ASC_TRIANGLE',
+                                'Descending Triangle': 'DESC_TRIANGLE',
+                                'Bull Flag': 'BULL_FLAG',
+                                'Bear Flag': 'BEAR_FLAG',
+                                'Falling Wedge': 'FALLING_WEDGE',
+                                'Rising Wedge': 'RISING_WEDGE',
+                            }
+                            pt_key = cp_type_map.get(best_cp.pattern_name)
+                            if pt_key:
+                                data.pattern_type = PatternType[pt_key]
+                            data.description = f"{best_cp.pattern_name} ({best_cp.success_rate:.0f}% success)"
+                            if best_cp.target_price > 0:
+                                data.buy_point = best_cp.breakout_price
+                                data.current_vs_buy_point = (
+                                    (stock.price - best_cp.breakout_price) / best_cp.breakout_price * 100
+                                )
+                except Exception as e:
+                    print(f"      ⚠️ Chart pattern detection: {e}")
+
         except Exception as e:
             pass
-        
+
         return data
     
     def _analyze_volume_profile(self, df: pd.DataFrame) -> Dict:
@@ -1176,22 +1536,29 @@ class PatternDetector:
     def score(self, data: PatternData) -> float:
         """Tính điểm pattern (0-100)"""
         if data.pattern_type == PatternType.NONE:
-            return 30  # Base score for no pattern
-        
+            base = 30  # Base score for no pattern
+            # Even with no IBD pattern, candlestick/chart patterns add value (capped 20)
+            base += min(20, data.candlestick_score + data.chart_pattern_score)
+            return min(100, max(0, base))
+
         score = data.pattern_quality
-        
+
         # Bonus for specific patterns
         if data.pattern_type == PatternType.VCP:
             score += 10  # VCP is high quality
         elif data.pattern_type == PatternType.CUP_HANDLE:
             score += 5
-        
+
         # Near buy point bonus
         if -5 <= data.current_vs_buy_point <= 3:
             score += 15  # Trong vùng mua
         elif data.current_vs_buy_point > 3:
             score -= 10  # Đã vượt buy point
-        
+
+        # Phase 02: Candlestick + Chart pattern bonus (capped at 20 combined)
+        phase02_bonus = min(20, data.candlestick_score + data.chart_pattern_score)
+        score += phase02_bonus
+
         return min(100, max(0, score))
 
 
@@ -1584,12 +1951,16 @@ Ngành: {candidate.sector_name}
 - Distance from 52w High: {candidate.technical.distance_from_high:.1f}%
 - Volume Ratio: {candidate.technical.volume_ratio:.2f}x
 - Foreign Trade (Session): Buy {candidate.technical.foreign_buy_value/1e6:.1f}M, Sell {candidate.technical.foreign_sell_value/1e6:.1f}M, Net {candidate.technical.foreign_net_value/1e6:+.1f}M VND
+- Money Flow Score: {candidate.technical.money_flow_score:.0f}/100 | Trend: {candidate.technical.foreign_trend} | MFI: {candidate.technical.mfi_14:.0f}
+- Distribution Days: {candidate.technical.distribution_days} | OBV: {candidate.technical.obv_trend} | Divergence: {candidate.technical.volume_divergence}
 
 📐 PATTERN DETECTED:
 - Type: {candidate.pattern.pattern_type.value}
 - Quality: {candidate.pattern.pattern_quality:.0f}/100
 - Base Depth: {candidate.pattern.base_depth:.1f}%
 - Pattern Buy Point: {candidate.pattern.buy_point:,.0f}
+- Candlestick Score: {candidate.pattern.candlestick_score:.1f}/30
+- Chart Pattern: {candidate.pattern.chart_pattern_name or 'None'} (Score: {candidate.pattern.chart_pattern_score:.1f}/30, Success: {candidate.pattern.chart_success_rate:.0f}%)
 
 {self._format_news_for_prompt(candidate.news)}
 
@@ -2242,11 +2613,20 @@ class ScreenerExporter:
                         'rsi': c.technical.rsi_14,
                         'above_ma50': c.technical.above_ma50,
                         'distance_from_high': c.technical.distance_from_high,
+                        'money_flow_score': c.technical.money_flow_score,
+                        'foreign_trend': c.technical.foreign_trend,
+                        'distribution_days': c.technical.distribution_days,
+                        'mfi': c.technical.mfi_14,
                     },
                     'pattern': {
                         'type': c.pattern.pattern_type.value,
                         'quality': c.pattern.pattern_quality,
                         'buy_point': c.pattern.buy_point,
+                        'candlestick_score': c.pattern.candlestick_score,
+                        'chart_pattern': c.pattern.chart_pattern_name,
+                        'chart_pattern_score': c.pattern.chart_pattern_score,
+                        'chart_success_rate': c.pattern.chart_success_rate,
+                        'chart_target_price': c.pattern.chart_target_price,
                     },
                     'ai_analysis': c.ai_analysis[:500] if c.ai_analysis else '',
                 }
@@ -2342,9 +2722,11 @@ class ScreenerExporter:
 - Price: {price:,.0f} | RS: {c.technical.rs_rating}
 - RSI: {c.technical.rsi_14:.0f} | MA: {'✓' if c.technical.above_ma50 else '✗'} MA50
 - Distance from High: {c.technical.distance_from_high:.1f}%
+- Money Flow: {c.technical.money_flow_score:.0f}/100 | {c.technical.foreign_trend} | Dist Days: {c.technical.distribution_days}
 
 **Pattern:** {c.pattern.pattern_type.value} (Quality: {c.pattern.pattern_quality:.0f})
 - Buy Point: {buy_point:,.0f}
+- Candlestick: {c.pattern.candlestick_score:.0f}/30 | Chart: {c.pattern.chart_pattern_name or '-'} ({c.pattern.chart_pattern_score:.0f}/30)
 
 {self._format_news_section(c.news)}
 

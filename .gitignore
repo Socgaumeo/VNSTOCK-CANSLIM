@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Cache & data
+v2_optimized/cache/
+v2_optimized/data_cache/
+v3_enhanced/cache/
+
+# Generated reports
+v2_optimized/output/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment
+.env
+*.env.local
+
+# Research/temp docs (root level)
+BAOCAOTAICHINH-QUICKREF.md
+DOCUMENTATION-UPDATE-SUMMARY.md
+RESEARCH-COMPLETION-SUMMARY.md
+RESEARCH-INDEX.md
+baocaotaichinh-research.md

@@ -201,45 +201,54 @@ class ClaudeProvider(BaseAIProvider):
             raise ImportError("Chạy: pip install anthropic")
     
     def chat(self, prompt: str, system_prompt: str = None) -> str:
-        try:
-            response = self.client.messages.create(
-                model=self.config.get_model(),
-                max_tokens=self.config.max_tokens,
-                system=system_prompt or self.config.system_prompt,
-                messages=[
-                    {"role": "user", "content": prompt}
-                ]
-            )
-            return response.content[0].text
-            
-        except Exception as e:
-            return f"❌ Lỗi Claude: {str(e)}"
+        import time
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                response = self.client.messages.create(
+                    model=self.config.get_model(),
+                    max_tokens=self.config.max_tokens,
+                    system=system_prompt or self.config.system_prompt,
+                    messages=[
+                        {"role": "user", "content": prompt}
+                    ]
+                )
+                return response.content[0].text
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait = (attempt + 1) * 5
+                    print(f"   ⚠️ Claude retry {attempt+1}/{max_retries} sau {wait}s: {str(e)[:60]}")
+                    time.sleep(wait)
+                else:
+                    return f"❌ Lỗi Claude (sau {max_retries} lần thử): {str(e)}"
     
     def chat_with_history(self, messages: List[Dict]) -> str:
-        try:
-            # Extract system from first message if present
-            system = self.config.system_prompt
-            chat_messages = []
-            
-            for msg in messages:
-                if msg["role"] == "system":
-                    system = msg["content"]
+        import time
+        max_retries = 3
+        system = self.config.system_prompt
+        chat_messages = []
+        for msg in messages:
+            if msg["role"] == "system":
+                system = msg["content"]
+            else:
+                chat_messages.append({"role": msg["role"], "content": msg["content"]})
+
+        for attempt in range(max_retries):
+            try:
+                response = self.client.messages.create(
+                    model=self.config.get_model(),
+                    max_tokens=self.config.max_tokens,
+                    system=system,
+                    messages=chat_messages
+                )
+                return response.content[0].text
+            except Exception as e:
+                if attempt < max_retries - 1:
+                    wait = (attempt + 1) * 5
+                    print(f"   ⚠️ Claude retry {attempt+1}/{max_retries} sau {wait}s: {str(e)[:60]}")
+                    time.sleep(wait)
                 else:
-                    chat_messages.append({
-                        "role": msg["role"],
-                        "content": msg["content"]
-                    })
-            
-            response = self.client.messages.create(
-                model=self.config.get_model(),
-                max_tokens=self.config.max_tokens,
-                system=system,
-                messages=chat_messages
-            )
-            return response.content[0].text
-            
-        except Exception as e:
-            return f"❌ Lỗi Claude: {str(e)}"
+                    return f"❌ Lỗi Claude (sau {max_retries} lần thử): {str(e)}"
 
 
 # ══════════════════════════════════════════════════════════════════════════════

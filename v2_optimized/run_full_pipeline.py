@@ -15,6 +15,7 @@ Cách sử dụng:
 """
 
 import os
+import importlib.util
 from datetime import datetime
 from typing import Dict, List, Optional
 
@@ -27,6 +28,32 @@ from module2_sector_rotation_v3 import SectorRotationModule, create_config_from_
 from module3_stock_screener_v1 import StockScreenerModule, create_config_from_unified as create_m3_config
 from email_notifier import EmailNotifier
 from history_manager import HistoryManager
+from database.signal_store import SignalStore
+
+
+# Load kebab-case modules dynamically
+def _load_kebab_module(module_path: str, module_name: str):
+    """Helper to import kebab-case module files."""
+    try:
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
+    except Exception as e:
+        print(f"⚠️ Could not load {module_name}: {e}")
+    return None
+
+
+# Try loading new modules
+_dupont_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "dupont-analyzer.py"),
+    "dupont_analyzer"
+)
+_risk_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "risk-metrics-calculator.py"),
+    "risk_metrics_calculator"
+)
 
 
 def calculate_dynamic_sl_tp(candidate, market_score: int) -> dict:
@@ -245,6 +272,11 @@ class FullPipelineRunner:
         )
         
         # ══════════════════════════════════════════════════════════════════════
+        # SAVE SIGNALS TO DATABASE
+        # ══════════════════════════════════════════════════════════════════════
+        self._save_signals_to_db()
+
+        # ══════════════════════════════════════════════════════════════════════
         # GENERATE COMBINED OUTPUT
         # ══════════════════════════════════════════════════════════════════════
         print("\n" + "="*80)
@@ -267,6 +299,50 @@ class FullPipelineRunner:
         
         return output_file
     
+    def _save_signals_to_db(self):
+        """Persist screener signals to signals_history for backtesting."""
+        if not self.screener_report or not self.screener_report.top_picks:
+            print("⚠️ No signals to save")
+            return
+
+        try:
+            store = SignalStore()
+            market_score = self.market_report.market_score if self.market_report else 50
+            today = self.timestamp.strftime('%Y-%m-%d')
+            signals = []
+            for c in self.screener_report.top_picks:
+                price = c.technical.price
+                buy_point = c.pattern.buy_point if c.pattern.buy_point > 0 else price * 1.02
+                sl_tp = calculate_dynamic_sl_tp(c, market_score)
+                signals.append({
+                    'date': today,
+                    'symbol': c.symbol,
+                    'signal': c.signal.value,
+                    'score_total': c.score_total,
+                    'score_fundamental': c.score_fundamental,
+                    'score_technical': c.score_technical,
+                    'score_pattern': c.score_pattern,
+                    'rs_rating': c.technical.rs_rating,
+                    'pattern_type': c.pattern.pattern_type.value,
+                    'buy_point': buy_point,
+                    'stop_loss': sl_tp['stop_loss'],
+                    'target': sl_tp['target_1'],
+                })
+            saved = store.record_signals_batch(signals)
+            print(f"\n💾 Saved {saved} signals to database")
+
+            # Save market snapshot
+            if self.market_report:
+                store.save_market_snapshot(
+                    date=today,
+                    market_score=self.market_report.market_score,
+                    market_color=self.market_report.traffic_light if hasattr(self.market_report, 'traffic_light') else '',
+                    distribution_days=getattr(self.market_report, 'distribution_days', 0),
+                )
+                print(f"💾 Saved market snapshot (score={self.market_report.market_score})")
+        except Exception as e:
+            print(f"⚠️ Error saving signals to DB: {e}")
+
     def _build_market_context(self) -> Dict:
         """Xây dựng market context từ Module 1 & 2"""
         context = {
@@ -291,6 +367,114 @@ class FullPipelineRunner:
         
         return context
     
+    def _generate_financial_health_report(self) -> str:
+        """Generate financial health summary table from screener results."""
+        if not self.screener_report or not self.screener_report.top_picks:
+            return ""
+
+        content = """## 📊 Financial Health Summary
+
+| Stock | Piotroski | Rating | Altman Z | Zone | PEG | Rating |
+|-------|-----------|--------|----------|------|-----|--------|
+"""
+
+        for c in self.screener_report.top_picks[:10]:
+            try:
+                # Extract attributes (with backward compatibility)
+                piotroski = getattr(c.fundamental, 'piotroski_score', None)
+                altman_z = getattr(c.fundamental, 'altman_z_score', None)
+                altman_zone = getattr(c.fundamental, 'altman_zone', None)
+                peg = getattr(c.fundamental, 'peg_ratio', None)
+                peg_rating = getattr(c.fundamental, 'peg_rating', None)
+
+                # Format values
+                piotroski_str = f"{piotroski}/9" if piotroski is not None else "N/A"
+                piotroski_rating = ("Very Strong" if piotroski and piotroski >= 7 else
+                                   "Strong" if piotroski and piotroski >= 5 else
+                                   "Weak" if piotroski else "N/A")
+
+                altman_str = f"{altman_z:.2f}" if altman_z is not None else "N/A"
+                zone_str = altman_zone if altman_zone else "N/A"
+
+                peg_str = f"{peg:.2f}" if peg is not None else "N/A"
+                peg_rating_str = peg_rating if peg_rating else "N/A"
+
+                content += f"| {c.symbol} | {piotroski_str} | {piotroski_rating} | {altman_str} | {zone_str} | {peg_str} | {peg_rating_str} |\n"
+            except Exception as e:
+                # Gracefully skip if attributes don't exist
+                content += f"| {c.symbol} | N/A | N/A | N/A | N/A | N/A | N/A |\n"
+
+        content += "\n"
+        return content
+
+    def _generate_dupont_analysis_report(self) -> str:
+        """Generate DuPont ROE decomposition for top 5 picks."""
+        if not self.screener_report or not self.screener_report.top_picks:
+            return ""
+
+        if not _dupont_module:
+            return ""  # Module not available
+
+        content = """## 🔍 DuPont ROE Analysis (Top 5)
+
+"""
+
+        for c in self.screener_report.top_picks[:5]:
+            try:
+                # Build input dicts from fundamental data
+                income_data = {
+                    'net_income': getattr(c.fundamental, 'net_income', None),
+                    'profit_before_tax': getattr(c.fundamental, 'profit_before_tax', None),
+                    'operating_profit': getattr(c.fundamental, 'operating_profit', None),
+                    'revenue': getattr(c.fundamental, 'revenue', None),
+                }
+                balance_data = {
+                    'total_assets': getattr(c.fundamental, 'total_assets', None),
+                    'total_equity': getattr(c.fundamental, 'total_equity', None),
+                }
+
+                # Check if we have enough data
+                if not all([income_data.get('net_income'), income_data.get('revenue'),
+                           balance_data.get('total_assets'), balance_data.get('total_equity')]):
+                    # Skip if critical fields missing
+                    continue
+
+                # Calculate DuPont
+                dupont_result = _dupont_module.calculate_dupont(income_data, balance_data)
+
+                roe = dupont_result.get('roe')
+                components = dupont_result.get('components', {})
+                driver = dupont_result.get('driver')
+                weakness = dupont_result.get('weakness')
+
+                if roe is None:
+                    continue
+
+                # Extract component values
+                tax_burden = components.get('tax_burden', {}).get('value')
+                interest = components.get('interest_burden', {}).get('value')
+                margin = components.get('operating_margin', {}).get('value')
+                turnover = components.get('asset_turnover', {}).get('value')
+                leverage = components.get('financial_leverage', {}).get('value')
+
+                # Format component display
+                def fmt(val):
+                    return f"{val:.2f}" if val is not None else "N/A"
+
+                content += f"""**{c.symbol}** (ROE: {roe*100:.1f}%)
+- Tax Burden: {fmt(tax_burden)} | Interest: {fmt(interest)} | Margin: {fmt(margin)} | Turnover: {fmt(turnover)} | Leverage: {fmt(leverage)}
+- Driver: {driver.replace('_', ' ').title() if driver else 'N/A'} | Weakness: {weakness.replace('_', ' ').title() if weakness else 'N/A'}
+
+"""
+            except Exception as e:
+                # Skip on error
+                continue
+
+        if content.count("**") == 0:  # No stocks analyzed
+            return ""
+
+        return content
+
     def _generate_mid_session_comparison(self) -> str:
         """Tạo section so sánh giữa phiên và cuối ngày"""
         if not self.mid_session_data or not self.market_report:
@@ -470,7 +654,11 @@ class FullPipelineRunner:
                 vol_status = "🚀" if getattr(c.pattern, 'breakout_ready', False) else ("✓" if getattr(c.pattern, 'has_shakeout', False) or getattr(c.pattern, 'has_dryup', False) else "⭕")
                 content += f"| {c.rank} | {c.symbol} | {c.sector_name} | {c.score_total:.0f} | {c.technical.rs_rating} | {c.pattern.pattern_type.value} | {vol_status} | {c.signal.value} |\n"
 
-            
+            # Financial Health Summary right after Top Picks table
+            financial_health = self._generate_financial_health_report()
+            if financial_health:
+                content += "\n" + financial_health + "\n"
+
             # Top 5 detail với Trading Plan
             content += "\n## 📝 Chi tiết Top 5 Candidates\n"
             
@@ -526,6 +714,32 @@ class FullPipelineRunner:
 - {'🚀 **BREAKOUT READY**' if getattr(c.pattern, 'breakout_ready', False) else '⏳ Waiting for confirmation'}
 
 """
+                # Financial Health section for each stock
+                pio = getattr(c.fundamental, 'piotroski_score', None)
+                alt_z = getattr(c.fundamental, 'altman_z_score', None)
+                alt_zone = getattr(c.fundamental, 'altman_zone', None)
+                peg = getattr(c.fundamental, 'peg_ratio', None)
+                peg_r = getattr(c.fundamental, 'peg_rating', None)
+                div_y = getattr(c.fundamental, 'dividend_yield', None)
+
+                if pio is not None or alt_z is not None or peg is not None:
+                    pio_rating = ("Very Strong" if pio and pio >= 8 else
+                                  "Strong" if pio and pio >= 6 else
+                                  "Average" if pio and pio >= 4 else
+                                  "Weak" if pio else "N/A")
+                    pio_emoji = "🟢" if pio and pio >= 7 else "🟡" if pio and pio >= 4 else "🔴" if pio else "⚪"
+                    alt_emoji = "🟢" if alt_zone == 'safe' else "🟡" if alt_zone == 'grey' else "🔴" if alt_zone == 'distress' else "⚪"
+                    peg_emoji = "🟢" if peg and peg < 1 else "🟡" if peg and peg <= 2 else "🔴" if peg and peg > 2 else "⚪"
+
+                    content += f"""**🏥 Financial Health:**
+| Chỉ số | Giá trị | Đánh giá |
+|--------|---------|----------|
+| Piotroski F-Score | {pio if pio else 'N/A'}/9 | {pio_emoji} {pio_rating} |
+| Altman Z-Score | {f'{alt_z:.2f}' if alt_z else 'N/A'} | {alt_emoji} {alt_zone if alt_zone else 'N/A'} |
+| PEG Ratio | {f'{peg:.2f}' if peg else 'N/A'} | {peg_emoji} {peg_r if peg_r else 'N/A'} |
+| Dividend Yield | {f'{div_y*100:.1f}%' if div_y else 'N/A'} | {'🟢' if div_y and div_y >= 0.04 else '🟡' if div_y and div_y >= 0.02 else '⚪'} |
+
+"""
                 # News section
                 if c.news and c.news.articles:
                     content += f"**📰 News ({len(c.news.articles)} bài):**\n"
@@ -567,7 +781,17 @@ class FullPipelineRunner:
 ## 🤖 AI Summary - Stock Screening
 {self.screener_report.ai_analysis}
 """
-        
+
+        # ══════════════════════════════════════════════════════════════════════
+        # NEW SECTIONS: DuPont Analysis
+        # ══════════════════════════════════════════════════════════════════════
+        content += "\n---\n\n"
+
+        # DuPont ROE Decomposition
+        dupont_analysis = self._generate_dupont_analysis_report()
+        if dupont_analysis:
+            content += dupont_analysis
+
         # Footer
         content += f"""
 ---
