@@ -106,8 +106,20 @@ def calculate_altman_z_score(data: Dict[str, Any]) -> Dict[str, Any]:
     if data is None:
         return {'z_score': 0.0, 'zone': 'distress', 'components': {}}
 
-    ta = max(_safe_get(data, 'total_assets', 1), 1)
-    tl = max(_safe_get(data, 'total_liabilities', 1), 1)
+    # Check for minimum required data
+    ta = _safe_get(data, 'total_assets', 0)
+    tl = _safe_get(data, 'total_liabilities', 0)
+
+    # If no balance sheet data, return N/A
+    if ta <= 0 or tl <= 0:
+        return {
+            'z_score': 0.0,
+            'zone': 'unknown',
+            'components': {},
+            'note': 'Insufficient balance sheet data'
+        }
+
+    # Use already validated ta, tl from above check
     te = _safe_get(data, 'total_equity', 0)
 
     # Check if this is a financial institution

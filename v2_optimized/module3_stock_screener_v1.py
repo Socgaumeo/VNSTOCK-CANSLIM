@@ -744,7 +744,7 @@ class FundamentalAnalyzer:
                 'profit_before_tax': getattr(v3_data, 'profit_before_tax', 0) or 0,
                 'pe': data.pe,
                 'pb': data.pb,
-                'market_cap': data.market_cap,
+                'market_cap': getattr(v3_data, 'market_cap', 0) or data.market_cap,  # Prefer V3 market_cap
             }
 
             # Build previous financials for Piotroski YoY comparison
@@ -762,15 +762,52 @@ class FundamentalAnalyzer:
                 }
 
             # Quick health check (Piotroski + Altman)
-            health = self.enhanced_scorer.quick_health_check(current_financials, previous_financials)
-            data.piotroski_score = health.get('piotroski_score', 0)
-            data.piotroski_rating = health.get('piotroski_rating', '')
-            data.altman_z_score = health.get('altman_z_score', 0)
-            data.altman_zone = health.get('altman_zone', '')
+            # Build EPS history for PEG calculation
+            eps_history = []
+            if hasattr(v3_data, 'quarterly_data') and v3_data.quarterly_data:
+                # Get EPS from quarterly data (oldest to newest for CAGR)
+                eps_list = [(q.period, q.eps) for q in v3_data.quarterly_data if hasattr(q, 'eps') and q.eps > 0]
+                eps_list.sort(key=lambda x: x[0])  # Sort by period
+                eps_history = [e[1] for e in eps_list[-8:]]  # Last 8 quarters = ~2 years
+
+            # Use full analyze() instead of quick_health_check for complete scoring
+            result = self.enhanced_scorer.analyze(
+                symbol=symbol,
+                current_financials=current_financials,
+                previous_financials=previous_financials,
+                income_data=current_financials,  # Reuse for DuPont
+                balance_data=current_financials,  # Reuse for DuPont
+                eps_history=eps_history if len(eps_history) >= 2 else None,
+                current_price=data.price if hasattr(data, 'price') else 0.0,
+            )
+
+            # Transfer results to FundamentalData
+            data.piotroski_score = result.piotroski_score
+            data.piotroski_rating = result.piotroski_rating
+            data.altman_z_score = result.altman_z_score
+            data.altman_zone = result.altman_zone
+
+            # PEG Ratio
+            if result.peg_ratio is not None:
+                data.peg_ratio = result.peg_ratio
+                data.peg_rating = result.peg_rating
+
+            # DuPont Analysis
+            if result.dupont_roe is not None:
+                data.dupont_roe = result.dupont_roe
+                data.dupont_driver = result.dupont_driver or ''
+                data.dupont_weakness = result.dupont_weakness or ''
+
+            # Financial Health Score
+            data.financial_health_score = result.financial_health_score
 
             # Log enhanced metrics
-            if data.piotroski_score > 0 or data.altman_z_score > 0:
-                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})")
+            metrics_str = f"Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})"
+            if data.peg_ratio > 0:
+                metrics_str += f" PEG={data.peg_ratio:.2f}"
+            if data.dupont_roe > 0:
+                metrics_str += f" DuPont={data.dupont_roe:.1f}%"
+            print(f"   📈 Enhanced: {metrics_str}")
 
         except Exception as e:
             print(f"   ⚠️ Enhanced scoring V3 error: {e}")
@@ -1837,6 +1874,13 @@ Ngành: {candidate.sector_name}
 - OCF/Profit Ratio: {candidate.fundamental.ocf_to_profit_ratio:.2f}
 - Cash Flow Status: {candidate.fundamental.cash_flow_warning if candidate.fundamental.cash_flow_warning else "Healthy"}
 
+🏥 FINANCIAL HEALTH (Enhanced Scoring):
+- Piotroski F-Score: {candidate.fundamental.piotroski_score}/9 ({candidate.fundamental.piotroski_rating or 'N/A'})
+- Altman Z-Score: {candidate.fundamental.altman_z_score:.2f} ({candidate.fundamental.altman_zone or 'N/A'})
+- PEG Ratio: {candidate.fundamental.peg_ratio:.2f if candidate.fundamental.peg_ratio > 0 else 'N/A'}
+- DuPont ROE: {candidate.fundamental.dupont_roe:.1f}% | Driver: {candidate.fundamental.dupont_driver or 'N/A'}
+- Financial Health Score: {candidate.fundamental.financial_health_score:.0f}/100
+
 📈 TECHNICAL DATA:
 - Giá hiện tại: {price:,.0f}
 - RS Rating: {candidate.technical.rs_rating}
@@ -2600,6 +2644,16 @@ class ScreenerExporter:
 ### {c.rank}. {c.symbol} - {c.sector_name}
 
 **Scores:** Fundamental {c.score_fundamental:.0f} | Technical {c.score_technical:.0f} | Pattern {c.score_pattern:.0f} | **Total: {c.score_total:.0f}**
+
+**Fundamental:**
+- ROE: {c.fundamental.roe:.1f}% | ROA: {c.fundamental.roa:.1f}%
+- EPS Growth Q/Q: {c.fundamental.eps_growth_qoq:+.1f}% | Y/Y: {c.fundamental.eps_growth_yoy:+.1f}%
+
+**🏥 Financial Health (Enhanced):**
+- Piotroski F-Score: **{c.fundamental.piotroski_score}/9** ({c.fundamental.piotroski_rating or 'N/A'})
+- Altman Z-Score: **{c.fundamental.altman_z_score:.2f}** ({c.fundamental.altman_zone or 'N/A'})
+- PEG Ratio: {c.fundamental.peg_ratio:.2f if c.fundamental.peg_ratio > 0 else 'N/A'}
+- DuPont ROE: {c.fundamental.dupont_roe:.1f}% | Driver: {c.fundamental.dupont_driver or 'N/A'}
 
 **Technical:**
 - Price: {price:,.0f} | RS: {c.technical.rs_rating}
