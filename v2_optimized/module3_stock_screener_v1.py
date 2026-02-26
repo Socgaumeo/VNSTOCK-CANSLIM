@@ -1877,8 +1877,8 @@ Ngành: {candidate.sector_name}
 🏥 FINANCIAL HEALTH (Enhanced Scoring):
 - Piotroski F-Score: {candidate.fundamental.piotroski_score}/9 ({candidate.fundamental.piotroski_rating or 'N/A'})
 - Altman Z-Score: {candidate.fundamental.altman_z_score:.2f} ({candidate.fundamental.altman_zone or 'N/A'})
-- PEG Ratio: {candidate.fundamental.peg_ratio:.2f if candidate.fundamental.peg_ratio > 0 else 'N/A'}
-- DuPont ROE: {candidate.fundamental.dupont_roe:.1f}% | Driver: {candidate.fundamental.dupont_driver or 'N/A'}
+- PEG Ratio: {f'{candidate.fundamental.peg_ratio:.2f}' if candidate.fundamental.peg_ratio and candidate.fundamental.peg_ratio > 0 else 'N/A'}
+- DuPont ROE: {f'{candidate.fundamental.dupont_roe:.1f}' if candidate.fundamental.dupont_roe else '0.0'}% | Driver: {candidate.fundamental.dupont_driver or 'N/A'}
 - Financial Health Score: {candidate.fundamental.financial_health_score:.0f}/100
 
 📈 TECHNICAL DATA:
@@ -2652,8 +2652,8 @@ class ScreenerExporter:
 **🏥 Financial Health (Enhanced):**
 - Piotroski F-Score: **{c.fundamental.piotroski_score}/9** ({c.fundamental.piotroski_rating or 'N/A'})
 - Altman Z-Score: **{c.fundamental.altman_z_score:.2f}** ({c.fundamental.altman_zone or 'N/A'})
-- PEG Ratio: {c.fundamental.peg_ratio:.2f if c.fundamental.peg_ratio > 0 else 'N/A'}
-- DuPont ROE: {c.fundamental.dupont_roe:.1f}% | Driver: {c.fundamental.dupont_driver or 'N/A'}
+- PEG Ratio: {f'{c.fundamental.peg_ratio:.2f}' if c.fundamental.peg_ratio and c.fundamental.peg_ratio > 0 else 'N/A'}
+- DuPont ROE: {f'{c.fundamental.dupont_roe:.1f}' if c.fundamental.dupont_roe else '0.0'}% | Driver: {c.fundamental.dupont_driver or 'N/A'}
 
 **Technical:**
 - Price: {price:,.0f} | RS: {c.technical.rs_rating}
