@@ -45,6 +45,18 @@ def _load_kebab_module(module_path: str, module_name: str):
     return None
 
 
+# Load context memo module
+_memo_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "context-memo.py"),
+    "context_memo"
+)
+
+# Load template renderer (optional - requires jinja2)
+_template_renderer_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "report-template-renderer.py"),
+    "report_template_renderer"
+)
+
 # Try loading new modules
 _dupont_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "dupont-analyzer.py"),
@@ -53,6 +65,10 @@ _dupont_module = _load_kebab_module(
 _risk_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "risk-metrics-calculator.py"),
     "risk_metrics_calculator"
+)
+_news_hub_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "news-hub.py"),
+    "news_hub"
 )
 
 
@@ -160,6 +176,15 @@ class FullPipelineRunner:
         """)
         
         # ══════════════════════════════════════════════════════════════════════
+        # INIT CONTEXT MEMO
+        # ══════════════════════════════════════════════════════════════════════
+        memo = None
+        if _memo_module:
+            memo = _memo_module.ContextMemo()
+            memo.clear()
+            print("✓ Context memo initialized")
+
+        # ══════════════════════════════════════════════════════════════════════
         # PREPARE HISTORY CONTEXT
         # ══════════════════════════════════════════════════════════════════════
         print("\n" + "="*80)
@@ -193,7 +218,7 @@ class FullPipelineRunner:
         m1_config.SAVE_REPORT = False  # Không save riêng
         
         m1_module = MarketTimingModule(m1_config)
-        self.market_report = m1_module.run(combined_context)
+        self.market_report = m1_module.run(combined_context, memo=memo)
         
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 2: SECTOR ROTATION
@@ -206,7 +231,7 @@ class FullPipelineRunner:
         m2_config.SAVE_REPORT = False  # Không save riêng
         
         m2_module = SectorRotationModule(m2_config)
-        self.sector_report = m2_module.run()
+        self.sector_report = m2_module.run(memo=memo)
         
         # Xác định target sectors từ Module 2
         # LOGIC MỚI: Scan TẤT CẢ các ngành mạnh hoặc đang improving
@@ -252,23 +277,40 @@ class FullPipelineRunner:
             print(f"\n📋 TARGET SECTORS ({len(target_sectors)}): {', '.join(target_sectors)}")
         
         # ══════════════════════════════════════════════════════════════════════
+        # NEWS HUB: Crawl & refresh market news sentiment
+        # ══════════════════════════════════════════════════════════════════════
+        news_hub = None
+        if _news_hub_module:
+            try:
+                hub = _news_hub_module.NewsHub()
+                new_count = hub.refresh()
+                print(f"\n✓ News Hub: {new_count} new articles fetched")
+                if memo:
+                    memo.save("news", hub.get_market_sentiment())
+                news_hub = hub
+            except Exception as e:
+                print(f"⚠️ News Hub failed: {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
         # MODULE 3: STOCK SCREENER
         # ══════════════════════════════════════════════════════════════════════
         print("\n" + "="*80)
         print("📈 MODULE 3: STOCK SCREENER")
         print("="*80)
-        
+
         # Build market context từ Module 1 & 2
         market_context = self._build_market_context()
-        
+
         m3_config = create_m3_config()
         m3_config.SAVE_REPORT = False  # Không save riêng
-        
+
         m3_module = StockScreenerModule(m3_config)
         self.screener_report = m3_module.run(
             target_sectors=target_sectors,
             market_context=market_context,
-            history_context=history_context
+            history_context=history_context,
+            memo=memo,
+            news_hub=news_hub
         )
         
         # ══════════════════════════════════════════════════════════════════════
@@ -283,7 +325,8 @@ class FullPipelineRunner:
         print("📝 GENERATING COMBINED REPORT")
         print("="*80)
         
-        combined_report = self._generate_combined_report()
+        # Try template renderer first; fall back to existing method
+        combined_report = self._generate_report_via_templates() or self._generate_combined_report()
         output_file = self._save_report(combined_report)
         
         print(f"\n✅ HOÀN THÀNH!")
@@ -366,7 +409,55 @@ class FullPipelineRunner:
             context['leading_sectors'] = top_sectors
         
         return context
-    
+
+    def _generate_breadth_section(self) -> str:
+        """Generate market breadth section for combined report (Phase 02)."""
+        if not self.market_report:
+            return ""
+        try:
+            breadth_mod = _load_kebab_module(
+                os.path.join(os.path.dirname(__file__), "market-breadth-analyzer.py"),
+                "market_breadth_analyzer"
+            )
+            if not breadth_mod:
+                return ""
+
+            analyzer = breadth_mod.MarketBreadthAnalyzer()
+            b = self.market_report.breadth
+            metrics = analyzer.calculate_breadth_metrics(
+                advances=b.advances, declines=b.declines,
+                unchanged=b.unchanged, ceiling=b.ceiling, floor=b.floor,
+            )
+            section = analyzer.format_breadth_report_section(metrics) + "\n\n"
+
+            # Add VNMID/VNSML comparison table if available
+            indices = []
+            for name, data in [("VNMID", self.market_report.vnmid), ("VNSML", self.market_report.vnsml)]:
+                if data and data.price > 0:
+                    indices.append(f"| **{name}** | {data.price:,.0f} | {data.change_1d:+.2f}% |")
+            if indices:
+                section += "### Mid/Small Cap\n| Index | Price | 1D Change |\n|-------|-------|----------|\n"
+                section += "\n".join(indices) + "\n\n"
+
+            # Sector heatmap
+            if self.sector_report and hasattr(self.sector_report, 'sectors'):
+                heatmap_data = []
+                for s in self.sector_report.sectors:
+                    code = getattr(s, 'code', '')
+                    name = getattr(s, 'name', code)
+                    change = getattr(s, 'change_1d', 0)
+                    phase = getattr(s, 'phase', '')
+                    if hasattr(phase, 'name'):
+                        phase = phase.name
+                    heatmap_data.append({"code": code, "name": name, "change_1d": change, "phase": str(phase)})
+                if heatmap_data:
+                    section += analyzer.generate_sector_heatmap(heatmap_data) + "\n\n"
+
+            return section
+        except Exception as e:
+            print(f"[WARN] Breadth section generation failed: {e}")
+            return ""
+
     def _generate_financial_health_report(self) -> str:
         """Generate financial health summary table from screener results."""
         if not self.screener_report or not self.screener_report.top_picks:
@@ -555,6 +646,142 @@ class FullPipelineRunner:
         
         return content
     
+    def _generate_report_via_templates(self) -> Optional[str]:
+        """
+        Render report using Jinja2 templates with deterministic fallback.
+        Returns None if template renderer unavailable (caller falls back to _generate_combined_report).
+        """
+        if not _template_renderer_module:
+            return None
+        if not _template_renderer_module.is_available():
+            return None
+
+        try:
+            renderer = _template_renderer_module.ReportTemplateRenderer()
+
+            # Build market data dict
+            market_data: dict = {}
+            if self.market_report:
+                vni = self.market_report.vnindex
+                breadth = self.market_report.breadth
+                market_data = {
+                    'color': self.market_report.market_color,
+                    'score': self.market_report.market_score,
+                    'vnindex_price': vni.price,
+                    'vnindex_change': vni.change_1d,
+                    'rsi': vni.rsi_14,
+                    'macd_hist': vni.macd_hist,
+                    'poc': vni.poc,
+                    'val': vni.val,
+                    'vah': vni.vah,
+                    'price_vs_va': vni.price_vs_va,
+                    'key_signals': self.market_report.key_signals,
+                    'trend': getattr(self.market_report, 'trend_status', ''),
+                    'breadth': {
+                        'advances': breadth.advances,
+                        'declines': breadth.declines,
+                        'unchanged': breadth.unchanged,
+                        'ad_ratio': breadth.ad_ratio,
+                        'ceiling': getattr(breadth, 'ceiling', 0),
+                        'floor': getattr(breadth, 'floor', 0),
+                    } if breadth else None,
+                }
+
+            # Build sectors list
+            sectors_data: list = []
+            if self.sector_report and hasattr(self.sector_report, 'sectors'):
+                for s in self.sector_report.sectors:
+                    phase = getattr(s, 'phase', '')
+                    phase_str = phase.name if hasattr(phase, 'name') else str(phase)
+                    sectors_data.append({
+                        'code': getattr(s, 'code', ''),
+                        'name': getattr(s, 'name', getattr(s, 'code', '')),
+                        'change_1d': getattr(s, 'change_1d', 0),
+                        'rs_rating': getattr(s, 'rs_rating', 50),
+                        'phase': phase_str,
+                    })
+
+            # Build screener data
+            market_score = self.market_report.market_score if self.market_report else 50
+            top_picks_rows: list = []
+            top_picks_detail: list = []
+
+            if self.screener_report:
+                for c in self.screener_report.top_picks[:10]:
+                    top_picks_rows.append({
+                        'rank': c.rank,
+                        'symbol': c.symbol,
+                        'sector_name': c.sector_name,
+                        'score_total': c.score_total,
+                        'rs_rating': c.technical.rs_rating,
+                        'pattern_type': c.pattern.pattern_type.value,
+                        'signal': c.signal.value,
+                    })
+
+                for c in self.screener_report.top_picks[:5]:
+                    sl_tp = calculate_dynamic_sl_tp(c, market_score)
+                    price = c.technical.price
+                    buy_point = c.pattern.buy_point if c.pattern.buy_point > 0 else price * 1.02
+                    top_picks_detail.append({
+                        'rank': c.rank,
+                        'symbol': c.symbol,
+                        'sector_name': c.sector_name,
+                        'score_total': c.score_total,
+                        'score_fundamental': c.score_fundamental,
+                        'score_technical': c.score_technical,
+                        'score_pattern': c.score_pattern,
+                        'roe': c.fundamental.roe,
+                        'roa': c.fundamental.roa,
+                        'eps_qoq': c.fundamental.eps_growth_qoq,
+                        'eps_yoy': c.fundamental.eps_growth_yoy,
+                        'price': price,
+                        'rs_rating': c.technical.rs_rating,
+                        'rsi': c.technical.rsi_14,
+                        'volume_ratio': c.technical.volume_ratio,
+                        'pattern_type': c.pattern.pattern_type.value,
+                        'pattern_quality': c.pattern.pattern_quality,
+                        'breakout_ready': getattr(c.pattern, 'breakout_ready', False),
+                        'buy_point': buy_point,
+                        'stop_loss': sl_tp['stop_loss'],
+                        'stop_loss_pct': sl_tp['stop_loss_pct'],
+                        'target_1': sl_tp['target_1'],
+                        'target_1_pct': sl_tp['target_1_pct'],
+                        'target_2': sl_tp['target_2'],
+                        'target_2_pct': sl_tp['target_2_pct'],
+                        'ai_analysis': c.ai_analysis or None,
+                        'rule_based_commentary': '',
+                    })
+
+            screener_data = {
+                'stats': {
+                    'total_scanned': self.screener_report.total_scanned if self.screener_report else 0,
+                    'passed_technical': self.screener_report.passed_technical if self.screener_report else 0,
+                    'final_candidates': len(self.screener_report.candidates) if self.screener_report else 0,
+                },
+                'top_picks': top_picks_rows,
+                'top_picks_detail': top_picks_detail,
+            }
+
+            data = {
+                'timestamp': self.timestamp.strftime('%d/%m/%Y %H:%M'),
+                'market': market_data,
+                'sectors': sectors_data,
+                'screener': screener_data,
+            }
+
+            ai_narratives = {
+                'market': getattr(self.market_report, 'ai_analysis', None) if self.market_report else None,
+                'sector': getattr(self.sector_report, 'ai_analysis', None) if self.sector_report else None,
+                'screener': getattr(self.screener_report, 'ai_analysis', None) if self.screener_report else None,
+            }
+
+            print("Using Jinja2 template renderer...")
+            return renderer.render(data, ai_narratives)
+
+        except Exception as e:
+            print(f"⚠️ Template renderer failed: {e} - falling back to combined report")
+            return None
+
     def _generate_combined_report(self) -> str:
         """Tạo báo cáo gộp từ 3 modules"""
         
@@ -594,7 +821,11 @@ class FullPipelineRunner:
 | **Value Area** | {vni.val:,.0f} - {vni.vah:,.0f} |
 | **Price vs VA** | {vni.price_vs_va} |
 
-## Tín hiệu chính
+"""
+            # Market Breadth section (Phase 02)
+            content += self._generate_breadth_section()
+
+            content += """## Tín hiệu chính
 """
             for sig in self.market_report.key_signals:
                 content += f"- {sig}\n"

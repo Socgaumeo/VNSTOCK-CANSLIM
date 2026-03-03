@@ -12,14 +12,18 @@
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
-│              Screening & Orchestration                      │
-│  module3_stock_screener_v1.py (CANSLIM + Financial Health) │
-│  - Technical scoring (RS, MA, Volume, RSI, Money Flow)     │
-│  - Fundamental scoring (C, A, L, P, Earnings)             │
-│  - Financial health (Piotroski, Altman, PEG, Dividend)    │
-│  - Industry-specific analysis (Banking, Real Estate, etc.) │
-│  - Risk gating (Altman distress rejection)                 │
-│  - Position sizing with risk management                    │
+│         Screening & Orchestration (with Context Memo)      │
+│  module1 → module2 → module3 integrated via context-memo   │
+│  - Module 1: Market timing → saves market context          │
+│  - Module 2: Sector rotation → reads M1, saves M2 context │
+│  - Module 3: Stock screener → reads full context, adjusts │
+│    * Dynamic thresholds based on market color             │
+│    * Technical scoring (RS, MA, Volume, RSI, Money Flow)  │
+│    * Fundamental scoring (C, A, L, P, Earnings)           │
+│    * Financial health (Piotroski, Altman, PEG, Dividend)  │
+│    * Industry-specific analysis (Banking, Real Estate)    │
+│    * Risk gating (Altman distress rejection)              │
+│    * Position sizing with risk management                 │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐

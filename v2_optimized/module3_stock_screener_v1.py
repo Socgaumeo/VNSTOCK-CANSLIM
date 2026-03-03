@@ -1883,10 +1883,12 @@ Ngành: {candidate.sector_name}
 """
         
         try:
-            return self.ai.chat(prompt)
+            response = self.ai.chat(prompt)
+            return response  # May be None if AI failed
         except Exception as e:
-            return f"❌ Error: {e}"
-    
+            print(f"⚠️ AI analyze_candidate error: {e}")
+            return None
+
     def generate_report_summary(self, report: ScreenerReport, history_context: str = "") -> str:
         """Tạo tóm tắt cho toàn bộ report với Trading Plan cụ thể"""
         if not self.ai:
@@ -1956,9 +1958,11 @@ Với MỖI mã trong TOP 3, đưa ra:
 """
         
         try:
-            return self.ai.chat(prompt)
+            response = self.ai.chat(prompt)
+            return response  # May be None if AI failed
         except Exception as e:
-            return f"❌ Error: {e}"
+            print(f"⚠️ AI generate_report_summary error: {e}")
+            return None
 
     def critique_screener(self, report: ScreenerReport, peer_analysis: str) -> str:
         """
@@ -2248,14 +2252,16 @@ class StockScreener:
     def screen(self, 
                target_sectors: List[str],
                market_context: Optional[Dict] = None,
-               history_context: str = "") -> ScreenerReport:
+               history_context: str = "",
+               news_hub=None) -> ScreenerReport:
         """
         Chạy screening
-        
+
         Args:
             target_sectors: List mã ngành (e.g., ['VNREAL', 'VNFIN'])
             market_context: Context từ Module 1 & 2
             history_context: Context lịch sử từ HistoryManager
+            news_hub: Optional NewsHub instance for RSS-based sentiment scoring
         """
         print("\n" + "="*70)
         print("📊 MODULE 3: STOCK SCREENER")
@@ -2355,7 +2361,7 @@ class StockScreener:
                     print(f"   📰 News: {len(news_data.articles)} bài, sentiment={news_data.sentiment}")
             else:
                 candidate.score_news = 50  # Neutral default
-            
+
             # Total score
             candidate.score_total = (
                 candidate.score_fundamental * self.config.WEIGHT_FUNDAMENTAL +
@@ -2363,6 +2369,20 @@ class StockScreener:
                 candidate.score_pattern * self.config.WEIGHT_PATTERN +
                 candidate.score_news * self.config.WEIGHT_NEWS
             )
+
+            # News Hub bonus: apply RSS sentiment on top of weighted score
+            if news_hub:
+                try:
+                    hub_result = news_hub.analyze_symbol(symbol)
+                    hub_sentiment = hub_result.get("sentiment_score", 0.0)
+                    if hub_sentiment >= 0.5:
+                        candidate.score_total += 3
+                        print(f"   📰 NewsHub +3 (sentiment={hub_sentiment:+.2f})")
+                    elif hub_sentiment <= -0.5:
+                        candidate.score_total -= 5
+                        print(f"   📰 NewsHub -5 (sentiment={hub_sentiment:+.2f})")
+                except Exception:
+                    pass
             
             # Determine signal
             candidate.signal = self._determine_signal(candidate)
@@ -2673,14 +2693,18 @@ class StockScreenerModule:
     def run(self,
             target_sectors: List[str] = None,
             market_context: Optional[Dict] = None,
-            history_context: str = "") -> ScreenerReport:
+            history_context: str = "",
+            memo=None,
+            news_hub=None) -> ScreenerReport:
         """
         Chạy module
-        
+
         Args:
             target_sectors: List mã ngành để scan
             market_context: Context từ Module 1 & 2
             history_context: Context lịch sử
+            memo: ContextMemo instance for inter-module sharing
+            news_hub: Optional NewsHub instance for RSS sentiment scoring
         """
         print("""
 ╔══════════════════════════════════════════════════════════════╗
@@ -2688,14 +2712,22 @@ class StockScreenerModule:
 ║     CANSLIM + Technical + Pattern + News                     ║
 ╚══════════════════════════════════════════════════════════════╝
         """)
-        
+
+        # Adjust thresholds based on context memo
+        if memo:
+            self._adjust_thresholds_by_context(memo)
+
         # Default sectors if not provided
         if not target_sectors:
             target_sectors = ['VNREAL', 'VNFIN']  # Default
-        
+
         # Screen
-        self.report = self.screener.screen(target_sectors, market_context, history_context)
-        
+        self.report = self.screener.screen(target_sectors, market_context, history_context, news_hub=news_hub)
+
+        # Save screener summary to memo
+        if memo:
+            self._save_to_memo(memo)
+
         # Print summary
         self._print_summary()
 
@@ -2706,7 +2738,86 @@ class StockScreenerModule:
         # Track recommendations for backtesting
         self._track_recommendations()
 
+        # Restore thresholds to avoid mutation leak on repeated calls
+        self._restore_thresholds()
+
         return self.report
+
+    def _adjust_thresholds_by_context(self, memo) -> None:
+        """Adjust screening thresholds based on market color from memo.
+
+        Saves original values and restores them via _restore_thresholds().
+        """
+        try:
+            m1_ctx = memo.read("module1")
+            if not m1_ctx:
+                return
+
+            market_color = m1_ctx.get("market_color", "")
+            market_score = m1_ctx.get("market_score", 50)
+
+            # Detect color from Vietnamese text (e.g., "🔴 ĐỎ", "🟢 XANH")
+            color_upper = market_color.upper()
+            if "ĐỎ" in color_upper or "RED" in color_upper:
+                color = "RED"
+            elif "XANH" in color_upper or "GREEN" in color_upper:
+                color = "GREEN"
+            else:
+                color = "YELLOW"
+
+            # Save originals for restoration
+            self._orig_rs = self.config.MIN_RS_RATING
+            self._orig_vol = self.config.MIN_VOLUME_AVG
+
+            if color == "RED":
+                self.config.MIN_RS_RATING = 70
+                self.config.MIN_VOLUME_AVG = max(self._orig_vol, 150000)
+            elif color == "GREEN":
+                self.config.MIN_RS_RATING = 40
+                self.config.MIN_VOLUME_AVG = min(self._orig_vol, 100000)
+            else:  # YELLOW
+                self.config.MIN_RS_RATING = 55
+                self.config.MIN_VOLUME_AVG = max(self._orig_vol, 120000)
+
+            # Also update the screener's config reference
+            self.screener.config = self.config
+
+            print(f"✓ Thresholds adjusted for {color} market (score={market_score}): "
+                  f"RS {self._orig_rs}→{self.config.MIN_RS_RATING}, "
+                  f"Vol {self._orig_vol}→{self.config.MIN_VOLUME_AVG}")
+        except Exception as e:
+            print(f"[WARN] Threshold adjustment failed: {e}")
+
+    def _restore_thresholds(self) -> None:
+        """Restore config thresholds to originals after run."""
+        if hasattr(self, "_orig_rs"):
+            self.config.MIN_RS_RATING = self._orig_rs
+            self.config.MIN_VOLUME_AVG = self._orig_vol
+            self.screener.config = self.config
+
+    def _save_to_memo(self, memo) -> None:
+        """Save screener summary to memo for report generation."""
+        try:
+            rpt = self.report
+            if not rpt:
+                return
+            picks_summary = []
+            for c in (rpt.top_picks or [])[:10]:
+                picks_summary.append({
+                    "symbol": c.symbol,
+                    "score": c.score_total,
+                    "signal": c.signal.value if hasattr(c.signal, "value") else str(c.signal),
+                    "rs_rating": getattr(c.technical, "rs_rating", 0),
+                })
+            memo.save("module3", {
+                "total_scanned": rpt.total_scanned,
+                "passed_technical": rpt.passed_technical,
+                "top_picks_count": len(rpt.top_picks or []),
+                "top_picks": picks_summary,
+            })
+            print("✓ Module3 context saved to memo")
+        except Exception as e:
+            print(f"[WARN] Module3 memo save failed: {e}")
 
     def _track_recommendations(self):
         """Save recommendations to history tracker for performance tracking"""

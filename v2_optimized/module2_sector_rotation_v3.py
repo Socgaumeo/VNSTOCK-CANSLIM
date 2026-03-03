@@ -918,19 +918,24 @@ Format:
     def generate(self, report: SectorRotationReport, history_context: str = "") -> str:
         """Tạo báo cáo AI với context lịch sử"""
         if not self.ai:
-            return "⚠️ AI chưa cấu hình. Điền API key vào config.py"
-        
+            print("⚠️ AI chua cau hinh - rule-based fallback will be used")
+            return None
+
         print("\n" + "="*60)
-        print(f"🤖 AI ANALYSIS ({self.config.AI_PROVIDER.upper()})...")
-        
+        print(f"AI ANALYSIS ({self.config.AI_PROVIDER.upper()})...")
+
         prompt = self.generate_prompt(report, history_context)
-        
+
         try:
             response = self.ai.chat(prompt)
-            print("✓ Hoàn thành!")
+            if response:
+                print("Hoan thanh!")
+            else:
+                print("⚠️ AI returned None - rule-based fallback will be used")
             return response
         except Exception as e:
-            return f"❌ Lỗi: {e}"
+            print(f"⚠️ AI generate error: {e}")
+            return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -1125,13 +1130,14 @@ class SectorRotationModule:
         self.exporter = ReportExporter(self.config)
         self.report: SectorRotationReport = None
     
-    def run(self, market_context: Optional[Dict] = None, history_context: str = "") -> SectorRotationReport:
+    def run(self, market_context: Optional[Dict] = None, history_context: str = "", memo=None) -> SectorRotationReport:
         """
         Chạy module
-        
+
         Args:
             market_context: Optional dict từ Module 1
             history_context: Context lịch sử từ HistoryManager
+            memo: ContextMemo instance for inter-module sharing
         """
         print("""
 ╔══════════════════════════════════════════════════════════════╗
@@ -1139,21 +1145,65 @@ class SectorRotationModule:
 ║     RS Rating (IBD) + Rotation Clock + Leader Analysis       ║
 ╚══════════════════════════════════════════════════════════════╝
         """)
-        
+
+        # Read module1 context from memo if available
+        if memo and not market_context:
+            m1_ctx = memo.read("module1")
+            if m1_ctx:
+                market_context = {
+                    "traffic_light": m1_ctx.get("market_color", ""),
+                    "market_score": m1_ctx.get("market_score", 50),
+                }
+                print(f"✓ Read Module1 context from memo (score={m1_ctx.get('market_score')})")
+
         # 1. Analyze
         self.report = self.analyzer.analyze(market_context)
-        
+
         # 2. AI
         self.report.ai_analysis = self.ai_generator.generate(self.report, history_context)
-        
-        # 3. Print summary
+
+        # 3. Save to context memo
+        if memo:
+            self._save_to_memo(memo)
+
+        # 4. Print summary
         self._print_summary()
-        
-        # 4. Save
+
+        # 5. Save
         if self.config.SAVE_REPORT:
             self.exporter.save(self.report)
-        
+
         return self.report
+
+    def _save_to_memo(self, memo) -> None:
+        """Save sector context to memo for Module3."""
+        try:
+            rpt = self.report
+            sector_scores = {}
+            sector_phases = {}
+            for s in rpt.sectors:
+                code = getattr(s, "code", "")
+                if code:
+                    sector_scores[code] = getattr(s, "composite_score", 0)
+                    phase = getattr(s, "phase", None)
+                    phase_name = phase.name if hasattr(phase, "name") else str(phase)
+                    sector_phases[code] = phase_name
+
+            rotation = getattr(rpt, "rotation", None)
+
+            memo_data = {
+                "sector_scores": sector_scores,
+                "sector_phases": sector_phases,
+                "leading_sectors": [s.code for s in rpt.leading_sectors if hasattr(s, "code")],
+                "improving_sectors": [s.code for s in rpt.improving_sectors if hasattr(s, "code")],
+            }
+            if rotation:
+                memo_data["rotation_clock"] = rotation.current_clock.name if hasattr(rotation.current_clock, "name") else str(rotation.current_clock)
+
+            memo.save("module2", memo_data)
+            print("✓ Module2 context saved to memo")
+        except Exception as e:
+            print(f"[WARN] Module2 memo save failed: {e}")
     
     def run_critique(self, report: SectorRotationReport, peer_analysis: str) -> str:
         """

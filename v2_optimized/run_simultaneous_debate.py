@@ -74,7 +74,7 @@ A. TỔNG QUAN THỊ TRƯỜNG (MARKET CONTEXT)
 🚦 MARKET STATUS: {market_report.market_color} | Score: {market_report.market_score}/100
 
 🧠 CLAUDE ANALYSIS:
-{market_report.ai_analysis}
+{market_report.ai_analysis or "(AI analysis unavailable - rule-based mode)"}
 """
 
     # === SECTOR DATA ===

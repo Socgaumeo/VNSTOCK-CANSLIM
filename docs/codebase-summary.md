@@ -57,6 +57,7 @@ VNSTOCK-CANSLIM is a comprehensive Vietnamese stock analysis system implementing
 | File | Lines | Purpose |
 |------|-------|---------|
 | `money_flow_analyzer.py` | ~220 | Foreign flow, distribution days, MFI, OBV |
+| `market-breadth-analyzer.py` | ~150 | **NEW (Phase 02)** A/D ratio, new highs/lows, sector heatmap, sparkline trends |
 
 ### Portfolio Management
 
@@ -89,13 +90,24 @@ VNSTOCK-CANSLIM is a comprehensive Vietnamese stock analysis system implementing
 
 | File | Lines | Purpose |
 |------|-------|---------|
-| `ai_providers.py` | ~150 | Multi-AI provider abstraction (Gemini, DeepSeek) |
+| `ai_providers.py` | ~150 | Multi-AI provider abstraction (Gemini, DeepSeek), returns None on error |
 | `news_analyzer.py` | ~120 | News sentiment analysis, AI-powered insights |
+| `report-template-renderer.py` | ~210 | **NEW (Phase 03)** Jinja2 Markdown report generator with rule-based fallback |
 
-### Pipeline & Entry Points
+### Report Templates
+
+| File | Bytes | Purpose |
+|------|-------|---------|
+| `templates/base-report.md.j2` | 292 | Full report wrapper with header/footer |
+| `templates/market-timing-section.md.j2` | 1379 | Market timing (Module 1) table + analysis |
+| `templates/sector-rotation-section.md.j2` | 521 | Sector ranking (Module 2) + phase analysis |
+| `templates/stock-picks-section.md.j2` | 2043 | Stock picks (Module 3) + trading plans |
+
+### Pipeline & Orchestration
 
 | File | Lines | Purpose |
 |------|-------|---------|
+| `context-memo.py` | ~80 | **NEW (Phase 01)** Inter-module state sharing via JSON |
 | `run_full_pipeline.py` | ~200 | End-to-end pipeline orchestration, batch screening |
 | `run_backtest.py` | ~150 | Backtest execution, markdown report generation |
 | `initial_sync.py` | ~100 | One-time DB initialization from vnstock |
@@ -195,9 +207,10 @@ Reporting:
 
 ## File Statistics
 
-- **Total Modules**: 33 files
+- **Total Modules**: 35 files
+- **New Modules (Phase 03)**: 1 file + 4 templates (report generation)
 - **New Modules (Phase 07)**: 7 files (financial analysis integration)
-- **Total LOC**: ~5,500 (excluding database schema, tests)
+- **Total LOC**: ~5,800 (excluding database schema, tests)
 - **Max File Size**: 102 KB (module3_stock_screener_v1.py - too large, should be modularized in future)
 - **Modularization Status**: All files <200 lines except module3
 
@@ -214,7 +227,10 @@ Reporting:
 7. **CAGR Validity**: Only meaningful when both start/end profit are positive
 8. **VN Market Adjustments**: RSI thresholds (35/65), ±7% price limits, Piotroski CFO/NI at 0.8x (not strict >1)
 9. **Backtesting Reality**: Requires real signals from run_full_pipeline.py; fake data won't train correctly
-10. **Phase Completion**: All 7 phases of baocaotaichinh integration complete ✅
+10. **Phase 07 Completion**: All 7 phases of baocaotaichinh integration complete ✅
+11. **AI Provider Error Handling (Phase 03)**: Return None on final failure (not error strings) for clean fallback handling
+12. **Jinja2 Templates**: Use `.j2` extension, FileSystemLoader for template discovery, trim_blocks/lstrip_blocks for clean output
+13. **Template Data Contracts**: Keep templates in sync with pipeline output structure; breaking changes require coordinated updates
 
 ---
 

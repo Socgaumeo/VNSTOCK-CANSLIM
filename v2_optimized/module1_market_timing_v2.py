@@ -12,6 +12,7 @@
 """
 
 import os
+import importlib.util
 import warnings
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple, Optional
@@ -40,6 +41,19 @@ except ImportError:
         print("⚠️ Could not import AIProvider")
 
 
+def _load_kebab_module(module_path: str, module_name: str):
+    """Helper to import kebab-case module files."""
+    try:
+        spec = importlib.util.spec_from_file_location(module_name, module_path)
+        if spec and spec.loader:
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            return module
+    except Exception as e:
+        print(f"⚠️ Could not load {module_name}: {e}")
+    return None
+
+
 # ══════════════════════════════════════════════════════════════════════════════
 # CONFIG ADAPTER
 # ══════════════════════════════════════════════════════════════════════════════
@@ -54,7 +68,7 @@ class MarketTimingConfig:
     
     # Indices
     MAIN_INDEX: str = "VNINDEX"
-    COMPARISON_INDICES: List[str] = field(default_factory=lambda: ["VN30", "VN100"])
+    COMPARISON_INDICES: List[str] = field(default_factory=lambda: ["VN30", "VN100", "VNMID", "VNSML"])
     
     # Sector indices - CHỈ 7 NGÀNH HỢP LỆ (đã test)
     SECTOR_INDICES: List[str] = field(default_factory=lambda: [
@@ -120,7 +134,11 @@ class MarketBreadth:
     unchanged: int = 0
     ceiling: int = 0
     floor: int = 0
-    
+    # Extended breadth fields (Phase 02)
+    breadth_thrust: float = 0.0
+    net_breadth_score: float = 0.0
+    breadth_signal: str = ""
+
     @property
     def ad_ratio(self) -> float:
         return self.advances / self.declines if self.declines > 0 else 0
@@ -155,6 +173,8 @@ class MarketReport:
     vnindex: EnhancedStockData = None
     vn30: EnhancedStockData = None
     vn100: EnhancedStockData = None
+    vnmid: EnhancedStockData = None
+    vnsml: EnhancedStockData = None
     
     # Market internals
     breadth: MarketBreadth = field(default_factory=MarketBreadth)
@@ -188,6 +208,8 @@ SECTOR_NAMES = {
     'VNCONS': 'Tiêu dùng thiết yếu',
     'VN30': 'VN30 Large Cap',
     'VN100': 'VN100',
+    'VNMID': 'VNMidCap',
+    'VNSML': 'VNSmallCap',
 }
 
 
@@ -213,7 +235,7 @@ class MarketTimingAnalyzer:
         report = MarketReport()
         
         # 1. VNIndex với Volume Profile
-        print("\n[1/5] VN-INDEX...")
+        print("\n[1/7] VN-INDEX...")
         report.vnindex = self.collector.get_stock_data(
             "VNINDEX", 
             lookback_days=self.config.LOOKBACK_DAYS,
@@ -227,26 +249,48 @@ class MarketTimingAnalyzer:
                       f"VA={report.vnindex.val:,.0f}-{report.vnindex.vah:,.0f}")
         
         # 2. VN30
-        print("\n[2/5] VN30...")
+        print("\n[2/7] VN30...")
         report.vn30 = self.collector.get_stock_data("VN30", include_vp=False)
         if report.vn30.price > 0:
             print(f"   ✓ VN30: {report.vn30.price:,.0f} ({report.vn30.change_1d:+.2f}%)")
         
         # 3. VN100
-        print("\n[3/5] VN100...")
+        print("\n[3/7] VN100...")
         report.vn100 = self.collector.get_stock_data("VN100", include_vp=False)
         if report.vn100 and report.vn100.price > 0:
             print(f"   ✓ VN100: {report.vn100.price:,.0f} ({report.vn100.change_1d:+.2f}%)")
-        
+
+        # 3b. VNMID (Mid Cap)
+        print("\n[4/7] VNMID...")
+        try:
+            report.vnmid = self.collector.get_stock_data("VNMID", include_vp=False)
+            if report.vnmid and report.vnmid.price > 0:
+                print(f"   ✓ VNMID: {report.vnmid.price:,.0f} ({report.vnmid.change_1d:+.2f}%)")
+            else:
+                print("   ⚠️ VNMID: No data")
+        except Exception as e:
+            print(f"   ⚠️ VNMID failed: {e}")
+
+        # 3c. VNSML (Small Cap)
+        print("\n[5/7] VNSML...")
+        try:
+            report.vnsml = self.collector.get_stock_data("VNSML", include_vp=False)
+            if report.vnsml and report.vnsml.price > 0:
+                print(f"   ✓ VNSML: {report.vnsml.price:,.0f} ({report.vnsml.change_1d:+.2f}%)")
+            else:
+                print("   ⚠️ VNSML: No data")
+        except Exception as e:
+            print(f"   ⚠️ VNSML failed: {e}")
+
         # 4. Market Internals (Breadth + Money Flow)
-        print("\n[4/5] MARKET INTERNALS (Breadth & Money Flow)...")
+        print("\n[6/7] MARKET INTERNALS (Breadth & Money Flow)...")
         report.breadth, report.money_flow = self._get_market_internals()
         
         print(f"   ✓ Breadth: Tăng={report.breadth.advances}, Giảm={report.breadth.declines}")
         print(f"   ✓ Money Flow: KN={report.money_flow.foreign_net:+.1f}tỷ")
         
         # 6. Top 3 sectors (chỉ lấy để hiển thị, chi tiết ở Module 2)
-        print("\n[6/6] TOP NGÀNH...")
+        print("\n[7/7] TOP NGÀNH...")
         all_sectors = []
         for code in self.config.SECTOR_INDICES:
             data = self.collector.get_stock_data(code, lookback_days=30, include_vp=False)
@@ -365,14 +409,37 @@ class MarketTimingAnalyzer:
                     except Exception:
                         continue
             
+            # Calculate extended breadth metrics (Phase 02)
+            try:
+                breadth_mod = _load_kebab_module(
+                    os.path.join(os.path.dirname(__file__), "market-breadth-analyzer.py"),
+                    "market_breadth_analyzer"
+                )
+                if breadth_mod:
+                    analyzer = breadth_mod.MarketBreadthAnalyzer()
+                    bm = analyzer.calculate_breadth_metrics(
+                        advances=breadth.advances,
+                        declines=breadth.declines,
+                        unchanged=breadth.unchanged,
+                        ceiling=breadth.ceiling,
+                        floor=breadth.floor,
+                    )
+                    breadth.breadth_thrust = bm["breadth_thrust"]
+                    breadth.net_breadth_score = bm["net_breadth_score"]
+                    breadth.breadth_signal = bm["breadth_signal"]
+                    thrust_note = " 🚀 Breadth Thrust!" if bm["is_thrust_bullish"] else ""
+                    print(f"   ✓ Extended Breadth: A/D={bm['ad_ratio']:.2f} ({bm['breadth_signal']}){thrust_note}")
+            except Exception as e:
+                print(f"   ⚠️ Extended breadth failed: {e}")
+
             print(f"   ✓ Breadth: Tăng={breadth.advances}, Giảm={breadth.declines}")
             print(f"   ✓ Money Flow: KN={money_flow.foreign_net:+.1f}tỷ")
-            
+
         except Exception as e:
             print(f"   ⚠️ Lỗi market internals: {e}")
             breadth.advances = 100
             breadth.declines = 100
-        
+
         return breadth, money_flow
     
     def _calculate_foreign_from_price_board(self, hose_stocks: List[str]) -> MoneyFlow:
@@ -927,23 +994,28 @@ YÊU CẦU: Viết BÁO CÁO CHIẾN LƯỢC NGÀY với cấu trúc:
 """
         return self.ai.chat(prompt)
 
-    def generate(self, report: MarketReport, history_context: str = "") -> str:
-        """Tạo báo cáo AI chi tiết"""
+    def generate(self, report: MarketReport, history_context: str = "") -> Optional[str]:
+        """Tao bao cao AI chi tiet. Returns None if AI unavailable/failed."""
         if not self.ai:
-            return "⚠️ AI chưa được cấu hình. Điền API key vào config.py"
-        
+            print("⚠️ AI chua duoc cau hinh - rule-based fallback will be used")
+            return None
+
         print("\n" + "="*60)
-        print(f"🤖 ĐANG TẠO BÁO CÁO AI ({self.config.AI_PROVIDER.upper()})...")
+        print(f"AI DANG TAO BAO CAO ({self.config.AI_PROVIDER.upper()})...")
         print("="*60)
-        
+
         prompt = self.generate_prompt(report, history_context)
-        
+
         try:
             response = self.ai.chat(prompt)
-            print("✓ Hoàn thành!")
+            if response:
+                print("Hoan thanh!")
+            else:
+                print("⚠️ AI returned None - rule-based fallback will be used")
             return response
         except Exception as e:
-            return f"❌ Lỗi: {e}"
+            print(f"⚠️ AI generate error: {e}")
+            return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -959,37 +1031,77 @@ class MarketTimingModule:
         self.ai_generator = MarketTimingAIGenerator(self.config)
         self.report: MarketReport = None
     
-    def run(self, history_context: str = "") -> MarketReport:
+    def run(self, history_context: str = "", memo=None) -> MarketReport:
         """Chạy module với AI-based scoring"""
         print("""
 ╔══════════════════════════════════════════════════════════════╗
 ║     MODULE 1: MARKET TIMING + AI SCORING                     ║
 ╚══════════════════════════════════════════════════════════════╝
         """)
-        
+
         # 1. Thu thập dữ liệu
         self.report = self.analyzer.collect_data()
-        
+
         # 2. Thu thập tín hiệu kỹ thuật (không chấm điểm)
         self.report = self.analyzer.collect_technical_signals(self.report)
-        
+
         # 3. AI Scoring - để AI chấm điểm thị trường
         ai_score_result = self.ai_generator.score_market(self.report, history_context)
         self.report.market_score = ai_score_result['score']
         self.report.market_color = ai_score_result['color']
         self.report.trend_status = ai_score_result['trend']
-        
+
         # 4. AI Generate detailed report
         self.report.ai_analysis = self.ai_generator.generate(self.report, history_context)
-        
-        # 5. Print
+
+        # 5. Save to context memo
+        if memo:
+            self._save_to_memo(memo)
+
+        # 6. Print
         self._print_report()
-        
-        # 6. Save
+
+        # 7. Save
         if self.config.SAVE_REPORT:
             self._save_report()
-        
+
         return self.report
+
+    def _save_to_memo(self, memo) -> None:
+        """Save market context to context memo for downstream modules."""
+        try:
+            rpt = self.report
+            breadth = rpt.breadth
+            vnindex = rpt.vnindex
+
+            memo_data = {
+                "market_color": rpt.market_color,
+                "market_score": rpt.market_score,
+                "trend_status": rpt.trend_status,
+                "breadth": {
+                    "advances": breadth.advances,
+                    "declines": breadth.declines,
+                    "unchanged": breadth.unchanged,
+                    "ceiling": breadth.ceiling,
+                    "floor": breadth.floor,
+                    "ad_ratio": round(breadth.ad_ratio, 2),
+                    "breadth_thrust": breadth.breadth_thrust,
+                    "net_breadth_score": breadth.net_breadth_score,
+                    "breadth_signal": breadth.breadth_signal,
+                },
+                "top_sectors": [s.code for s in rpt.top_sectors[:5]],
+                "foreign_net": rpt.money_flow.foreign_net,
+                "key_signals": rpt.key_signals[:10],
+            }
+
+            if vnindex:
+                memo_data["vnindex_price"] = getattr(vnindex, "price", 0)
+                memo_data["vnindex_rsi"] = getattr(vnindex, "rsi_14", 0)
+
+            memo.save("module1", memo_data)
+            print("✓ Module1 context saved to memo")
+        except Exception as e:
+            print(f"[WARN] Module1 memo save failed: {e}")
     
     def run_critique(self, report: MarketReport, peer_analysis: str) -> str:
         """

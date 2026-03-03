@@ -1,0 +1,20 @@
+{# Sector rotation section template #}
+# PHAN 2: SECTOR ROTATION (Module 2)
+
+## Bang xep hang nganh
+
+| Rank | Nganh | Change 1D | RS Score | Phase |
+|------|-------|-----------|----------|-------|
+{% for s in sectors %}
+| {{ loop.index }} | {{ s.name }} | {{ "{:+.2f}".format(s.change_1d) }}% | {{ "{:.0f}".format(s.rs_rating) }} | {{ s.phase }} |
+{% endfor %}
+
+{% if ai_narrative %}
+## AI Analysis - Sector Rotation
+
+{{ ai_narrative }}
+{% else %}
+## Nhan dinh nganh (Rule-Based)
+
+{{ rule_based_commentary }}
+{% endif %}

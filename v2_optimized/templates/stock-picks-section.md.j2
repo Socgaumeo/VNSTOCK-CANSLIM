@@ -1,0 +1,60 @@
+{# Stock picks section template #}
+# PHAN 3: STOCK SCREENER (Module 3)
+
+## Screening Stats
+
+| Metric | Value |
+|--------|-------|
+| **Total Scanned** | {{ stats.total_scanned }} |
+| **Passed Technical** | {{ stats.passed_technical }} |
+| **Final Candidates** | {{ stats.final_candidates }} |
+
+## Top Picks
+
+| Rank | Symbol | Sector | Score | RS | Pattern | Signal |
+|------|--------|--------|-------|----|---------|--------|
+{% for c in top_picks %}
+| {{ c.rank }} | {{ c.symbol }} | {{ c.sector_name }} | {{ "{:.0f}".format(c.score_total) }} | {{ c.rs_rating }} | {{ c.pattern_type }} | {{ c.signal }} |
+{% endfor %}
+
+## Chi tiet Top Candidates
+
+{% for c in top_picks_detail %}
+### {{ c.rank }}. {{ c.symbol }} - {{ c.sector_name }}
+
+**Scores:** Fundamental {{ "{:.0f}".format(c.score_fundamental) }} | Technical {{ "{:.0f}".format(c.score_technical) }} | Pattern {{ "{:.0f}".format(c.score_pattern) }} | Total: {{ "{:.0f}".format(c.score_total) }}
+
+**Fundamental:**
+- ROE: {{ "{:.1f}".format(c.roe) }}% | ROA: {{ "{:.1f}".format(c.roa) }}%
+- EPS Q/Q: {{ "{:+.1f}".format(c.eps_qoq) }}% | EPS Y/Y: {{ "{:+.1f}".format(c.eps_yoy) }}%
+
+**Technical:**
+- Gia: {{ "{:,.0f}".format(c.price) }} | RS: {{ c.rs_rating }} | RSI: {{ "{:.0f}".format(c.rsi) }}
+- Volume Ratio: {{ "{:.2f}".format(c.volume_ratio) }}x
+
+**Pattern:** {{ c.pattern_type }} (Quality: {{ "{:.0f}".format(c.pattern_quality) }})
+
+**Trading Plan:**
+| Level | Gia | % |
+|-------|-----|---|
+| Buy Point | {{ "{:,.0f}".format(c.buy_point) }} | - |
+| Stop Loss | {{ "{:,.0f}".format(c.stop_loss) }} | -{{ "{:.1f}".format(c.stop_loss_pct) }}% |
+| Target 1 | {{ "{:,.0f}".format(c.target_1) }} | +{{ "{:.0f}".format(c.target_1_pct) }}% |
+| Target 2 | {{ "{:,.0f}".format(c.target_2) }} | +{{ "{:.0f}".format(c.target_2_pct) }}% |
+
+{% if c.ai_analysis %}
+**AI Analysis:**
+{{ c.ai_analysis }}
+{% else %}
+**Rule-Based Analysis:**
+{{ c.rule_based_commentary }}
+{% endif %}
+
+---
+{% endfor %}
+
+{% if screener_ai_summary %}
+## AI Summary - Stock Screening
+
+{{ screener_ai_summary }}
+{% endif %}

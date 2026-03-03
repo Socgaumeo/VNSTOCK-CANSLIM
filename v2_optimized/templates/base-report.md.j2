@@ -1,0 +1,19 @@
+{# Base report template - wraps all 3 sections #}
+# CANSLIM DAILY REPORT
+**Ngay:** {{ timestamp }}
+
+---
+
+{{ market_section }}
+
+---
+
+{{ sector_section }}
+
+---
+
+{{ screener_section }}
+
+---
+
+*Report generated {{ "with AI analysis" if has_ai else "using rule-based analysis (AI unavailable)" }}*

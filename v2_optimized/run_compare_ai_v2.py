@@ -307,7 +307,8 @@ def run_ai_for_provider(
         sector_report.ai_analysis = ai_gen2.generate(sector_report, history_context)
         results['sector_report'] = sector_report
 
-        print(f"      ✓ AI analysis: {len(sector_report.ai_analysis)} chars")
+        ai_chars = len(sector_report.ai_analysis) if sector_report.ai_analysis else 0
+        print(f"      ✓ AI analysis: {ai_chars} chars")
 
         # ═══════════════════════════════════════════════════════════════════
         # MODULE 3: Stock AI Selection
