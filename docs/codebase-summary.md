@@ -1,7 +1,7 @@
 # VNSTOCK-CANSLIM: Codebase Summary
 
-**Last Updated:** 2026-02-23
-**Status:** All phases complete (07/07)
+**Last Updated:** 2026-03-03
+**Status:** All phases complete (07/07 + Phase 5-6 enhancements)
 
 ## System Overview
 
@@ -24,12 +24,14 @@ VNSTOCK-CANSLIM is a comprehensive Vietnamese stock analysis system implementing
 |------|-------|---------|
 | `config.py` | ~80 | Centralized config, API keys, singleton settings |
 | `data_collector.py` | ~650 | Multi-source data fetcher (VCI/TCBS/SSI), index data, price history |
-| `database/` | 4 files | SQLite cache layer with WAL mode, singleton pattern |
+| `database/` | 6 files | SQLite cache layer with WAL mode, singleton pattern |
 | `database/__init__.py` | ~20 | Package init, `get_db()` factory |
 | `database/base_store.py` | ~80 | BaseStore parent class (CRUD operations) |
 | `database/price_store.py` | ~120 | OHLCV data, technical indicators caching |
 | `database/fundamental_store.py` | ~140 | Fundamentals, ratios, quarterly/annual caching |
 | `database/signal_store.py` | ~100 | Signal persistence, scoring, performance tracking |
+| `database/bond_store.py` | ~110 | **NEW (Phase 5-6)** VN10Y bond yields, health scores |
+| `database/asset_store.py` | ~110 | **NEW (Phase 5-6)** Commodity prices (Gold/Silver/Oil) |
 
 ### Technical Analysis
 
@@ -58,6 +60,14 @@ VNSTOCK-CANSLIM is a comprehensive Vietnamese stock analysis system implementing
 |------|-------|---------|
 | `money_flow_analyzer.py` | ~220 | Foreign flow, distribution days, MFI, OBV |
 | `market-breadth-analyzer.py` | ~150 | **NEW (Phase 02)** A/D ratio, new highs/lows, sector heatmap, sparkline trends |
+
+### Macro & Asset Analysis (Phase 5-6)
+
+| File | Lines | Purpose |
+|------|-------|---------|
+| `bond-lab.py` | ~200 | **NEW** VN10Y yield tracking, bond health scoring, macro signals |
+| `research-lab.py` | ~250 | **NEW** Bond-stock Granger causality, correlation accumulation framework |
+| `asset-tracker.py` | ~180 | **NEW** Gold/Silver/Oil commodity prices, macro signal scoring |
 
 ### Portfolio Management
 
@@ -210,7 +220,8 @@ Reporting:
 - **Total Modules**: 35 files
 - **New Modules (Phase 03)**: 1 file + 4 templates (report generation)
 - **New Modules (Phase 07)**: 7 files (financial analysis integration)
-- **Total LOC**: ~5,800 (excluding database schema, tests)
+- **New Modules (Phase 5-6)**: 5 files + 2 stores (macro/asset analysis)
+- **Total LOC**: ~6,400 (excluding database schema, tests)
 - **Max File Size**: 102 KB (module3_stock_screener_v1.py - too large, should be modularized in future)
 - **Modularization Status**: All files <200 lines except module3
 
@@ -260,4 +271,5 @@ Reporting:
 4. **Risk Monitoring**: Daily alerts for position stop-loss/target management
 5. **ML Enhancement**: Pattern recognition beyond Bulkowski patterns
 6. **News Sentiment**: Real-time news ingestion + AI analysis
+7. **Macro Integration**: Bond/commodity signals wired into screening thresholds (Phase 5-6 follow-up)
 

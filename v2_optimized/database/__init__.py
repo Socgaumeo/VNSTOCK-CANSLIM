@@ -10,9 +10,11 @@ from .fundamental_store import FundamentalStore
 from .foreign_flow_store import ForeignFlowStore
 from .signal_store import SignalStore
 from .news_store import NewsStore
+from .asset_store import AssetStore
+from .bond_store import BondStore
 
 __all__ = [
     'DatabaseManager', 'get_db', 'SCHEMA_VERSION',
     'PriceStore', 'FundamentalStore', 'ForeignFlowStore', 'SignalStore',
-    'NewsStore',
+    'NewsStore', 'AssetStore', 'BondStore',
 ]

@@ -1,7 +1,7 @@
 # VNSTOCK-CANSLIM: System Architecture
 
-**Last Updated:** 2026-02-23
-**Phase:** Complete (all 7 phases ✅)
+**Last Updated:** 2026-03-03
+**Phase:** Complete (all 7 phases ✅ + Phase 5-6 enhancements)
 
 ## High-Level Architecture
 
@@ -48,6 +48,11 @@
 │ - data-reconciliation-checker.py (Verify ratios)         │
 │ - portfolio/position_sizer.py (Risk gates, ATR sizing)   │
 │ - portfolio/trailing_stop.py (Dynamic stops)             │
+├────────────────────────────────────────────────────────────┤
+│ Macro & Asset Layer (Phase 5-6)                           │
+│ - bond-lab.py (VN10Y yield tracking, bond health scoring) │
+│ - research-lab.py (Bond-stock Granger causality)         │
+│ - asset-tracker.py (Gold/Silver/Oil macro signals)       │
 └─────────────────────────────────────────────────────────────┘
                             ↓
 ┌─────────────────────────────────────────────────────────────┐
@@ -66,6 +71,8 @@
 │  database/fundamental_store.py    → fundamentals table     │
 │  database/signal_store.py         → signals table          │
 │  database/foreign_flow_store.py   → foreign_flows table    │
+│  database/bond_store.py           → bonds table (Phase 5-6)│
+│  database/asset_store.py          → assets table (Phase 5-6)
 │  WAL mode, thread-safe singleton pattern                  │
 └─────────────────────────────────────────────────────────────┘
                             ↓

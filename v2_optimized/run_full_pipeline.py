@@ -70,6 +70,14 @@ _news_hub_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "news-hub.py"),
     "news_hub"
 )
+_asset_tracker_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "asset-tracker.py"),
+    "asset_tracker"
+)
+_bond_lab_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "bond-lab.py"),
+    "bond_lab"
+)
 
 
 def calculate_dynamic_sl_tp(candidate, market_score: int) -> dict:
@@ -208,6 +216,27 @@ class FullPipelineRunner:
         combined_context = f"{mid_session_context}\n{history_context}"
 
         # ══════════════════════════════════════════════════════════════════════
+        # BOND LAB: Fetch VN10Y yield and compute bond health score
+        # ══════════════════════════════════════════════════════════════════════
+        if _bond_lab_module:
+            try:
+                lab = _bond_lab_module.BondLab()
+                new_yields = lab.fetch_and_store()
+                bond_health = lab.get_bond_health_score()
+                if memo:
+                    memo.save("bonds", {
+                        "bond_health": bond_health,
+                        "yield_curve": lab.get_yield_curve(),
+                    })
+                print(
+                    f"\n✓ Bond Lab: VN10Y={bond_health.get('vn10y_yield', 'N/A')}%, "
+                    f"health={bond_health.get('score', 0)} "
+                    f"({bond_health.get('interpretation', '')})"
+                )
+            except Exception as e:
+                print(f"  Bond Lab error (skipping): {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
         # MODULE 1: MARKET TIMING
         # ══════════════════════════════════════════════════════════════════════
         print("\n" + "="*80)
@@ -290,6 +319,20 @@ class FullPipelineRunner:
                 news_hub = hub
             except Exception as e:
                 print(f"⚠️ News Hub failed: {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ASSET TRACKER: Fetch commodity prices and derive macro signal
+        # ══════════════════════════════════════════════════════════════════════
+        if _asset_tracker_module:
+            try:
+                tracker = _asset_tracker_module.AssetTracker()
+                new_assets = tracker.fetch_and_store()
+                macro_signal = tracker.get_macro_signal()
+                if memo:
+                    memo.save("assets", {"macro_signal": macro_signal, "summary": tracker.get_asset_summary()})
+                print(f"  Asset Tracker: {new_assets} assets updated, signal={macro_signal.get('signal', 'N/A')}")
+            except Exception as e:
+                print(f"  Asset Tracker error (skipping): {e}")
 
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 3: STOCK SCREENER

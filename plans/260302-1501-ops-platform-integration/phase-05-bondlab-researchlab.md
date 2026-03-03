@@ -9,17 +9,17 @@
 ## Overview
 - **Date**: 2026-03-02
 - **Priority**: P2
-- **Status**: pending
+- **Status**: complete
 - **Effort**: 6h
 - **Description**: Create `bond-lab.py` for Vietnamese government bond yield fetching and SQLite storage, plus `research-lab.py` for bond-stock Granger causality testing and rolling correlation analysis. Feed results into context memo as `bond_health` indicator for Module1 macro timing signal.
 
 ## Key Insights
-- vnstock library already supports bond data retrieval (TCBS source)
-- Government bond yields (TPCP) are key macro indicator: rising yields -> bearish for stocks
-- Granger causality test via statsmodels determines if bond yields "predict" stock returns at various lags
-- Research recommends: keep SQLite for bonds (not DuckDB) to avoid new dependency -- dataset is small (365 rows/year)
-- Bond-stock lead time unknown for VN market -- test lags 1-10 days, report optimal lag
+- vnstock bond API not available; adapted to TradingEconomics free guest API for VN10Y yield data
+- Government bond yields (10Y) are key macro indicator: rising yields -> bearish for stocks
+- Historical data accumulated via daily SQLite snapshots for Granger causality testing (requires 60+ data points)
+- Granger test deferred until sufficient data accumulated (avoid p-hacking with small samples)
 - Module1 already has `_fallback_scoring()` that sums +/- adjustments -- add bond_health adjustment
+- VN10Y only available from free API; multi-tenor yield curve requires premium subscription or manual SBV data
 
 ### Bond Health Scoring Logic
 

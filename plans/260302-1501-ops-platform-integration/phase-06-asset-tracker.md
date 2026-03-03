@@ -8,17 +8,18 @@
 ## Overview
 - **Date**: 2026-03-02
 - **Priority**: P3
-- **Status**: pending
+- **Status**: complete
 - **Effort**: 4h
-- **Description**: Track gold, silver, and USD/VND prices via yfinance. Store in SQLite with correlation analysis against VN indices. Provides macro context for portfolio diversification and risk assessment. Post-MVP -- lowest priority, builds on bond store pattern.
+- **Description**: Track gold, silver, and USD/VND prices via TradingEconomics API. Store in SQLite with correlation analysis against VN indices. Provides macro context for portfolio diversification and risk assessment. Post-MVP -- lowest priority, builds on bond store pattern.
 
 ## Key Insights
-- Gold (GC=F or GLD), Silver (SI=F or SLV), USD/VND (USDVND=X) available via yfinance
+- Gold, Silver, Oil prices available via TradingEconomics free guest API (no API key required)
+- USD/VND rate available via same API for FX risk assessment
 - Gold-stock negative correlation during stress: gold up -> stocks down (risk-off signal)
 - USD/VND appreciation -> foreign outflow from VN market (investors repatriating)
 - Reuse BondStore pattern for AssetStore (same schema structure)
-- yfinance is free, rate-limited but sufficient for daily updates
-- Future web dashboard will use this data for portfolio mark-to-market
+- TradingEconomics free API provides daily updates without rate limiting concerns
+- Macro signal scoring: risk-on/off/neutral in [-5,+5] range
 
 ## Requirements
 

@@ -1051,6 +1051,21 @@ class MarketTimingModule:
         self.report.market_color = ai_score_result['color']
         self.report.trend_status = ai_score_result['trend']
 
+        # 3b. Bond health adjustment (half weight, max ±5 points)
+        try:
+            bond_ctx = memo.read("bonds") if memo else None
+            if bond_ctx and bond_ctx.get("bond_health"):
+                bond_adj = bond_ctx["bond_health"].get("score", 0) * 0.5
+                if bond_adj != 0:
+                    old_score = self.report.market_score
+                    self.report.market_score = max(0, min(100, round(old_score + bond_adj)))
+                    print(
+                        f"  Bond adjustment: {old_score} -> {self.report.market_score} "
+                        f"(bond_score={bond_ctx['bond_health'].get('score', 0):+.1f})"
+                    )
+        except Exception as e:
+            print(f"[WARN] Bond adjustment failed (skipping): {e}")
+
         # 4. AI Generate detailed report
         self.report.ai_analysis = self.ai_generator.generate(self.report, history_context)
 
