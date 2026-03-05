@@ -168,6 +168,7 @@ class FullPipelineRunner:
         self.sector_report = None
         self.screener_report = None
         self.mid_session_data = None  # Mid-session data for comparison
+        self.memo = None  # ContextMemo reference for OPS data in reports
     
     def run(self, target_sectors: List[str] = None) -> str:
         """
@@ -190,6 +191,7 @@ class FullPipelineRunner:
         if _memo_module:
             memo = _memo_module.ContextMemo()
             memo.clear()
+            self.memo = memo
             print("✓ Context memo initialized")
 
         # ══════════════════════════════════════════════════════════════════════
@@ -368,8 +370,8 @@ class FullPipelineRunner:
         print("📝 GENERATING COMBINED REPORT")
         print("="*80)
         
-        # Try template renderer first; fall back to existing method
-        combined_report = self._generate_report_via_templates() or self._generate_combined_report()
+        # Use combined report (richer: includes Financial Health, DuPont, OPS sections)
+        combined_report = self._generate_combined_report()
         output_file = self._save_report(combined_report)
         
         print(f"\n✅ HOÀN THÀNH!")
@@ -522,15 +524,15 @@ class FullPipelineRunner:
                 peg_rating = getattr(c.fundamental, 'peg_rating', None)
 
                 # Format values
-                piotroski_str = f"{piotroski}/9" if piotroski is not None else "N/A"
-                piotroski_rating = ("Very Strong" if piotroski and piotroski >= 7 else
-                                   "Strong" if piotroski and piotroski >= 5 else
-                                   "Weak" if piotroski else "N/A")
+                piotroski_str = f"{piotroski}/9" if piotroski is not None and piotroski > 0 else "N/A"
+                piotroski_rating = ("Very Strong" if piotroski is not None and piotroski >= 7 else
+                                   "Strong" if piotroski is not None and piotroski >= 5 else
+                                   "Weak" if piotroski is not None and piotroski > 0 else "N/A")
 
-                altman_str = f"{altman_z:.2f}" if altman_z is not None else "N/A"
+                altman_str = f"{altman_z:.2f}" if altman_z is not None and altman_z > 0 else "N/A"
                 zone_str = altman_zone if altman_zone else "N/A"
 
-                peg_str = f"{peg:.2f}" if peg is not None else "N/A"
+                peg_str = f"{peg:.2f}" if peg is not None and peg > 0 else "N/A"
                 peg_rating_str = peg_rating if peg_rating else "N/A"
 
                 content += f"| {c.symbol} | {piotroski_str} | {piotroski_rating} | {altman_str} | {zone_str} | {peg_str} | {peg_rating_str} |\n"
@@ -689,6 +691,87 @@ class FullPipelineRunner:
         
         return content
     
+    def _generate_ops_sections(self) -> str:
+        """Generate BondLab + AssetTracker + NewsHub report sections from ContextMemo."""
+        if not self.memo:
+            return ""
+
+        content = ""
+
+        # ── Bond Lab ──
+        bonds = self.memo.read("bonds")
+        if bonds:
+            health = bonds.get("bond_health", {})
+            curve = bonds.get("yield_curve", {})
+            vn10y = health.get("vn10y_yield") or curve.get("VN10Y") or "N/A"
+            score = health.get("score", 0)
+            interp = health.get("interpretation", "N/A")
+            weekly_bps = health.get("weekly_change_bps", 0)
+            monthly_bps = health.get("monthly_change_bps", 0)
+            score_emoji = "🟢" if score >= 3 else "🔴" if score <= -3 else "🟡"
+
+            content += f"""## 🏦 Bond Lab - Lãi suất trái phiếu
+
+| Chỉ số | Giá trị |
+|--------|---------|
+| **VN10Y Yield** | {vn10y}% |
+| **Thay đổi tuần** | {weekly_bps:+.1f} bps |
+| **Thay đổi tháng** | {monthly_bps:+.1f} bps |
+| **Health Score** | {score_emoji} {score:+.1f}/10 |
+| **Nhận định** | {interp} |
+
+"""
+
+        # ── Asset Tracker ──
+        assets_data = self.memo.read("assets")
+        if assets_data:
+            macro = assets_data.get("macro_signal", {})
+            summary = assets_data.get("summary", {})
+            assets_list = summary.get("assets", {})
+            signal = macro.get("signal", "neutral")
+            macro_score = macro.get("score", 0)
+            signal_emoji = "🟢" if signal == "risk-on" else "🔴" if signal == "risk-off" else "🟡"
+
+            content += """## 🌍 Asset Tracker - Tín hiệu vĩ mô
+
+| Asset | Giá | Ngày | Tuần | Xu hướng |
+|-------|-----|------|------|----------|
+"""
+            for ticker, info in assets_list.items():
+                price = info.get("price", "N/A")
+                unit = info.get("unit", "")
+                daily = info.get("daily_change_pct", 0)
+                weekly = info.get("weekly_change_pct", 0)
+                direction = "📈" if info.get("direction") == "up" else "📉"
+                content += f"| **{ticker}** | {price} {unit} | {daily:+.1f}% | {weekly:+.1f}% | {direction} |\n"
+
+            content += f"""
+**Macro Signal:** {signal_emoji} **{signal.upper()}** (score: {macro_score:+.1f})
+
+"""
+
+        # ── News Hub ──
+        news = self.memo.read("news")
+        if news:
+            avg_sent = news.get("avg_sentiment", 0)
+            total = news.get("total_articles", 0)
+            positive = news.get("positive", 0)
+            negative = news.get("negative", 0)
+            sent_emoji = "🟢" if avg_sent > 0.1 else "🔴" if avg_sent < -0.1 else "🟡"
+
+            content += f"""## 📰 News Hub - Sentiment thị trường
+
+| Metric | Value |
+|--------|-------|
+| **Sentiment TB** | {sent_emoji} {avg_sent:+.3f} |
+| **Tổng bài (7 ngày)** | {total} |
+| **Tích cực** | {positive} |
+| **Tiêu cực** | {negative} |
+
+"""
+
+        return content
+
     def _generate_report_via_templates(self) -> Optional[str]:
         """
         Render report using Jinja2 templates with deterministic fallback.
@@ -880,7 +963,14 @@ class FullPipelineRunner:
 """
         
         content += "\n---\n\n"
-        
+
+        # OPS Platform sections (Bond Lab, Asset Tracker, News Hub)
+        ops_sections = self._generate_ops_sections()
+        if ops_sections:
+            content += "# 🔬 OPS PLATFORM DATA\n\n"
+            content += ops_sections
+            content += "\n---\n\n"
+
         # Module 2: Sector Rotation
         content += """# 🏭 PHẦN 2: SECTOR ROTATION (Module 2)
 
@@ -996,22 +1086,27 @@ class FullPipelineRunner:
                 peg_r = getattr(c.fundamental, 'peg_rating', None)
                 div_y = getattr(c.fundamental, 'dividend_yield', None)
 
-                if pio is not None or alt_z is not None or peg is not None:
-                    pio_rating = ("Very Strong" if pio and pio >= 8 else
-                                  "Strong" if pio and pio >= 6 else
-                                  "Average" if pio and pio >= 4 else
-                                  "Weak" if pio else "N/A")
-                    pio_emoji = "🟢" if pio and pio >= 7 else "🟡" if pio and pio >= 4 else "🔴" if pio else "⚪"
+                if pio is not None or alt_z is not None or (peg is not None and peg > 0):
+                    pio_rating = ("Very Strong" if pio is not None and pio >= 8 else
+                                  "Strong" if pio is not None and pio >= 6 else
+                                  "Average" if pio is not None and pio >= 4 else
+                                  "Weak" if pio is not None and pio > 0 else "N/A")
+                    pio_emoji = "🟢" if pio is not None and pio >= 7 else "🟡" if pio is not None and pio >= 4 else "🔴" if pio is not None and pio > 0 else "⚪"
                     alt_emoji = "🟢" if alt_zone == 'safe' else "🟡" if alt_zone == 'grey' else "🔴" if alt_zone == 'distress' else "⚪"
                     peg_emoji = "🟢" if peg and peg < 1 else "🟡" if peg and peg <= 2 else "🔴" if peg and peg > 2 else "⚪"
+
+                    pio_val = f"{pio}/9" if pio is not None and pio > 0 else "N/A"
+                    alt_val = f"{alt_z:.2f}" if alt_z is not None and alt_z > 0 else "N/A"
+                    peg_val = f"{peg:.2f}" if peg is not None and peg > 0 else "N/A"
+                    div_val = f"{div_y*100:.1f}%" if div_y and div_y > 0 else "N/A"
 
                     content += f"""**🏥 Financial Health:**
 | Chỉ số | Giá trị | Đánh giá |
 |--------|---------|----------|
-| Piotroski F-Score | {pio if pio else 'N/A'}/9 | {pio_emoji} {pio_rating} |
-| Altman Z-Score | {f'{alt_z:.2f}' if alt_z else 'N/A'} | {alt_emoji} {alt_zone if alt_zone else 'N/A'} |
-| PEG Ratio | {f'{peg:.2f}' if peg else 'N/A'} | {peg_emoji} {peg_r if peg_r else 'N/A'} |
-| Dividend Yield | {f'{div_y*100:.1f}%' if div_y else 'N/A'} | {'🟢' if div_y and div_y >= 0.04 else '🟡' if div_y and div_y >= 0.02 else '⚪'} |
+| Piotroski F-Score | {pio_val} | {pio_emoji} {pio_rating} |
+| Altman Z-Score | {alt_val} | {alt_emoji} {alt_zone if alt_zone else 'N/A'} |
+| PEG Ratio | {peg_val} | {peg_emoji} {peg_r if peg_r else 'N/A'} |
+| Dividend Yield | {div_val} | {'🟢' if div_y and div_y >= 0.04 else '🟡' if div_y and div_y >= 0.02 else '⚪'} |
 
 """
                 # News section

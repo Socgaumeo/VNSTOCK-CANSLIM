@@ -702,18 +702,23 @@ class FundamentalAnalyzer:
                 'pe': data.pe,
                 'pb': data.pb,
                 'market_cap': data.market_cap,
+                'eps_growth_yoy': data.eps_growth_yoy,
             }
 
-            # Quick health check (Piotroski + Altman)
+            # Quick health check (Piotroski + Altman + PEG)
             health = self.enhanced_scorer.quick_health_check(current_financials)
             data.piotroski_score = health.get('piotroski_score', 0)
             data.piotroski_rating = health.get('piotroski_rating', '')
             data.altman_z_score = health.get('altman_z_score', 0)
             data.altman_zone = health.get('altman_zone', '')
+            if health.get('peg_ratio') is not None:
+                data.peg_ratio = health['peg_ratio']
+                data.peg_rating = health.get('peg_rating', '')
 
             # Log enhanced metrics
             if data.piotroski_score > 0 or data.altman_z_score > 0:
-                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})")
+                peg_str = f" PEG={data.peg_ratio:.2f}" if data.peg_ratio else ""
+                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone}){peg_str}")
 
         except Exception as e:
             print(f"   ⚠️ Enhanced scoring error: {e}")
@@ -745,6 +750,7 @@ class FundamentalAnalyzer:
                 'pe': data.pe,
                 'pb': data.pb,
                 'market_cap': data.market_cap,
+                'eps_growth_yoy': data.eps_growth_yoy,
             }
 
             # Build previous financials for Piotroski YoY comparison
@@ -761,16 +767,20 @@ class FundamentalAnalyzer:
                     'revenue': getattr(v3_data, 'prev_revenue', 0) or 0,
                 }
 
-            # Quick health check (Piotroski + Altman)
+            # Quick health check (Piotroski + Altman + PEG)
             health = self.enhanced_scorer.quick_health_check(current_financials, previous_financials)
             data.piotroski_score = health.get('piotroski_score', 0)
             data.piotroski_rating = health.get('piotroski_rating', '')
             data.altman_z_score = health.get('altman_z_score', 0)
             data.altman_zone = health.get('altman_zone', '')
+            if health.get('peg_ratio') is not None:
+                data.peg_ratio = health['peg_ratio']
+                data.peg_rating = health.get('peg_rating', '')
 
             # Log enhanced metrics
             if data.piotroski_score > 0 or data.altman_z_score > 0:
-                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})")
+                peg_str = f" PEG={data.peg_ratio:.2f}" if data.peg_ratio else ""
+                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone}){peg_str}")
 
         except Exception as e:
             print(f"   ⚠️ Enhanced scoring V3 error: {e}")
@@ -1823,6 +1833,12 @@ Trả lời bằng tiếng Việt với định dạng rõ ràng."""
 PHÂN TÍCH CỔ PHIẾU: {candidate.symbol} - {candidate.name}
 Ngành: {candidate.sector_name}
 
+⚡ CONTEXT: Cổ phiếu này đã LỌT TOP {candidate.rank} trong CANSLIM Screening với tổng điểm {candidate.score_total:.0f}/100.
+Signal hiện tại: {candidate.signal.value}
+→ Đây là cổ phiếu ĐÃ ĐƯỢC LỌC KỸ. Ưu tiên khuyến nghị BUY với điều kiện cụ thể (buy zone, entry trigger).
+→ Chỉ khuyến nghị WATCH nếu giá quá extended (>15% trên buy point) VÀ RSI > 80.
+→ Chỉ khuyến nghị AVOID nếu có red flags NGHIÊM TRỌNG (Altman Z < 1.81, OCF/Profit < -0.5, fraud risk).
+
 📊 SCORES:
 - Fundamental: {candidate.score_fundamental:.0f}/100
 - Technical: {candidate.score_technical:.0f}/100
@@ -1863,7 +1879,7 @@ Ngành: {candidate.sector_name}
 *Liệt kê 2-3 điểm mỗi loại*
 
 ### 2. HÀNH ĐỘNG: BUY / WATCH / AVOID
-*Giải thích lý do*
+*Ưu tiên BUY nếu đã lọt top CANSLIM. Chỉ WATCH nếu giá quá extended (>15% trên buy point VÀ RSI>80). Chỉ AVOID nếu red flags nghiêm trọng. Giải thích lý do.*
 
 ### 3. KỊCH BẢN GIAO DỊCH (NẾU BUY)
 
@@ -2442,11 +2458,11 @@ class StockScreener:
         if self.ai_analyzer.ai:
             for candidate in report.top_picks[:5]:
                 print(f"   🤖 {candidate.symbol}...")
-                candidate.ai_analysis = self.ai_analyzer.analyze_candidate(candidate)
-        
+                candidate.ai_analysis = self.ai_analyzer.analyze_candidate(candidate) or ""
+
         # Step 5: Generate report summary
         print("\n[5/5] Tạo báo cáo tổng hợp...")
-        report.ai_analysis = self.ai_analyzer.generate_report_summary(report, history_context)
+        report.ai_analysis = self.ai_analyzer.generate_report_summary(report, history_context) or ""
         
         return report
     
