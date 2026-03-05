@@ -1529,8 +1529,8 @@ class StockNewsCollector:
             from vnstock import Vnstock
             from datetime import datetime
             
-            # Use VCI source
-            stock = Vnstock().stock(symbol=symbol, source='VCI')
+            # Use KBS source (VCI API blocked since 03/2026)
+            stock = Vnstock().stock(symbol=symbol, source='KBS')
             df = stock.company.news()
             
             articles = []

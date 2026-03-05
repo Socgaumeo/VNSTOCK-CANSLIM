@@ -59,8 +59,9 @@ class APIKeys:
 
 class DataSource(Enum):
     """Nguồn dữ liệu được hỗ trợ"""
-    VCI = "VCI"           # Mặc định, đầy đủ nhất
-    TCBS = "TCBS"         # Backup
+    KBS = "KBS"           # Mặc định từ vnstock 3.4.2 (thay VCI)
+    VCI = "VCI"           # Legacy - API bị block từ 03/2026
+    TCBS = "TCBS"         # Deprecated từ vnstock 3.4.0
     CAFEF = "CAFEF"       # Fallback cho dữ liệu cơ bản
     SSI = "SSI"           # Thêm option
 
@@ -68,12 +69,12 @@ class DataSource(Enum):
 @dataclass
 class DataSourceConfig:
     """Cấu hình nguồn dữ liệu với fallback"""
-    
+
     # Thứ tự ưu tiên nguồn dữ liệu
-    PRIORITY: List[str] = field(default_factory=lambda: ["VCI", "TCBS", "SSI"])
-    
+    PRIORITY: List[str] = field(default_factory=lambda: ["KBS", "VCI", "TCBS"])
+
     # Nguồn mặc định
-    DEFAULT: str = "VCI"
+    DEFAULT: str = "KBS"
     
     # Tự động fallback khi lỗi
     AUTO_FALLBACK: bool = True

@@ -63,10 +63,10 @@ class DataSourceManager:
         df = manager.get_price_history("VCB", days=60)
     """
 
-    SOURCES = ["VCI", "TCBS", "SSI"]
+    SOURCES = ["KBS", "VCI", "TCBS", "SSI"]
 
     def __init__(self,
-                 primary_source: str = "VCI",
+                 primary_source: str = "KBS",
                  api_key: str = None,
                  auto_fallback: bool = True,
                  enable_ohlcv_cache: bool = True):
@@ -468,9 +468,9 @@ class EnhancedDataCollector:
     - Caching (optional)
     """
     
-    def __init__(self, 
+    def __init__(self,
                  api_key: str = None,
-                 primary_source: str = "VCI",
+                 primary_source: str = "KBS",
                  api_delay: float = 0.3,
                  enable_volume_profile: bool = True):
         """
@@ -1017,7 +1017,7 @@ def get_data_collector(enable_volume_profile: bool = True) -> EnhancedDataCollec
     config = get_config() if get_config else None
     
     api_key = config.get_vnstock_key() if config else None
-    primary_source = config.get_data_source() if config else "VCI"
+    primary_source = config.get_data_source() if config else "KBS"
     api_delay = config.rate_limit.API_DELAY if config else 0.3
     
     return EnhancedDataCollector(

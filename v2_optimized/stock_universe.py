@@ -367,7 +367,7 @@ class StockUniverse:
 
         for i, symbol in enumerate(df['symbol'].tolist()):
             try:
-                stock = self.Vnstock().stock(symbol=symbol, source='VCI')
+                stock = self.Vnstock().stock(symbol=symbol, source='KBS')
                 hist = stock.quote.history(start='2025-01-01', end=datetime.now().strftime('%Y-%m-%d'))
 
                 if hist is not None and not hist.empty and 'volume' in hist.columns:

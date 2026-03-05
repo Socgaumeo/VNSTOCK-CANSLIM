@@ -134,7 +134,7 @@ class EarningsCalculator:
             if not self._vnstock:
                 self._vnstock = Vnstock()
 
-            stock = self._vnstock.stock(symbol, source='VCI')
+            stock = self._vnstock.stock(symbol, source='KBS')
 
             # Fetch 3 endpoints
             df_income = self._safe_fetch(stock.finance.income_statement, period='quarter', lang='vi')
