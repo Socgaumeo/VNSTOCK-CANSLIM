@@ -343,19 +343,20 @@ class StockUniverse:
     def _get_volume_data(self, force_refresh: bool = False) -> Dict[str, float]:
         """
         Lấy volume trung bình 20 ngày của tất cả cổ phiếu
-        Cache 1 ngày
+        Cache 5 ngày (volume averages are stable across trading days)
         """
-        # Check cache
+        # Check in-memory cache
         if self._volume_map and not force_refresh:
             return self._volume_map
 
-        # Check file cache (1 day TTL)
-        cached = self._load_cache(self.volume_cache_file, max_age_days=1)
+        # Check file cache (5 day TTL - volume averages don't change rapidly)
+        cached = self._load_cache(self.volume_cache_file, max_age_days=5)
         if cached and 'data' in cached and not force_refresh:
             self._volume_map = cached['data']
+            print(f"📊 Volume cache loaded ({len(self._volume_map)} stocks)")
             return self._volume_map
 
-        print("🔄 Fetching volume data (this may take a while)...")
+        print("🔄 Fetching volume data (this may take a while)...", flush=True)
 
         # Get universe
         df = self.get_full_universe()
@@ -365,27 +366,40 @@ class StockUniverse:
         volume_map = {}
         total = len(df)
 
+        import time as _time
         for i, symbol in enumerate(df['symbol'].tolist()):
             try:
                 stock = self.Vnstock().stock(symbol=symbol, source='KBS')
-                hist = stock.quote.history(start='2025-01-01', end=datetime.now().strftime('%Y-%m-%d'))
+                hist = stock.quote.history(
+                    start='2025-01-01',
+                    end=datetime.now().strftime('%Y-%m-%d')
+                )
 
                 if hist is not None and not hist.empty and 'volume' in hist.columns:
                     avg_vol = hist['volume'].tail(20).mean()
                     volume_map[symbol] = float(avg_vol) if not pd.isna(avg_vol) else 0
 
-                # Progress
+                # Progress every 50 stocks
                 if (i + 1) % 50 == 0:
-                    print(f"   Progress: {i+1}/{total} ({(i+1)/total*100:.1f}%)")
+                    print(f"   Progress: {i+1}/{total} ({(i+1)/total*100:.1f}%)", flush=True)
+                # Rate limit pause every 500 requests (Golden: 600/min)
+                if (i + 1) % 500 == 0:
+                    print(f"   💤 Rate limit pause (60s)...", flush=True)
+                    _time.sleep(60)
 
             except Exception as e:
                 volume_map[symbol] = 0
+                # Log rate limit errors
+                err_str = str(e).lower()
+                if 'rate' in err_str or 'limit' in err_str or 'quota' in err_str:
+                    print(f"   ⚠️ Rate limited at {i+1}/{total}, pausing 30s...", flush=True)
+                    _time.sleep(30)
 
         # Save cache
         self._save_cache(self.volume_cache_file, {'data': volume_map})
         self._volume_map = volume_map
 
-        print(f"✅ Loaded volume for {len(volume_map)} stocks")
+        print(f"✅ Loaded volume for {len(volume_map)} stocks", flush=True)
         return volume_map
 
     def filter_by_liquidity(self, symbols: List[str],
