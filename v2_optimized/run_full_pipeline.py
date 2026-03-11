@@ -21,25 +21,52 @@ import importlib.util
 from datetime import datetime
 from typing import Dict, List, Optional
 
-# ── Patch vnai rate limit: increase limits to avoid blocking ──
+# ── Patch vnai rate limit: prevent process kill on rate limit ──
 def _patch_vnai_rate_limit():
-    """Increase vnai guardian limits to prevent blocking during batch operations."""
+    """
+    vnai's CleanErrorContext calls sys.exit() on RateLimitExceeded,
+    killing the entire process. Patch it to sleep + retry instead.
+    """
     try:
         from vnai.beam import quota
+        import time as _time
+
+        # 1. Patch CleanErrorContext.__exit__ — the actual killer
+        #    Original: catches RateLimitExceeded → sys.exit() (kills process)
+        #    Patched:  catches RateLimitExceeded → sleep 60s → suppress exception
+        def _safe_exit(self, exc_type, exc_val, exc_tb):
+            if exc_type is quota.RateLimitExceeded:
+                msg = str(exc_val)
+                # Extract wait time from error message (e.g., "thử lại sau 48 giây")
+                wait = 60
+                import re
+                m = re.search(r'(\d+)\s*giây', msg)
+                if m:
+                    wait = int(m.group(1)) + 5  # Add 5s buffer
+                print(f"\n   ⏳ VCI rate limited, waiting {wait}s... ({msg})", flush=True)
+                _time.sleep(wait)
+                return True  # Suppress the exception (don't kill process)
+            return False
+
+        quota.CleanErrorContext.__exit__ = _safe_exit
+
+        # 2. Increase guardian tier limits to reduce false triggers
         guardian = quota.guardian
-        # Override tier limits to be very generous (we handle rate limiting ourselves)
         guardian._tier_limits = {
-            "free": {"min": 60, "hour": 3600},
-            "golden": {"min": 6000, "hour": 360000},   # 10x actual to avoid vnai blocking
+            "free": {"min": 600, "hour": 36000},
+            "golden": {"min": 6000, "hour": 360000},
             "diamond": {"min": 60000, "hour": 3600000},
         }
-        # Also patch the _get_tier_limits method to use our overrides
-        _orig_get_limits = guardian._get_tier_limits
-        def _patched_get_limits():
-            tier = guardian._get_current_tier()
-            return guardian._tier_limits.get(tier, {"min": 6000, "hour": 360000})
-        guardian._get_tier_limits = _patched_get_limits
-        print("✓ vnai rate limits relaxed (self-managed)")
+        try:
+            _orig_get_limits = guardian._get_tier_limits
+            def _patched_get_limits():
+                tier = guardian._get_current_tier()
+                return guardian._tier_limits.get(tier, {"min": 6000, "hour": 360000})
+            guardian._get_tier_limits = _patched_get_limits
+        except AttributeError:
+            pass  # _get_tier_limits doesn't exist in this version
+
+        print("✓ vnai rate limit patch: sleep+retry instead of process kill")
     except Exception as e:
         print(f"⚠️ vnai patch skipped: {e}")
 

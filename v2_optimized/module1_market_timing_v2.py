@@ -340,74 +340,75 @@ class MarketTimingAnalyzer:
             
             # ═══════════════════════════════════════════════════════════════════════
             # 2. LẤY KHỐI NGOẠI TỪ VNINDEX - trading.foreign_trade() (CHÍNH XÁC)
+            #    KBS không hỗ trợ foreign_trade() → dùng VCI
             # ═══════════════════════════════════════════════════════════════════════
-            try:
-                today = datetime.now().strftime('%Y-%m-%d')
-                # Lấy 3 ngày gần nhất để đảm bảo có dữ liệu (cuối tuần không có giao dịch)
-                start_date = (datetime.now() - timedelta(days=5)).strftime('%Y-%m-%d')
-                
-                # Sử dụng VNINDEX để lấy tổng dòng tiền cả thị trường
-                stock = Vnstock().stock(symbol='VNINDEX', source=self.config.DATA_SOURCE)
-                foreign_df = stock.trading.foreign_trade(start=start_date, end=today)
-                
-                if foreign_df is not None and not foreign_df.empty:
-                    # Lấy dữ liệu ngày gần nhất (cuối cùng)
-                    latest = foreign_df.iloc[-1]
-                    
-                    # fr_buy_value, fr_sell_value đã tính bằng VND
-                    money_flow.foreign_buy = latest.get('fr_buy_value', 0) / 1e9  # Convert to tỷ
-                    money_flow.foreign_sell = latest.get('fr_sell_value', 0) / 1e9
-                    money_flow.foreign_net = latest.get('fr_net_value', 0) / 1e9
-                    
-                    print(f"   ✓ Foreign Trade API: Buy={money_flow.foreign_buy:.1f}tỷ, Sell={money_flow.foreign_sell:.1f}tỷ, Net={money_flow.foreign_net:+.1f}tỷ")
-                else:
-                    print(f"   ⚠️ foreign_trade() returned empty, fallback to price_board calculation")
-                    raise Exception("Empty foreign_trade data")
-                    
-            except Exception as e:
-                print(f"   ⚠️ foreign_trade API failed: {e}, calculating from price_board...")
-                # Fallback: Tính từ price_board (code cũ)
-                money_flow = self._calculate_foreign_from_price_board(hose_stocks)
-            
+            # Chọn source hỗ trợ trading APIs (foreign_trade, price_board)
+            # KBS không hỗ trợ → ưu tiên VCI, fallback TCBS
+            trading_source = self.config.DATA_SOURCE
+            if trading_source == "KBS":
+                trading_source = "VCI"
+
             # ═══════════════════════════════════════════════════════════════════════
-            # 3. TÍNH BREADTH TỪ PRICE_BOARD
+            # 2+3. TÍNH BREADTH + KHỐI NGOẠI TỪ PRICE_BOARD (1 lần fetch)
+            #      KBS không hỗ trợ price_board() → dùng VCI
             # ═══════════════════════════════════════════════════════════════════════
-            chunk_size = 100
+            import time as _time
+            chunk_size = 200  # VCI supports large chunks
             all_dfs = []
-            stock = Vnstock().stock(symbol='VCB', source=self.config.DATA_SOURCE)
-            
+            stock = Vnstock().stock(symbol='VCB', source=trading_source)
+
             for i in range(0, len(hose_stocks), chunk_size):
                 chunk = hose_stocks[i:i+chunk_size]
                 try:
+                    if i > 0:
+                        _time.sleep(2)  # Tránh rate limit VCI
                     df = stock.trading.price_board(symbols_list=chunk)
                     if df is not None and not df.empty:
                         all_dfs.append(df)
-                except Exception:
-                    pass
-            
+                except Exception as chunk_err:
+                    print(f"   ⚠️ price_board chunk {i//chunk_size+1} failed ({trading_source}): {chunk_err}")
+                    _time.sleep(5)  # Wait longer on error
+
             if all_dfs:
                 full_df = pd.concat(all_dfs, ignore_index=True)
-                
+
+                total_foreign_buy = 0
+                total_foreign_sell = 0
+
                 for _, row in full_df.iterrows():
                     try:
                         match_price = row.get(('match', 'match_price'), 0)
                         ref_price = row.get(('listing', 'ref_price'), 0)
-                        ceil_price = row.get(('listing', 'ceil_price'), 0)
-                        floor_price = row.get(('listing', 'floor_price'), 0)
-                        
+                        # VCI dùng 'ceiling'/'floor', fallback 'ceil_price'/'floor_price'
+                        ceil_price = row.get(('listing', 'ceiling'), 0) or row.get(('listing', 'ceil_price'), 0)
+                        floor_price = row.get(('listing', 'floor'), 0) or row.get(('listing', 'floor_price'), 0)
+
                         if match_price == 0: match_price = ref_price
-                        
+
                         if match_price > 0 and ref_price > 0:
                             change = match_price - ref_price
-                            
+
                             if match_price == ceil_price: breadth.ceiling += 1
                             if match_price == floor_price: breadth.floor += 1
-                            
+
                             if change > 0: breadth.advances += 1
                             elif change < 0: breadth.declines += 1
                             else: breadth.unchanged += 1
+
+                        # Foreign flow (from same price_board data)
+                        f_buy = row.get(('match', 'foreign_buy_value'), 0)
+                        f_sell = row.get(('match', 'foreign_sell_value'), 0)
+                        if pd.isna(f_buy): f_buy = 0
+                        if pd.isna(f_sell): f_sell = 0
+                        total_foreign_buy += f_buy
+                        total_foreign_sell += f_sell
                     except Exception:
                         continue
+
+                # Convert to tỷ VND
+                money_flow.foreign_buy = total_foreign_buy / 1e9
+                money_flow.foreign_sell = total_foreign_sell / 1e9
+                money_flow.foreign_net = money_flow.foreign_buy - money_flow.foreign_sell
             
             # Calculate extended breadth metrics (Phase 02)
             try:
@@ -437,23 +438,28 @@ class MarketTimingAnalyzer:
 
         except Exception as e:
             print(f"   ⚠️ Lỗi market internals: {e}")
-            breadth.advances = 100
-            breadth.declines = 100
+            # Không dùng dummy data — giữ giá trị 0 để báo cáo biết dữ liệu bị thiếu
 
         return breadth, money_flow
     
     def _calculate_foreign_from_price_board(self, hose_stocks: List[str]) -> MoneyFlow:
         """
         Fallback: Tính dòng tiền khối ngoại từ price_board (kém chính xác hơn)
+        KBS không hỗ trợ price_board() → dùng VCI/TCBS
         """
         money_flow = MoneyFlow()
-        
+
         try:
             from vnstock import Vnstock
-            
+
+            # KBS không hỗ trợ price_board → dùng VCI
+            pb_source = self.config.DATA_SOURCE
+            if pb_source == "KBS":
+                pb_source = "VCI"
+
             chunk_size = 100
             all_dfs = []
-            stock = Vnstock().stock(symbol='VCB', source=self.config.DATA_SOURCE)
+            stock = Vnstock().stock(symbol='VCB', source=pb_source)
             
             for i in range(0, len(hose_stocks), chunk_size):
                 chunk = hose_stocks[i:i+chunk_size]

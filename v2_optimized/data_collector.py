@@ -65,6 +65,14 @@ class DataSourceManager:
 
     SOURCES = ["KBS", "VCI", "TCBS", "SSI"]
 
+    # Index symbols that KBS returns with prices scaled down by 1000x
+    # e.g. VNINDEX close=1.65 instead of 1,650
+    KBS_SCALED_INDEX_SYMBOLS = {
+        "VNINDEX", "VN30", "VN100", "VNMID", "VNSML",
+        "HNXINDEX", "HNX30", "UPCOMINDEX",
+        "VNFIN", "VNREAL", "VNMAT", "VNIT", "VNHEAL", "VNCOND", "VNCONS",
+    }
+
     def __init__(self,
                  primary_source: str = "KBS",
                  api_key: str = None,
@@ -171,6 +179,9 @@ class DataSourceManager:
             if 'time' in df.columns:
                 df['time'] = pd.to_datetime(df['time'])
 
+            # Normalize KBS index prices from old cache
+            df = self._normalize_kbs_index_prices(df, symbol, self.current_source)
+
             self.stats['cache_hits'] += 1
             return df
         except Exception as e:
@@ -235,6 +246,26 @@ class DataSourceManager:
         source = source or self.current_source
         return self.Vnstock().stock(symbol=symbol, source=source)
     
+    def _normalize_kbs_index_prices(self, df: pd.DataFrame, symbol: str, source: str) -> pd.DataFrame:
+        """
+        KBS returns index prices scaled down by ~1000x.
+        E.g. VNINDEX close=1.65 instead of 1,650.
+        Detect and fix by multiplying OHLC columns by 1000.
+        """
+        if source != "KBS" or symbol not in self.KBS_SCALED_INDEX_SYMBOLS:
+            return df
+        if df.empty:
+            return df
+
+        # Verify scaling: index values should be > 100, KBS returns < 10
+        sample_close = df['close'].iloc[-1]
+        if sample_close < 50:  # Definitely scaled down
+            price_cols = ['open', 'high', 'low', 'close']
+            for col in price_cols:
+                if col in df.columns:
+                    df[col] = df[col] * 1000
+        return df
+
     def _should_skip_source(self, source: str) -> bool:
         """Kiểm tra xem source có đang trong thời gian cooldown không"""
         if source not in self.failed_sources:
@@ -319,6 +350,9 @@ class DataSourceManager:
                 df = stock.quote.history(start=start_date, end=end_date)
 
                 if not df.empty:
+                    # Normalize KBS index prices (scaled down by 1000x)
+                    df = self._normalize_kbs_index_prices(df, symbol, src)
+
                     self.stats['success'] += 1
 
                     if src != self.current_source:
@@ -535,14 +569,14 @@ class EnhancedDataCollector:
             print(f"   ⚠️ Error saving cache: {e}")
 
     def _delay(self):
-        """Rate limiting"""
+        """Rate limiting — tránh VCI rate limit (600 req/min for Golden)"""
         self.request_count += 1
         time.sleep(self.api_delay)
-        
+
         # Nghỉ dài hơn sau mỗi 20 requests
         if self.request_count % 20 == 0:
             print(f"   💤 Đã xử lý {self.request_count} requests...")
-            time.sleep(2)
+            time.sleep(5)  # 5s pause every 20 requests to stay under VCI limit
     
     def get_stock_data(self, 
                        symbol: str, 

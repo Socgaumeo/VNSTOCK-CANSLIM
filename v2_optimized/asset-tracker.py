@@ -1,7 +1,7 @@
 """
-Asset Tracker - Gold, Silver, Oil, and USD/VND price tracking.
+Asset Tracker - Gold, Silver, Oil price tracking via Yahoo Finance.
 
-Fetches commodity prices from TradingEconomics free API and stores
+Fetches commodity prices from Yahoo Finance API and stores
 in SQLite via AssetStore. Derives macro signals for portfolio context.
 """
 
@@ -11,21 +11,21 @@ import requests
 from datetime import datetime
 from typing import Dict, List, Optional
 
-# TradingEconomics free API (public guest credentials)
-TE_URL = "https://api.tradingeconomics.com/markets/commodities"
-TE_PARAMS = {"c": "guest:guest"}
+# Yahoo Finance chart API for commodity futures
+YAHOO_CHART_URL = "https://query1.finance.yahoo.com/v8/finance/chart/{ticker}"
+YAHOO_HEADERS = {"User-Agent": "Mozilla/5.0"}
 
-# Tracked assets and their TradingEconomics name prefixes
+# Tracked assets and their Yahoo Finance ticker symbols
 TRACKED_ASSETS = {
-    "GOLD": {"te_name": "Gold", "unit": "USD/oz"},
-    "SILVER": {"te_name": "Silver", "unit": "USD/oz"},
-    "OIL": {"te_name": "Brent", "unit": "USD/bbl"},
+    "GOLD": {"yahoo_ticker": "GC=F", "unit": "USD/oz"},
+    "SILVER": {"yahoo_ticker": "SI=F", "unit": "USD/oz"},
+    "OIL": {"yahoo_ticker": "BZ=F", "unit": "USD/bbl"},
 }
 
 
 class AssetTracker:
     """
-    Fetches commodity prices (gold, silver, oil) from TradingEconomics,
+    Fetches commodity prices (gold, silver, oil) from Yahoo Finance,
     stores in SQLite, and derives macro signals for portfolio risk context.
 
     Usage:
@@ -37,7 +37,7 @@ class AssetTracker:
 
     def __init__(self):
         self._store = None
-        self._cached_commodities = None  # Cache API response within session
+        self._cached_assets: Optional[Dict] = None
         self._init_store()
 
     def _init_store(self):
@@ -56,36 +56,32 @@ class AssetTracker:
         Returns count of new entries inserted.
         """
         try:
-            # Skip if data already fresh for first tracked asset
             if self._store and not self._store.is_stale("GOLD"):
                 print("[AssetTracker] Data fresh, skipping fetch")
                 return 0
 
-            commodities = self._fetch_commodities()
-            if not commodities:
+            assets = self._fetch_all_assets()
+            if not assets:
                 return 0
 
             today = datetime.now().strftime("%Y-%m-%d")
             count = 0
 
-            for ticker, config in TRACKED_ASSETS.items():
-                match = self._find_commodity(commodities, config["te_name"])
-                if match:
-                    record = {
-                        "date": today,
-                        "ticker": ticker,
-                        "price": match.get("Last", 0),
-                        "daily_change_pct": match.get("DailyPercentualChange", 0),
-                        "weekly_change_pct": match.get("WeeklyPercentualChange", 0),
-                        "source": "tradingeconomics",
-                    }
-                    if self._store:
-                        if self._store.insert_price(record):
-                            count += 1
-                    else:
-                        count += 1  # Count even without DB (API success)
+            for ticker, data in assets.items():
+                record = {
+                    "date": today,
+                    "ticker": ticker,
+                    "price": data.get("price", 0),
+                    "daily_change_pct": data.get("daily_change_pct", 0),
+                    "weekly_change_pct": data.get("weekly_change_pct", 0),
+                    "source": "yahoo_finance",
+                }
+                if self._store:
+                    if self._store.insert_price(record):
+                        count += 1
+                else:
+                    count += 1
 
-            # Purge old data to keep DB lean
             if self._store:
                 self._store.purge_old(days=365)
 
@@ -94,32 +90,58 @@ class AssetTracker:
             print(f"[AssetTracker] fetch_and_store error: {e}")
             return 0
 
-    def _fetch_commodities(self) -> Optional[List[Dict]]:
-        """Fetch commodity data from TradingEconomics API. Cached per session."""
-        if self._cached_commodities is not None:
-            return self._cached_commodities
+    def _fetch_yahoo_chart(self, ticker: str) -> Optional[Dict]:
+        """Fetch price data from Yahoo Finance chart API."""
         try:
+            url = YAHOO_CHART_URL.format(ticker=ticker)
             r = requests.get(
-                TE_URL,
-                params=TE_PARAMS,
+                url,
+                params={"interval": "1d", "range": "1mo"},
                 timeout=10,
-                headers={"User-Agent": "Mozilla/5.0"},
+                headers=YAHOO_HEADERS,
             )
-            if r.status_code == 200:
-                self._cached_commodities = r.json()
-                return self._cached_commodities
-            print(f"[AssetTracker] API returned status {r.status_code}")
-            return None
+            if r.status_code != 200:
+                return None
+
+            data = r.json()
+            result = data.get("chart", {}).get("result", [{}])[0]
+            closes = result.get("indicators", {}).get("quote", [{}])[0].get("close", [])
+            closes = [c for c in closes if c is not None]
+
+            if len(closes) < 2:
+                return None
+
+            current = closes[-1]
+            prev_day = closes[-2]
+            prev_week = closes[-6] if len(closes) >= 6 else closes[0]
+            prev_month = closes[0]
+
+            return {
+                "price": round(current, 2),
+                "daily_change_pct": round(((current / prev_day) - 1) * 100, 2) if prev_day else 0,
+                "weekly_change_pct": round(((current / prev_week) - 1) * 100, 2) if prev_week else 0,
+                "monthly_change_pct": round(((current / prev_month) - 1) * 100, 2) if prev_month else 0,
+            }
         except Exception as e:
-            print(f"[AssetTracker] API error: {e}")
+            print(f"[AssetTracker] Yahoo chart error for {ticker}: {e}")
             return None
 
-    def _find_commodity(self, data: list, name: str) -> Optional[Dict]:
-        """Find a commodity entry by name prefix (case-insensitive)."""
-        for item in data:
-            if item.get("Name", "").lower().startswith(name.lower()):
-                return item
-        return None
+    def _fetch_all_assets(self) -> Dict:
+        """Fetch all tracked assets. Cached per session."""
+        if self._cached_assets is not None:
+            return self._cached_assets
+
+        assets = {}
+        for name, config in TRACKED_ASSETS.items():
+            result = self._fetch_yahoo_chart(config["yahoo_ticker"])
+            if result:
+                result["unit"] = config["unit"]
+                result["direction"] = "up" if result.get("weekly_change_pct", 0) > 0 else "down"
+                assets[name] = result
+
+        if assets:
+            self._cached_assets = assets
+        return assets
 
     def get_asset_summary(self) -> Dict:
         """
@@ -127,23 +149,9 @@ class AssetTracker:
         Returns: {"status": "ok"|"unavailable", "assets": {ticker: {...}}}
         """
         try:
-            commodities = self._fetch_commodities()
-            if not commodities:
+            assets = self._fetch_all_assets()
+            if not assets:
                 return {"status": "unavailable", "assets": {}}
-
-            assets = {}
-            for ticker, config in TRACKED_ASSETS.items():
-                match = self._find_commodity(commodities, config["te_name"])
-                if match:
-                    assets[ticker] = {
-                        "price": match.get("Last"),
-                        "unit": config["unit"],
-                        "daily_change_pct": round(float(match.get("DailyPercentualChange", 0)), 2),
-                        "weekly_change_pct": round(float(match.get("WeeklyPercentualChange", 0)), 2),
-                        "monthly_change_pct": round(float(match.get("MonthlyPercentualChange", 0)), 2),
-                        "direction": "up" if match.get("WeeklyPercentualChange", 0) > 0 else "down",
-                    }
-
             return {"status": "ok", "assets": assets}
         except Exception as e:
             print(f"[AssetTracker] get_asset_summary error: {e}")
@@ -183,20 +191,18 @@ class AssetTracker:
             elif gold_weekly > 1:
                 score -= 1.0
             elif gold_weekly < -1:
-                score += 1.0  # Falling gold = risk-on
+                score += 1.0
 
             # Oil: moderate rise = growth; spike or crash = headwind
             if 0 < oil_weekly <= 3:
                 score += 1.0
             elif oil_weekly > 5:
-                score -= 1.5  # Oil spiking = inflationary headwind
+                score -= 1.5
             elif oil_weekly < -3:
-                score -= 1.0  # Oil crashing = demand concerns
+                score -= 1.0
 
-            # Clamp score to [-5, 5]
             score = max(-5.0, min(5.0, score))
 
-            # Determine signal label
             if score >= 1.5:
                 signal = "risk-on"
             elif score <= -1.5:
