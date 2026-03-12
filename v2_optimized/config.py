@@ -4,53 +4,46 @@
 ║                    CANSLIM SCANNER - UNIFIED CONFIG                          ║
 ║              File cấu hình chung cho tất cả các Modules                      ║
 ╠══════════════════════════════════════════════════════════════════════════════╣
-║  Chỉ cần điền API keys 1 LẦN DUY NHẤT tại đây                                ║
-║  Tất cả modules sẽ tự động đọc từ file này                                   ║
+║  API keys được đọc từ file .env (KHÔNG hardcode trong source code)           ║
+║  Copy .env.example → .env và điền API keys vào đó                            ║
 ╚══════════════════════════════════════════════════════════════════════════════╝
 """
 
 import os
+from pathlib import Path
 from dataclasses import dataclass, field
 from typing import List, Dict, Optional
 from enum import Enum
 
+# Load .env file
+try:
+    from dotenv import load_dotenv
+    # Tìm .env file trong thư mục hiện tại hoặc thư mục chứa config.py
+    _env_path = Path(__file__).parent / ".env"
+    if _env_path.exists():
+        load_dotenv(_env_path)
+    else:
+        load_dotenv()  # Tìm .env từ CWD
+except ImportError:
+    pass  # Nếu không có python-dotenv, dùng env vars trực tiếp
+
 
 # ══════════════════════════════════════════════════════════════════════════════
-# ⚠️ ĐIỀN API KEYS CỦA BẠN VÀO ĐÂY (CHỈ 1 LẦN)
+# API KEYS (đọc từ environment variables / .env file)
 # ══════════════════════════════════════════════════════════════════════════════
 
 class APIKeys:
-    """Tất cả API keys tập trung tại đây"""
-    
-    # ─────────────────────────────────────────────────────────────
-    # VNSTOCK PREMIUM
-    # ─────────────────────────────────────────────────────────────
-    # Đăng ký: https://vnstocks.com
-    VNSTOCK = "vnstock_0acf8671851dba60b26830c7816c756f"
-    
-    # ─────────────────────────────────────────────────────────────
-    # AI PROVIDERS (Điền ít nhất 1 cái)
-    # ─────────────────────────────────────────────────────────────
-    
-    # DeepSeek - Rẻ nhất ($0.14/1M tokens)
-    # Đăng ký: https://platform.deepseek.com/
-    DEEPSEEK = "sk-2ccd0aea542e4da8b7af147b435be35d"
-    
-    # Google Gemini - Free tier rộng rãi (60 req/phút)
-    # Đăng ký: https://makersuite.google.com/app/apikey
-    GEMINI = "AIzaSyBf8r3SWc9NkuGcLbS4M_nKVIYo5lKr1VI"
-    
-    # Groq - Nhanh nhất (Free tier generous)
-    # Đăng ký: https://console.groq.com/
-    GROQ = ""
-    
-    # Anthropic Claude - Chất lượng cao nhất
-    # Đăng ký: https://console.anthropic.com/
-    CLAUDE = "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"
-    
-    # OpenAI - Phổ biến
-    # Đăng ký: https://platform.openai.com/
-    OPENAI = ""
+    """API keys đọc từ environment variables (.env file)"""
+
+    # VNSTOCK PREMIUM (https://vnstocks.com)
+    VNSTOCK = os.getenv("VNSTOCK_API_KEY", "")
+
+    # AI PROVIDERS
+    DEEPSEEK = os.getenv("DEEPSEEK_API_KEY", "")
+    GEMINI = os.getenv("GEMINI_API_KEY", "")
+    GROQ = os.getenv("GROQ_API_KEY", "")
+    CLAUDE = os.getenv("CLAUDE_API_KEY", "")
+    OPENAI = os.getenv("OPENAI_API_KEY", "")
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -337,14 +330,14 @@ class EmailConfig:
     SMTP_SERVER: str = "smtp.gmail.com"
     SMTP_PORT: int = 587
     
-    # Credentials
+    # Credentials (đọc từ .env)
     # Lưu ý: Với Gmail, cần dùng "App Password" (Mật khẩu ứng dụng)
     # Hướng dẫn: https://support.google.com/accounts/answer/185833
-    SENDER_EMAIL: str = "khanhnn.112@gmail.com"
-    SENDER_PASSWORD: str = "gdzy kbyw rceo qzwh"
-    
+    SENDER_EMAIL: str = field(default_factory=lambda: os.getenv("SENDER_EMAIL", ""))
+    SENDER_PASSWORD: str = field(default_factory=lambda: os.getenv("SENDER_PASSWORD", ""))
+
     # Người nhận (có thể là list hoặc string phân cách bởi dấu phẩy)
-    RECEIVER_EMAIL: str = "khanhnn.112@gmail.com"
+    RECEIVER_EMAIL: str = field(default_factory=lambda: os.getenv("RECEIVER_EMAIL", ""))
     
     # Tiêu đề email
     SUBJECT_PREFIX: str = "[CANSLIM REPORT]"
@@ -361,11 +354,11 @@ class TelegramConfig:
     # Bật/Tắt tính năng Telegram
     ENABLED: bool = True
 
-    # Bot Token (lấy từ @BotFather)
-    BOT_TOKEN: str = "7058792437:AAHcArFXfdP-UOlw3Mnk_E_syhX_iPORJ5o"
+    # Bot Token (đọc từ .env, lấy từ @BotFather)
+    BOT_TOKEN: str = field(default_factory=lambda: os.getenv("TELEGRAM_BOT_TOKEN", ""))
 
     # Admin User ID (để nhận thông báo lỗi)
-    ADMIN_USER_ID: int = 348988385
+    ADMIN_USER_ID: int = field(default_factory=lambda: int(os.getenv("TELEGRAM_ADMIN_USER_ID", "0")))
 
     # Gửi alert hàng ngày lúc 16h
     DAILY_ALERT_ENABLED: bool = True
@@ -451,7 +444,7 @@ class UnifiedConfig:
             print(f"   Key: {key[:20]}...")
         else:
             print("\n🤖 AI PROVIDER: ✗ Không có")
-            print("   Cần điền ít nhất 1 API key trong config.py")
+            print("   Cần điền ít nhất 1 API key trong .env file")
         
         print("\n" + "="*60)
 

@@ -6,6 +6,11 @@ __pycache__/
 dist/
 build/
 
+# Virtual environments
+.venv/
+venv/
+env/
+
 # Cache & data
 v2_optimized/cache/
 v2_optimized/data_cache/
@@ -13,6 +18,10 @@ v3_enhanced/cache/
 
 # Generated reports
 v2_optimized/output/
+
+# Logs
+v2_optimized/logs/
+*.log
 
 # OS
 .DS_Store
@@ -24,9 +33,19 @@ Thumbs.db
 *.swp
 *.swo
 
-# Environment
+# Environment / Secrets (QUAN TRỌNG - KHÔNG commit keys!)
 .env
 *.env.local
+*.env.production
+*.env.staging
+v2_optimized/.env
+
+# Backup directories (chứa keys cũ)
+backups/
+v2_optimized_backup_*/
+
+# Claude worktrees
+.claude/worktrees/
 
 # Research/temp docs (root level)
 BAOCAOTAICHINH-QUICKREF.md

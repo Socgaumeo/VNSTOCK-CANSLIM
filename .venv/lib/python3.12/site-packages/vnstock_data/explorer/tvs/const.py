@@ -1,1 +1,0 @@
-_BASE_URL='https://market-data.tvsi.com.vn/api/v1/'

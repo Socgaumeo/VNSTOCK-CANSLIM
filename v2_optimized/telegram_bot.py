@@ -72,9 +72,10 @@ except ImportError as e:
 # CONFIG
 # ══════════════════════════════════════════════════════════════════════════════
 
-# Bot Configuration
-BOT_TOKEN = "7058792437:AAHcArFXfdP-UOlw3Mnk_E_syhX_iPORJ5o"
-ADMIN_USER_ID = 348988385
+# Bot Configuration (đọc từ config → .env)
+_cfg = get_config()
+BOT_TOKEN = _cfg.telegram.BOT_TOKEN
+ADMIN_USER_ID = _cfg.telegram.ADMIN_USER_ID
 
 # Alert subscribers file
 SUBSCRIBERS_FILE = Path(__file__).parent / "cache" / "telegram_subscribers.json"

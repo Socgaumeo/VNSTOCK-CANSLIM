@@ -30,9 +30,12 @@ LOG_DIR.mkdir(exist_ok=True)
 CACHE_DIR = PROJECT_DIR / "cache"
 CACHE_DIR.mkdir(exist_ok=True)
 
-# Telegram config
-BOT_TOKEN = "7058792437:AAHcArFXfdP-UOlw3Mnk_E_syhX_iPORJ5o"
-ADMIN_USER_ID = 348988385
+# Telegram config (đọc từ config → .env)
+sys.path.insert(0, str(PROJECT_DIR))
+from config import get_config
+_cfg = get_config()
+BOT_TOKEN = _cfg.telegram.BOT_TOKEN
+ADMIN_USER_ID = _cfg.telegram.ADMIN_USER_ID
 SUBSCRIBERS_FILE = CACHE_DIR / "telegram_subscribers.json"
 
 
