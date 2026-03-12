@@ -767,53 +767,20 @@ class FundamentalAnalyzer:
                     'revenue': getattr(v3_data, 'prev_revenue', 0) or 0,
                 }
 
-            # Quick health check (Piotroski + Altman)
-            # Build EPS history for PEG calculation
-            eps_history = []
-            if hasattr(v3_data, 'quarterly_data') and v3_data.quarterly_data:
-                # Get EPS from quarterly data (oldest to newest for CAGR)
-                eps_list = [(q.period, q.eps) for q in v3_data.quarterly_data if hasattr(q, 'eps') and q.eps > 0]
-                eps_list.sort(key=lambda x: x[0])  # Sort by period
-                eps_history = [e[1] for e in eps_list[-8:]]  # Last 8 quarters = ~2 years
-
-            # Use full analyze() instead of quick_health_check for complete scoring
-            result = self.enhanced_scorer.analyze(
-                symbol=symbol,
-                current_financials=current_financials,
-                previous_financials=previous_financials,
-                income_data=current_financials,  # Reuse for DuPont
-                balance_data=current_financials,  # Reuse for DuPont
-                eps_history=eps_history if len(eps_history) >= 2 else None,
-                current_price=data.price if hasattr(data, 'price') else 0.0,
-            )
-
-            # Transfer results to FundamentalData
-            data.piotroski_score = result.piotroski_score
-            data.piotroski_rating = result.piotroski_rating
-            data.altman_z_score = result.altman_z_score
-            data.altman_zone = result.altman_zone
-
-            # PEG Ratio
-            if result.peg_ratio is not None:
-                data.peg_ratio = result.peg_ratio
-                data.peg_rating = result.peg_rating
-
-            # DuPont Analysis
-            if result.dupont_roe is not None:
-                data.dupont_roe = result.dupont_roe
-                data.dupont_driver = result.dupont_driver or ''
-                data.dupont_weakness = result.dupont_weakness or ''
-
-            # Financial Health Score
-            data.financial_health_score = result.financial_health_score
+            # Quick health check (Piotroski + Altman + PEG)
+            health = self.enhanced_scorer.quick_health_check(current_financials, previous_financials)
+            data.piotroski_score = health.get('piotroski_score', 0)
+            data.piotroski_rating = health.get('piotroski_rating', '')
+            data.altman_z_score = health.get('altman_z_score', 0)
+            data.altman_zone = health.get('altman_zone', '')
+            if health.get('peg_ratio') is not None:
+                data.peg_ratio = health['peg_ratio']
+                data.peg_rating = health.get('peg_rating', '')
 
             # Log enhanced metrics
-            metrics_str = f"Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone})"
-            if data.peg_ratio > 0:
-                metrics_str += f" PEG={data.peg_ratio:.2f}"
-            if data.dupont_roe > 0:
-                metrics_str += f" DuPont={data.dupont_roe:.1f}%"
-            print(f"   📈 Enhanced: {metrics_str}")
+            if data.piotroski_score > 0 or data.altman_z_score > 0:
+                peg_str = f" PEG={data.peg_ratio:.2f}" if data.peg_ratio else ""
+                print(f"   📈 Enhanced: Piotroski={data.piotroski_score}/9 Altman={data.altman_z_score:.2f} ({data.altman_zone}){peg_str}")
 
         except Exception as e:
             print(f"   ⚠️ Enhanced scoring V3 error: {e}")

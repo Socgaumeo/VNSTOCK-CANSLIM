@@ -98,27 +98,7 @@ def _load_kebab_module(module_path: str, module_name: str):
     return None
 
 
-# Load context memo module
-_memo_module = _load_kebab_module(
-    os.path.join(os.path.dirname(__file__), "context-memo.py"),
-    "context_memo"
-)
-
-# Load template renderer (optional - requires jinja2)
-_template_renderer_module = _load_kebab_module(
-    os.path.join(os.path.dirname(__file__), "report-template-renderer.py"),
-    "report_template_renderer"
-)
-
-# Try loading new modules
-_dupont_module = _load_kebab_module(
-    os.path.join(os.path.dirname(__file__), "dupont-analyzer.py"),
-    "dupont_analyzer"
-)
-_risk_module = _load_kebab_module(
-    os.path.join(os.path.dirname(__file__), "risk-metrics-calculator.py"),
-    "risk_metrics_calculator"
-)
+# Load OPS platform modules (optional)
 _news_hub_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "news-hub.py"),
     "news_hub"
@@ -237,16 +217,6 @@ class FullPipelineRunner:
 ╚══════════════════════════════════════════════════════════════════════════════╝
         """)
         
-        # ══════════════════════════════════════════════════════════════════════
-        # INIT CONTEXT MEMO
-        # ══════════════════════════════════════════════════════════════════════
-        memo = None
-        if _memo_module:
-            memo = _memo_module.ContextMemo()
-            memo.clear()
-            self.memo = memo
-            print("✓ Context memo initialized")
-
         # ══════════════════════════════════════════════════════════════════════
         # PREPARE HISTORY CONTEXT
         # ══════════════════════════════════════════════════════════════════════
