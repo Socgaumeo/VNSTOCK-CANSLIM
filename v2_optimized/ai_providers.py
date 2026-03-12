@@ -152,27 +152,30 @@ class GeminiProvider(BaseAIProvider):
                 if candidate.content and candidate.content.parts:
                     return candidate.content.parts[0].text
                 elif candidate.finish_reason:
-                    return f"⚠️ Response bị block: finish_reason={candidate.finish_reason}"
-            
+                    print(f"⚠️ Gemini response blocked: finish_reason={candidate.finish_reason}")
+                    return None
+
             return response.text
-            
+
         except Exception as e:
-            return f"❌ Lỗi Gemini: {str(e)}"
-    
+            print(f"⚠️ Gemini error: {str(e)}")
+            return None
+
     def chat_with_history(self, messages: List[Dict]) -> str:
         try:
             chat = self.model.start_chat(history=[])
-            
+
             for msg in messages[:-1]:  # Add history except last
                 role = "user" if msg["role"] == "user" else "model"
                 chat.history.append({"role": role, "parts": [msg["content"]]})
-            
+
             # Send last message
             response = chat.send_message(messages[-1]["content"])
             return response.text
-            
+
         except Exception as e:
-            return f"❌ Lỗi Gemini: {str(e)}"
+            print(f"⚠️ Gemini error: {str(e)}")
+            return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -220,8 +223,9 @@ class ClaudeProvider(BaseAIProvider):
                     print(f"   ⚠️ Claude retry {attempt+1}/{max_retries} sau {wait}s: {str(e)[:60]}")
                     time.sleep(wait)
                 else:
-                    return f"❌ Lỗi Claude (sau {max_retries} lần thử): {str(e)}"
-    
+                    print(f"⚠️ Claude error after {max_retries} retries: {str(e)}")
+                    return None
+
     def chat_with_history(self, messages: List[Dict]) -> str:
         import time
         max_retries = 3
@@ -248,7 +252,8 @@ class ClaudeProvider(BaseAIProvider):
                     print(f"   ⚠️ Claude retry {attempt+1}/{max_retries} sau {wait}s: {str(e)[:60]}")
                     time.sleep(wait)
                 else:
-                    return f"❌ Lỗi Claude (sau {max_retries} lần thử): {str(e)}"
+                    print(f"⚠️ Claude error after {max_retries} retries: {str(e)}")
+                    return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -302,21 +307,22 @@ class DeepSeekProvider(BaseAIProvider):
                 ]
             )
             return response.choices[0].message.content
-            
+
         except Exception as e:
-            return f"❌ Lỗi DeepSeek: {str(e)}"
-    
+            print(f"⚠️ DeepSeek error: {str(e)}")
+            return None
+
     def chat_with_history(self, messages: List[Dict]) -> str:
         try:
             # Ensure system prompt is first
             chat_messages = [
                 {"role": "system", "content": self.config.system_prompt}
             ]
-            
+
             for msg in messages:
                 if msg["role"] != "system":
                     chat_messages.append(msg)
-            
+
             response = self.client.chat.completions.create(
                 model=self.config.get_model(),
                 max_tokens=self.config.max_tokens,
@@ -324,9 +330,10 @@ class DeepSeekProvider(BaseAIProvider):
                 messages=chat_messages
             )
             return response.choices[0].message.content
-            
+
         except Exception as e:
-            return f"❌ Lỗi DeepSeek: {str(e)}"
+            print(f"⚠️ DeepSeek error: {str(e)}")
+            return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -366,20 +373,21 @@ class OpenAIProvider(BaseAIProvider):
                 ]
             )
             return response.choices[0].message.content
-            
+
         except Exception as e:
-            return f"❌ Lỗi OpenAI: {str(e)}"
-    
+            print(f"⚠️ OpenAI error: {str(e)}")
+            return None
+
     def chat_with_history(self, messages: List[Dict]) -> str:
         try:
             chat_messages = [
                 {"role": "system", "content": self.config.system_prompt}
             ]
-            
+
             for msg in messages:
                 if msg["role"] != "system":
                     chat_messages.append(msg)
-            
+
             response = self.client.chat.completions.create(
                 model=self.config.get_model(),
                 max_tokens=self.config.max_tokens,
@@ -387,9 +395,10 @@ class OpenAIProvider(BaseAIProvider):
                 messages=chat_messages
             )
             return response.choices[0].message.content
-            
+
         except Exception as e:
-            return f"❌ Lỗi OpenAI: {str(e)}"
+            print(f"⚠️ OpenAI error: {str(e)}")
+            return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════
@@ -431,20 +440,21 @@ class GroqProvider(BaseAIProvider):
                 ]
             )
             return response.choices[0].message.content
-            
+
         except Exception as e:
-            return f"❌ Lỗi Groq: {str(e)}"
-    
+            print(f"⚠️ Groq error: {str(e)}")
+            return None
+
     def chat_with_history(self, messages: List[Dict]) -> str:
         try:
             chat_messages = [
                 {"role": "system", "content": self.config.system_prompt}
             ]
-            
+
             for msg in messages:
                 if msg["role"] != "system":
                     chat_messages.append(msg)
-            
+
             response = self.client.chat.completions.create(
                 model=self.config.get_model(),
                 max_tokens=self.config.max_tokens,
@@ -452,9 +462,10 @@ class GroqProvider(BaseAIProvider):
                 messages=chat_messages
             )
             return response.choices[0].message.content
-            
+
         except Exception as e:
-            return f"❌ Lỗi Groq: {str(e)}"
+            print(f"⚠️ Groq error: {str(e)}")
+            return None
 
 
 # ══════════════════════════════════════════════════════════════════════════════

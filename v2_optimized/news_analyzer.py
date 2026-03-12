@@ -61,8 +61,8 @@ class NewsAnalyzer:
             from vnstock import Vnstock
             
             try:
-                # Use VCI source as it seems reliable for company news
-                stock = Vnstock().stock(symbol=symbol, source='VCI')
+                # Use KBS source (VCI API blocked since 03/2026)
+                stock = Vnstock().stock(symbol=symbol, source='KBS')
                 df = stock.company.news()
                 
                 if df is not None and not df.empty:

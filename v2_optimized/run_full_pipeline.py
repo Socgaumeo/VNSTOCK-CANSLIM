@@ -15,9 +15,62 @@ Cách sử dụng:
 """
 
 import os
+import sys
+import time
 import importlib.util
 from datetime import datetime
 from typing import Dict, List, Optional
+
+# ── Patch vnai rate limit: prevent process kill on rate limit ──
+def _patch_vnai_rate_limit():
+    """
+    vnai's CleanErrorContext calls sys.exit() on RateLimitExceeded,
+    killing the entire process. Patch it to sleep + retry instead.
+    """
+    try:
+        from vnai.beam import quota
+        import time as _time
+
+        # 1. Patch CleanErrorContext.__exit__ — the actual killer
+        #    Original: catches RateLimitExceeded → sys.exit() (kills process)
+        #    Patched:  catches RateLimitExceeded → sleep 60s → suppress exception
+        def _safe_exit(self, exc_type, exc_val, exc_tb):
+            if exc_type is quota.RateLimitExceeded:
+                msg = str(exc_val)
+                # Extract wait time from error message (e.g., "thử lại sau 48 giây")
+                wait = 60
+                import re
+                m = re.search(r'(\d+)\s*giây', msg)
+                if m:
+                    wait = int(m.group(1)) + 5  # Add 5s buffer
+                print(f"\n   ⏳ VCI rate limited, waiting {wait}s... ({msg})", flush=True)
+                _time.sleep(wait)
+                return True  # Suppress the exception (don't kill process)
+            return False
+
+        quota.CleanErrorContext.__exit__ = _safe_exit
+
+        # 2. Increase guardian tier limits to reduce false triggers
+        guardian = quota.guardian
+        guardian._tier_limits = {
+            "free": {"min": 600, "hour": 36000},
+            "golden": {"min": 6000, "hour": 360000},
+            "diamond": {"min": 60000, "hour": 3600000},
+        }
+        try:
+            _orig_get_limits = guardian._get_tier_limits
+            def _patched_get_limits():
+                tier = guardian._get_current_tier()
+                return guardian._tier_limits.get(tier, {"min": 6000, "hour": 360000})
+            guardian._get_tier_limits = _patched_get_limits
+        except AttributeError:
+            pass  # _get_tier_limits doesn't exist in this version
+
+        print("✓ vnai rate limit patch: sleep+retry instead of process kill")
+    except Exception as e:
+        print(f"⚠️ vnai patch skipped: {e}")
+
+_patch_vnai_rate_limit()
 
 # Import config
 from config import get_config
@@ -45,6 +98,18 @@ def _load_kebab_module(module_path: str, module_name: str):
     return None
 
 
+# Load context memo module
+_memo_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "context-memo.py"),
+    "context_memo"
+)
+
+# Load template renderer (optional - requires jinja2)
+_template_renderer_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "report-template-renderer.py"),
+    "report_template_renderer"
+)
+
 # Try loading new modules
 _dupont_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "dupont-analyzer.py"),
@@ -53,6 +118,18 @@ _dupont_module = _load_kebab_module(
 _risk_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "risk-metrics-calculator.py"),
     "risk_metrics_calculator"
+)
+_news_hub_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "news-hub.py"),
+    "news_hub"
+)
+_asset_tracker_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "asset-tracker.py"),
+    "asset_tracker"
+)
+_bond_lab_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "bond-lab.py"),
+    "bond_lab"
 )
 
 
@@ -144,6 +221,7 @@ class FullPipelineRunner:
         self.sector_report = None
         self.screener_report = None
         self.mid_session_data = None  # Mid-session data for comparison
+        self.memo = None  # ContextMemo reference for OPS data in reports
     
     def run(self, target_sectors: List[str] = None) -> str:
         """
@@ -159,6 +237,16 @@ class FullPipelineRunner:
 ╚══════════════════════════════════════════════════════════════════════════════╝
         """)
         
+        # ══════════════════════════════════════════════════════════════════════
+        # INIT CONTEXT MEMO
+        # ══════════════════════════════════════════════════════════════════════
+        memo = None
+        if _memo_module:
+            memo = _memo_module.ContextMemo()
+            memo.clear()
+            self.memo = memo
+            print("✓ Context memo initialized")
+
         # ══════════════════════════════════════════════════════════════════════
         # PREPARE HISTORY CONTEXT
         # ══════════════════════════════════════════════════════════════════════
@@ -183,6 +271,27 @@ class FullPipelineRunner:
         combined_context = f"{mid_session_context}\n{history_context}"
 
         # ══════════════════════════════════════════════════════════════════════
+        # BOND LAB: Fetch VN10Y yield and compute bond health score
+        # ══════════════════════════════════════════════════════════════════════
+        if _bond_lab_module:
+            try:
+                lab = _bond_lab_module.BondLab()
+                new_yields = lab.fetch_and_store()
+                bond_health = lab.get_bond_health_score()
+                if memo:
+                    memo.save("bonds", {
+                        "bond_health": bond_health,
+                        "yield_curve": lab.get_yield_curve(),
+                    })
+                print(
+                    f"\n✓ Bond Lab: VN10Y={bond_health.get('vn10y_yield', 'N/A')}%, "
+                    f"health={bond_health.get('score', 0)} "
+                    f"({bond_health.get('interpretation', '')})"
+                )
+            except Exception as e:
+                print(f"  Bond Lab error (skipping): {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
         # MODULE 1: MARKET TIMING
         # ══════════════════════════════════════════════════════════════════════
         print("\n" + "="*80)
@@ -193,7 +302,7 @@ class FullPipelineRunner:
         m1_config.SAVE_REPORT = False  # Không save riêng
         
         m1_module = MarketTimingModule(m1_config)
-        self.market_report = m1_module.run(combined_context)
+        self.market_report = m1_module.run(combined_context, memo=memo)
         
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 2: SECTOR ROTATION
@@ -206,7 +315,7 @@ class FullPipelineRunner:
         m2_config.SAVE_REPORT = False  # Không save riêng
         
         m2_module = SectorRotationModule(m2_config)
-        self.sector_report = m2_module.run()
+        self.sector_report = m2_module.run(memo=memo)
         
         # Xác định target sectors từ Module 2
         # LOGIC MỚI: Scan TẤT CẢ các ngành mạnh hoặc đang improving
@@ -252,23 +361,54 @@ class FullPipelineRunner:
             print(f"\n📋 TARGET SECTORS ({len(target_sectors)}): {', '.join(target_sectors)}")
         
         # ══════════════════════════════════════════════════════════════════════
+        # NEWS HUB: Crawl & refresh market news sentiment
+        # ══════════════════════════════════════════════════════════════════════
+        news_hub = None
+        if _news_hub_module:
+            try:
+                hub = _news_hub_module.NewsHub()
+                new_count = hub.refresh()
+                print(f"\n✓ News Hub: {new_count} new articles fetched")
+                if memo:
+                    memo.save("news", hub.get_market_sentiment())
+                news_hub = hub
+            except Exception as e:
+                print(f"⚠️ News Hub failed: {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
+        # ASSET TRACKER: Fetch commodity prices and derive macro signal
+        # ══════════════════════════════════════════════════════════════════════
+        if _asset_tracker_module:
+            try:
+                tracker = _asset_tracker_module.AssetTracker()
+                new_assets = tracker.fetch_and_store()
+                macro_signal = tracker.get_macro_signal()
+                if memo:
+                    memo.save("assets", {"macro_signal": macro_signal, "summary": tracker.get_asset_summary()})
+                print(f"  Asset Tracker: {new_assets} assets updated, signal={macro_signal.get('signal', 'N/A')}")
+            except Exception as e:
+                print(f"  Asset Tracker error (skipping): {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
         # MODULE 3: STOCK SCREENER
         # ══════════════════════════════════════════════════════════════════════
         print("\n" + "="*80)
         print("📈 MODULE 3: STOCK SCREENER")
         print("="*80)
-        
+
         # Build market context từ Module 1 & 2
         market_context = self._build_market_context()
-        
+
         m3_config = create_m3_config()
         m3_config.SAVE_REPORT = False  # Không save riêng
-        
+
         m3_module = StockScreenerModule(m3_config)
         self.screener_report = m3_module.run(
             target_sectors=target_sectors,
             market_context=market_context,
-            history_context=history_context
+            history_context=history_context,
+            memo=memo,
+            news_hub=news_hub
         )
         
         # ══════════════════════════════════════════════════════════════════════
@@ -283,6 +423,7 @@ class FullPipelineRunner:
         print("📝 GENERATING COMBINED REPORT")
         print("="*80)
         
+        # Use combined report (richer: includes Financial Health, DuPont, OPS sections)
         combined_report = self._generate_combined_report()
         output_file = self._save_report(combined_report)
         
@@ -366,7 +507,55 @@ class FullPipelineRunner:
             context['leading_sectors'] = top_sectors
         
         return context
-    
+
+    def _generate_breadth_section(self) -> str:
+        """Generate market breadth section for combined report (Phase 02)."""
+        if not self.market_report:
+            return ""
+        try:
+            breadth_mod = _load_kebab_module(
+                os.path.join(os.path.dirname(__file__), "market-breadth-analyzer.py"),
+                "market_breadth_analyzer"
+            )
+            if not breadth_mod:
+                return ""
+
+            analyzer = breadth_mod.MarketBreadthAnalyzer()
+            b = self.market_report.breadth
+            metrics = analyzer.calculate_breadth_metrics(
+                advances=b.advances, declines=b.declines,
+                unchanged=b.unchanged, ceiling=b.ceiling, floor=b.floor,
+            )
+            section = analyzer.format_breadth_report_section(metrics) + "\n\n"
+
+            # Add VNMID/VNSML comparison table if available
+            indices = []
+            for name, data in [("VNMID", self.market_report.vnmid), ("VNSML", self.market_report.vnsml)]:
+                if data and data.price > 0:
+                    indices.append(f"| **{name}** | {data.price:,.0f} | {data.change_1d:+.2f}% |")
+            if indices:
+                section += "### Mid/Small Cap\n| Index | Price | 1D Change |\n|-------|-------|----------|\n"
+                section += "\n".join(indices) + "\n\n"
+
+            # Sector heatmap
+            if self.sector_report and hasattr(self.sector_report, 'sectors'):
+                heatmap_data = []
+                for s in self.sector_report.sectors:
+                    code = getattr(s, 'code', '')
+                    name = getattr(s, 'name', code)
+                    change = getattr(s, 'change_1d', 0)
+                    phase = getattr(s, 'phase', '')
+                    if hasattr(phase, 'name'):
+                        phase = phase.name
+                    heatmap_data.append({"code": code, "name": name, "change_1d": change, "phase": str(phase)})
+                if heatmap_data:
+                    section += analyzer.generate_sector_heatmap(heatmap_data) + "\n\n"
+
+            return section
+        except Exception as e:
+            print(f"[WARN] Breadth section generation failed: {e}")
+            return ""
+
     def _generate_financial_health_report(self) -> str:
         """Generate financial health summary table from screener results."""
         if not self.screener_report or not self.screener_report.top_picks:
@@ -388,15 +577,15 @@ class FullPipelineRunner:
                 peg_rating = getattr(c.fundamental, 'peg_rating', None)
 
                 # Format values
-                piotroski_str = f"{piotroski}/9" if piotroski is not None else "N/A"
-                piotroski_rating = ("Very Strong" if piotroski and piotroski >= 7 else
-                                   "Strong" if piotroski and piotroski >= 5 else
-                                   "Weak" if piotroski else "N/A")
+                piotroski_str = f"{piotroski}/9" if piotroski is not None and piotroski > 0 else "N/A"
+                piotroski_rating = ("Very Strong" if piotroski is not None and piotroski >= 7 else
+                                   "Strong" if piotroski is not None and piotroski >= 5 else
+                                   "Weak" if piotroski is not None and piotroski > 0 else "N/A")
 
-                altman_str = f"{altman_z:.2f}" if altman_z is not None else "N/A"
+                altman_str = f"{altman_z:.2f}" if altman_z is not None and altman_z > 0 else "N/A"
                 zone_str = altman_zone if altman_zone else "N/A"
 
-                peg_str = f"{peg:.2f}" if peg is not None else "N/A"
+                peg_str = f"{peg:.2f}" if peg is not None and peg > 0 else "N/A"
                 peg_rating_str = peg_rating if peg_rating else "N/A"
 
                 content += f"| {c.symbol} | {piotroski_str} | {piotroski_rating} | {altman_str} | {zone_str} | {peg_str} | {peg_rating_str} |\n"
@@ -555,6 +744,223 @@ class FullPipelineRunner:
         
         return content
     
+    def _generate_ops_sections(self) -> str:
+        """Generate BondLab + AssetTracker + NewsHub report sections from ContextMemo."""
+        if not self.memo:
+            return ""
+
+        content = ""
+
+        # ── Bond Lab ──
+        bonds = self.memo.read("bonds")
+        if bonds:
+            health = bonds.get("bond_health", {})
+            curve = bonds.get("yield_curve", {})
+            vn10y = health.get("vn10y_yield") or curve.get("VN10Y") or "N/A"
+            score = health.get("score", 0)
+            interp = health.get("interpretation", "N/A")
+            weekly_bps = health.get("weekly_change_bps", 0)
+            monthly_bps = health.get("monthly_change_bps", 0)
+            score_emoji = "🟢" if score >= 3 else "🔴" if score <= -3 else "🟡"
+
+            content += f"""## 🏦 Bond Lab - Lãi suất trái phiếu
+
+| Chỉ số | Giá trị |
+|--------|---------|
+| **VN10Y Yield** | {vn10y}% |
+| **Thay đổi tuần** | {weekly_bps:+.1f} bps |
+| **Thay đổi tháng** | {monthly_bps:+.1f} bps |
+| **Health Score** | {score_emoji} {score:+.1f}/10 |
+| **Nhận định** | {interp} |
+
+"""
+
+        # ── Asset Tracker ──
+        assets_data = self.memo.read("assets")
+        if assets_data:
+            macro = assets_data.get("macro_signal", {})
+            summary = assets_data.get("summary", {})
+            assets_list = summary.get("assets", {})
+            signal = macro.get("signal", "neutral")
+            macro_score = macro.get("score", 0)
+            signal_emoji = "🟢" if signal == "risk-on" else "🔴" if signal == "risk-off" else "🟡"
+
+            content += """## 🌍 Asset Tracker - Tín hiệu vĩ mô
+
+| Asset | Giá | Ngày | Tuần | Xu hướng |
+|-------|-----|------|------|----------|
+"""
+            for ticker, info in assets_list.items():
+                price = info.get("price", "N/A")
+                unit = info.get("unit", "")
+                daily = info.get("daily_change_pct", 0)
+                weekly = info.get("weekly_change_pct", 0)
+                direction = "📈" if info.get("direction") == "up" else "📉"
+                content += f"| **{ticker}** | {price} {unit} | {daily:+.1f}% | {weekly:+.1f}% | {direction} |\n"
+
+            content += f"""
+**Macro Signal:** {signal_emoji} **{signal.upper()}** (score: {macro_score:+.1f})
+
+"""
+
+        # ── News Hub ──
+        news = self.memo.read("news")
+        if news:
+            avg_sent = news.get("avg_sentiment", 0)
+            total = news.get("total_articles", 0)
+            positive = news.get("positive", 0)
+            negative = news.get("negative", 0)
+            sent_emoji = "🟢" if avg_sent > 0.1 else "🔴" if avg_sent < -0.1 else "🟡"
+
+            content += f"""## 📰 News Hub - Sentiment thị trường
+
+| Metric | Value |
+|--------|-------|
+| **Sentiment TB** | {sent_emoji} {avg_sent:+.3f} |
+| **Tổng bài (7 ngày)** | {total} |
+| **Tích cực** | {positive} |
+| **Tiêu cực** | {negative} |
+
+"""
+
+        return content
+
+    def _generate_report_via_templates(self) -> Optional[str]:
+        """
+        Render report using Jinja2 templates with deterministic fallback.
+        Returns None if template renderer unavailable (caller falls back to _generate_combined_report).
+        """
+        if not _template_renderer_module:
+            return None
+        if not _template_renderer_module.is_available():
+            return None
+
+        try:
+            renderer = _template_renderer_module.ReportTemplateRenderer()
+
+            # Build market data dict
+            market_data: dict = {}
+            if self.market_report:
+                vni = self.market_report.vnindex
+                breadth = self.market_report.breadth
+                market_data = {
+                    'color': self.market_report.market_color,
+                    'score': self.market_report.market_score,
+                    'vnindex_price': vni.price,
+                    'vnindex_change': vni.change_1d,
+                    'rsi': vni.rsi_14,
+                    'macd_hist': vni.macd_hist,
+                    'poc': vni.poc,
+                    'val': vni.val,
+                    'vah': vni.vah,
+                    'price_vs_va': vni.price_vs_va,
+                    'key_signals': self.market_report.key_signals,
+                    'trend': getattr(self.market_report, 'trend_status', ''),
+                    'breadth': {
+                        'advances': breadth.advances,
+                        'declines': breadth.declines,
+                        'unchanged': breadth.unchanged,
+                        'ad_ratio': breadth.ad_ratio,
+                        'ceiling': getattr(breadth, 'ceiling', 0),
+                        'floor': getattr(breadth, 'floor', 0),
+                    } if breadth else None,
+                }
+
+            # Build sectors list
+            sectors_data: list = []
+            if self.sector_report and hasattr(self.sector_report, 'sectors'):
+                for s in self.sector_report.sectors:
+                    phase = getattr(s, 'phase', '')
+                    phase_str = phase.name if hasattr(phase, 'name') else str(phase)
+                    sectors_data.append({
+                        'code': getattr(s, 'code', ''),
+                        'name': getattr(s, 'name', getattr(s, 'code', '')),
+                        'change_1d': getattr(s, 'change_1d', 0),
+                        'rs_rating': getattr(s, 'rs_rating', 50),
+                        'phase': phase_str,
+                    })
+
+            # Build screener data
+            market_score = self.market_report.market_score if self.market_report else 50
+            top_picks_rows: list = []
+            top_picks_detail: list = []
+
+            if self.screener_report:
+                for c in self.screener_report.top_picks[:10]:
+                    top_picks_rows.append({
+                        'rank': c.rank,
+                        'symbol': c.symbol,
+                        'sector_name': c.sector_name,
+                        'score_total': c.score_total,
+                        'rs_rating': c.technical.rs_rating,
+                        'pattern_type': c.pattern.pattern_type.value,
+                        'signal': c.signal.value,
+                    })
+
+                for c in self.screener_report.top_picks[:5]:
+                    sl_tp = calculate_dynamic_sl_tp(c, market_score)
+                    price = c.technical.price
+                    buy_point = c.pattern.buy_point if c.pattern.buy_point > 0 else price * 1.02
+                    top_picks_detail.append({
+                        'rank': c.rank,
+                        'symbol': c.symbol,
+                        'sector_name': c.sector_name,
+                        'score_total': c.score_total,
+                        'score_fundamental': c.score_fundamental,
+                        'score_technical': c.score_technical,
+                        'score_pattern': c.score_pattern,
+                        'roe': c.fundamental.roe,
+                        'roa': c.fundamental.roa,
+                        'eps_qoq': c.fundamental.eps_growth_qoq,
+                        'eps_yoy': c.fundamental.eps_growth_yoy,
+                        'price': price,
+                        'rs_rating': c.technical.rs_rating,
+                        'rsi': c.technical.rsi_14,
+                        'volume_ratio': c.technical.volume_ratio,
+                        'pattern_type': c.pattern.pattern_type.value,
+                        'pattern_quality': c.pattern.pattern_quality,
+                        'breakout_ready': getattr(c.pattern, 'breakout_ready', False),
+                        'buy_point': buy_point,
+                        'stop_loss': sl_tp['stop_loss'],
+                        'stop_loss_pct': sl_tp['stop_loss_pct'],
+                        'target_1': sl_tp['target_1'],
+                        'target_1_pct': sl_tp['target_1_pct'],
+                        'target_2': sl_tp['target_2'],
+                        'target_2_pct': sl_tp['target_2_pct'],
+                        'ai_analysis': c.ai_analysis or None,
+                        'rule_based_commentary': '',
+                    })
+
+            screener_data = {
+                'stats': {
+                    'total_scanned': self.screener_report.total_scanned if self.screener_report else 0,
+                    'passed_technical': self.screener_report.passed_technical if self.screener_report else 0,
+                    'final_candidates': len(self.screener_report.candidates) if self.screener_report else 0,
+                },
+                'top_picks': top_picks_rows,
+                'top_picks_detail': top_picks_detail,
+            }
+
+            data = {
+                'timestamp': self.timestamp.strftime('%d/%m/%Y %H:%M'),
+                'market': market_data,
+                'sectors': sectors_data,
+                'screener': screener_data,
+            }
+
+            ai_narratives = {
+                'market': getattr(self.market_report, 'ai_analysis', None) if self.market_report else None,
+                'sector': getattr(self.sector_report, 'ai_analysis', None) if self.sector_report else None,
+                'screener': getattr(self.screener_report, 'ai_analysis', None) if self.screener_report else None,
+            }
+
+            print("Using Jinja2 template renderer...")
+            return renderer.render(data, ai_narratives)
+
+        except Exception as e:
+            print(f"⚠️ Template renderer failed: {e} - falling back to combined report")
+            return None
+
     def _generate_combined_report(self) -> str:
         """Tạo báo cáo gộp từ 3 modules"""
         
@@ -594,7 +1000,11 @@ class FullPipelineRunner:
 | **Value Area** | {vni.val:,.0f} - {vni.vah:,.0f} |
 | **Price vs VA** | {vni.price_vs_va} |
 
-## Tín hiệu chính
+"""
+            # Market Breadth section (Phase 02)
+            content += self._generate_breadth_section()
+
+            content += """## Tín hiệu chính
 """
             for sig in self.market_report.key_signals:
                 content += f"- {sig}\n"
@@ -606,7 +1016,14 @@ class FullPipelineRunner:
 """
         
         content += "\n---\n\n"
-        
+
+        # OPS Platform sections (Bond Lab, Asset Tracker, News Hub)
+        ops_sections = self._generate_ops_sections()
+        if ops_sections:
+            content += "# 🔬 OPS PLATFORM DATA\n\n"
+            content += ops_sections
+            content += "\n---\n\n"
+
         # Module 2: Sector Rotation
         content += """# 🏭 PHẦN 2: SECTOR ROTATION (Module 2)
 
@@ -722,22 +1139,27 @@ class FullPipelineRunner:
                 peg_r = getattr(c.fundamental, 'peg_rating', None)
                 div_y = getattr(c.fundamental, 'dividend_yield', None)
 
-                if pio is not None or alt_z is not None or peg is not None:
-                    pio_rating = ("Very Strong" if pio and pio >= 8 else
-                                  "Strong" if pio and pio >= 6 else
-                                  "Average" if pio and pio >= 4 else
-                                  "Weak" if pio else "N/A")
-                    pio_emoji = "🟢" if pio and pio >= 7 else "🟡" if pio and pio >= 4 else "🔴" if pio else "⚪"
+                if pio is not None or alt_z is not None or (peg is not None and peg > 0):
+                    pio_rating = ("Very Strong" if pio is not None and pio >= 8 else
+                                  "Strong" if pio is not None and pio >= 6 else
+                                  "Average" if pio is not None and pio >= 4 else
+                                  "Weak" if pio is not None and pio > 0 else "N/A")
+                    pio_emoji = "🟢" if pio is not None and pio >= 7 else "🟡" if pio is not None and pio >= 4 else "🔴" if pio is not None and pio > 0 else "⚪"
                     alt_emoji = "🟢" if alt_zone == 'safe' else "🟡" if alt_zone == 'grey' else "🔴" if alt_zone == 'distress' else "⚪"
                     peg_emoji = "🟢" if peg and peg < 1 else "🟡" if peg and peg <= 2 else "🔴" if peg and peg > 2 else "⚪"
+
+                    pio_val = f"{pio}/9" if pio is not None and pio > 0 else "N/A"
+                    alt_val = f"{alt_z:.2f}" if alt_z is not None and alt_z > 0 else "N/A"
+                    peg_val = f"{peg:.2f}" if peg is not None and peg > 0 else "N/A"
+                    div_val = f"{div_y*100:.1f}%" if div_y and div_y > 0 else "N/A"
 
                     content += f"""**🏥 Financial Health:**
 | Chỉ số | Giá trị | Đánh giá |
 |--------|---------|----------|
-| Piotroski F-Score | {pio if pio else 'N/A'}/9 | {pio_emoji} {pio_rating} |
-| Altman Z-Score | {f'{alt_z:.2f}' if alt_z else 'N/A'} | {alt_emoji} {alt_zone if alt_zone else 'N/A'} |
-| PEG Ratio | {f'{peg:.2f}' if peg else 'N/A'} | {peg_emoji} {peg_r if peg_r else 'N/A'} |
-| Dividend Yield | {f'{div_y*100:.1f}%' if div_y else 'N/A'} | {'🟢' if div_y and div_y >= 0.04 else '🟡' if div_y and div_y >= 0.02 else '⚪'} |
+| Piotroski F-Score | {pio_val} | {pio_emoji} {pio_rating} |
+| Altman Z-Score | {alt_val} | {alt_emoji} {alt_zone if alt_zone else 'N/A'} |
+| PEG Ratio | {peg_val} | {peg_emoji} {peg_r if peg_r else 'N/A'} |
+| Dividend Yield | {div_val} | {'🟢' if div_y and div_y >= 0.04 else '🟡' if div_y and div_y >= 0.02 else '⚪'} |
 
 """
                 # News section

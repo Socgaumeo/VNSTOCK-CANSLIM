@@ -91,7 +91,7 @@ def sync_prices(symbols: list, days: int, api_delay: float = 1.5):
                 fetch_start = existing['latest']
 
         try:
-            stock = Vnstock().stock(symbol=symbol, source='VCI')
+            stock = Vnstock().stock(symbol=symbol, source='KBS')
             df = stock.quote.history(start=fetch_start, end=end_date)
 
             if not df.empty:
@@ -155,7 +155,7 @@ def sync_fundamentals(symbols: list, api_delay: float = 1.5):
             continue
 
         try:
-            stock = Vnstock().stock(symbol=symbol, source='VCI')
+            stock = Vnstock().stock(symbol=symbol, source='KBS')
 
             # Income statement
             df_income = stock.finance.income_statement(period='quarter', lang='vi')

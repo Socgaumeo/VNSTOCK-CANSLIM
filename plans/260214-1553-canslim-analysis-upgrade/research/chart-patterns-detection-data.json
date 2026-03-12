@@ -1,0 +1,2627 @@
+{
+  "metadata": {
+    "source": "Thomas Bulkowski - Encyclopedia of Chart Patterns",
+    "total_patterns": 64,
+    "version": "2.0.0"
+  },
+  "patterns_by_category": {
+    "reversal": [
+      {
+        "key": "head-shoulders",
+        "name_vi": "Đầu và Vai",
+        "name_en": "Head and Shoulders",
+        "category": "reversal",
+        "success_rate": 89,
+        "avg_move_pct": -18,
+        "duration": "3-4 tuần",
+        "bull_breakout_pct": 0,
+        "bear_breakout_pct": 89,
+        "avg_rise_pct": 0,
+        "avg_decline_pct": 18,
+        "pullback_rate_pct": 4,
+        "structure": [
+          "Vai trái: Đỉnh đầu tiên, thấp hơn đầu",
+          "Đầu: Đỉnh cao nhất, nằm ở giữa",
+          "Vai phải: Đỉnh thứ ba, tương đương vai trái",
+          "Đường cổ: Nối hai đáy giữa các đỉnh"
+        ],
+        "trading_rules": [
+          "Đợi giá phá vỡ đường cổ trước khi vào lệnh",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu giá = Khoảng cách từ đầu đến đường cổ",
+          "Stop loss đặt trên vai phải"
+        ]
+      },
+      {
+        "key": "triple-bottom",
+        "name_vi": "Đáy Ba",
+        "name_en": "Triple Bottom",
+        "category": "reversal",
+        "success_rate": 86,
+        "avg_move_pct": 22,
+        "duration": "3-6 tuần",
+        "bull_breakout_pct": 86,
+        "bear_breakout_pct": 0,
+        "avg_rise_pct": 22,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 6,
+        "structure": [
+          "Ba đáy ở cùng mức giá hoặc gần bằng nhau",
+          "Hai đỉnh giữa các đáy",
+          "Đường kháng cự nối hai đỉnh cao nhất"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường kháng cự",
+          "Khối lượng tăng dần qua các đáy",
+          "Mục tiêu = Khoảng cách từ đáy đến đường kháng cự",
+          "Stop loss đặt dưới đáy thấp nhất"
+        ]
+      },
+      {
+        "key": "triple-top",
+        "name_vi": "Đỉnh Ba",
+        "name_en": "Triple Top",
+        "category": "reversal",
+        "success_rate": 84,
+        "avg_move_pct": -20,
+        "duration": "3-6 tuần",
+        "bull_breakout_pct": 0,
+        "bear_breakout_pct": 84,
+        "avg_rise_pct": 0,
+        "avg_decline_pct": 20,
+        "pullback_rate_pct": 7,
+        "structure": [
+          "Ba đỉnh ở cùng mức giá hoặc gần bằng nhau",
+          "Hai đáy giữa các đỉnh",
+          "Đường cổ nối hai đáy thấp nhất"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường cổ",
+          "Khối lượng giảm dần qua các đỉnh",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đường cổ",
+          "Stop loss đặt trên đỉnh cao nhất"
+        ]
+      },
+      {
+        "key": "double-bottom",
+        "name_vi": "Đáy Kép",
+        "name_en": "Double Bottom",
+        "category": "reversal",
+        "success_rate": 82,
+        "avg_move_pct": 20,
+        "duration": "2-3 tuần",
+        "bull_breakout_pct": 82,
+        "bear_breakout_pct": 0,
+        "avg_rise_pct": 20,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 11,
+        "structure": [
+          "Đáy đầu tiên: Giá đạt đáy và tăng",
+          "Đỉnh giữa: Mức kháng cự tạm thời",
+          "Đáy thứ hai: Giá quay lại mức đáy cũ và tăng"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đỉnh giữa",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+          "Stop loss đặt dưới đáy thứ hai"
+        ]
+      },
+      {
+        "key": "complex-head-shoulders",
+        "name_vi": "Đầu và Vai Phức Tạp",
+        "name_en": "Complex Head and Shoulders",
+        "category": "reversal",
+        "success_rate": 82,
+        "avg_move_pct": -17,
+        "duration": "4-8 tuần",
+        "bull_breakout_pct": 18,
+        "bear_breakout_pct": 82,
+        "avg_rise_pct": 4,
+        "avg_decline_pct": 17,
+        "pullback_rate_pct": 5,
+        "structure": [
+          "Có thể có 2 vai trái và/hoặc 2 vai phải",
+          "Có thể có 2 đầu (Double Head)",
+          "Đường cổ có thể không thẳng"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường cổ",
+          "Đếm số vai và đầu để xác định",
+          "Mục tiêu = Khoảng cách từ đầu đến đường cổ",
+          "Stop loss trên vai phải cao nhất"
+        ]
+      },
+      {
+        "key": "inverse-head-shoulders",
+        "name_vi": "Đầu và Vai Ngược",
+        "name_en": "Inverse Head and Shoulders",
+        "category": "reversal",
+        "success_rate": 81,
+        "avg_move_pct": 22,
+        "duration": "3-4 tuần",
+        "bull_breakout_pct": 81,
+        "bear_breakout_pct": 0,
+        "avg_rise_pct": 22,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Vai trái: Đáy đầu tiên, cao hơn đầu",
+          "Đầu: Đáy thấp nhất, nằm ở giữa",
+          "Vai phải: Đáy thứ ba, tương đương vai trái",
+          "Đường cổ: Nối hai đỉnh giữa các đáy"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường cổ",
+          "Khối lượng nên tăng mạnh khi phá vỡ",
+          "Mục tiêu = Khoảng cách từ đầu đến đường cổ",
+          "Stop loss đặt dưới vai phải"
+        ]
+      },
+      {
+        "key": "falling-wedge",
+        "name_vi": "Nêm Giảm",
+        "name_en": "Falling Wedge",
+        "category": "reversal",
+        "success_rate": 81,
+        "avg_move_pct": 18,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 81,
+        "bear_breakout_pct": 19,
+        "avg_rise_pct": 18,
+        "avg_decline_pct": 5,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Đường biên trên: Dốc xuống",
+          "Đường biên dưới: Dốc xuống (độ dốc lớn hơn)",
+          "Khối lượng giảm trong quá trình hình thành"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường biên trên",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu = Chiều cao của nêm tại điểm rộng nhất",
+          "Stop loss đặt dưới đường biên dưới"
+        ]
+      },
+      {
+        "key": "rounding-bottom",
+        "name_vi": "Đáy Tròn",
+        "name_en": "Rounding Bottom / Saucer",
+        "category": "reversal",
+        "success_rate": 79,
+        "avg_move_pct": 24,
+        "duration": "4-8 tuần",
+        "bull_breakout_pct": 79,
+        "bear_breakout_pct": 0,
+        "avg_rise_pct": 24,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Phần đầu: Giá giảm dần chậm lại",
+          "Phần đáy: Giá đi ngang, tạo đáy tròn",
+          "Phần đuôi: Giá tăng dần nhanh hơn"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường kháng cự",
+          "Khối lượng thường hình chữ U",
+          "Mục tiêu = Chiều cao của mẫu",
+          "Stop loss đặt dưới đáy của mẫu"
+        ]
+      },
+      {
+        "key": "diamond-bottom",
+        "name_vi": "Kim Cương Đáy",
+        "name_en": "Diamond Bottom",
+        "category": "reversal",
+        "success_rate": 79,
+        "avg_move_pct": 19,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 79,
+        "bear_breakout_pct": 21,
+        "avg_rise_pct": 19,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 7,
+        "structure": [
+          "Phần đầu: Mở rộng",
+          "Phần đuôi: Hội tụ",
+          "Xuất hiện tại đáy xu hướng"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường biên trên",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu = Chiều cao của kim cương",
+          "Stop loss đặt dưới đáy thấp nhất"
+        ]
+      },
+      {
+        "key": "adam-adam-bottom",
+        "name_vi": "Adam Adam Đáy",
+        "name_en": "Adam and Adam Bottom",
+        "category": "reversal",
+        "success_rate": 79,
+        "avg_move_pct": 18,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 79,
+        "bear_breakout_pct": 21,
+        "avg_rise_pct": 18,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 7,
+        "structure": [
+          "Đáy 1: Nhọn, sắc (Adam)",
+          "Đỉnh giữa: Nhọn, sắc (Adam)",
+          "Đáy 2: Nhọn, sắc (Adam)"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi phá vỡ đỉnh giữa",
+          "Hai đáy nên có hình dáng tương tự",
+          "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+          "Stop loss dưới đáy thấp nhất"
+        ]
+      },
+      {
+        "key": "double-top",
+        "name_vi": "Đỉnh Kép",
+        "name_en": "Double Top",
+        "category": "reversal",
+        "success_rate": 78,
+        "avg_move_pct": -15,
+        "duration": "2-3 tuần",
+        "bull_breakout_pct": 0,
+        "bear_breakout_pct": 78,
+        "avg_rise_pct": 0,
+        "avg_decline_pct": 15,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Đỉnh đầu tiên: Giá đạt đỉnh và giảm",
+          "Đáy giữa (Neckline): Mức hỗ trợ tạm thời",
+          "Đỉnh thứ hai: Giá quay lại mức đỉnh cũ và giảm"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đáy giữa",
+          "Khối lượng thường giảm ở đỉnh thứ hai",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+          "Stop loss đặt trên đỉnh thứ hai"
+        ]
+      },
+      {
+        "key": "adam-eve-bottom",
+        "name_vi": "Adam Eve Đáy",
+        "name_en": "Adam and Eve Bottom",
+        "category": "reversal",
+        "success_rate": 78,
+        "avg_move_pct": 20,
+        "duration": "3-5 tuần",
+        "bull_breakout_pct": 78,
+        "bear_breakout_pct": 22,
+        "avg_rise_pct": 20,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 6,
+        "structure": [
+          "Đáy 1: Nhọn, sắc (Adam)",
+          "Đỉnh giữa: Có thể tròn hoặc nhọn",
+          "ĐáĐáy 2: Tròn, cong (Eve)"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi phá vỡ đỉnh giữa",
+          "Đáy Adam trước đáy Eve",
+          "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+          "Stop loss dưới đáy Eve"
+        ]
+      },
+      {
+        "key": "diamond-top",
+        "name_vi": "Kim Cương Đỉnh",
+        "name_en": "Diamond Top",
+        "category": "reversal",
+        "success_rate": 77,
+        "avg_move_pct": -16,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 23,
+        "bear_breakout_pct": 77,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 16,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Phần đầu: Mở rộng như broadening",
+          "Phần đuôi: Hội tụ như triangle",
+          "Hình dạng tổng thể như kim cương"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường biên dưới",
+          "Khối lượng thường giảm trong mẫu",
+          "Mục tiêu = Chiều cao của kim cương",
+          "Stop loss đặt trên đỉnh cao nhất"
+        ]
+      },
+      {
+        "key": "island-bottom",
+        "name_vi": "Đảo Đáy",
+        "name_en": "Island Bottom",
+        "category": "reversal",
+        "success_rate": 76,
+        "avg_move_pct": 17,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 76,
+        "bear_breakout_pct": 24,
+        "avg_rise_pct": 17,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Gap giảm: Giá nhảy xuống tạo đáy",
+          "Vùng đảo: Giá giao dịch cô lập",
+          "Gap tăng: Giá nhảy lên xác nhận"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi gap tăng xuất hiện",
+          "Khối lượng thường cao tại đảo",
+          "Mục tiêu = Chiều cao của đảo",
+          "Stop loss dưới đáy của đảo"
+        ]
+      },
+      {
+        "key": "adam-adam-top",
+        "name_vi": "Adam Adam Đỉnh",
+        "name_en": "Adam and Adam Top",
+        "category": "reversal",
+        "success_rate": 76,
+        "avg_move_pct": -15,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 24,
+        "bear_breakout_pct": 76,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 15,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Đỉnh 1: Nhọn, sắc (Adam)",
+          "Đáy giữa: Nhọn, sắc (Adam)",
+          "Đỉnh 2: Nhọn, sắc (Adam)"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi phá vỡ đáy giữa",
+          "Hai đỉnh nên có hình dáng tương tự",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+          "Stop loss trên đỉnh cao nhất"
+        ]
+      },
+      {
+        "key": "eve-adam-bottom",
+        "name_vi": "Eve Adam Đáy",
+        "name_en": "Eve and Adam Bottom",
+        "category": "reversal",
+        "success_rate": 75,
+        "avg_move_pct": 17,
+        "duration": "3-5 tuần",
+        "bull_breakout_pct": 75,
+        "bear_breakout_pct": 25,
+        "avg_rise_pct": 17,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Đáy 1: Tròn, cong (Eve)",
+          "Đỉnh giữa: Có thể tròn hoặc nhọn",
+          "Đáy 2: Nhọn, sắc (Adam)"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi phá vỡ đỉnh giữa",
+          "Đáy Eve trước đáy Adam",
+          "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+          "Stop loss dưới đáy Adam"
+        ]
+      },
+      {
+        "key": "island-reversal",
+        "name_vi": "Đảo Ngược Đảo",
+        "name_en": "Island Reversal",
+        "category": "reversal",
+        "success_rate": 74,
+        "avg_move_pct": 0,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 52,
+        "bear_breakout_pct": 48,
+        "avg_rise_pct": 14,
+        "avg_decline_pct": 14,
+        "pullback_rate_pct": 10,
+        "structure": [
+          "Gap ban đầu: Đi ngược xu hướng cũ",
+          "Vùng đảo: Giao dịch cô lập",
+          "Gap xác nhận: Quay ngược xu hướng cũ"
+        ],
+        "trading_rules": [
+          "Vào lệnh theo hướng gap xác nhận",
+          "Khối lượng cao tăng độ tin cậy",
+          "Mục tiêu = Chiều cao của đảo",
+          "Stop loss bên kia đảo"
+        ]
+      },
+      {
+        "key": "adam-eve-top",
+        "name_vi": "Adam Eve Đỉnh",
+        "name_en": "Adam and Eve Top",
+        "category": "reversal",
+        "success_rate": 74,
+        "avg_move_pct": -14,
+        "duration": "3-5 tuần",
+        "bull_breakout_pct": 26,
+        "bear_breakout_pct": 74,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 14,
+        "pullback_rate_pct": 10,
+        "structure": [
+          "Đỉnh 1: Nhọn, sắc (Adam)",
+          "Đáy giữa: Có thể tròn hoặc nhọn",
+          "Đỉnh 2: Tròn, cong (Eve)"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi phá vỡ đáy giữa",
+          "Đỉnh Adam trước đỉnh Eve",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+          "Stop loss trên đỉnh Eve"
+        ]
+      },
+      {
+        "key": "bump-run-bottom",
+        "name_vi": "Bump and Run Đáy",
+        "name_en": "Bump and Run Bottom / Bump and Run Reversal",
+        "category": "reversal",
+        "success_rate": 74,
+        "avg_move_pct": 22,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 74,
+        "bear_breakout_pct": 26,
+        "avg_rise_pct": 22,
+        "avg_decline_pct": 5,
+        "pullback_rate_pct": 7,
+        "structure": [
+          "Lead-in: Xu hướng giảm thoải mái",
+          "Bump: Giảm dốc đột ngột",
+          "Run: Tăng nhanh sau đáy"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá vượt trendline bump",
+          "Bump phải dốc hơn lead-in gấp đôi",
+          "Mục tiêu = Độ sâu của bump",
+          "Stop loss dưới đáy bump"
+        ]
+      },
+      {
+        "key": "island-top",
+        "name_vi": "Đảo Đỉnh",
+        "name_en": "Island Top",
+        "category": "reversal",
+        "success_rate": 73,
+        "avg_move_pct": -14,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 27,
+        "bear_breakout_pct": 73,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 14,
+        "pullback_rate_pct": 11,
+        "structure": [
+          "Gap tăng: Giá nhảy lên tạo đỉnh",
+          "Vùng đảo: Giá giao dịch cô lập",
+          "Gap giảm: Giá nhảy xuống xác nhận"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi gap giảm xuất hiện",
+          "Khối lượng thường cao tại đảo",
+          "Mục tiêu = Chiều cao của đảo",
+          "Stop loss trên đỉnh của đảo"
+        ]
+      },
+      {
+        "key": "eve-eve-bottom",
+        "name_vi": "Eve Eve Đáy",
+        "name_en": "Eve and Eve Bottom",
+        "category": "reversal",
+        "success_rate": 73,
+        "avg_move_pct": 19,
+        "duration": "4-8 tuần",
+        "bull_breakout_pct": 73,
+        "bear_breakout_pct": 27,
+        "avg_rise_pct": 19,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Đáy 1: Tròn, cong (Eve)",
+          "Đỉnh giữa: Tròn, cong",
+          "Đáy 2: Tròn, cong (Eve)"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi phá vỡ đỉnh giữa",
+          "Kiên nhẫn chờ mẫu hoàn thành",
+          "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+          "Stop loss dưới đáy thấp nhất"
+        ]
+      },
+      {
+        "key": "rising-wedge",
+        "name_vi": "Nêm Tăng",
+        "name_en": "Rising Wedge",
+        "category": "reversal",
+        "success_rate": 72,
+        "avg_move_pct": -14,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 28,
+        "bear_breakout_pct": 72,
+        "avg_rise_pct": 8,
+        "avg_decline_pct": 14,
+        "pullback_rate_pct": 10,
+        "structure": [
+          "Đường biên dưới: Dốc lên",
+          "Đường biên trên: Dốc lên (độ dốc nhỏ hơn)",
+          "Khối lượng giảm trong quá trình hình thành"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường biên dưới",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu = Chiều cao của nêm tại điểm rộng nhất",
+          "Stop loss đặt trên đường biên trên"
+        ]
+      },
+      {
+        "key": "tower-bottom",
+        "name_vi": "Tháp Đáy",
+        "name_en": "Tower Bottom",
+        "category": "reversal",
+        "success_rate": 72,
+        "avg_move_pct": 15,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 72,
+        "bear_breakout_pct": 28,
+        "avg_rise_pct": 15,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 10,
+        "structure": [
+          "Phần trái: Nến giảm tạo tháp xuống",
+          "Đáy tháp: Điểm thấp nhất",
+          "Phần phải: Nến tăng tạo tháp lên đối xứng"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi tháp phải hoàn thành",
+          "Khối lượng nên đối xứng hai bên",
+          "Mục tiêu = Chiều cao của tháp",
+          "Stop loss dưới đáy tháp"
+        ]
+      },
+      {
+        "key": "horn-bottom",
+        "name_vi": "Sừng Đáy",
+        "name_en": "Horn Bottom",
+        "category": "reversal",
+        "success_rate": 72,
+        "avg_move_pct": 16,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 72,
+        "bear_breakout_pct": 28,
+        "avg_rise_pct": 16,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 12,
+        "structure": [
+          "Đáy 1: Nhọn, sắc",
+          "Đỉnh giữa: Rất thấp",
+          "Đáy 2: Nhọn, sắc, gần đáy 1"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá tăng trên đỉnh giữa",
+          "Hai đáy gần nhau về thời gian",
+          "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+          "Stop loss dưới đáy thấp nhất"
+        ]
+      },
+      {
+        "key": "rounding-top",
+        "name_vi": "Đỉnh Tròn",
+        "name_en": "Rounding Top",
+        "category": "reversal",
+        "success_rate": 71,
+        "avg_move_pct": -16,
+        "duration": "4-8 tuần",
+        "bull_breakout_pct": 0,
+        "bear_breakout_pct": 71,
+        "avg_rise_pct": 0,
+        "avg_decline_pct": 16,
+        "pullback_rate_pct": 12,
+        "structure": [
+          "Phần đầu: Giá tăng dần chậm lại",
+          "Phần đỉnh: Giá đi ngang, tạo đỉnh tròn",
+          "Phần đuôi: Giá giảm dần nhanh hơn"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường hỗ trợ",
+          "Khối lượng thường giảm ở đỉnh",
+          "Mục tiêu = Chiều cao của mẫu",
+          "Stop loss đặt trên đỉnh của mẫu"
+        ]
+      },
+      {
+        "key": "eve-adam-top",
+        "name_vi": "Eve Adam Đỉnh",
+        "name_en": "Eve and Adam Top",
+        "category": "reversal",
+        "success_rate": 71,
+        "avg_move_pct": -13,
+        "duration": "3-5 tuần",
+        "bull_breakout_pct": 29,
+        "bear_breakout_pct": 71,
+        "avg_rise_pct": 6,
+        "avg_decline_pct": 13,
+        "pullback_rate_pct": 12,
+        "structure": [
+          "Đỉnh 1: Tròn, cong (Eve)",
+          "Đáy giữa: Có thể tròn hoặc nhọn",
+          "Đỉnh 2: Nhọn, sắc (Adam)"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi phá vỡ đáy giữa",
+          "Đỉnh Eve trước đỉnh Adam",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+          "Stop loss trên đỉnh Adam"
+        ]
+      },
+      {
+        "key": "bump-run-top",
+        "name_vi": "Bump and Run Đỉnh",
+        "name_en": "Bump and Run Top",
+        "category": "reversal",
+        "success_rate": 71,
+        "avg_move_pct": -14,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 29,
+        "bear_breakout_pct": 71,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 14,
+        "pullback_rate_pct": 11,
+        "structure": [
+          "Lead-in: Xu hướng tăng thoải mái",
+          "Bump: Tăng dốc đột ngột",
+          "Run: Giảm nhanh sau đỉnh"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá vượt trendline bump",
+          "Bump phải dốc hơn lead-in gấp đôi",
+          "Mục tiêu = Độ cao của bump",
+          "Stop loss trên đỉnh bump"
+        ]
+      },
+      {
+        "key": "tower-top",
+        "name_vi": "Tháp Đỉnh",
+        "name_en": "Tower Top",
+        "category": "reversal",
+        "success_rate": 70,
+        "avg_move_pct": -13,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 30,
+        "bear_breakout_pct": 70,
+        "avg_rise_pct": 4,
+        "avg_decline_pct": 13,
+        "pullback_rate_pct": 12,
+        "structure": [
+          "Phần trái: Nến tăng tạo tháp lên",
+          "Đỉnh tháp: Điểm cao nhất",
+          "Phần phải: Nến giảm tạo tháp xuống đối xứng"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi tháp phải hoàn thành",
+          "Khối lượng nên đối xứng hai bên",
+          "Mục tiêu = Chiều cao của tháp",
+          "Stop loss trên đỉnh tháp"
+        ]
+      },
+      {
+        "key": "horn-top",
+        "name_vi": "Sừng Đỉnh",
+        "name_en": "Horn Top",
+        "category": "reversal",
+        "success_rate": 69,
+        "avg_move_pct": -11,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 31,
+        "bear_breakout_pct": 69,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 11,
+        "pullback_rate_pct": 15,
+        "structure": [
+          "Đỉnh 1: Nhọn, sắc",
+          "Đáy giữa: Rất nông",
+          "Đỉnh 2: Nhọn, sắc, gần đỉnh 1"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá giảm dưới đáy giữa",
+          "Hai đỉnh gần nhau về thời gian",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+          "Stop loss trên đỉnh cao nhất"
+        ]
+      },
+      {
+        "key": "broadening-bottom",
+        "name_vi": "Đáy Mở Rộng",
+        "name_en": "Broadening Bottom",
+        "category": "reversal",
+        "success_rate": 68,
+        "avg_move_pct": 18,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 68,
+        "bear_breakout_pct": 32,
+        "avg_rise_pct": 18,
+        "avg_decline_pct": 6,
+        "pullback_rate_pct": 15,
+        "structure": [
+          "Đường biên trên: Dốc lên",
+          "Đường biên dưới: Dốc xuống",
+          "Hai đường mở rộng ra tại đáy"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường biên trên",
+          "Tìm divergence với RSI/MACD",
+          "Mục tiêu = Chiều cao tối đa của mẫu",
+          "Stop loss đặt dưới đáy thấp nhất"
+        ]
+      },
+      {
+        "key": "eve-eve-top",
+        "name_vi": "Eve Eve Đỉnh",
+        "name_en": "Eve and Eve Top",
+        "category": "reversal",
+        "success_rate": 68,
+        "avg_move_pct": -12,
+        "duration": "4-8 tuần",
+        "bull_breakout_pct": 32,
+        "bear_breakout_pct": 68,
+        "avg_rise_pct": 6,
+        "avg_decline_pct": 12,
+        "pullback_rate_pct": 14,
+        "structure": [
+          "Đỉnh 1: Tròn, cong (Eve)",
+          "Đáy giữa: Tròn, cong",
+          "Đỉnh 2: Tròn, cong (Eve)"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi phá vỡ đáy giữa",
+          "Mẫu hình thành chậm",
+          "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+          "Stop loss trên đỉnh cao nhất"
+        ]
+      },
+      {
+        "key": "hook-reversal",
+        "name_vi": "Đảo Ngược Móc",
+        "name_en": "Hook Reversal",
+        "category": "reversal",
+        "success_rate": 67,
+        "avg_move_pct": 8,
+        "duration": "1-3 phiên",
+        "bull_breakout_pct": 45,
+        "bear_breakout_pct": 55,
+        "avg_rise_pct": 8,
+        "avg_decline_pct": 8,
+        "pullback_rate_pct": 25,
+        "structure": [
+          "Phiên 1: Xu hướng mạnh",
+          "Phiên 2: Mở trong phạm vi phiên 1, đóng ngược hướng",
+          "Phiên 3 (tùy chọn): Xác nhận đảo chiều"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi đóng phiên xác nhận",
+          "Khối lượng nên giảm ở mẫu",
+          "Mục tiêu ngắn hạn",
+          "Stop loss gần điểm vào lệnh"
+        ]
+      },
+      {
+        "key": "exhaustion-gap",
+        "name_vi": "Khoảng Trống Kiệt Sức",
+        "name_en": "Exhaustion Gap",
+        "category": "reversal",
+        "success_rate": 65,
+        "avg_move_pct": -10,
+        "duration": "Cuối xu hướng",
+        "bull_breakout_pct": 35,
+        "bear_breakout_pct": 35,
+        "avg_rise_pct": 8,
+        "avg_decline_pct": 10,
+        "pullback_rate_pct": 22,
+        "structure": [
+          "Xu hướng mạnh đã kéo dài",
+          "Gap xuất hiện cuối xu hướng",
+          "Đảo chiều hoặc đi ngang sau đó"
+        ],
+        "trading_rules": [
+          "Chuẩn bị cho đảo chiều",
+          "Đợi xác nhận đảo chiều trước vào lệnh",
+          "Mục tiêu = Độ rộng gap có thể được lấp đầy",
+          "Cẩn trọng với fakeout"
+        ]
+      },
+      {
+        "key": "inverted-scallop",
+        "name_vi": "Scallop Ngược",
+        "name_en": "Inverted Scallop",
+        "category": "reversal",
+        "success_rate": 65,
+        "avg_move_pct": 10,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 48,
+        "bear_breakout_pct": 52,
+        "avg_rise_pct": 10,
+        "avg_decline_pct": 10,
+        "pullback_rate_pct": 18,
+        "structure": [
+          "Điểm bắt đầu thấp",
+          "Phần giữa cong lên",
+          "Điểm kết thúc thấp hơn hoặc bằng điểm bắt đầu"
+        ],
+        "trading_rules": [
+          "Vào lệnh theo hướng phá vỡ",
+          "Có thể đảo chiều cả hai hướng",
+          "Mục tiêu = Độ cao của mẫu",
+          "Stop loss bên kia mẫu"
+        ]
+      },
+      {
+        "key": "pipe-bottom",
+        "name_vi": "Ống Đáy",
+        "name_en": "Pipe Bottom",
+        "category": "reversal",
+        "success_rate": 64,
+        "avg_move_pct": 11,
+        "duration": "2-5 phiên",
+        "bull_breakout_pct": 64,
+        "bear_breakout_pct": 36,
+        "avg_rise_pct": 11,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 16,
+        "structure": [
+          "Phiên 1: Nến giảm dài",
+          "Phiên 2: Nến giảm dài tương tự",
+          "Hai nến gần như song song"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá tăng trên hai nến",
+          "Khối lượng nên cao",
+          "Mục tiêu = Độ dài của ống",
+          "Stop loss dưới đáy ống"
+        ]
+      },
+      {
+        "key": "v-bottom",
+        "name_vi": "Đáy V",
+        "name_en": "V Bottom / Spike Bottom",
+        "category": "reversal",
+        "success_rate": 62,
+        "avg_move_pct": 14,
+        "duration": "1-2 tuần",
+        "bull_breakout_pct": 62,
+        "bear_breakout_pct": 38,
+        "avg_rise_pct": 14,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 18,
+        "structure": [
+          "Xu hướng giảm mạnh",
+          "Đáy nhọn, sắc",
+          "Tăng nhanh ngang bằng độ giảm"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi xác nhận đáy",
+          "Khối lượng cao ở đáy",
+          "Mục tiêu = Độ sâu của V",
+          "Stop loss dưới đáy V"
+        ]
+      },
+      {
+        "key": "broadening-top",
+        "name_vi": "Đỉnh Mở Rộng",
+        "name_en": "Broadening Top",
+        "category": "reversal",
+        "success_rate": 61,
+        "avg_move_pct": -12,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 39,
+        "bear_breakout_pct": 61,
+        "avg_rise_pct": 8,
+        "avg_decline_pct": 12,
+        "pullback_rate_pct": 18,
+        "structure": [
+          "Đường biên trên: Dốc lên",
+          "Đường biên dưới: Dốc xuống",
+          "Hai đường mở rộng ra như cái phễu ngược"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường biên dưới",
+          "Khối lượng thường không nhất quán",
+          "Mục tiêu = Chiều cao tối đa của mẫu",
+          "Stop loss đặt trên đỉnh cao nhất"
+        ]
+      },
+      {
+        "key": "pipe-top",
+        "name_vi": "Ống Đỉnh",
+        "name_en": "Pipe Top",
+        "category": "reversal",
+        "success_rate": 61,
+        "avg_move_pct": -9,
+        "duration": "2-5 phiên",
+        "bull_breakout_pct": 39,
+        "bear_breakout_pct": 61,
+        "avg_rise_pct": 4,
+        "avg_decline_pct": 9,
+        "pullback_rate_pct": 18,
+        "structure": [
+          "Phiên 1: Nến tăng dài",
+          "Phiên 2: Nến tăng dài tương tự",
+          "Hai nến gần như song song"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá giảm dưới hai nến",
+          "Khối lượng nên cao",
+          "Mục tiêu = Độ dài của ống",
+          "Stop loss trên đỉnh ống"
+        ]
+      },
+      {
+        "key": "v-top",
+        "name_vi": "Đỉnh V",
+        "name_en": "V Top / Spike Top",
+        "category": "reversal",
+        "success_rate": 58,
+        "avg_move_pct": -10,
+        "duration": "1-2 tuần",
+        "bull_breakout_pct": 42,
+        "bear_breakout_pct": 58,
+        "avg_rise_pct": 5,
+        "avg_decline_pct": 10,
+        "pullback_rate_pct": 20,
+        "structure": [
+          "Xu hướng tăng mạnh",
+          "Đỉnh nhọn, sắc",
+          "Giảm nhanh ngang bằng độ tăng"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi xác nhận đỉnh",
+          "Khối lượng cao ở đỉnh",
+          "Mục tiêu = Độ cao của V",
+          "Stop loss trên đỉnh V"
+        ]
+      }
+    ],
+    "continuation": [
+      {
+        "key": "cup-handle",
+        "name_vi": "Cốc và Tay Cầm",
+        "name_en": "Cup and Handle",
+        "category": "continuation",
+        "success_rate": 88,
+        "avg_move_pct": 25,
+        "duration": "2-6 tháng",
+        "bull_breakout_pct": 88,
+        "bear_breakout_pct": 12,
+        "avg_rise_pct": 25,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 5,
+        "structure": [
+          "Phần cốc: Hình chữ U, kéo dài 1-6 tháng",
+          "Phần tay cầm: Điều chỉnh nhẹ, kéo dài 1-4 tuần",
+          "Điểm phá vỡ: Giá vượt qua đỉnh tay cầm"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ đường kháng cự",
+          "Khối lượng tăng mạnh khi phá vỡ",
+          "Mục tiêu = Độ sâu của cốc",
+          "Stop loss đặt dưới tay cầm"
+        ]
+      },
+      {
+        "key": "flag",
+        "name_vi": "Cờ Đuôi Nheo",
+        "name_en": "Flag",
+        "category": "continuation",
+        "success_rate": 85,
+        "avg_move_pct": 12,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 67,
+        "bear_breakout_pct": 85,
+        "avg_rise_pct": 12,
+        "avg_decline_pct": 12,
+        "pullback_rate_pct": 6,
+        "structure": [
+          "Cột cờ: Xu hướng mạnh ban đầu",
+          "Phần cờ: Điều chỉnh ngắn, đi ngược xu hướng",
+          "Phá vỡ: Tiếp tục xu hướng cũ"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ khỏi phần cờ",
+          "Khối lượng thấp trong phần cờ",
+          "Mục tiêu = Độ dài của cột cờ",
+          "Stop loss đặt bên kia phần cờ"
+        ]
+      },
+      {
+        "key": "bull-flag",
+        "name_vi": "Cờ Tăng",
+        "name_en": "Bull Flag",
+        "category": "continuation",
+        "success_rate": 85,
+        "avg_move_pct": 14,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 85,
+        "bear_breakout_pct": 15,
+        "avg_rise_pct": 14,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 5,
+        "structure": [
+          "Cột cờ: Tăng mạnh trong vài phiên",
+          "Phần cờ: Điều chỉnh nhẹ, giảm dần",
+          "Phá vỡ: Giá tiếp tục tăng"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ đường kháng cự của cờ",
+          "Khối lượng giảm trong phần cờ",
+          "Mục tiêu = Độ dài cột cờ tính từ điểm phá vỡ",
+          "Stop loss đặt dưới đáy phần cờ"
+        ]
+      },
+      {
+        "key": "high-tight-flag",
+        "name_vi": "Cờ Cao và Chặt",
+        "name_en": "High and Tight Flag",
+        "category": "continuation",
+        "success_rate": 85,
+        "avg_move_pct": 69,
+        "duration": "1-2 tháng",
+        "bull_breakout_pct": 85,
+        "bear_breakout_pct": 15,
+        "avg_rise_pct": 69,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 5,
+        "structure": [
+          "Phần cột cờ: Tăng mạnh, gấp đôi giá",
+          "Phần cờ: Đi ngang chặt, không quá 25%回落",
+          "Phá vỡ: Tiếp tục tăng mạnh"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ đỉnh cờ",
+          "Cờ không nên thấp quá 25% so với đỉnh",
+          "Mục tiêu = Độ dài cột cờ",
+          "Stop loss dưới đáy cờ"
+        ]
+      },
+      {
+        "key": "bear-flag",
+        "name_vi": "Cờ Giảm",
+        "name_en": "Bear Flag",
+        "category": "continuation",
+        "success_rate": 83,
+        "avg_move_pct": -13,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 17,
+        "bear_breakout_pct": 83,
+        "avg_rise_pct": 0,
+        "avg_decline_pct": 13,
+        "pullback_rate_pct": 7,
+        "structure": [
+          "Cột cờ: Giảm mạnh trong vài phiên",
+          "Phần cờ: Điều chỉnh nhẹ, tăng dần",
+          "Phá vỡ: Giá tiếp tục giảm"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường hỗ trợ của cờ",
+          "Khối lượng giảm trong phần cờ",
+          "Mục tiêu = Độ dài cột cờ tính từ điểm phá vỡ",
+          "Stop loss đặt trên đỉnh phần cờ"
+        ]
+      },
+      {
+        "key": "pennant",
+        "name_vi": "Cờ Đuôi Nheo Tam Giác",
+        "name_en": "Pennant",
+        "category": "continuation",
+        "success_rate": 82,
+        "avg_move_pct": 11,
+        "duration": "1-3 tuần",
+        "bull_breakout_pct": 68,
+        "bear_breakout_pct": 82,
+        "avg_rise_pct": 11,
+        "avg_decline_pct": 11,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Cột cờ: Xu hướng mạnh ban đầu",
+          "Phần cờ: Tam giác nhỏ, hội tụ",
+          "Phá vỡ: Tiếp tục xu hướng cũ"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ khỏi tam giác",
+          "Khối lượng giảm trong phần tam giác",
+          "Mục tiêu = Độ dài của cột cờ",
+          "Stop loss bên kia tam giác"
+        ]
+      },
+      {
+        "key": "cup-high-handle",
+        "name_vi": "Cốc Tay Cầm Cao",
+        "name_en": "Cup with High Handle",
+        "category": "continuation",
+        "success_rate": 81,
+        "avg_move_pct": 22,
+        "duration": "2-5 tháng",
+        "bull_breakout_pct": 81,
+        "bear_breakout_pct": 19,
+        "avg_rise_pct": 22,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 6,
+        "structure": [
+          "Phần cốc: Hình chữ U",
+          "Tay cầm: Nằm ở phần cao của cốc",
+          "Phá vỡ: Vượt đỉnh tay cầm"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ đỉnh tay cầm",
+          "Tay cầm ở phần trên 1/3 của cốc",
+          "Mục tiêu = Độ sâu của cốc",
+          "Stop loss dưới tay cầm"
+        ]
+      },
+      {
+        "key": "descending-triangle",
+        "name_vi": "Tam Giác Giảm",
+        "name_en": "Descending Triangle",
+        "category": "continuation",
+        "success_rate": 79,
+        "avg_move_pct": -15,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 21,
+        "bear_breakout_pct": 79,
+        "avg_rise_pct": 4,
+        "avg_decline_pct": 15,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Đường hỗ trợ: Nằm ngang, ở dưới",
+          "Đường kháng cự: Dốc xuống, ở trên",
+          "Điểm hội tụ: Hai đường gặp nhau"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá phá vỡ đường hỗ trợ",
+          "Khối lượng giảm trong quá trình hình thành",
+          "Mục tiêu = Chiều cao của tam giác",
+          "Stop loss đặt trên đường kháng cự"
+        ]
+      },
+      {
+        "key": "three-rising-valleys",
+        "name_vi": "Ba Thung Lũng Tăng",
+        "name_en": "Three Rising Valleys",
+        "category": "continuation",
+        "success_rate": 76,
+        "avg_move_pct": 16,
+        "duration": "3-6 tuần",
+        "bull_breakout_pct": 76,
+        "bear_breakout_pct": 24,
+        "avg_rise_pct": 16,
+        "avg_decline_pct": 3,
+        "pullback_rate_pct": 8,
+        "structure": [
+          "Đáy 1: Thấp nhất",
+          "Đáy 2: Cao hơn đáy 1",
+          "Đáy 3: Cao hơn đáy 2"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá vượt đỉnh gần nhất",
+          "Mỗi đáy cao hơn đáy trước",
+          "Mục tiêu = Khoảng cách từ đáy 1 đến đỉnh",
+          "Stop loss dưới đáy 3"
+        ]
+      },
+      {
+        "key": "ascending-triangle",
+        "name_vi": "Tam Giác Tăng",
+        "name_en": "Ascending Triangle",
+        "category": "continuation",
+        "success_rate": 75,
+        "avg_move_pct": 12,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 75,
+        "bear_breakout_pct": 25,
+        "avg_rise_pct": 12,
+        "avg_decline_pct": 5,
+        "pullback_rate_pct": 11,
+        "structure": [
+          "Đường kháng cự: Nằm ngang, ở trên",
+          "Đường hỗ trợ: Dốc lên, ở dưới",
+          "Điểm hội tụ: Hai đường gặp nhau"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ đường kháng cự",
+          "Khối lượng giảm trong quá trình hình thành",
+          "Mục tiêu = Chiều cao của tam giác",
+          "Stop loss đặt dưới đường hỗ trợ"
+        ]
+      },
+      {
+        "key": "three-falling-peaks",
+        "name_vi": "Ba Đỉnh Giảm",
+        "name_en": "Three Falling Peaks",
+        "category": "continuation",
+        "success_rate": 74,
+        "avg_move_pct": -14,
+        "duration": "3-6 tuần",
+        "bull_breakout_pct": 26,
+        "bear_breakout_pct": 74,
+        "avg_rise_pct": 4,
+        "avg_decline_pct": 14,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Đỉnh 1: Cao nhất",
+          "Đỉnh 2: Thấp hơn đỉnh 1",
+          "Đỉnh 3: Thấp hơn đỉnh 2"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá跌破 đáy gần nhất",
+          "Mỗi đỉnh thấp hơn đỉnh trước",
+          "Mục tiêu = Khoảng cách từ đỉnh 1 đến đáy",
+          "Stop loss trên đỉnh 3"
+        ]
+      },
+      {
+        "key": "scallop-ascending",
+        "name_vi": "Scallop Tăng",
+        "name_en": "Scallop Ascending",
+        "category": "continuation",
+        "success_rate": 73,
+        "avg_move_pct": 14,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 73,
+        "bear_breakout_pct": 27,
+        "avg_rise_pct": 14,
+        "avg_decline_pct": 3,
+        "pullback_rate_pct": 11,
+        "structure": [
+          "Đáy đầu tiên",
+          "Đáy thứ hai cao hơn",
+          "Đáy thứ ba cao hơn nữa (tùy chọn)",
+          "Hình dáng cong như vỏ sò"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá vượt đỉnh gần nhất",
+          "Khối lượng nên tăng khi vượt đỉnh",
+          "Mục tiêu = Độ cao từ đáy đến đỉnh",
+          "Stop loss dưới đáy gần nhất"
+        ]
+      },
+      {
+        "key": "cup-low-handle",
+        "name_vi": "Cốc Tay Cầm Thấp",
+        "name_en": "Cup with Low Handle",
+        "category": "continuation",
+        "success_rate": 73,
+        "avg_move_pct": 18,
+        "duration": "2-5 tháng",
+        "bull_breakout_pct": 73,
+        "bear_breakout_pct": 27,
+        "avg_rise_pct": 18,
+        "avg_decline_pct": 0,
+        "pullback_rate_pct": 9,
+        "structure": [
+          "Phần cốc: Hình chữ U",
+          "Tay cầm: Nằm ở phần dưới của cốc",
+          "Phá vỡ: Vượt đỉnh tay cầm"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ đỉnh tay cầm",
+          "Tay cầm ở phần dưới 1/3 của cốc",
+          "Mục tiêu = Độ sâu của cốc",
+          "Stop loss dưới tay cầm"
+        ]
+      },
+      {
+        "key": "breakaway-gap",
+        "name_vi": "Khoảng Trống Phá Vỡ",
+        "name_en": "Breakaway Gap",
+        "category": "continuation",
+        "success_rate": 71,
+        "avg_move_pct": 15,
+        "duration": "Ngay lập tức",
+        "bull_breakout_pct": 71,
+        "bear_breakout_pct": 71,
+        "avg_rise_pct": 15,
+        "avg_decline_pct": 15,
+        "pullback_rate_pct": 12,
+        "structure": [
+          "Vùng tích lũy trước gap",
+          "Gap lớn vượt mức kháng cự/hỗ trợ",
+          "Giá tiếp tục theo hướng gap"
+        ],
+        "trading_rules": [
+          "Vào lệnh theo hướng gap",
+          "Khối lượng phải cao khi gap",
+          "Mục tiêu = Độ rộng gap + vùng tích lũy",
+          "Stop loss trong vùng gap"
+        ]
+      },
+      {
+        "key": "scallop-descending",
+        "name_vi": "Scallop Giảm",
+        "name_en": "Scallop Descending",
+        "category": "continuation",
+        "success_rate": 69,
+        "avg_move_pct": -12,
+        "duration": "2-4 tuần",
+        "bull_breakout_pct": 31,
+        "bear_breakout_pct": 69,
+        "avg_rise_pct": 4,
+        "avg_decline_pct": 12,
+        "pullback_rate_pct": 13,
+        "structure": [
+          "Đỉnh đầu tiên",
+          "Đỉnh thứ hai thấp hơn",
+          "Đỉnh thứ ba thấp hơn nữa (tùy chọn)",
+          "Hình dáng cong nghiêng xuống"
+        ],
+        "trading_rules": [
+          "Vào lệnh bán khi giá跌破 đáy gần nhất",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu = Độ cao từ đỉnh đến đáy",
+          "Stop loss trên đỉnh gần nhất"
+        ]
+      },
+      {
+        "key": "runaway-gap",
+        "name_vi": "Khoảng Trống Chạy",
+        "name_en": "Runaway Gap / Measuring Gap",
+        "category": "continuation",
+        "success_rate": 68,
+        "avg_move_pct": 12,
+        "duration": "Giữa xu hướng",
+        "bull_breakout_pct": 68,
+        "bear_breakout_pct": 68,
+        "avg_rise_pct": 12,
+        "avg_decline_pct": 12,
+        "pullback_rate_pct": 14,
+        "structure": [
+          "Xu hướng mạnh đang diễn ra",
+          "Gap xuất hiện giữa xu hướng",
+          "Giá tiếp tục theo hướng cũ"
+        ],
+        "trading_rules": [
+          "Vào lệnh theo hướng gap",
+          "Xác nhận bằng khối lượng",
+          "Mục tiêu = Đo từ bắt đầu xu hướng đến gap",
+          "Stop loss bên kia gap"
+        ]
+      }
+    ],
+    "bilateral": [
+      {
+        "key": "symmetrical-triangle",
+        "name_vi": "Tam Giác Đối Xứng",
+        "name_en": "Symmetrical Triangle",
+        "category": "bilateral",
+        "success_rate": 64,
+        "avg_move_pct": 0,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 52,
+        "bear_breakout_pct": 48,
+        "avg_rise_pct": 10,
+        "avg_decline_pct": 10,
+        "pullback_rate_pct": 14,
+        "structure": [
+          "Đường biên trên: Dốc xuống",
+          "Đường biên dưới: Dốc lên",
+          "Điểm hội tụ: Hai đường gặp nhau"
+        ],
+        "trading_rules": [
+          "Đợi phá vỡ rõ ràng trước khi vào lệnh",
+          "Hai hướng phá vỡ có xác suất tương đương",
+          "Mục tiêu = Chiều cao của tam giác",
+          "Stop loss đặt bên kia đường phá vỡ"
+        ]
+      },
+      {
+        "key": "rectangle-bottom",
+        "name_vi": "Hình Chữ Nhật Đáy",
+        "name_en": "Rectangle Bottom",
+        "category": "bilateral",
+        "success_rate": 64,
+        "avg_move_pct": 10,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 64,
+        "bear_breakout_pct": 36,
+        "avg_rise_pct": 10,
+        "avg_decline_pct": 4,
+        "pullback_rate_pct": 14,
+        "structure": [
+          "Biên trên: Đường kháng cự ngang",
+          "Biên dưới: Đường hỗ trợ ngang",
+          "Giá dao động trong kênh ở đáy"
+        ],
+        "trading_rules": [
+          "Vào lệnh mua khi giá phá vỡ biên trên",
+          "Khối lượng nên tăng khi phá vỡ",
+          "Mục tiêu = Chiều cao của kênh",
+          "Stop loss dưới biên dưới"
+        ]
+      },
+      {
+        "key": "rectangle-top",
+        "name_vi": "Hình Chữ Nhật Đỉnh",
+        "name_en": "Rectangle Top",
+        "category": "bilateral",
+        "success_rate": 62,
+        "avg_move_pct": -8,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 38,
+        "bear_breakout_pct": 62,
+        "avg_rise_pct": 6,
+        "avg_decline_pct": 8,
+        "pullback_rate_pct": 16,
+        "structure": [
+          "Biên trên: Đường kháng cự ngang",
+          "Biên dưới: Đường hỗ trợ ngang",
+          "Giá dao động trong kênh"
+        ],
+        "trading_rules": [
+          "Vào lệnh khi giá phá vỡ một trong hai biên",
+          "Khối lượng không nhất quán",
+          "Mục tiêu = Chiều cao của kênh",
+          "Stop loss bên kia biên phá vỡ"
+        ]
+      },
+      {
+        "key": "broadening-wedge-descending",
+        "name_vi": "Nêm Mở Rộng Giảm",
+        "name_en": "Broadening Wedge Descending",
+        "category": "bilateral",
+        "success_rate": 62,
+        "avg_move_pct": 0,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 38,
+        "bear_breakout_pct": 62,
+        "avg_rise_pct": 7,
+        "avg_decline_pct": 12,
+        "pullback_rate_pct": 17,
+        "structure": [
+          "Đường biên trên: Nằm ngang",
+          "Đường biên dưới: Dốc xuống",
+          "Mở rộng theo hướng xuống"
+        ],
+        "trading_rules": [
+          "Đợi phá vỡ rõ ràng",
+          "Thường phá vỡ về phía giảm",
+          "Mục tiêu = Chiều cao của mẫu",
+          "Stop loss bên kia đường phá vỡ"
+        ]
+      },
+      {
+        "key": "right-angled-broadening-descending",
+        "name_vi": "Mở Rộng Vuông Giảm",
+        "name_en": "Right-Angled Broadening Descending",
+        "category": "bilateral",
+        "success_rate": 61,
+        "avg_move_pct": 0,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 39,
+        "bear_breakout_pct": 61,
+        "avg_rise_pct": 7,
+        "avg_decline_pct": 11,
+        "pullback_rate_pct": 15,
+        "structure": [
+          "Đường biên trên: Nằm ngang",
+          "Đường biên dưới: Dốc xuống",
+          "Mở rộng theo hướng xuống"
+        ],
+        "trading_rules": [
+          "Đợi phá vỡ rõ ràng",
+          "Thường phá vỡ về phía giảm",
+          "Mục tiêu = Chiều cao của mẫu",
+          "Stop loss bên kia đường phá vỡ"
+        ]
+      },
+      {
+        "key": "right-angled-broadening-ascending",
+        "name_vi": "Mở Rộng Vuông Tăng",
+        "name_en": "Right-Angled Broadening Ascending",
+        "category": "bilateral",
+        "success_rate": 59,
+        "avg_move_pct": 0,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 59,
+        "bear_breakout_pct": 41,
+        "avg_rise_pct": 11,
+        "avg_decline_pct": 8,
+        "pullback_rate_pct": 16,
+        "structure": [
+          "Đường biên dưới: Nằm ngang",
+          "Đường biên trên: Dốc lên",
+          "Mở rộng theo hướng lên"
+        ],
+        "trading_rules": [
+          "Đợi phá vỡ rõ ràng",
+          "Thường phá vỡ về phía tăng",
+          "Mục tiêu = Chiều cao của mẫu",
+          "Stop loss bên kia đường phá vỡ"
+        ]
+      },
+      {
+        "key": "broadening-wedge-ascending",
+        "name_vi": "Nêm Mở Rộng Tăng",
+        "name_en": "Broadening Wedge Ascending",
+        "category": "bilateral",
+        "success_rate": 58,
+        "avg_move_pct": 0,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 42,
+        "bear_breakout_pct": 58,
+        "avg_rise_pct": 9,
+        "avg_decline_pct": 11,
+        "pullback_rate_pct": 19,
+        "structure": [
+          "Đường biên dưới: Nằm ngang",
+          "Đường biên trên: Dốc lên",
+          "Mở rộng theo hướng lên"
+        ],
+        "trading_rules": [
+          "Đợi phá vỡ rõ ràng",
+          "Thường tiếp tục xu hướng cũ",
+          "Mục tiêu = Chiều cao của mẫu",
+          "Stop loss bên kia đường phá vỡ"
+        ]
+      },
+      {
+        "key": "lazy-s",
+        "name_vi": "Chữ S Lười",
+        "name_en": "Lazy S",
+        "category": "bilateral",
+        "success_rate": 55,
+        "avg_move_pct": 0,
+        "duration": "2-6 tuần",
+        "bull_breakout_pct": 50,
+        "bear_breakout_pct": 50,
+        "avg_rise_pct": 8,
+        "avg_decline_pct": 8,
+        "pullback_rate_pct": 22,
+        "structure": [
+          "Phần 1: Cong lên",
+          "Phần 2: Cong xuống",
+          "Tổng thể: Hình S nằm ngang"
+        ],
+        "trading_rules": [
+          "Đợi phá vỡ rõ ràng",
+          "Không có hướng ưu tiên",
+          "Mục tiêu = Biên độ của mẫu",
+          "Stop loss bên kia mẫu"
+        ]
+      },
+      {
+        "key": "common-gap",
+        "name_vi": "Khoảng Trống Phổ Biến",
+        "name_en": "Common Gap",
+        "category": "bilateral",
+        "success_rate": 0,
+        "avg_move_pct": 0,
+        "duration": "1-3 phiên",
+        "bull_breakout_pct": 50,
+        "bear_breakout_pct": 50,
+        "avg_rise_pct": 3,
+        "avg_decline_pct": 3,
+        "pullback_rate_pct": 80,
+        "structure": [
+          "Xuất hiện trong trading range",
+          "Không có xu hướng rõ ràng",
+          "Thường được lấp đầy trong vài phiên"
+        ],
+        "trading_rules": [
+          "Không nên giao dịch dựa trên gap này",
+          "Có thể fade (đánh ngược) gap",
+          "Lấp đầy gap là mục tiêu",
+          "Không có giá trị dự báo"
+        ]
+      }
+    ]
+  },
+  "high_success_patterns": [
+    {
+      "key": "head-shoulders",
+      "name_vi": "Đầu và Vai",
+      "name_en": "Head and Shoulders",
+      "category": "reversal",
+      "success_rate": 89,
+      "avg_move_pct": -18,
+      "duration": "3-4 tuần",
+      "bull_breakout_pct": 0,
+      "bear_breakout_pct": 89,
+      "avg_rise_pct": 0,
+      "avg_decline_pct": 18,
+      "pullback_rate_pct": 4,
+      "structure": [
+        "Vai trái: Đỉnh đầu tiên, thấp hơn đầu",
+        "Đầu: Đỉnh cao nhất, nằm ở giữa",
+        "Vai phải: Đỉnh thứ ba, tương đương vai trái",
+        "Đường cổ: Nối hai đáy giữa các đỉnh"
+      ],
+      "trading_rules": [
+        "Đợi giá phá vỡ đường cổ trước khi vào lệnh",
+        "Khối lượng nên tăng khi phá vỡ",
+        "Mục tiêu giá = Khoảng cách từ đầu đến đường cổ",
+        "Stop loss đặt trên vai phải"
+      ]
+    },
+    {
+      "key": "cup-handle",
+      "name_vi": "Cốc và Tay Cầm",
+      "name_en": "Cup and Handle",
+      "category": "continuation",
+      "success_rate": 88,
+      "avg_move_pct": 25,
+      "duration": "2-6 tháng",
+      "bull_breakout_pct": 88,
+      "bear_breakout_pct": 12,
+      "avg_rise_pct": 25,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 5,
+      "structure": [
+        "Phần cốc: Hình chữ U, kéo dài 1-6 tháng",
+        "Phần tay cầm: Điều chỉnh nhẹ, kéo dài 1-4 tuần",
+        "Điểm phá vỡ: Giá vượt qua đỉnh tay cầm"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ đường kháng cự",
+        "Khối lượng tăng mạnh khi phá vỡ",
+        "Mục tiêu = Độ sâu của cốc",
+        "Stop loss đặt dưới tay cầm"
+      ]
+    },
+    {
+      "key": "triple-bottom",
+      "name_vi": "Đáy Ba",
+      "name_en": "Triple Bottom",
+      "category": "reversal",
+      "success_rate": 86,
+      "avg_move_pct": 22,
+      "duration": "3-6 tuần",
+      "bull_breakout_pct": 86,
+      "bear_breakout_pct": 0,
+      "avg_rise_pct": 22,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 6,
+      "structure": [
+        "Ba đáy ở cùng mức giá hoặc gần bằng nhau",
+        "Hai đỉnh giữa các đáy",
+        "Đường kháng cự nối hai đỉnh cao nhất"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đường kháng cự",
+        "Khối lượng tăng dần qua các đáy",
+        "Mục tiêu = Khoảng cách từ đáy đến đường kháng cự",
+        "Stop loss đặt dưới đáy thấp nhất"
+      ]
+    },
+    {
+      "key": "flag",
+      "name_vi": "Cờ Đuôi Nheo",
+      "name_en": "Flag",
+      "category": "continuation",
+      "success_rate": 85,
+      "avg_move_pct": 12,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 67,
+      "bear_breakout_pct": 85,
+      "avg_rise_pct": 12,
+      "avg_decline_pct": 12,
+      "pullback_rate_pct": 6,
+      "structure": [
+        "Cột cờ: Xu hướng mạnh ban đầu",
+        "Phần cờ: Điều chỉnh ngắn, đi ngược xu hướng",
+        "Phá vỡ: Tiếp tục xu hướng cũ"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ khỏi phần cờ",
+        "Khối lượng thấp trong phần cờ",
+        "Mục tiêu = Độ dài của cột cờ",
+        "Stop loss đặt bên kia phần cờ"
+      ]
+    },
+    {
+      "key": "bull-flag",
+      "name_vi": "Cờ Tăng",
+      "name_en": "Bull Flag",
+      "category": "continuation",
+      "success_rate": 85,
+      "avg_move_pct": 14,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 85,
+      "bear_breakout_pct": 15,
+      "avg_rise_pct": 14,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 5,
+      "structure": [
+        "Cột cờ: Tăng mạnh trong vài phiên",
+        "Phần cờ: Điều chỉnh nhẹ, giảm dần",
+        "Phá vỡ: Giá tiếp tục tăng"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đường kháng cự của cờ",
+        "Khối lượng giảm trong phần cờ",
+        "Mục tiêu = Độ dài cột cờ tính từ điểm phá vỡ",
+        "Stop loss đặt dưới đáy phần cờ"
+      ]
+    },
+    {
+      "key": "high-tight-flag",
+      "name_vi": "Cờ Cao và Chặt",
+      "name_en": "High and Tight Flag",
+      "category": "continuation",
+      "success_rate": 85,
+      "avg_move_pct": 69,
+      "duration": "1-2 tháng",
+      "bull_breakout_pct": 85,
+      "bear_breakout_pct": 15,
+      "avg_rise_pct": 69,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 5,
+      "structure": [
+        "Phần cột cờ: Tăng mạnh, gấp đôi giá",
+        "Phần cờ: Đi ngang chặt, không quá 25%回落",
+        "Phá vỡ: Tiếp tục tăng mạnh"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ đỉnh cờ",
+        "Cờ không nên thấp quá 25% so với đỉnh",
+        "Mục tiêu = Độ dài cột cờ",
+        "Stop loss dưới đáy cờ"
+      ]
+    },
+    {
+      "key": "triple-top",
+      "name_vi": "Đỉnh Ba",
+      "name_en": "Triple Top",
+      "category": "reversal",
+      "success_rate": 84,
+      "avg_move_pct": -20,
+      "duration": "3-6 tuần",
+      "bull_breakout_pct": 0,
+      "bear_breakout_pct": 84,
+      "avg_rise_pct": 0,
+      "avg_decline_pct": 20,
+      "pullback_rate_pct": 7,
+      "structure": [
+        "Ba đỉnh ở cùng mức giá hoặc gần bằng nhau",
+        "Hai đáy giữa các đỉnh",
+        "Đường cổ nối hai đáy thấp nhất"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá phá vỡ đường cổ",
+        "Khối lượng giảm dần qua các đỉnh",
+        "Mục tiêu = Khoảng cách từ đỉnh đến đường cổ",
+        "Stop loss đặt trên đỉnh cao nhất"
+      ]
+    },
+    {
+      "key": "bear-flag",
+      "name_vi": "Cờ Giảm",
+      "name_en": "Bear Flag",
+      "category": "continuation",
+      "success_rate": 83,
+      "avg_move_pct": -13,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 17,
+      "bear_breakout_pct": 83,
+      "avg_rise_pct": 0,
+      "avg_decline_pct": 13,
+      "pullback_rate_pct": 7,
+      "structure": [
+        "Cột cờ: Giảm mạnh trong vài phiên",
+        "Phần cờ: Điều chỉnh nhẹ, tăng dần",
+        "Phá vỡ: Giá tiếp tục giảm"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá phá vỡ đường hỗ trợ của cờ",
+        "Khối lượng giảm trong phần cờ",
+        "Mục tiêu = Độ dài cột cờ tính từ điểm phá vỡ",
+        "Stop loss đặt trên đỉnh phần cờ"
+      ]
+    },
+    {
+      "key": "double-bottom",
+      "name_vi": "Đáy Kép",
+      "name_en": "Double Bottom",
+      "category": "reversal",
+      "success_rate": 82,
+      "avg_move_pct": 20,
+      "duration": "2-3 tuần",
+      "bull_breakout_pct": 82,
+      "bear_breakout_pct": 0,
+      "avg_rise_pct": 20,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 11,
+      "structure": [
+        "Đáy đầu tiên: Giá đạt đáy và tăng",
+        "Đỉnh giữa: Mức kháng cự tạm thời",
+        "Đáy thứ hai: Giá quay lại mức đáy cũ và tăng"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đỉnh giữa",
+        "Khối lượng nên tăng khi phá vỡ",
+        "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+        "Stop loss đặt dưới đáy thứ hai"
+      ]
+    },
+    {
+      "key": "pennant",
+      "name_vi": "Cờ Đuôi Nheo Tam Giác",
+      "name_en": "Pennant",
+      "category": "continuation",
+      "success_rate": 82,
+      "avg_move_pct": 11,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 68,
+      "bear_breakout_pct": 82,
+      "avg_rise_pct": 11,
+      "avg_decline_pct": 11,
+      "pullback_rate_pct": 8,
+      "structure": [
+        "Cột cờ: Xu hướng mạnh ban đầu",
+        "Phần cờ: Tam giác nhỏ, hội tụ",
+        "Phá vỡ: Tiếp tục xu hướng cũ"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ khỏi tam giác",
+        "Khối lượng giảm trong phần tam giác",
+        "Mục tiêu = Độ dài của cột cờ",
+        "Stop loss bên kia tam giác"
+      ]
+    },
+    {
+      "key": "complex-head-shoulders",
+      "name_vi": "Đầu và Vai Phức Tạp",
+      "name_en": "Complex Head and Shoulders",
+      "category": "reversal",
+      "success_rate": 82,
+      "avg_move_pct": -17,
+      "duration": "4-8 tuần",
+      "bull_breakout_pct": 18,
+      "bear_breakout_pct": 82,
+      "avg_rise_pct": 4,
+      "avg_decline_pct": 17,
+      "pullback_rate_pct": 5,
+      "structure": [
+        "Có thể có 2 vai trái và/hoặc 2 vai phải",
+        "Có thể có 2 đầu (Double Head)",
+        "Đường cổ có thể không thẳng"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá phá vỡ đường cổ",
+        "Đếm số vai và đầu để xác định",
+        "Mục tiêu = Khoảng cách từ đầu đến đường cổ",
+        "Stop loss trên vai phải cao nhất"
+      ]
+    },
+    {
+      "key": "inverse-head-shoulders",
+      "name_vi": "Đầu và Vai Ngược",
+      "name_en": "Inverse Head and Shoulders",
+      "category": "reversal",
+      "success_rate": 81,
+      "avg_move_pct": 22,
+      "duration": "3-4 tuần",
+      "bull_breakout_pct": 81,
+      "bear_breakout_pct": 0,
+      "avg_rise_pct": 22,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 8,
+      "structure": [
+        "Vai trái: Đáy đầu tiên, cao hơn đầu",
+        "Đầu: Đáy thấp nhất, nằm ở giữa",
+        "Vai phải: Đáy thứ ba, tương đương vai trái",
+        "Đường cổ: Nối hai đỉnh giữa các đáy"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đường cổ",
+        "Khối lượng nên tăng mạnh khi phá vỡ",
+        "Mục tiêu = Khoảng cách từ đầu đến đường cổ",
+        "Stop loss đặt dưới vai phải"
+      ]
+    },
+    {
+      "key": "falling-wedge",
+      "name_vi": "Nêm Giảm",
+      "name_en": "Falling Wedge",
+      "category": "reversal",
+      "success_rate": 81,
+      "avg_move_pct": 18,
+      "duration": "2-4 tuần",
+      "bull_breakout_pct": 81,
+      "bear_breakout_pct": 19,
+      "avg_rise_pct": 18,
+      "avg_decline_pct": 5,
+      "pullback_rate_pct": 8,
+      "structure": [
+        "Đường biên trên: Dốc xuống",
+        "Đường biên dưới: Dốc xuống (độ dốc lớn hơn)",
+        "Khối lượng giảm trong quá trình hình thành"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đường biên trên",
+        "Khối lượng nên tăng khi phá vỡ",
+        "Mục tiêu = Chiều cao của nêm tại điểm rộng nhất",
+        "Stop loss đặt dưới đường biên dưới"
+      ]
+    },
+    {
+      "key": "cup-high-handle",
+      "name_vi": "Cốc Tay Cầm Cao",
+      "name_en": "Cup with High Handle",
+      "category": "continuation",
+      "success_rate": 81,
+      "avg_move_pct": 22,
+      "duration": "2-5 tháng",
+      "bull_breakout_pct": 81,
+      "bear_breakout_pct": 19,
+      "avg_rise_pct": 22,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 6,
+      "structure": [
+        "Phần cốc: Hình chữ U",
+        "Tay cầm: Nằm ở phần cao của cốc",
+        "Phá vỡ: Vượt đỉnh tay cầm"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ đỉnh tay cầm",
+        "Tay cầm ở phần trên 1/3 của cốc",
+        "Mục tiêu = Độ sâu của cốc",
+        "Stop loss dưới tay cầm"
+      ]
+    }
+  ],
+  "candlestick_patterns": [
+    {
+      "key": "island-top",
+      "name_vi": "Đảo Đỉnh",
+      "name_en": "Island Top",
+      "category": "reversal",
+      "success_rate": 73,
+      "avg_move_pct": -14,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 27,
+      "bear_breakout_pct": 73,
+      "avg_rise_pct": 5,
+      "avg_decline_pct": 14,
+      "pullback_rate_pct": 11,
+      "structure": [
+        "Gap tăng: Giá nhảy lên tạo đỉnh",
+        "Vùng đảo: Giá giao dịch cô lập",
+        "Gap giảm: Giá nhảy xuống xác nhận"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi gap giảm xuất hiện",
+        "Khối lượng thường cao tại đảo",
+        "Mục tiêu = Chiều cao của đảo",
+        "Stop loss trên đỉnh của đảo"
+      ]
+    },
+    {
+      "key": "island-bottom",
+      "name_vi": "Đảo Đáy",
+      "name_en": "Island Bottom",
+      "category": "reversal",
+      "success_rate": 76,
+      "avg_move_pct": 17,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 76,
+      "bear_breakout_pct": 24,
+      "avg_rise_pct": 17,
+      "avg_decline_pct": 4,
+      "pullback_rate_pct": 9,
+      "structure": [
+        "Gap giảm: Giá nhảy xuống tạo đáy",
+        "Vùng đảo: Giá giao dịch cô lập",
+        "Gap tăng: Giá nhảy lên xác nhận"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi gap tăng xuất hiện",
+        "Khối lượng thường cao tại đảo",
+        "Mục tiêu = Chiều cao của đảo",
+        "Stop loss dưới đáy của đảo"
+      ]
+    },
+    {
+      "key": "island-reversal",
+      "name_vi": "Đảo Ngược Đảo",
+      "name_en": "Island Reversal",
+      "category": "reversal",
+      "success_rate": 74,
+      "avg_move_pct": 0,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 52,
+      "bear_breakout_pct": 48,
+      "avg_rise_pct": 14,
+      "avg_decline_pct": 14,
+      "pullback_rate_pct": 10,
+      "structure": [
+        "Gap ban đầu: Đi ngược xu hướng cũ",
+        "Vùng đảo: Giao dịch cô lập",
+        "Gap xác nhận: Quay ngược xu hướng cũ"
+      ],
+      "trading_rules": [
+        "Vào lệnh theo hướng gap xác nhận",
+        "Khối lượng cao tăng độ tin cậy",
+        "Mục tiêu = Chiều cao của đảo",
+        "Stop loss bên kia đảo"
+      ]
+    },
+    {
+      "key": "breakaway-gap",
+      "name_vi": "Khoảng Trống Phá Vỡ",
+      "name_en": "Breakaway Gap",
+      "category": "continuation",
+      "success_rate": 71,
+      "avg_move_pct": 15,
+      "duration": "Ngay lập tức",
+      "bull_breakout_pct": 71,
+      "bear_breakout_pct": 71,
+      "avg_rise_pct": 15,
+      "avg_decline_pct": 15,
+      "pullback_rate_pct": 12,
+      "structure": [
+        "Vùng tích lũy trước gap",
+        "Gap lớn vượt mức kháng cự/hỗ trợ",
+        "Giá tiếp tục theo hướng gap"
+      ],
+      "trading_rules": [
+        "Vào lệnh theo hướng gap",
+        "Khối lượng phải cao khi gap",
+        "Mục tiêu = Độ rộng gap + vùng tích lũy",
+        "Stop loss trong vùng gap"
+      ]
+    },
+    {
+      "key": "runaway-gap",
+      "name_vi": "Khoảng Trống Chạy",
+      "name_en": "Runaway Gap / Measuring Gap",
+      "category": "continuation",
+      "success_rate": 68,
+      "avg_move_pct": 12,
+      "duration": "Giữa xu hướng",
+      "bull_breakout_pct": 68,
+      "bear_breakout_pct": 68,
+      "avg_rise_pct": 12,
+      "avg_decline_pct": 12,
+      "pullback_rate_pct": 14,
+      "structure": [
+        "Xu hướng mạnh đang diễn ra",
+        "Gap xuất hiện giữa xu hướng",
+        "Giá tiếp tục theo hướng cũ"
+      ],
+      "trading_rules": [
+        "Vào lệnh theo hướng gap",
+        "Xác nhận bằng khối lượng",
+        "Mục tiêu = Đo từ bắt đầu xu hướng đến gap",
+        "Stop loss bên kia gap"
+      ]
+    },
+    {
+      "key": "exhaustion-gap",
+      "name_vi": "Khoảng Trống Kiệt Sức",
+      "name_en": "Exhaustion Gap",
+      "category": "reversal",
+      "success_rate": 65,
+      "avg_move_pct": -10,
+      "duration": "Cuối xu hướng",
+      "bull_breakout_pct": 35,
+      "bear_breakout_pct": 35,
+      "avg_rise_pct": 8,
+      "avg_decline_pct": 10,
+      "pullback_rate_pct": 22,
+      "structure": [
+        "Xu hướng mạnh đã kéo dài",
+        "Gap xuất hiện cuối xu hướng",
+        "Đảo chiều hoặc đi ngang sau đó"
+      ],
+      "trading_rules": [
+        "Chuẩn bị cho đảo chiều",
+        "Đợi xác nhận đảo chiều trước vào lệnh",
+        "Mục tiêu = Độ rộng gap có thể được lấp đầy",
+        "Cẩn trọng với fakeout"
+      ]
+    },
+    {
+      "key": "common-gap",
+      "name_vi": "Khoảng Trống Phổ Biến",
+      "name_en": "Common Gap",
+      "category": "bilateral",
+      "success_rate": 0,
+      "avg_move_pct": 0,
+      "duration": "1-3 phiên",
+      "bull_breakout_pct": 50,
+      "bear_breakout_pct": 50,
+      "avg_rise_pct": 3,
+      "avg_decline_pct": 3,
+      "pullback_rate_pct": 80,
+      "structure": [
+        "Xuất hiện trong trading range",
+        "Không có xu hướng rõ ràng",
+        "Thường được lấp đầy trong vài phiên"
+      ],
+      "trading_rules": [
+        "Không nên giao dịch dựa trên gap này",
+        "Có thể fade (đánh ngược) gap",
+        "Lấp đầy gap là mục tiêu",
+        "Không có giá trị dự báo"
+      ]
+    },
+    {
+      "key": "hook-reversal",
+      "name_vi": "Đảo Ngược Móc",
+      "name_en": "Hook Reversal",
+      "category": "reversal",
+      "success_rate": 67,
+      "avg_move_pct": 8,
+      "duration": "1-3 phiên",
+      "bull_breakout_pct": 45,
+      "bear_breakout_pct": 55,
+      "avg_rise_pct": 8,
+      "avg_decline_pct": 8,
+      "pullback_rate_pct": 25,
+      "structure": [
+        "Phiên 1: Xu hướng mạnh",
+        "Phiên 2: Mở trong phạm vi phiên 1, đóng ngược hướng",
+        "Phiên 3 (tùy chọn): Xác nhận đảo chiều"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi đóng phiên xác nhận",
+        "Khối lượng nên giảm ở mẫu",
+        "Mục tiêu ngắn hạn",
+        "Stop loss gần điểm vào lệnh"
+      ]
+    },
+    {
+      "key": "pipe-top",
+      "name_vi": "Ống Đỉnh",
+      "name_en": "Pipe Top",
+      "category": "reversal",
+      "success_rate": 61,
+      "avg_move_pct": -9,
+      "duration": "2-5 phiên",
+      "bull_breakout_pct": 39,
+      "bear_breakout_pct": 61,
+      "avg_rise_pct": 4,
+      "avg_decline_pct": 9,
+      "pullback_rate_pct": 18,
+      "structure": [
+        "Phiên 1: Nến tăng dài",
+        "Phiên 2: Nến tăng dài tương tự",
+        "Hai nến gần như song song"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá giảm dưới hai nến",
+        "Khối lượng nên cao",
+        "Mục tiêu = Độ dài của ống",
+        "Stop loss trên đỉnh ống"
+      ]
+    },
+    {
+      "key": "pipe-bottom",
+      "name_vi": "Ống Đáy",
+      "name_en": "Pipe Bottom",
+      "category": "reversal",
+      "success_rate": 64,
+      "avg_move_pct": 11,
+      "duration": "2-5 phiên",
+      "bull_breakout_pct": 64,
+      "bear_breakout_pct": 36,
+      "avg_rise_pct": 11,
+      "avg_decline_pct": 4,
+      "pullback_rate_pct": 16,
+      "structure": [
+        "Phiên 1: Nến giảm dài",
+        "Phiên 2: Nến giảm dài tương tự",
+        "Hai nến gần như song song"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá tăng trên hai nến",
+        "Khối lượng nên cao",
+        "Mục tiêu = Độ dài của ống",
+        "Stop loss dưới đáy ống"
+      ]
+    },
+    {
+      "key": "horn-top",
+      "name_vi": "Sừng Đỉnh",
+      "name_en": "Horn Top",
+      "category": "reversal",
+      "success_rate": 69,
+      "avg_move_pct": -11,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 31,
+      "bear_breakout_pct": 69,
+      "avg_rise_pct": 5,
+      "avg_decline_pct": 11,
+      "pullback_rate_pct": 15,
+      "structure": [
+        "Đỉnh 1: Nhọn, sắc",
+        "Đáy giữa: Rất nông",
+        "Đỉnh 2: Nhọn, sắc, gần đỉnh 1"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá giảm dưới đáy giữa",
+        "Hai đỉnh gần nhau về thời gian",
+        "Mục tiêu = Khoảng cách từ đỉnh đến đáy giữa",
+        "Stop loss trên đỉnh cao nhất"
+      ]
+    },
+    {
+      "key": "horn-bottom",
+      "name_vi": "Sừng Đáy",
+      "name_en": "Horn Bottom",
+      "category": "reversal",
+      "success_rate": 72,
+      "avg_move_pct": 16,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 72,
+      "bear_breakout_pct": 28,
+      "avg_rise_pct": 16,
+      "avg_decline_pct": 4,
+      "pullback_rate_pct": 12,
+      "structure": [
+        "Đáy 1: Nhọn, sắc",
+        "Đỉnh giữa: Rất thấp",
+        "Đáy 2: Nhọn, sắc, gần đáy 1"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá tăng trên đỉnh giữa",
+        "Hai đáy gần nhau về thời gian",
+        "Mục tiêu = Khoảng cách từ đáy đến đỉnh giữa",
+        "Stop loss dưới đáy thấp nhất"
+      ]
+    }
+  ],
+  "geometric_patterns": [
+    {
+      "key": "rising-wedge",
+      "name_vi": "Nêm Tăng",
+      "name_en": "Rising Wedge",
+      "category": "reversal",
+      "success_rate": 72,
+      "avg_move_pct": -14,
+      "duration": "2-4 tuần",
+      "bull_breakout_pct": 28,
+      "bear_breakout_pct": 72,
+      "avg_rise_pct": 8,
+      "avg_decline_pct": 14,
+      "pullback_rate_pct": 10,
+      "structure": [
+        "Đường biên dưới: Dốc lên",
+        "Đường biên trên: Dốc lên (độ dốc nhỏ hơn)",
+        "Khối lượng giảm trong quá trình hình thành"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá phá vỡ đường biên dưới",
+        "Khối lượng nên tăng khi phá vỡ",
+        "Mục tiêu = Chiều cao của nêm tại điểm rộng nhất",
+        "Stop loss đặt trên đường biên trên"
+      ]
+    },
+    {
+      "key": "falling-wedge",
+      "name_vi": "Nêm Giảm",
+      "name_en": "Falling Wedge",
+      "category": "reversal",
+      "success_rate": 81,
+      "avg_move_pct": 18,
+      "duration": "2-4 tuần",
+      "bull_breakout_pct": 81,
+      "bear_breakout_pct": 19,
+      "avg_rise_pct": 18,
+      "avg_decline_pct": 5,
+      "pullback_rate_pct": 8,
+      "structure": [
+        "Đường biên trên: Dốc xuống",
+        "Đường biên dưới: Dốc xuống (độ dốc lớn hơn)",
+        "Khối lượng giảm trong quá trình hình thành"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đường biên trên",
+        "Khối lượng nên tăng khi phá vỡ",
+        "Mục tiêu = Chiều cao của nêm tại điểm rộng nhất",
+        "Stop loss đặt dưới đường biên dưới"
+      ]
+    },
+    {
+      "key": "ascending-triangle",
+      "name_vi": "Tam Giác Tăng",
+      "name_en": "Ascending Triangle",
+      "category": "continuation",
+      "success_rate": 75,
+      "avg_move_pct": 12,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 75,
+      "bear_breakout_pct": 25,
+      "avg_rise_pct": 12,
+      "avg_decline_pct": 5,
+      "pullback_rate_pct": 11,
+      "structure": [
+        "Đường kháng cự: Nằm ngang, ở trên",
+        "Đường hỗ trợ: Dốc lên, ở dưới",
+        "Điểm hội tụ: Hai đường gặp nhau"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ đường kháng cự",
+        "Khối lượng giảm trong quá trình hình thành",
+        "Mục tiêu = Chiều cao của tam giác",
+        "Stop loss đặt dưới đường hỗ trợ"
+      ]
+    },
+    {
+      "key": "descending-triangle",
+      "name_vi": "Tam Giác Giảm",
+      "name_en": "Descending Triangle",
+      "category": "continuation",
+      "success_rate": 79,
+      "avg_move_pct": -15,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 21,
+      "bear_breakout_pct": 79,
+      "avg_rise_pct": 4,
+      "avg_decline_pct": 15,
+      "pullback_rate_pct": 9,
+      "structure": [
+        "Đường hỗ trợ: Nằm ngang, ở dưới",
+        "Đường kháng cự: Dốc xuống, ở trên",
+        "Điểm hội tụ: Hai đường gặp nhau"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá phá vỡ đường hỗ trợ",
+        "Khối lượng giảm trong quá trình hình thành",
+        "Mục tiêu = Chiều cao của tam giác",
+        "Stop loss đặt trên đường kháng cự"
+      ]
+    },
+    {
+      "key": "symmetrical-triangle",
+      "name_vi": "Tam Giác Đối Xứng",
+      "name_en": "Symmetrical Triangle",
+      "category": "bilateral",
+      "success_rate": 64,
+      "avg_move_pct": 0,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 52,
+      "bear_breakout_pct": 48,
+      "avg_rise_pct": 10,
+      "avg_decline_pct": 10,
+      "pullback_rate_pct": 14,
+      "structure": [
+        "Đường biên trên: Dốc xuống",
+        "Đường biên dưới: Dốc lên",
+        "Điểm hội tụ: Hai đường gặp nhau"
+      ],
+      "trading_rules": [
+        "Đợi phá vỡ rõ ràng trước khi vào lệnh",
+        "Hai hướng phá vỡ có xác suất tương đương",
+        "Mục tiêu = Chiều cao của tam giác",
+        "Stop loss đặt bên kia đường phá vỡ"
+      ]
+    },
+    {
+      "key": "flag",
+      "name_vi": "Cờ Đuôi Nheo",
+      "name_en": "Flag",
+      "category": "continuation",
+      "success_rate": 85,
+      "avg_move_pct": 12,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 67,
+      "bear_breakout_pct": 85,
+      "avg_rise_pct": 12,
+      "avg_decline_pct": 12,
+      "pullback_rate_pct": 6,
+      "structure": [
+        "Cột cờ: Xu hướng mạnh ban đầu",
+        "Phần cờ: Điều chỉnh ngắn, đi ngược xu hướng",
+        "Phá vỡ: Tiếp tục xu hướng cũ"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ khỏi phần cờ",
+        "Khối lượng thấp trong phần cờ",
+        "Mục tiêu = Độ dài của cột cờ",
+        "Stop loss đặt bên kia phần cờ"
+      ]
+    },
+    {
+      "key": "bull-flag",
+      "name_vi": "Cờ Tăng",
+      "name_en": "Bull Flag",
+      "category": "continuation",
+      "success_rate": 85,
+      "avg_move_pct": 14,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 85,
+      "bear_breakout_pct": 15,
+      "avg_rise_pct": 14,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 5,
+      "structure": [
+        "Cột cờ: Tăng mạnh trong vài phiên",
+        "Phần cờ: Điều chỉnh nhẹ, giảm dần",
+        "Phá vỡ: Giá tiếp tục tăng"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ đường kháng cự của cờ",
+        "Khối lượng giảm trong phần cờ",
+        "Mục tiêu = Độ dài cột cờ tính từ điểm phá vỡ",
+        "Stop loss đặt dưới đáy phần cờ"
+      ]
+    },
+    {
+      "key": "bear-flag",
+      "name_vi": "Cờ Giảm",
+      "name_en": "Bear Flag",
+      "category": "continuation",
+      "success_rate": 83,
+      "avg_move_pct": -13,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 17,
+      "bear_breakout_pct": 83,
+      "avg_rise_pct": 0,
+      "avg_decline_pct": 13,
+      "pullback_rate_pct": 7,
+      "structure": [
+        "Cột cờ: Giảm mạnh trong vài phiên",
+        "Phần cờ: Điều chỉnh nhẹ, tăng dần",
+        "Phá vỡ: Giá tiếp tục giảm"
+      ],
+      "trading_rules": [
+        "Vào lệnh bán khi giá phá vỡ đường hỗ trợ của cờ",
+        "Khối lượng giảm trong phần cờ",
+        "Mục tiêu = Độ dài cột cờ tính từ điểm phá vỡ",
+        "Stop loss đặt trên đỉnh phần cờ"
+      ]
+    },
+    {
+      "key": "pennant",
+      "name_vi": "Cờ Đuôi Nheo Tam Giác",
+      "name_en": "Pennant",
+      "category": "continuation",
+      "success_rate": 82,
+      "avg_move_pct": 11,
+      "duration": "1-3 tuần",
+      "bull_breakout_pct": 68,
+      "bear_breakout_pct": 82,
+      "avg_rise_pct": 11,
+      "avg_decline_pct": 11,
+      "pullback_rate_pct": 8,
+      "structure": [
+        "Cột cờ: Xu hướng mạnh ban đầu",
+        "Phần cờ: Tam giác nhỏ, hội tụ",
+        "Phá vỡ: Tiếp tục xu hướng cũ"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ khỏi tam giác",
+        "Khối lượng giảm trong phần tam giác",
+        "Mục tiêu = Độ dài của cột cờ",
+        "Stop loss bên kia tam giác"
+      ]
+    },
+    {
+      "key": "rectangle-top",
+      "name_vi": "Hình Chữ Nhật Đỉnh",
+      "name_en": "Rectangle Top",
+      "category": "bilateral",
+      "success_rate": 62,
+      "avg_move_pct": -8,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 38,
+      "bear_breakout_pct": 62,
+      "avg_rise_pct": 6,
+      "avg_decline_pct": 8,
+      "pullback_rate_pct": 16,
+      "structure": [
+        "Biên trên: Đường kháng cự ngang",
+        "Biên dưới: Đường hỗ trợ ngang",
+        "Giá dao động trong kênh"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ một trong hai biên",
+        "Khối lượng không nhất quán",
+        "Mục tiêu = Chiều cao của kênh",
+        "Stop loss bên kia biên phá vỡ"
+      ]
+    },
+    {
+      "key": "rectangle-bottom",
+      "name_vi": "Hình Chữ Nhật Đáy",
+      "name_en": "Rectangle Bottom",
+      "category": "bilateral",
+      "success_rate": 64,
+      "avg_move_pct": 10,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 64,
+      "bear_breakout_pct": 36,
+      "avg_rise_pct": 10,
+      "avg_decline_pct": 4,
+      "pullback_rate_pct": 14,
+      "structure": [
+        "Biên trên: Đường kháng cự ngang",
+        "Biên dưới: Đường hỗ trợ ngang",
+        "Giá dao động trong kênh ở đáy"
+      ],
+      "trading_rules": [
+        "Vào lệnh mua khi giá phá vỡ biên trên",
+        "Khối lượng nên tăng khi phá vỡ",
+        "Mục tiêu = Chiều cao của kênh",
+        "Stop loss dưới biên dưới"
+      ]
+    },
+    {
+      "key": "broadening-wedge-ascending",
+      "name_vi": "Nêm Mở Rộng Tăng",
+      "name_en": "Broadening Wedge Ascending",
+      "category": "bilateral",
+      "success_rate": 58,
+      "avg_move_pct": 0,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 42,
+      "bear_breakout_pct": 58,
+      "avg_rise_pct": 9,
+      "avg_decline_pct": 11,
+      "pullback_rate_pct": 19,
+      "structure": [
+        "Đường biên dưới: Nằm ngang",
+        "Đường biên trên: Dốc lên",
+        "Mở rộng theo hướng lên"
+      ],
+      "trading_rules": [
+        "Đợi phá vỡ rõ ràng",
+        "Thường tiếp tục xu hướng cũ",
+        "Mục tiêu = Chiều cao của mẫu",
+        "Stop loss bên kia đường phá vỡ"
+      ]
+    },
+    {
+      "key": "broadening-wedge-descending",
+      "name_vi": "Nêm Mở Rộng Giảm",
+      "name_en": "Broadening Wedge Descending",
+      "category": "bilateral",
+      "success_rate": 62,
+      "avg_move_pct": 0,
+      "duration": "2-6 tuần",
+      "bull_breakout_pct": 38,
+      "bear_breakout_pct": 62,
+      "avg_rise_pct": 7,
+      "avg_decline_pct": 12,
+      "pullback_rate_pct": 17,
+      "structure": [
+        "Đường biên trên: Nằm ngang",
+        "Đường biên dưới: Dốc xuống",
+        "Mở rộng theo hướng xuống"
+      ],
+      "trading_rules": [
+        "Đợi phá vỡ rõ ràng",
+        "Thường phá vỡ về phía giảm",
+        "Mục tiêu = Chiều cao của mẫu",
+        "Stop loss bên kia đường phá vỡ"
+      ]
+    },
+    {
+      "key": "high-tight-flag",
+      "name_vi": "Cờ Cao và Chặt",
+      "name_en": "High and Tight Flag",
+      "category": "continuation",
+      "success_rate": 85,
+      "avg_move_pct": 69,
+      "duration": "1-2 tháng",
+      "bull_breakout_pct": 85,
+      "bear_breakout_pct": 15,
+      "avg_rise_pct": 69,
+      "avg_decline_pct": 0,
+      "pullback_rate_pct": 5,
+      "structure": [
+        "Phần cột cờ: Tăng mạnh, gấp đôi giá",
+        "Phần cờ: Đi ngang chặt, không quá 25%回落",
+        "Phá vỡ: Tiếp tục tăng mạnh"
+      ],
+      "trading_rules": [
+        "Vào lệnh khi giá phá vỡ đỉnh cờ",
+        "Cờ không nên thấp quá 25% so với đỉnh",
+        "Mục tiêu = Độ dài cột cờ",
+        "Stop loss dưới đáy cờ"
+      ]
+    }
+  ]
+}

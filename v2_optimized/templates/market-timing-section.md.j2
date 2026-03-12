@@ -1,0 +1,48 @@
+{# Market timing section template #}
+# PHAN 1: MARKET TIMING (Module 1)
+
+## Tong quan thi truong
+
+| Chi so | Gia tri |
+|--------|---------|
+| **Market Color** | {{ market.color }} |
+| **Score** | {{ market.score }}/100 |
+| **VN-Index** | {{ "{:,.0f}".format(market.vnindex_price) }} ({{ "{:+.2f}".format(market.vnindex_change) }}%) |
+| **RSI(14)** | {{ "{:.1f}".format(market.rsi) }} |
+| **MACD Hist** | {{ "{:+.2f}".format(market.macd_hist) }} |
+
+## Volume Profile
+
+| Level | Gia |
+|-------|-----|
+| **POC** | {{ "{:,.0f}".format(market.poc) }} |
+| **Value Area** | {{ "{:,.0f}".format(market.val) }} - {{ "{:,.0f}".format(market.vah) }} |
+| **Price vs VA** | {{ market.price_vs_va }} |
+
+{% if market.breadth %}
+## Market Breadth
+
+| Chi so | Gia tri |
+|--------|---------|
+| **Advances** | {{ market.breadth.advances }} |
+| **Declines** | {{ market.breadth.declines }} |
+| **Unchanged** | {{ market.breadth.unchanged }} |
+| **A/D Ratio** | {{ "{:.2f}".format(market.breadth.ad_ratio) }} |
+{% if market.breadth.ceiling is defined %}| **Ceiling/Floor** | {{ market.breadth.ceiling }}/{{ market.breadth.floor }} |{% endif %}
+
+{% endif %}
+## Tin hieu chinh
+
+{% for sig in market.key_signals %}
+- {{ sig }}
+{% endfor %}
+
+{% if ai_narrative %}
+## AI Analysis - Market Timing
+
+{{ ai_narrative }}
+{% else %}
+## Nhan dinh thi truong (Rule-Based)
+
+{{ rule_based_commentary }}
+{% endif %}
