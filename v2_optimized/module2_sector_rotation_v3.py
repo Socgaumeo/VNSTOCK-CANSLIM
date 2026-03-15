@@ -1160,7 +1160,7 @@ class SectorRotationModule:
         self.report = self.analyzer.analyze(market_context)
 
         # 2. AI
-        self.report.ai_analysis = self.ai_generator.generate(self.report, history_context)
+        self.report.ai_analysis = self.ai_generator.generate(self.report, history_context) or ""
 
         # 3. Save to context memo
         if memo:
@@ -1248,7 +1248,8 @@ class SectorRotationModule:
         print("\n" + "─"*70)
         print("🤖 AI ANALYSIS:")
         print("─"*70)
-        print(self.report.ai_analysis[:2000] + "..." if len(self.report.ai_analysis) > 2000 else self.report.ai_analysis)
+        ai_text = self.report.ai_analysis or "N/A (AI unavailable)"
+        print(ai_text[:2000] + "..." if len(ai_text) > 2000 else ai_text)
     
     def get_json(self) -> str:
         """Get JSON output"""

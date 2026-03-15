@@ -193,6 +193,9 @@ class MarketReport:
     # AI
     ai_analysis: str = ""
 
+    # Valuation context from vnstock_data (PE/PB)
+    valuation_context: Optional[Dict] = None
+
 
 # ══════════════════════════════════════════════════════════════════════════════
 # SECTOR NAMES
@@ -637,6 +640,22 @@ Luôn trả lời bằng tiếng Việt."""
    - VP Resistance: {', '.join([f'{p:,.0f}' for p in vni.vp_resistance[:3]]) if vni.vp_resistance else 'N/A'}
 """
         
+        # Valuation section (PE/PB from vnstock_data)
+        val_section = ""
+        val = getattr(report, 'valuation_context', None)
+        if val and val.get("pe_current"):
+            pe = val["pe_current"]
+            pe_avg = val.get("pe_1y_avg", pe)
+            pe_min = val.get("pe_1y_min", "N/A")
+            pe_max = val.get("pe_1y_max", "N/A")
+            pb = val.get("pb_current", "N/A")
+            val_section = f"""
+📊 VALUATION (VN-Index):
+   - PE hiện tại: {pe} (1Y: min={pe_min}, max={pe_max}, TB={pe_avg})
+   - PB hiện tại: {pb}
+   - Vùng PE: {"DƯỚI TB 1Y -> Undervalued" if pe < pe_avg * 0.9 else "TRÊN TB 1Y -> Expensive" if pe > pe_avg * 1.1 else "QUANH TB 1Y -> Fair value"}
+"""
+
         # Signals section
         signals_str = "\n".join([f"   - {s}" for s in report.key_signals])
         
@@ -654,7 +673,7 @@ Luôn trả lời bằng tiếng Việt."""
    - MACD Histogram: {vni.macd_hist:+.2f}
    - ADX: {vni.adx:.1f}
    - Volume Ratio: {vni.volume_ratio:.2f}x
-{vp_section}
+{vp_section}{val_section}
 📊 VN30: {vn30.price:,.0f} ({vn30.change_1d:+.2f}%)
 
 📉 ĐỘ RỘNG: Tăng={report.breadth.advances} | Giảm={report.breadth.declines} | A/D={report.breadth.ad_ratio:.2f}
@@ -1050,6 +1069,23 @@ class MarketTimingModule:
 
         # 2. Thu thập tín hiệu kỹ thuật (không chấm điểm)
         self.report = self.analyzer.collect_technical_signals(self.report)
+
+        # 2b. Valuation context from vnstock_data (PE/PB)
+        try:
+            val_data = memo.read("market_pe") if memo else None
+            if val_data and val_data.get("pe_current"):
+                self.report.valuation_context = val_data
+                pe = val_data["pe_current"]
+                pe_avg = val_data.get("pe_1y_avg", pe)
+                if pe < pe_avg * 0.9:
+                    self.report.key_signals.append(f"PE={pe:.1f} (DUOI TB 1Y: {pe_avg:.1f}) -> Undervalued")
+                elif pe > pe_avg * 1.1:
+                    self.report.key_signals.append(f"PE={pe:.1f} (TREN TB 1Y: {pe_avg:.1f}) -> Expensive")
+                else:
+                    self.report.key_signals.append(f"PE={pe:.1f} (TB 1Y: {pe_avg:.1f}) -> Fair value")
+                print(f"  Valuation: PE={pe:.1f} (1Y avg={pe_avg:.1f})")
+        except Exception:
+            pass  # Silent fail
 
         # 3. AI Scoring - để AI chấm điểm thị trường
         ai_score_result = self.ai_generator.score_market(self.report, history_context)

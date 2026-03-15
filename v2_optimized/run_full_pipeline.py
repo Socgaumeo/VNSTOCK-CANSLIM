@@ -98,26 +98,17 @@ def _load_kebab_module(module_path: str, module_name: str):
     return None
 
 
-# Load context memo module
 _memo_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "context-memo.py"),
     "context_memo"
 )
-
-# Load template renderer (optional - requires jinja2)
 _template_renderer_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "report-template-renderer.py"),
     "report_template_renderer"
 )
-
-# Try loading new modules
 _dupont_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "dupont-analyzer.py"),
     "dupont_analyzer"
-)
-_risk_module = _load_kebab_module(
-    os.path.join(os.path.dirname(__file__), "risk-metrics-calculator.py"),
-    "risk_metrics_calculator"
 )
 _news_hub_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "news-hub.py"),
@@ -130,6 +121,10 @@ _asset_tracker_module = _load_kebab_module(
 _bond_lab_module = _load_kebab_module(
     os.path.join(os.path.dirname(__file__), "bond-lab.py"),
     "bond_lab"
+)
+_vnstock_data_module = _load_kebab_module(
+    os.path.join(os.path.dirname(__file__), "vnstock-data-provider.py"),
+    "vnstock_data_provider"
 )
 
 
@@ -388,6 +383,37 @@ class FullPipelineRunner:
                 print(f"  Asset Tracker: {new_assets} assets updated, signal={macro_signal.get('signal', 'N/A')}")
             except Exception as e:
                 print(f"  Asset Tracker error (skipping): {e}")
+
+        # ══════════════════════════════════════════════════════════════════════
+        # VNSTOCK_DATA: Market PE/PB + Foreign Flow Top + Macro
+        # ══════════════════════════════════════════════════════════════════════
+        if _vnstock_data_module:
+            try:
+                vd_provider = _vnstock_data_module.VnstockDataProvider()
+
+                # Market PE/PB valuation
+                pe_data = vd_provider.get_market_pe()
+                if pe_data and memo:
+                    memo.save("market_pe", pe_data)
+                    print(f"  Market PE: {pe_data.get('pe_current', 'N/A')} "
+                          f"(1Y: {pe_data.get('pe_1y_min')}-{pe_data.get('pe_1y_max')})")
+
+                # Top foreign flow (gainer/loser fallback)
+                foreign_top = vd_provider.get_top_foreign()
+                if foreign_top and memo:
+                    memo.save("foreign_flow_top", foreign_top)
+                    buy_n = len(foreign_top.get("top_buy", []))
+                    sell_n = len(foreign_top.get("top_sell", []))
+                    print(f"  Top Stocks: {buy_n} gainers, {sell_n} losers")
+
+                # Macro indicators (USD/VND, CPI)
+                macro_data = vd_provider.get_macro_indicators()
+                if macro_data and memo:
+                    memo.save("macro", macro_data)
+                    usd_vnd = macro_data.get("usd_vnd", {}).get("rate", "N/A")
+                    print(f"  Macro: USD/VND={usd_vnd:,.0f}" if isinstance(usd_vnd, (int, float)) else f"  Macro: USD/VND={usd_vnd}")
+            except Exception as e:
+                print(f"  vnstock_data error (skipping): {e}")
 
         # ══════════════════════════════════════════════════════════════════════
         # MODULE 3: STOCK SCREENER
@@ -822,6 +848,80 @@ class FullPipelineRunner:
 | **Tiêu cực** | {negative} |
 
 """
+
+        # ── Market PE/PB ──
+        pe_data = self.memo.read("market_pe") if self.memo else None
+        if pe_data:
+            pe_cur = pe_data.get("pe_current", "N/A")
+            pe_avg = pe_data.get("pe_1y_avg", "N/A")
+            pe_min = pe_data.get("pe_1y_min", "N/A")
+            pe_max = pe_data.get("pe_1y_max", "N/A")
+            pb_cur = pe_data.get("pb_current", "N/A")
+
+            # PE zone indicator
+            if isinstance(pe_cur, (int, float)) and isinstance(pe_avg, (int, float)):
+                if pe_cur > pe_avg * 1.1:
+                    pe_zone = "🔴 Cao hơn TB"
+                elif pe_cur < pe_avg * 0.9:
+                    pe_zone = "🟢 Thấp hơn TB"
+                else:
+                    pe_zone = "🟡 Quanh TB"
+            else:
+                pe_zone = "N/A"
+
+            content += f"""## 📊 Market Valuation - PE/PB
+
+| Chỉ số | Giá trị | 1Y Range |
+|--------|---------|----------|
+| **PE** | {pe_cur} | {pe_min} - {pe_max} (TB: {pe_avg}) |
+| **PB** | {pb_cur} | - |
+| **Zone** | {pe_zone} | - |
+
+"""
+
+        # ── Foreign Flow Top / Top Gainers-Losers ──
+        foreign_top = self.memo.read("foreign_flow_top") if self.memo else None
+        if foreign_top:
+            top_buy = foreign_top.get("top_buy", [])
+            top_sell = foreign_top.get("top_sell", [])
+            is_gainer_data = top_buy and top_buy[0].get("source") == "top_gainer"
+            buy_label = "Top Tăng giá" if is_gainer_data else "Top Mua ròng"
+            sell_label = "Top Giảm giá" if is_gainer_data else "Top Bán ròng"
+
+            content += f"## 🌊 {buy_label} / {sell_label} (HOSE)\n\n"
+            if top_buy:
+                content += f"### {buy_label}\n| # | Mã | Giá trị |\n|---|-----|--------|\n"
+                for i, s in enumerate(top_buy[:5], 1):
+                    sym = s.get("symbol", "N/A")
+                    val = s.get("net_value", 0)
+                    chg = s.get("change_pct")
+                    extra = f" ({chg:+.1f}%)" if chg is not None else ""
+                    content += f"| {i} | **{sym}** | {val:,.0f}{extra} |\n"
+                content += "\n"
+            if top_sell:
+                content += f"### {sell_label}\n| # | Mã | Giá trị |\n|---|-----|--------|\n"
+                for i, s in enumerate(top_sell[:5], 1):
+                    sym = s.get("symbol", "N/A")
+                    val = s.get("net_value", 0)
+                    chg = s.get("change_pct")
+                    extra = f" ({chg:+.1f}%)" if chg is not None else ""
+                    content += f"| {i} | **{sym}** | {val:,.0f}{extra} |\n"
+                content += "\n"
+
+        # ── Macro Indicators ──
+        macro_data = self.memo.read("macro") if self.memo else None
+        if macro_data:
+            usd_vnd = macro_data.get("usd_vnd", {})
+            cpi = macro_data.get("cpi", {})
+            content += "## 📊 Macro - Chỉ số vĩ mô\n\n| Chỉ số | Giá trị | Ghi chú |\n|--------|---------|--------|\n"
+            if usd_vnd:
+                rate = usd_vnd.get("rate", "N/A")
+                content += f"| **USD/VND** | {rate:,.0f} | Tỷ giá trung tâm |\n" if isinstance(rate, (int, float)) else f"| **USD/VND** | {rate} | |\n"
+            if cpi:
+                cpi_val = cpi.get("value", "N/A")
+                cpi_period = cpi.get("period", "")
+                content += f"| **CPI** | {cpi_val}% | {cpi_period} |\n"
+            content += "\n"
 
         return content
 
